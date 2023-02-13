@@ -38,14 +38,27 @@
                             <input type="text" class="form-control" id="discreption" placeholder="Discreption" />
                         </div>
 
-                        <div class="mb-3">
-                            <label class="form-label" for="color"> Color</label>
+                        <div class="form-group">
+                            <label for="color"> Color</label>
                             <div id="colors-container">
                                 <input type="color" value="#000000" class="form-control" id="color">
                             </div>
                             <button type="button" onclick="addColor()" class="btn btn-success">Add Color &plus;</button>
                             <button type="button" onclick="resetColors()" class="btn btn-danger"
-                                style="margin-left: 20px;">Clear Colors</button>
+                                style="margin-left: 20px;">Clear
+                                Colors</button>
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="size">Size</label>
+                            <input type="text" class="form-control" id="sizes">
+                        </div>
+
+                        <div class="mb-3">
+                            <label for="Quantity" class="form-label">Quantity</label>
+                            <div class="mb-3" style="width: 100%;">
+                                <input type="number" class="form-control" id="quantity" placeholder="Quantity" min="0">
+                            </div>
                         </div>
 
                         <div class="mb-3">
@@ -84,8 +97,8 @@
 
 @section('script')
 
-    <script>
-        let colors = 0;
+<script>
+    let colors = 0;
 
         function PerformProduct() {
             let formData = new FormData();
@@ -96,9 +109,9 @@
             formData.append('discount', document.getElementById('discount').value);
             formData.append('color', document.getElementById('color').value);
             formData.append('sizes', getSelectSizes());
-            formData.append('quantity', document.getElementById('quantity').value);
+            formData.append('quantity', getQuantity());
 
-
+            // {{--  Flag  --}}
             const radioButtons = document.querySelectorAll('input[type="radio"]');
             let selectedValue;
             radioButtons.forEach(radio => {
@@ -106,17 +119,51 @@
                     selectedValue = radio.value;
                 }
             });
-
             formData.append('flag', selectedValue);
 
+            // {{--  Image  --}}
             if (document.getElementById('image').files.length > 0) {
                 formData.append('image', document.getElementById('image').files[0]);
             }
 
-            formData.append('colors',colors);
-            for(let i=1 ; i<=colors ; i++){
-                formData.append('color_'+i , document.getElementById('color_'+i).value);
+            // {{--  Colors  --}}
+            formData.append('colors', colors);
+            for (let i = 1; i <= colors; i++) {
+                formData.append('color_' + i, document.getElementById('color_' + i).value);
             }
+
+            // {{--  Quantity  --}}
+            let products = [{
+                id: 1,
+                name: 'Product 1',
+                quantity: 10
+            }, {
+                id: 2,
+                name: 'Product 2',
+                quantity: 20
+            }, {
+                id: 3,
+                name: 'Product 3',
+                quantity: 30
+            }];
+
+            function getQuantity() {
+                let input = document.getElementById('quantity');
+                let decrementProductQuantity = (productId, quantity) => {
+                    let Product = products.find(Product => Product.id === productId);
+                    Product.quantity -= quantity;
+                };
+
+                let order = {
+                    quantity: 5
+                };
+
+                decrementProductQuantity(1, order.quantity);
+                console.log(products[0].quantity);
+            }
+
+
+            // {{--  axios  --}}
             axios.post('{{ route('products.store') }}', formData)
                 .then(function(response) {
                     toastr.success(response.data.message);
@@ -127,27 +174,45 @@
                     toastr.error(error.response.data.message);
                     console.log(error);
                 });
+        }
+
+        // {{--  Colors  --}}
+        function addColor() {
+            const colorInput = document.createElement("input");
+            colorInput.setAttribute('type', 'color');
+            colorInput.setAttribute('value', '#000000');
+            colorInput.setAttribute('class', 'form-control');
+            colorInput.setAttribute('id', `color_${++colors}`);
+            document.getElementById('colors-container').appendChild(colorInput);
+        }
+
+        function resetColors() {
+            const colorInput = document.createElement("input");
+            colorInput.setAttribute('type', 'color');
+            colorInput.setAttribute('value', '#000000');
+            colorInput.setAttribute('class', 'form-control');
+            colorInput.setAttribute('id', `color`);
+            document.getElementById('colors-container').innerHTML = '';
+            document.getElementById('colors-container').appendChild(colorInput);
+            colors = 0;
+        }
+
+
+        function getSelectSizes() {
+            let select = document.getElementById('sizes');
+            var result = [];
+            var options = select && select.options;
+            var opt;
+
+            for (var i = 0, iLen = options.length; i < iLen; i++) {
+                opt = options[i];
+
+                if (opt.selected) {
+                    result.push(opt.value || opt.text);
+                }
             }
-
-    function addColor(){
-        const colorInput = document.createElement("input");
-        colorInput.setAttribute('type','color');
-        colorInput.setAttribute('value','#000000');
-        colorInput.setAttribute('class','form-control');
-        colorInput.setAttribute('id',`color_${++colors}`);
-        document.getElementById('colors-container').appendChild(colorInput);
-    }      
-    function resetColors(){
-        const colorInput = document.createElement("input");
-        colorInput.setAttribute('type','color');
-        colorInput.setAttribute('value','#000000');
-        colorInput.setAttribute('class','form-control');
-        colorInput.setAttribute('id',`color`);
-        document.getElementById('colors-container').innerHTML ='';
-        document.getElementById('colors-container').appendChild(colorInput);
-        colors =0;
-    }          
-
+            return result;
+        }
 </script>
 
 @endsection

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "fe33f98a750b8c5a51b30c78bd3fab21",
+    "content-hash": "c33be50b85f8815f95d37e44ec5d2cdf",
     "packages": [
         {
             "name": "brick/math",
@@ -896,6 +896,59 @@
                 }
             ],
             "time": "2022-10-26T14:07:24+00:00"
+        },
+        {
+            "name": "laravel-validation-rules/colour",
+            "version": "1.6.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/laravel-validation-rules/colour.git",
+                "reference": "1e7ab2420879738f45adcf0320f8c571789e9fb4"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/laravel-validation-rules/colour/zipball/1e7ab2420879738f45adcf0320f8c571789e9fb4",
+                "reference": "1e7ab2420879738f45adcf0320f8c571789e9fb4",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/contracts": "^5.5|^6.0|^7.0|^8.0|^9.0"
+            },
+            "require-dev": {
+                "orchestra/testbench": "^5.0|^7.0",
+                "phpunit/phpunit": "^9.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "LVR\\Colour\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Ashley Clarke",
+                    "email": "me@ashleyclarke.me"
+                },
+                {
+                    "name": "Scott Robinson",
+                    "email": "scott@dor.ky"
+                }
+            ],
+            "description": "Validate colours",
+            "keywords": [
+                "colour",
+                "laravel",
+                "validation"
+            ],
+            "support": {
+                "issues": "https://github.com/laravel-validation-rules/colour/issues",
+                "source": "https://github.com/laravel-validation-rules/colour/tree/1.6.0"
+            },
+            "time": "2022-02-08T08:13:39+00:00"
         },
         {
             "name": "laravel/framework",

@@ -8,12 +8,17 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Product extends Model
 {
-    use HasFactory ,SoftDeletes;
+    use HasFactory, SoftDeletes;
 
     public function store(){
         return $this->belongsTo(Store::class)->withTrashed();
     }
-    public function purchases() {
+    public function purchases(){
         return $this->hasMany(Purchase::class)->withTrashed();
     }
+
+    protected $casts = [
+        'colors' => 'array',
+        'sizes' => 'array',
+    ];
 }
