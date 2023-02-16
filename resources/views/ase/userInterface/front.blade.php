@@ -94,7 +94,7 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="index.html" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Site Logo">
+                            <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
                             <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
@@ -482,7 +482,7 @@
                                         <div class="inner">
                                             <h5 class="title"><a href="single-product.html">{{ $product->productName
                                                     }}</a></h5>
-                                            <h5>{{$product->store->name}}</h5>
+                                            <h5>{{$product->category->categoryName}}</h5>
                                             @if ($product->flag)
                                             <div class="product-price-variant">
                                                 <span class="price current-price">${{ $product->discount }}</span>
@@ -783,20 +783,20 @@
                                         <div
                                             class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-01.png"
+                                                <img src="{{asset('fas/assets/images/product/product-big-01.png')}}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-01.png"
+                                                    <a href="{{asset('fas/assets/images/product/product-big-01.png')}}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-02.png"
+                                                <img src="{{asset('fas/assets/images/product/product-big-02.png')}}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
@@ -809,7 +809,7 @@
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-03.png"
+                                                <img src="{{asset('fas/assets/images/product/product-big-03.png')}}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
@@ -958,7 +958,8 @@
                 <ul class="cart-item-list">
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img src="assets/images/product/electric/product-01.png"
+                            <a href="single-product.html"><img
+                                    src="{{asset('fas/assets/images/product/electric/product-01.png')}}"
                                     alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
@@ -1038,7 +1039,7 @@
 
     <!-- Main JS -->
     <script src="{{asset('fas/assets/js/rtl-main.js')}}"></script>
-    <script src="{{asset('fas/js/popper.min.js')}}"></script>
+    {{-- <script src="{{asset('fas/js/popper.min.js')}}"></script> --}}
 
     <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/axios.js') }}"></script>

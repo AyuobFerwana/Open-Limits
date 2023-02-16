@@ -125,26 +125,26 @@
                     </li>
 
                     <li class="menu-header small text-uppercase">
-                        <span class="menu-header-text">Store</span>
+                        <span class="menu-header-text">Category</span>
                     </li>
                     <li class="menu-item">
                         <a href="javascript:void(0);" class="menu-link menu-toggle">
-                            <i class='menu-icon tf-icons bx bx-store'></i>
-                            <div data-i18n="Account Settings">Store</div>
+                            <i class='menu-icon tf-icons bx bx-category-alt'></i>
+                            <div data-i18n="Account Settings">Category</div>
                         </a>
                         <ul class="menu-sub">
                             <li class="menu-item">
-                                <a href="{{ route('store.create') }}" class="menu-link">
+                                <a href="{{ route('category.create') }}" class="menu-link">
                                     <div data-i18n="Account">Create</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('store.index') }}" class="menu-link">
+                                <a href="{{ route('category.index') }}" class="menu-link">
                                     <div data-i18n="Notifications">Index</div>
                                 </a>
                             </li>
                             <li class="menu-item">
-                                <a href="{{ route('store.restoreStore') }}" class="menu-link">
+                                <a href="{{ route('category.restoreCategory') }}" class="menu-link">
                                     <div data-i18n="Connections">Deleted</div>
                                 </a>
                             </li>

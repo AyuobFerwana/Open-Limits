@@ -10,11 +10,14 @@ class Product extends Model
 {
     use HasFactory, SoftDeletes;
 
-    public function store(){
-        return $this->belongsTo(Store::class)->withTrashed();
-    }
     public function purchases(){
         return $this->hasMany(Purchase::class)->withTrashed();
+    }
+
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class)->withTrashed();
     }
 
     protected $casts = [

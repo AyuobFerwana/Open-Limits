@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
 use Dotenv\Validator;
@@ -20,6 +21,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
+        $products = Product::paginate(15);
         return response()->view('ase.product.index', compact('products'));
     }
 
@@ -30,8 +32,8 @@ class ProductController extends Controller
      */
     public function create()
     {
-        $stores = Store::all();
-        return response()->view('ase.product.create', compact('stores'));
+        $categories = Category::all();
+        return response()->view('ase.product.create', compact('categories'));
     }
 
     /**
@@ -43,7 +45,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-            'store' => 'required',
+            'category' => 'required|string',
             'size' => 'required|string',
             'productName' => 'required|string|min:3|max:50',
             'discreption' => 'required|string|min:3|max:200',
@@ -58,7 +60,7 @@ class ProductController extends Controller
         ]);
         if (!$validator->fails()) {
             $products = new Product();
-            $products->store_id = $request->input('store');
+            $products->category_id = $request->input('category');
             $products->productName = $request->input('productName');
             $products->discreption = $request->input('discreption');
             $products->price = $request->input('price');
@@ -124,10 +126,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function edit(Product $product, Store $stores)
+    public function edit(Product $product, Category $categories)
     {
-        $stores = Store::all();
-        return response()->view('ase.product.edit', ['products' => $product, 'stores' => $stores]);
+        $categories = Category::all();
+        return response()->view('ase.product.edit', ['products' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -140,7 +142,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product, $productId, $quantity)
     {
         $validator = Validator($request->all(), [
-            'store' => 'required',
+            'category' => 'required',
             'color' => ['required', new Hex],
             'colors' => 'required|integer',
             'size' => 'required|string',
@@ -154,7 +156,7 @@ class ProductController extends Controller
         ]);
         if (!$validator->fails()) {
             $products = new Product();
-            $products->store_id = $request->input('store');
+            $products->category_id = $request->input('category');
             $products->productName = $request->input('productName');
             $products->discreption = $request->input('discreption');
             $products->price = $request->input('price');
@@ -166,8 +168,8 @@ class ProductController extends Controller
                 Storage::disk('public')->delete('' . $products->image);
                 $file = $request->file('image');
                 $imageName = time() . '_' . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
-                $image = $file->storePubliclyAs('products', $imageName, ['disk' => 'public']);
-                $products->image = $image;
+                $Newimage = $file->storePubliclyAs('products', $imageName, ['disk' => 'public']);
+                $products->image = $Newimage;
             }
 
             // color

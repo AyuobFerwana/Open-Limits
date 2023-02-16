@@ -8,10 +8,8 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
-     *
-     * @return void
      */
-    public function up()
+    public function up(): void
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
@@ -20,7 +18,7 @@ return new class extends Migration
             $table->json('colors');
             $table->json('size');
             $table->integer('quantity');
-            $table->foreignId('store_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('category_id')->constrained()->cascadeOnDelete();
             $table->string('price');
             $table->string('discount')->default(0);
             $table->boolean('flag')->default(0);
@@ -32,10 +30,8 @@ return new class extends Migration
 
     /**
      * Reverse the migrations.
-     *
-     * @return void
      */
-    public function down()
+    public function down(): void
     {
         Schema::dropIfExists('products');
     }

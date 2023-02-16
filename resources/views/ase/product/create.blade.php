@@ -20,10 +20,10 @@
                     <form id="form" onsubmit="event.preventDefault(); PerformProduct(); ">
                         @csrf
                         <div class="mb-3">
-                            <label for="Store" class="form-label">Select Store</label>
-                            <select class="form-select" id="store" aria-label="Default select example">
-                                @foreach ($stores as $store)
-                                <option value="{{ $store->id }}">{{ $store->name }}</option>
+                            <label for="Category" class="form-label">Select Category</label>
+                            <select class="form-select" id="category" aria-label="Default select example">
+                                @foreach ($categories as $categorie)
+                                <option value="{{ $categorie->id }}">{{ $categorie->categoryName}}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -104,13 +104,13 @@
 @section('script')
 
     <script>
-        let colors = 0;
+    let colors = 0;
         let sizes =1;
 
 
         function PerformProduct() {
             let formData = new FormData();
-            formData.append('store', document.getElementById('store').value);
+            formData.append('category', document.getElementById('category').value);
             formData.append('productName', document.getElementById('productName').value);
             formData.append('discreption', document.getElementById('discreption').value);
             formData.append('price', document.getElementById('price').value);
