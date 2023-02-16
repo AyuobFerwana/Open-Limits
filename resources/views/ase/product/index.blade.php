@@ -21,6 +21,9 @@
                             <th>Logo</th>
                             <th>Store</th>
                             <th>Product Name</th>
+                            <th>Color</th>
+                            <th>Size</th>
+                            <th>Quantity</th>
                             <th>Discreption</th>
                             <th>Price</th>
                             <th>Discount</th>
@@ -40,6 +43,18 @@
                                 </td>
                                 <td>{{ $product->store->name }}</td>
                                 <td>{{ $product->productName }}</td>
+                                <td class="color-grid">
+                                    @foreach ($product->colors as $colors)
+                                        <span class="color-box" style="background-color: {{ $colors }}; width:20px !important ; height:20px !important ; display: inline-block;border-radius:50% "></span>
+                                    @endforeach
+                                </td>
+                                <td>
+                                    @foreach ($product->size as $size)
+                                        <span class="badge bg-warning" style="color: #f00000; font-size: 16px;">{{ $size }}</span>
+                                    @endforeach
+                                </td>
+                                <td>{{ $product->quantity }}</td>
+
                                 <td>{{ $product->discreption }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->discount }}</td>

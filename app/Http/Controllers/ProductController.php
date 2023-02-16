@@ -40,11 +40,11 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $productId, $quantity)
+    public function store(Request $request)
     {
         $validator = Validator($request->all(), [
             'store' => 'required',
-            'sizes' => 'required',
+            'size' => 'required|string',
             'productName' => 'required|string|min:3|max:50',
             'discreption' => 'required|string|min:3|max:200',
             'color' => ['required', new Hex],
@@ -63,13 +63,18 @@ class ProductController extends Controller
             $products->discreption = $request->input('discreption');
             $products->price = $request->input('price');
             $products->discount = $request->input('discount');
+            $products->quantity = $request->input('quantity');
+
             $products->flag = $request->input('flag') == 'discount';
 
             // quantity
-            $products = Product::find($productId);
+            /*     $products = Product::find($productId);
             $products->decrement('quantity', $quantity);
             $products->quantity = $quantity;
-            $products->decrementProductQuantity($productId, $quantity);
+            $products->decrementProductQuantity($productId, $quantity);*/
+
+
+
             // image
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -85,8 +90,11 @@ class ProductController extends Controller
             $products->colors = $colors;
 
             // Size
-            $sizes = explode(',', $request->sizes);
-            $products->sizes = $sizes;
+            $sizes = [];
+            for ($i = 1; $i <= $request->input('size'); $i++) {
+                array_push($sizes, $request->input('size_' . $i));
+            }
+            $products->size = $sizes;
 
 
             $isSaved = $products->save();
@@ -134,7 +142,8 @@ class ProductController extends Controller
         $validator = Validator($request->all(), [
             'store' => 'required',
             'color' => ['required', new Hex],
-            'sizes' => 'required',
+            'colors' => 'required|integer',
+            'size' => 'required|string',
             'quantity' => 'required|integer|min:0',
             'productName' => 'required|string|min:3|max:50',
             'discreption' => 'required|string|min:3|max:200',
@@ -169,8 +178,7 @@ class ProductController extends Controller
             $products->colors = $colors;
 
             // Size
-            $sizes = explode(',', $request->sizes);
-            $products->sizes = $sizes;
+
 
             // quantity
             $products = Product::find($productId);

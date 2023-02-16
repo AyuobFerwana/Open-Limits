@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('productName', 50);
             $table->string('discreption', 150);
             $table->json('colors');
-            $table->json('sizes');
+            $table->json('size');
             $table->integer('quantity');
             $table->foreignId('store_id')->constrained()->cascadeOnDelete();
             $table->string('price');

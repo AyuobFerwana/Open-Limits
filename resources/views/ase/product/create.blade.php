@@ -51,7 +51,13 @@
 
                         <div class="mb-3">
                             <label for="size">Size</label>
-                            <input type="text" class="form-control" id="sizes">
+                            <div id="sizes-container">
+                                <input type="text" class="form-control" id="size_1">
+                            </div>
+
+                            <button type="button" onclick="addSize()" class="btn btn-success">Add Sizes &plus;</button>
+                            <button type="button" onclick="resetSizes()" class="btn btn-danger"
+                                style="margin-left: 20px;">Clear Sizes</button>
                         </div>
 
                         <div class="mb-3">
@@ -97,8 +103,10 @@
 
 @section('script')
 
-<script>
-    let colors = 0;
+    <script>
+        let colors = 0;
+        let sizes =1;
+
 
         function PerformProduct() {
             let formData = new FormData();
@@ -108,8 +116,9 @@
             formData.append('price', document.getElementById('price').value);
             formData.append('discount', document.getElementById('discount').value);
             formData.append('color', document.getElementById('color').value);
-            formData.append('sizes', getSelectSizes());
-            formData.append('quantity', getQuantity());
+             formData.append('quantity', document.getElementById('quantity').value);
+
+         //   formData.append('quantity', getQuantity());
 
             // {{--  Flag  --}}
             const radioButtons = document.querySelectorAll('input[type="radio"]');
@@ -132,8 +141,15 @@
                 formData.append('color_' + i, document.getElementById('color_' + i).value);
             }
 
+
+               // {{--  Sizes  --}}
+               formData.append('size', sizes);
+               for (let i = 1; i <= sizes; i++) {
+                   formData.append('size_' + i, document.getElementById('size_' + i).value);
+               }
+
             // {{--  Quantity  --}}
-            let products = [{
+       /*     {{--  let products = [{
                 id: 1,
                 name: 'Product 1',
                 quantity: 10
@@ -160,7 +176,7 @@
 
                 decrementProductQuantity(1, order.quantity);
                 console.log(products[0].quantity);
-            }
+            }  --}}*/
 
 
             // {{--  axios  --}}
@@ -198,21 +214,27 @@
         }
 
 
-        function getSelectSizes() {
-            let select = document.getElementById('sizes');
-            var result = [];
-            var options = select && select.options;
-            var opt;
 
-            for (var i = 0, iLen = options.length; i < iLen; i++) {
-                opt = options[i];
-
-                if (opt.selected) {
-                    result.push(opt.value || opt.text);
-                }
+              // {{--  Size  --}}
+              function addSize() {
+                const sizeInput = document.createElement("input");
+                sizeInput.setAttribute('type', 'text');
+                sizeInput.setAttribute('class', 'form-control');
+                sizeInput.setAttribute('id', `size_${++sizes}`);
+                document.getElementById('sizes-container').appendChild(sizeInput);
             }
-            return result;
-        }
+    
+            function resetSizes() {
+                const sizeInput = document.createElement("input");
+                sizeInput.setAttribute('type', 'text');
+                sizeInput.setAttribute('class', 'form-control');
+                sizeInput.setAttribute('id', `size`);
+                document.getElementById('sizes-container').innerHTML = '';
+                document.getElementById('sizes-container').appendChild(sizeInput);
+                sizes = 0;
+            }
+
+
 </script>
 
 @endsection
