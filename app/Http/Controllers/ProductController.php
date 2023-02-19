@@ -129,7 +129,7 @@ class ProductController extends Controller
     public function edit(Product $product, Category $categories)
     {
         $categories = Category::all();
-        return response()->view('ase.product.edit', ['products' => $product, 'categories' => $categories]);
+        return response()->view('ase.product.edit', ['product' => $product, 'categories' => $categories]);
     }
 
     /**
@@ -155,21 +155,21 @@ class ProductController extends Controller
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
         ]);
         if (!$validator->fails()) {
-            $products = new Product();
-            $products->category_id = $request->input('category');
-            $products->productName = $request->input('productName');
-            $products->discreption = $request->input('discreption');
-            $products->price = $request->input('price');
-            $products->discount = $request->input('discount');
-            $products->flag = $request->input('flag') == 'discount';
+            $product = new Product();
+            $product->category_id = $request->input('category');
+            $product->productName = $request->input('productName');
+            $product->discreption = $request->input('discreption');
+            $product->price = $request->input('price');
+            $product->discount = $request->input('discount');
+            $product->flag = $request->input('flag') == 'discount';
 
             // image
             if ($request->hasFile('image')) {
-                Storage::disk('public')->delete('' . $products->image);
+                Storage::disk('public')->delete('' . $product->image);
                 $file = $request->file('image');
                 $imageName = time() . '_' . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
                 $Newimage = $file->storePubliclyAs('products', $imageName, ['disk' => 'public']);
-                $products->image = $Newimage;
+                $product->image = $Newimage;
             }
 
             // color
@@ -177,18 +177,22 @@ class ProductController extends Controller
             for ($i = 1; $i <= $request->input('colors'); $i++) {
                 array_push($colors, $request->input('color_' . $i));
             }
-            $products->colors = $colors;
+            $product->colors = $colors;
 
             // Size
-
+            $sizes = [];
+            for ($i = 1; $i <= $request->input('size'); $i++) {
+                array_push($sizes, $request->input('size_' . $i));
+            }
+            $product->size = $sizes;
 
             // quantity
-            $products = Product::find($productId);
-            $products->decrement('quantity', $quantity);
-            $products->quantity = $quantity;
-            $products->decrementProductQuantity($productId, $quantity);
+            // $product = Product::find($productId);
+            // $product->decrement('quantity', $quantity);
+            // $product->quantity = $quantity;
+            // $product->decrementProductQuantity($productId, $quantity);
 
-            $isSaved = $products->save();
+            $isSaved = $product->save();
             return response()->json([
                 'message' => $isSaved ? 'Update Product Successfully' : 'Update Product Failed'
             ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);

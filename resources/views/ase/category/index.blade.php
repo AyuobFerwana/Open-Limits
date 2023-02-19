@@ -36,6 +36,8 @@
                         <td>{{ $categorie->categoryName }}</td>
                         <td>{{ $categorie->created_at }}</td>
                         <td>{{ $categorie->updated_at }}</td>
+                        <td>{{ $categorie->deleted_at }}</td>
+
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"

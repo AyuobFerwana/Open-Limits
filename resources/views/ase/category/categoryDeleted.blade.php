@@ -58,13 +58,13 @@
 
 
 @section('script')
-<script>
+    <script>
     function performDestroy(id, reference) {
             confirmDestroy('/dashboard/RestoreCategoryDestroy', id, reference)
         }
 </script>
 
-<script type="text/javascript">
+    <script type="text/javascript">
     $('.show_confirm').click(function(e) {
             if (!confirm('Are you sure you want to delete this?')) {
                 e.preventDefault();
