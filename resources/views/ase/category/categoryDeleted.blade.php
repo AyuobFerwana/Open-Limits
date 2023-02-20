@@ -40,9 +40,9 @@
                         <td>{{ $categorie->categoryName }}</td>
                         <td>{{ $categorie->deleted_at }}</td>
                         <td>
-                            <a href="{{ route('category.restore', $categorie->id) }}"
+                            <a href="{{ route('category.restore', $categorie->id) }}" style="color:aliceblue" 
                                 class="btn btn-primary">Restore</a>
-                            <a onclick="performDestroy('{{ $categorie->id }}',this)" class="btn btn-danger">Delete</a>
+                            <a onclick="performDestroy('{{ $categorie->id }}',this)" style="color:aliceblue"  class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach

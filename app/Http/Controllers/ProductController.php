@@ -45,7 +45,7 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-            'category' => 'required|string',
+            'categoryName' => 'required|string',
             'size' => 'required|string',
             'productName' => 'required|string|min:3|max:50',
             'discreption' => 'required|string|min:3|max:200',
@@ -60,7 +60,7 @@ class ProductController extends Controller
         ]);
         if (!$validator->fails()) {
             $products = new Product();
-            $products->category_id = $request->input('category');
+            $products->category_id = $request->input('categoryName');
             $products->productName = $request->input('productName');
             $products->discreption = $request->input('discreption');
             $products->price = $request->input('price');
@@ -139,10 +139,10 @@ class ProductController extends Controller
      * @param  \App\Models\Product  $product
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Product $product, $productId, $quantity)
+    public function update(Request $request, Product $product)
     {
         $validator = Validator($request->all(), [
-            'category' => 'required',
+            'categoryName' => 'required|string',
             'color' => ['required', new Hex],
             'colors' => 'required|integer',
             'size' => 'required|string',
@@ -156,7 +156,7 @@ class ProductController extends Controller
         ]);
         if (!$validator->fails()) {
             $product = new Product();
-            $product->category_id = $request->input('category');
+            $product->category_id = $request->input('categoryName');
             $product->productName = $request->input('productName');
             $product->discreption = $request->input('discreption');
             $product->price = $request->input('price');

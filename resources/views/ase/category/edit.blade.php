@@ -14,20 +14,20 @@
         <div class="col-xl">
             <div class="card mb-4">
                 <div class="card-header d-flex justify-content-between align-items-center">
-                    <h5 class="mb-0">Edit Category</h5>
+                    <h5 class="mb-0">Edit Categories</h5>
                 </div>
                 <div class="card-body">
-                    <form id="form" onsubmit="event.preventDefault(); editCategory(); ">
+                    <form id="form" onsubmit="event.preventDefault(); PerformCategory(); ">
                         @csrf
                         <div class="mb-3">
-                            <label class="form-label" for="Name Store">Name Category</label>
-                            <input type="text" class="form-control" value="{{ $categories->categoryName }}" id="name"
-                                placeholder="Name Category" />
+                            <label class="form-label" for="Name Category">Name Category</label>
+                            <input type="text" class="form-control" id="categoryName" value="{{$category->categoryName}}"
+                            placeholder="Name Category" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="Image">Image</label>
-                            <input class="form-control" value="{{ $categories->image }}" name="img[]" type="file"
-                                id="image">
+                            <input class="form-control" name="img[]" type="file" id="image" value="{{$category->image}}">
+
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>
                         <a href="{{ url()->previous() }}" class="btn btn-dark">Cancel</a>
@@ -42,9 +42,9 @@
 @section('script')
 
 <script>
-    function editCategory() {
+    function PerformCategory() {
             let formData = new FormData();
-            formData.append('_method', 'PUT');
+            formData.append('_method','PUT');
             formData.append('categoryName', document.getElementById('categoryName').value);
             if (document.getElementById('image').files.length > 0) {
                 formData.append('image', document.getElementById('image').files[0]);
@@ -59,6 +59,10 @@
                     toastr.error(error.response.data.message);
                     console.log(error);
                 });
+
+
+
+
         }
 </script>
 

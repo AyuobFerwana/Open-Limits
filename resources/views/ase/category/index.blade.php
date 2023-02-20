@@ -18,8 +18,8 @@
                 <thead>
                     <tr>
                         <th>id</th>
+                        <th>Logo</th>
                         <th>Category Name</th>
-                        <th>Product Name</th>
                         <th>Create_At</th>
                         <th>Updated_at</th>
                         <th>Setting</th>
@@ -30,13 +30,12 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>
-                        <img src="{{ Storage::url($categorie->image) }}" alt="Product-image" width="53"
-                            style="border-radius: 10px;">
+                            <img src="{{ Storage::url($categorie->image) }}" alt="Product-image" width="53"
+                                style="border-radius: 10px;">
                         </td>
                         <td>{{ $categorie->categoryName }}</td>
                         <td>{{ $categorie->created_at }}</td>
                         <td>{{ $categorie->updated_at }}</td>
-                        <td>{{ $categorie->deleted_at }}</td>
 
                         <td>
                             <div class="dropdown">
@@ -52,11 +51,11 @@
                                 </div>
                             </div>
                         </td>
+                    </tr>
+                    @endforeach
+                </tbody>
+            </table>
         </div>
-        </tr>
-        @endforeach
-        </tbody>
-        </table>
     </div>
 </div>
 @endsection

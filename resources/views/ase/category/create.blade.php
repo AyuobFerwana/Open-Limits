@@ -39,7 +39,7 @@
 
 @section('script')
 
-    <script>
+<script>
     function PerformCategory() {
             let formData = new FormData();
             formData.append('categoryName', document.getElementById('categoryName').value);

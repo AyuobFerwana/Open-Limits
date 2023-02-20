@@ -56,8 +56,8 @@
                         </td>
                         <td>{{ $product->deleted_at }}</td>
                         <td>
-                            <a href="{{ route('products.restore', $product->id) }}" class="btn btn-primary">Restore</a>
-                            <a onclick="performDestroy('{{ $product->id }}',this)" class="btn btn-danger">Delete</a>
+                            <a href="{{ route('products.restore', $product->id) }}" style="color:aliceblue" class="btn btn-primary">Restore</a>
+                            <a onclick="performDestroy('{{ $product->id }}',this)" style="color:aliceblue" class="btn btn-danger">Delete</a>
 
                         </td>
                     </tr>

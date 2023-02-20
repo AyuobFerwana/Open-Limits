@@ -21,7 +21,7 @@
                         @csrf
                         <div class="mb-3">
                             <label for="Category" class="form-label">Select Category</label>
-                            <select class="form-select" id="category" aria-label="Default select example">
+                            <select class="form-select" id="categoryName" aria-label="Default select example">
                                 @foreach ($categories as $categorie)
                                 <option value="{{ $categorie->id }}" @selected($product->category->categoryName)>{{
                                     $categorie->categoryName }}
@@ -122,7 +122,7 @@
     function PerformProduct() {
             let formData = new FormData();
             formData.append('_method', 'PUT');
-            formData.append('category', document.getElementById('category').value);
+            formData.append('categoryName', document.getElementById('categoryName').value);
             formData.append('productName', document.getElementById('productName').value);
             formData.append('discreption', document.getElementById('discreption').value);
             formData.append('price', document.getElementById('price').value);

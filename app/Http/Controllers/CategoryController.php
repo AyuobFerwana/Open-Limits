@@ -37,7 +37,7 @@ class CategoryController extends Controller
     public function store(Request $request)
     {
         $validator = Validator($request->all(), [
-            'categoryName' => 'required|string',
+            'categoryName' => 'required|string|max:50',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
 
         ]);
@@ -78,8 +78,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category): Response
     {
-        $categories = Category::all();
-        return response()->view('ase.category.edit', compact('categories'));
+        return response()->view('ase.category.edit', ['category' => $category]);
     }
 
     /**
@@ -88,27 +87,26 @@ class CategoryController extends Controller
     public function update(Request $request, Category $category)
     {
         $validator = Validator($request->all(), [
-            'categoryName' => 'required|string',
+            'categoryName' => 'required|string|max:50',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
 
         ]);
 
         if (!$validator->fails()) {
-            $categories = new Category();
-            $categories->categoryName = $request->input('categoryName');
+            $category->categoryName = $request->input('categoryName');
 
             //  Image
             if ($request->hasFile('image')) {
-                Storage::disk('public')->delete('' . $categories->image);
+                Storage::disk('public')->delete('' . $category->image);
                 $file = $request->file('image');
                 $imageName = time() . '_' . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
-                $Newimage = $file->storePubliclyAs('categories', $imageName, ['disk' => 'public']);
-                $categories->image = $Newimage;
+                $image = $file->storePubliclyAs('categories', $imageName, ['disk' => 'public']);
+                $category->image = $image;
             }
 
-            $isSaved = $categories->save();
+            $isSaved = $category->save();
             return response()->json([
-                'message' => $isSaved ? 'Create category Successfully' : 'Create Category Failed'
+                'message' => $isSaved ? 'Create Category Successfully' : 'Create Category Failed'
             ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
         } else {
             return response()->json([
@@ -142,6 +140,8 @@ class CategoryController extends Controller
     {
         Category::withTrashed()->findOrFail($id)->restore();
         return back();
+
+      
     }
 
     public function RestoreAll()
