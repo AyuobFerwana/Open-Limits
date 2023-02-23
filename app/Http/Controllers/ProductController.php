@@ -20,8 +20,7 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $products = Product::all();
-        $products = Product::paginate(15);
+        $products = Product::paginate(10);
         return response()->view('ase.product.index', compact('products'));
     }
 
@@ -161,6 +160,7 @@ class ProductController extends Controller
             $product->discreption = $request->input('discreption');
             $product->price = $request->input('price');
             $product->discount = $request->input('discount');
+            $product->quantity = $request->input('quantity');
             $product->flag = $request->input('flag') == 'discount';
 
             // image

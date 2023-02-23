@@ -20,7 +20,8 @@ use Illuminate\Support\Facades\Route;
 
 // User Inter FAce
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
-
+Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
+Route::get('/product/search', [FrontController::class, 'productSearch']);
 
 
 Route::redirect('/', '/dashboard');

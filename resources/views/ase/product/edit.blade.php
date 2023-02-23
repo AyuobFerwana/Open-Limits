@@ -54,12 +54,12 @@
                                 Colors</button>
                         </div>
 
-                        
+
                         <div class="mb-3">
                             <label for="size">Size</label>
                             @foreach ($product->size as $size)
                             <div id="sizes-container">
-                                <input type="text"  value="{{ $size }}"  class="form-control" id="size_1">
+                                <input type="text" value="{{ $size }}" class="form-control" id="size_1">
                             </div>
                             @endforeach
 
@@ -72,7 +72,8 @@
                         <div class="mb-3">
                             <label for="Quantity" class="form-label">Quantity</label>
                             <div class="mb-3" style="width: 100%;">
-                                <input type="number" value="{{ $product->quantity }}" class="form-control" id="quantity" placeholder="Quantity" min="0">
+                                <input type="number" value="{{ $product->quantity }}" class="form-control" id="quantity"
+                                    placeholder="Quantity" min="0">
                             </div>
                         </div>
 
@@ -116,9 +117,55 @@
 
 @section('script')
 
-    <script>
+<script>
     let colors = 0;
         let sizes =1;
+
+        
+       // {{--  Colors  --}}
+       function addColor() {
+          const colorInput = document.createElement("input");
+          colorInput.setAttribute('type', 'color');
+          colorInput.setAttribute('value', '#000000');
+          colorInput.setAttribute('class', 'form-control');
+          colorInput.setAttribute('id', `color_${++colors}`);
+          document.getElementById('colors-container').appendChild(colorInput);
+      }
+
+      function resetColors() {
+          const colorInput = document.createElement("input");
+          colorInput.setAttribute('type', 'color');
+          colorInput.setAttribute('value', '#000000');
+          colorInput.setAttribute('class', 'form-control');
+          colorInput.setAttribute('id', `color`);
+          document.getElementById('colors-container').innerHTML = '';
+          document.getElementById('colors-container').appendChild(colorInput);
+          colors = 0;
+      }
+
+
+
+            // {{--  Size  --}}
+            function addSize() {
+              const sizeInput = document.createElement("input");
+              sizeInput.setAttribute('type', 'text');
+              sizeInput.setAttribute('class', 'form-control');
+              sizeInput.setAttribute('id', `size_${++sizes}`);
+              document.getElementById('sizes-container').appendChild(sizeInput);
+          }
+  
+          function resetSizes() {
+              const sizeInput = document.createElement("input");
+              sizeInput.setAttribute('type', 'text');
+              sizeInput.setAttribute('class', 'form-control');
+              sizeInput.setAttribute('id', `size`);
+              document.getElementById('sizes-container').innerHTML = '';  
+              document.getElementById('sizes-container').appendChild(sizeInput);
+              sizes = 0;
+          }
+
+
+
     function PerformProduct() {
             let formData = new FormData();
             formData.append('_method', 'PUT');
@@ -164,55 +211,14 @@
                     toastr.success(response.data.message);
                     console.log(response);
                     document.getElementById('form').reset();
+                   // {{--  window.location.href = 'dashboard/products/create';  --}}
                 })
                 .catch(function(error) {
                     toastr.error(error.response.data.message);
                     console.log(error);
                 });
             }
-
-                 // {{--  Colors  --}}
-        function addColor() {
-            const colorInput = document.createElement("input");
-            colorInput.setAttribute('type', 'color');
-            colorInput.setAttribute('value', '#000000');
-            colorInput.setAttribute('class', 'form-control');
-            colorInput.setAttribute('id', `color_${++colors}`);
-            document.getElementById('colors-container').appendChild(colorInput);
-        }
-
-        function resetColors() {
-            const colorInput = document.createElement("input");
-            colorInput.setAttribute('type', 'color');
-            colorInput.setAttribute('value', '#000000');
-            colorInput.setAttribute('class', 'form-control');
-            colorInput.setAttribute('id', `color`);
-            document.getElementById('colors-container').innerHTML = '';
-            document.getElementById('colors-container').appendChild(colorInput);
-            colors = 0;
-        }
-
-
-
-              // {{--  Size  --}}
-              function addSize() {
-                const sizeInput = document.createElement("input");
-                sizeInput.setAttribute('type', 'text');
-                sizeInput.setAttribute('class', 'form-control');
-                sizeInput.setAttribute('id', `size_${++sizes}`);
-                document.getElementById('sizes-container').appendChild(sizeInput);
-            }
-    
-            function resetSizes() {
-                const sizeInput = document.createElement("input");
-                sizeInput.setAttribute('type', 'text');
-                sizeInput.setAttribute('class', 'form-control');
-                sizeInput.setAttribute('id', `size`);
-                document.getElementById('sizes-container').innerHTML = '';
-                document.getElementById('sizes-container').appendChild(sizeInput);
-                sizes = 0;
-            }
-
+            
        
 </script>
 

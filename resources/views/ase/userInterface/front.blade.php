@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Open Limits</title>
+    <title>Open Limit</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -110,11 +110,11 @@
                                 </a>
                             </div>
                             <ul class="mainmenu">
-                                <a href="{{route('front.index')}}">Home</a>
+                                <li><a href="{{route('front.index')}}">Home</a></li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Shop</a>
                                     <ul class="axil-submenu">
-                                        <li><a href="shop-sidebar.html">Shop With Sidebar</a></li>
+                                        <li><a href="{{route('front.sidebar')}}">Shop With Sidebar</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -494,7 +494,7 @@
                                             </div>
                                             @endif
 
-                                            <div class="color-variant-wrapper">
+                                            {{-- <div class="color-variant-wrapper">
                                                 <ul class="color-variant">
                                                     <li class="color-extra-01 active"><span><span
                                                                 class="color"></span></span>
@@ -504,7 +504,7 @@
                                                     <li class="color-extra-03"><span><span class="color"></span></span>
                                                     </li>
                                                 </ul>
-                                            </div>
+                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
