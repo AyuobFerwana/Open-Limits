@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Open Limit | Shop Sidebar</title>
+    <title>Open Limit | Product Item</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -15,7 +15,7 @@
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.rtl.min.css')}}">
+    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/font-awesome.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/flaticon/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick.css')}}">
@@ -36,47 +36,7 @@
     <a href="#top" class="back-to-top" id="backto-top"><i class="fal fa-arrow-up"></i></a>
     <!-- Start Header -->
     <header class="header axil-header header-style-5">
-        <div class="axil-header-top">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-sm-6 col-12">
-                        <div class="header-top-dropdown">
-                            <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    English
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">English</a></li>
-                                    <li><a class="dropdown-item" href="#">Arabic</a></li>
-                                    <li><a class="dropdown-item" href="#">Spanish</a></li>
-                                </ul>
-                            </div>
-                            <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
-                                    USD
-                                </button>
-                                <ul class="dropdown-menu">
-                                    <li><a class="dropdown-item" href="#">USD</a></li>
-                                    <li><a class="dropdown-item" href="#">AUD</a></li>
-                                    <li><a class="dropdown-item" href="#">EUR</a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-sm-6 col-12">
-                        <div class="header-top-link">
-                            <ul class="quick-link">
-                                <li><a href="#">Help</a></li>
-                                <li><a href="sign-up.html">Join Us</a></li>
-                                <li><a href="sign-in.html">Sign In</a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+
         <!-- Start Mainmenu Area  -->
         <div id="axil-sticky-placeholder"></div>
         <div class="axil-mainmenu">
@@ -84,7 +44,7 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="index.html" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
+                            <img src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
                             <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
@@ -100,7 +60,9 @@
                                 </a>
                             </div>
                             <ul class="mainmenu">
-                                <li><a href="{{route('front.index')}}">Home</a></li>
+                                <li>
+                                    <a href="{{route('front.index')}}">Home</a>
+                                </li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Shop</a>
                                     <ul class="axil-submenu">
@@ -147,6 +109,15 @@
                                         <li>
                                             <a href="my-account.html">My Account</a>
                                         </li>
+                                        <li>
+                                            <a href="#">Initiate return</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Support</a>
+                                        </li>
+                                        <li>
+                                            <a href="#">Language</a>
+                                        </li>
                                     </ul>
                                     <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
                                     <div class="reg-footer text-center">No account yet? <a href="sign-up.html"
@@ -188,134 +159,113 @@
     <!-- End Header -->
 
     <main class="main-wrapper">
-        <!-- Start Breadcrumb Area  -->
-        <div class="axil-breadcrumb-area">
-            <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-6 col-md-8">
-                        <div class="inner">
-                            <ul class="axil-breadcrumb">
-                                <li class="axil-breadcrumb-item"><a href="{{route('front.index')}}">Home</a></li>
-                                <li class="separator"></li>
-                                <li class="axil-breadcrumb-item active" aria-current="page">All Products</li>
-                            </ul>
-                            <h1 class="title">Explore All Products</h1>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-4">
-                        <div class="inner">
-                            <div class="bradcrumb-thumb">
-                                <img src="{{asset('fas/assets/images/product/product-45.png')}}" alt="Image">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- End Breadcrumb Area  -->
-
         <!-- Start Shop Area  -->
-        <div class="axil-shop-area axil-section-gap bg-color-white">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="axil-shop-sidebar">
-                            <div class="d-lg-none">
-                                <button class="sidebar-close filter-close-btn"><i class="fas fa-times"></i></button>
+        <div class="axil-single-product-area bg-color-white">
+            <div class="single-product-thumb axil-section-gap pb--20 pb_sm--0 bg-vista-white">
+                <div class="container">
+                    <div class="row row--50">
+                        <div class="col-lg-6 mb--40">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="product-large-thumbnail-2 single-product-thumbnail axil-product slick-layout-wrapper--15 axil-slick-arrow arrow-both-side-3">
+                                        <div class="thumbnail">
+                                            <img src="{{Storage::url($products->image)}}" alt="Product Images">
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="toggle-list product-categories active">
-                                <h6 class="title">CATEGORIES</h6>
-                                @foreach($categories as $categorie)
-                                <div class="shop-submenu">
-                                    <ul>
-                                        <li class="{{request()->category == $categorie->id ? 'current-cat' : '' }}">
-                                            <a
-                                                href="{{route('front.sidebar', ['category' =>$categorie->id])}}">{{$categorie->categoryName}}</a>
-                                        </li>
+                        </div>
+                        <div class="col-lg-6 mb--40">
+
+                            <div class="single-product-content">
+                                <div class="inner">
+                                    <h2 class="title">{{$products->category->categoryName}}</h2>
+                                    <h2 class="product-title">{{$products->productName}}</h2>
+                                    @if ($products->flag)
+
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">${{$products->discount}}</span>
+                                        <span class="price old-price">${{$products->price}}</span>
+                                    </div>
+                                    @else
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">${{$products->price}}</span>
+                                    </div>
+                                    @endif
+                                    <ul class="product-meta">
+                                        <li><i class="fal fa-check"></i>In stock</li>
+                                        <li><i class="fal fa-check"></i>Free delivery available</li>
+                                        <li><i class="fal fa-check"></i>Sales 30% Off Us Code: MOTIVE30</li>
                                     </ul>
-                                </div>
-                                @endforeach
-                            </div>
-                            <button class="axil-btn btn-bg-primary">All Reset</button>
-                        </div>
-                        <!-- End .axil-shop-sidebar -->
-                    </div>
-                    <div class="col-lg-9">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <div class="axil-shop-top mb--40">
-                                    <div
-                                        class="category-select align-items-center justify-content-lg-end justify-content-between">
-                                        <!-- Start Single Select  -->
-                                        <span class="filter-results">Showing 1-12 of
-                                            {{$products->count()}}
-                                            results</span>
+                                    <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi pretium.
+                                        Integer ante est, hendrerit in rutrum quis, elementum eget magna. Pellentesque
+                                        sagittis dictum libero, eu dignissim tellus.</p>
 
+                                    <!-- Start Product Action Wrapper  -->
+                                    <div class="product-action-wrapper d-flex-center">
+                                        <!-- Start Quentity Action  -->
+                                        <div class="pro-qty mr--20"><input type="text" value="1"></div>
+                                        <!-- End Quentity Action  -->
 
-                                        <select class="single-select">
-                                            <option>Sort by Latest</option>
-                                            <option>Sort by Oldest</option>
-                                            <option>Sort by Name</option>
-                                            <option>Sort by Price</option>
-                                        </select>
-                                        <!-- End Single Select  -->
+                                        <!-- Start Product Action  -->
+                                        <ul class="product-action d-flex-center mb--0">
+                                            <li class="add-to-cart"><a href="cart.html"
+                                                    class="axil-btn btn-bg-primary">Add to Cart</a></li>
+                                            <li class="wishlist"><a href="wishlist.html"
+                                                    class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                        </ul>
+                                        <!-- End Product Action  -->
+
                                     </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!-- End .row -->
-                        <div class="row row--15">
-                            @foreach ($products as $product)
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="axil-product product-style-one mb--30">
-                                    <div class="thumbnail">
-                                        <a href="single-product.html">
-                                            <img style="height: 200px ; width: 300px;"
-                                                src="{{Storage::url($product->image)}}" alt="Product Images">
-                                        </a>
-                                        <div class="product-hover-action">
-                                            <ul class="cart-action">
-                                                <li class="wishlist"><a href="wishlist.html"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a href="cart.html">Add to Cart</a></li>
-                                                <li class="quickview"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view-modal"><i
-                                                            class="far fa-eye"></i></a></li>
-                                            </ul>
+                                    <!-- End Product Action Wrapper  -->
+
+                                    <div class="product-desc-wrapper pt--80 pt_sm--60">
+                                        <h4 class="primary-color mb--40 desc-heading">Description</h4>
+                                        <div class="single-desc mb--30">
+                                            <h5 class="title">Specifications:</h5>
+                                            <p>We’ve created a full-stack structure for our working workflow processes,
+                                                were from the funny the century initial all the made, have spare to
+                                                negatives. But the structure was from the funny the century rather,
+                                                initial all the made, have spare to negatives.</p>
                                         </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="inner">
-                                            <h5 class="title">{{$product->category->categoryName}}</h5>
-                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{$product->productName}}</a>
-                                            </h5>
-                                            @if ($product->flag)
 
-                                            <div class="product-price-variant">
-                                                <span class="price current-price">${{$product->discount}}</span>
-                                                <span class="price old-price">${{$product->price}}</span>
-                                            </div>
-                                            @else
-                                            <div class="product-price-variant">
-                                                <span class="price current-price">${{$product->price}}</span>
-                                            </div>
-                                            @endif
-                                        </div>
+                                        <ul class="pro-des-features pro-desc-style-two pt-10">
+                                            <li class="single-features">
+                                                <div class="icon">
+                                                    <img src="{{asset('fas/assets/images/product/product-thumb/icon-3.png')}}"
+                                                        alt="icon">
+                                                </div>
+                                                Easy Returns
+                                            </li>
+                                            <li class="single-features">
+                                                <div class="icon">
+                                                    <img src="{{asset('fas/assets/images/product/product-thumb/icon-2.png')}}"
+                                                        alt="icon">
+                                                </div>
+                                                Quality Service
+                                            </li>
+                                            <li class="single-features">
+                                                <div class="icon">
+                                                    <img src="{{asset('fas/assets/images/product/product-thumb/icon-1.png')}}"
+                                                        alt="icon">
+                                                </div>
+                                                Original Product
+                                            </li>
+                                        </ul>
+                                        <!-- End .pro-des-features -->
                                     </div>
+                                    <!-- End .product-desc-wrapper -->
                                 </div>
                             </div>
-
-                            @endforeach
-
                         </div>
                     </div>
                 </div>
             </div>
-            <!-- End .container -->
+            <!-- End .single-product-thumb -->
+
         </div>
         <!-- End Shop Area  -->
 
-        <!-- Start Axil Newsletter Area  -->
         <div class="axil-newsletter-area axil-section-gap pt--0">
             <div class="container">
                 <div class="etrade-newsletter-wrapper bg_image bg_image--5">
@@ -556,7 +506,7 @@
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-02.png"
+                                                    <a href="{{asset('fas/assets/images/product/product-big-02.png')}}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
@@ -569,7 +519,7 @@
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-03.png"
+                                                    <a href="{{asset('fas/assets/images/product/product-big-03.png')}}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
@@ -818,7 +768,6 @@
     <script src="{{asset('fas/assets/js/vendor/bootstrap.min.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/slick.min.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/js.cookie.js')}}"></script>
-    <!-- <script src="{{asset('fas/assets/js/vendor/jquery.style.switcher.js')}}"></script> -->
     <script src="{{asset('fas/assets/js/vendor/jquery-ui.min.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/jquery.countdown.min.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/sal.js')}}"></script>
@@ -827,7 +776,6 @@
     <script src="{{asset('fas/assets/js/vendor/isotope.pkgd.min.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/counterup.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/waypoints.min.js')}}"></script>
-    <script src="{{ asset('js/axios.js') }}"></script>
 
     <!-- Main JS -->
     <script src="{{asset('fas/assets/js/rtl-main.js')}}"></script>

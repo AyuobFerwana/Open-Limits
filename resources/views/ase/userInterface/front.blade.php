@@ -272,7 +272,7 @@
                                     <img src="{{ Storage::url($product->image)}}" alt="Product">
                                     <div class="product-price">
                                         <span class="text">From</span>
-                                        <span class="price-amount">$49.00</span>
+                                        <span class="price-amount">{{$product->price}}</span>
                                     </div>
                                 </div>
                                 @endforeach
@@ -460,10 +460,10 @@
                                 <div class="axil-product product-style-one">
                                     <div class="thumbnail">
                                         <a href="single-product.html">
-                                            <img data-sal="zoom-out" data-sal-delay="300" data-sal-duration="800"
+                                            <img data-sal="zoom-out"  style="height: 200px ; width: 300px;" data-sal-delay="300" data-sal-duration="800"
                                                 loading="lazy" src="{{ Storage::url($product->image) }}"
                                                 alt="Product Images">
-                                            <img class="hover-img" src="{{ Storage::url($product->image) }}"
+                                            <img  class="hover-img"  style="height: 200px ; width: 300px;" src="{{ Storage::url($product->image) }}"
                                                 alt="Product Images">
                                         </a>
                                         <div class="product-hover-action">
@@ -480,9 +480,8 @@
                                     </div>
                                     <div class="product-content">
                                         <div class="inner">
-                                            <h5 class="title"><a href="single-product.html">{{ $product->productName
-                                                    }}</a></h5>
-                                            <h5>{{$product->category->categoryName}}</h5>
+                                            <h5 class="title">{{$product->category->categoryName}}</h5>
+                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{ $product->productName }}</a></h5>
                                             @if ($product->flag)
                                             <div class="product-price-variant">
                                                 <span class="price current-price">${{ $product->discount }}</span>
@@ -493,18 +492,6 @@
                                                 <span class="price current-price">${{ $product->price }}</span>
                                             </div>
                                             @endif
-
-                                            {{-- <div class="color-variant-wrapper">
-                                                <ul class="color-variant">
-                                                    <li class="color-extra-01 active"><span><span
-                                                                class="color"></span></span>
-                                                    </li>
-                                                    <li class="color-extra-02"><span><span class="color"></span></span>
-                                                    </li>
-                                                    <li class="color-extra-03"><span><span class="color"></span></span>
-                                                    </li>
-                                                </ul>
-                                            </div> --}}
                                         </div>
                                     </div>
                                 </div>
@@ -929,23 +916,30 @@
     </div>
     <!-- Product Quick View Modal End -->
 
-    <!-- Header Search Modal End -->
+
     <div class="header-search-modal" id="header-search-modal">
         <button class="card-close sidebar-close"><i class="fas fa-times"></i></button>
         <div class="header-search-wrap">
             <div class="card-header">
                 <form action="#">
-                    @csrf
                     <div class="input-group">
-                        <input type="search" class="form-control" name="prod-search" id="prod-search"
-                            placeholder="Write Something....">
+                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
+                            id="prod-search" placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
             </div>
+            <div class="card-body">
+                <div class="search-result-header">
+                    <h6 class="title"> Result Found {{$products->count()}}</h6>
+                    <a href="shop.html" class="view-all">View All</a>
+                </div>
+                <div class="psearch-results" id="searchContainer">
+
+                </div>
+            </div>
         </div>
     </div>
-    <!-- Header Search Modal End -->
 
 
     <div class="cart-dropdown" id="cart-dropdown">
@@ -1045,6 +1039,20 @@
     <script src="{{ asset('js/axios.js') }}"></script>
     <script src="{{ asset('js/Crud.js') }}"></script>
     <script src="{{ asset('js/sweet.js') }}"></script>
+
+    <script>
+        function productSearch(e){
+            axios.get(`/product/search?q=${e.value}`)
+            .then(function(response) {
+                console.log(response);
+                document.getElementById('searchContainer').innerHTML=response.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
+    </script>
 
 </body>
 

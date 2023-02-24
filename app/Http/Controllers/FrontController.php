@@ -16,7 +16,7 @@ class FrontController extends Controller
             return $q->where('category_id', $request->category);
         })->when($request->categoryName, function ($q) use ($request) {
             return $q->where('categoryName', 'LIKE', "%$request->categoryName%");
-        })->get();
+        })->with('category')->get();
 
         return response()->view('ase.userInterface.front', [
             'products' => $products,
@@ -36,11 +36,20 @@ class FrontController extends Controller
         ]);
     }
 
-    public function productSearch(Request $request){
-            $products = Product::when($request->productName,function($q) use ($request){
-                $q->where('productName' , 'Like', "%$request->productName%");
-            })->limit(10)->get();
-            return response()->view('ase.components.product-search',compact('products'));
+    public function productSearch(Request $request)
+    {
+        $products = Product::when($request->q, function ($q) use ($request) {
+            $q->where('productName', 'Like', "%$request->q%");
+        })->limit(10)->get();
+        return response()->view('ase.components.product-search', compact('products'));
     }
-  
+
+    public function productItem(Product $products)
+    {
+        $categories = Category::all();
+        return response()->view('ase.userInterface.product-item', [
+            'products' => $products,
+            'categories' => $categories
+        ]);
+    }
 }
