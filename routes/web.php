@@ -18,15 +18,15 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// User Inter FAce
-Route::get('/', [FrontController::class, 'index'])->name('front.index');
-Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
-Route::get('/product/search', [FrontController::class, 'productSearch']);
-Route::get('/product-item/{products}',[FrontController::class,'productItem'])->name('front.productItem');
+             // User Inter FAce
+    Route::get('/', [FrontController::class, 'index'])->name('front.index');
+    Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
+    Route::get('/product/search', [FrontController::class, 'productSearch']);
+    Route::get('/product-item/{products}',[FrontController::class,'productItem'])->name('front.productItem');
 
-
-Route::redirect('/', '/dashboard');
-Route::prefix('dashboard')->group(function () {
+            // Dashboard
+    Route::redirect('/', '/dashboard');
+    Route::prefix('dashboard')->group(function () {
     Route::view('/', 'ase.dashboard')->name('home');
 
     // // Store
@@ -37,7 +37,7 @@ Route::prefix('dashboard')->group(function () {
     // Route::delete('RestoreStoreDestroy/{id}',  [StoreController::class, 'RestoreStoreDestroy'])->name('store.RestoreStoreDestroy');
 
 
-    // Product
+            // Product
     Route::get('products/restore', [ProductController::class, 'restoreProducts'])->name('products.restoreProducts');
     Route::resource('/products', ProductController::class);
     Route::get('products/restore/one/{id}', [ProductController::class, 'restore'])->name('products.restore');
@@ -46,14 +46,14 @@ Route::prefix('dashboard')->group(function () {
 
 
 
-    // Category
+            // Category
     Route::get('category/restore', [CategoryController::class, 'restoreCategory'])->name('category.restoreCategory');
     Route::resource('/category', CategoryController::class);
     Route::get('category/restore/one/{id}', [CategoryController::class, 'restore'])->name('category.restore');
     Route::get('restoreCategory', [CategoryController::class, 'RestoreAll'])->name('category.Restore.all');
     Route::delete('RestoreCategoryDestroy/{id}',  [CategoryController::class, 'Restoredestroy'])->name('category.Restoredestroy');
 
-    // Purchase
+            // Purchase
     Route::get('purchase', [PurchaseController::class, 'index'])->name('purchase.index');
     Route::delete('purchase', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
 });

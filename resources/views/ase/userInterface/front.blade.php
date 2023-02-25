@@ -93,7 +93,7 @@
             <div class="container">
                 <div class="header-navbar">
                     <div class="header-brand">
-                        <a href="index.html" class="logo logo-dark">
+                        <a href="{{route('front.index')}}" class="logo logo-dark">
                             <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
@@ -295,149 +295,20 @@
                     <h2 class="title">Browse by Category</h2>
                 </div>
                 <div class="categrie-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
+                    @foreach ($categories as $categorie)
                     <div class="slick-single-layout">
                         <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-4.png')}}"
+                            <a href="{{route('front.sidebar', ['category' =>$categorie->id])}}">
+                                <img class="img-fluid" src="{{Storage::url($categorie->image)}}"
                                     alt="product categorie">
-                                <h6 class="cat-title">Phones</h6>
+                                <h6 class="cat-title">{{$categorie->categoryName}}</h6>
                             </a>
                         </div>
                         <!-- End .categrie-product -->
                     </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="300" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-5.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Computers</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="400" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-11.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Accessories</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="500" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-6.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Laptops</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="600" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-2.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Monitors</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="700" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-7.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Networking</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="800" data-sal-duration="500">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-8.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">PC Gaming</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-1.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Smartwatches</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-9.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Headphones</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-10.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Camera & Photo</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-8.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Video Games</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
-                    <!-- End .slick-single-layout -->
-                    <div class="slick-single-layout">
-                        <div class="categrie-product">
-                            <a href="#">
-                                <img class="img-fluid"
-                                    src="{{asset('fas/assets/images/product/categories/elec-1.png')}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">Sports</h6>
-                            </a>
-                        </div>
-                        <!-- End .categrie-product -->
-                    </div>
+
+                    @endforeach
+
                 </div>
             </div>
         </div>
@@ -460,11 +331,11 @@
                                 <div class="axil-product product-style-one">
                                     <div class="thumbnail">
                                         <a href="single-product.html">
-                                            <img data-sal="zoom-out"  style="height: 200px ; width: 300px;" data-sal-delay="300" data-sal-duration="800"
-                                                loading="lazy" src="{{ Storage::url($product->image) }}"
-                                                alt="Product Images">
-                                            <img  class="hover-img"  style="height: 200px ; width: 300px;" src="{{ Storage::url($product->image) }}"
-                                                alt="Product Images">
+                                            <img data-sal="zoom-out" style="height: 200px ; width: 300px;"
+                                                data-sal-delay="300" data-sal-duration="800" loading="lazy"
+                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                            <img class="hover-img" style="height: 200px ; width: 300px;"
+                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
                                         </a>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
@@ -481,7 +352,8 @@
                                     <div class="product-content">
                                         <div class="inner">
                                             <h5 class="title">{{$product->category->categoryName}}</h5>
-                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{ $product->productName }}</a></h5>
+                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{
+                                                    $product->productName }}</a></h5>
                                             @if ($product->flag)
                                             <div class="product-price-variant">
                                                 <span class="price current-price">${{ $product->discount }}</span>
@@ -630,8 +502,8 @@
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
-                            <a href="index.html">
-                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
+                            <a href="{{route('home')}}">
+                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">

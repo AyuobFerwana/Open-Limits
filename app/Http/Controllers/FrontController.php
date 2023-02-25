@@ -24,9 +24,16 @@ class FrontController extends Controller
         ]);
     }
 
+
     public function sidebar(Request $request)
     {
-        $categories = Category::all();
+        $sort = $request->input('sort', 'latest');
+        if ($sort === 'latest') {
+            $sort = 'created_at';
+          }
+        $products = Product::orderBy($sort, $sort === 'productName' ? 'asc' : 'desc')->get();
+
+        $categories = Category::paginate(10);
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
         })->with('category')->get();

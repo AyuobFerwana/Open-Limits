@@ -43,11 +43,16 @@
                         </div>
                         <div class="form-group">
                             <label for="color"> Color</label>
-                            @foreach ($product->colors as $colors)
+                            
                             <div id="colors-container">
-                                <input type="color" value="{{  $colors }}" class="form-control" id="color">
+                                @foreach ($product->colors as $colors)
+                                @if (!$loop->first)
+                                <input type="color" value="{{ $colors }}" class="form-control" id="color_{{ $loop->iteration - 1 }}">
+                                @endif
+
+                                @endforeach
                             </div>
-                            @endforeach
+
                             <button type="button" onclick="addColor()" class="btn btn-success">Add Color &plus;</button>
                             <button type="button" onclick="resetColors()" class="btn btn-danger"
                                 style="margin-left: 20px;">Clear
@@ -57,11 +62,15 @@
 
                         <div class="mb-3">
                             <label for="size">Size</label>
-                            @foreach ($product->size as $size)
+                            
                             <div id="sizes-container">
-                                <input type="text" value="{{ $size }}" class="form-control" id="size_1">
+                                @foreach ($product->size as $size)
+                                @if (!$loop->first)
+                                <input type="text" value="{{ $size }}" class="form-control" id="size_{{ $loop->iteration - 1 }}">
+                                @endif
+                                @endforeach
                             </div>
-                            @endforeach
+
 
                             <button type="button" onclick="addSize()" class="btn btn-success">Add Sizes &plus;</button>
                             <button type="button" onclick="resetSizes()" class="btn btn-danger"

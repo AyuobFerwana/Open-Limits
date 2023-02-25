@@ -236,7 +236,7 @@
                                 </div>
                                 @endforeach
                             </div>
-                            <button class="axil-btn btn-bg-primary">All Reset</button>
+                            <a href="{{route('front.sidebar')}}" class="axil-btn btn-bg-primary">All Reset</a>
                         </div>
                         <!-- End .axil-shop-sidebar -->
                     </div>
@@ -247,16 +247,12 @@
                                     <div
                                         class="category-select align-items-center justify-content-lg-end justify-content-between">
                                         <!-- Start Single Select  -->
-                                        <span class="filter-results">Showing 1-12 of
-                                            {{$products->count()}}
-                                            results</span>
-
-
-                                        <select class="single-select">
-                                            <option>Sort by Latest</option>
-                                            <option>Sort by Oldest</option>
-                                            <option>Sort by Name</option>
-                                            <option>Sort by Price</option>
+                                        <span class="filter-results">Showing {{$products->count()}} results</span>
+                                        <select class="single-select" id="sort-select" onchange="selectSort()">
+                                            <option value="latest">Sort by Latest</option>
+                                            <option value="oldest">Sort by Oldest</option>
+                                            <option value="productName">Sort by Name</option>
+                                            <option value="price">Sort by Price</option>
                                         </select>
                                         <!-- End Single Select  -->
                                     </div>
@@ -287,7 +283,8 @@
                                     <div class="product-content">
                                         <div class="inner">
                                             <h5 class="title">{{$product->category->categoryName}}</h5>
-                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{$product->productName}}</a>
+                                            <h5><a
+                                                    href="{{ route('front.productItem', $product->id) }}">{{$product->productName}}</a>
                                             </h5>
                                             @if ($product->flag)
 
@@ -312,6 +309,8 @@
                 </div>
             </div>
             <!-- End .container -->
+            {{ $categories->links() }}
+
         </div>
         <!-- End Shop Area  -->
 
@@ -843,6 +842,31 @@
             });
         }
 
+    </script>
+
+    <script>
+        function selectSort() {
+            document.getElementById('sort-select').addEventListener('change', selectSort);
+            const sortType = document.getElementById('sort-select').value;
+            axios.get(`/products?sort=${sortType}`).then(response => {
+                const productList = document.getElementById('product-list');
+
+                // clear the existing product list
+                while (productList.firstChild) {
+                  productList.removeChild(productList.firstChild);
+                }
+            
+                // insert the sorted products into the list
+                response.data.forEach(product => {
+                  const productItem = document.createElement('li');
+                  productItem.textContent = `${product.name} - ${product.price}`;
+                  productList.appendChild(productItem);
+                });
+            }).catch(error => {
+              console.log(error);
+            });
+          }
+          document.getElementById('sort-select').addEventListener('change', selectSort);
     </script>
 </body>
 

@@ -36,7 +36,7 @@
                             <img src="{{ Storage::url($product->product->image) }}" alt="Product-image" width="53"
                                 style="border-radius: 10px;">
                         </td>
-                        {{--  <td>{{ $purchase->product->store->name }}</td>  --}}
+                        {{-- <td>{{ $purchase->product->store->name }}</td> --}}
                         <td>{{ $purchase->product->productName }}</td>
                         {{-- <td>{{ $purchase->product->discreption }}</td>
                         <td>{{ $purchase->product->price }}</td> --}}
@@ -52,7 +52,7 @@
                             @endif
                         </td>
                         <td>{{ $purchase->created_at }}</td>
-                       
+
 
                         <td>
                             <div class="btn-group">

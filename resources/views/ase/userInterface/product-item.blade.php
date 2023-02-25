@@ -44,7 +44,7 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="index.html" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Site Logo">
+                            <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
                             <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
@@ -167,7 +167,8 @@
                         <div class="col-lg-6 mb--40">
                             <div class="row">
                                 <div class="col-lg-12">
-                                    <div class="product-large-thumbnail-2 single-product-thumbnail axil-product slick-layout-wrapper--15 axil-slick-arrow arrow-both-side-3">
+                                    <div
+                                        class="product-large-thumbnail-2 single-product-thumbnail axil-product slick-layout-wrapper--15 axil-slick-arrow arrow-both-side-3">
                                         <div class="thumbnail">
                                             <img src="{{Storage::url($products->image)}}" alt="Product Images">
                                         </div>
@@ -179,27 +180,74 @@
 
                             <div class="single-product-content">
                                 <div class="inner">
-                                    <h2 class="title">{{$products->category->categoryName}}</h2>
+                                    <h5 class="title">{{$products->category->categoryName}}</h5>
                                     <h2 class="product-title">{{$products->productName}}</h2>
                                     @if ($products->flag)
 
                                     <div class="product-price-variant">
                                         <span class="price current-price">${{$products->discount}}</span>
-                                        <span class="price old-price">${{$products->price}}</span>
+                                        <del><span class="price old-price">${{$products->price}}</span></del>
                                     </div>
                                     @else
                                     <div class="product-price-variant">
                                         <span class="price current-price">${{$products->price}}</span>
                                     </div>
                                     @endif
+
+                                    <div class="product-rating">
+                                        <div class="star-rating">
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="fas fa-star"></i>
+                                            <i class="far fa-star"></i>
+                                        </div>
+                                    </div>
+
                                     <ul class="product-meta">
-                                        <li><i class="fal fa-check"></i>In stock</li>
-                                        <li><i class="fal fa-check"></i>Free delivery available</li>
-                                        <li><i class="fal fa-check"></i>Sales 30% Off Us Code: MOTIVE30</li>
+                                        <li><i class="fal fa-check"></i>In stock ({{ $products->quantity}})</li>
+                                        <li><i class="fal fa-check"></i>Free Delivery Available</li>
                                     </ul>
-                                    <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi pretium.
-                                        Integer ante est, hendrerit in rutrum quis, elementum eget magna. Pellentesque
-                                        sagittis dictum libero, eu dignissim tellus.</p>
+
+                                    <div class="product-variations-wrapper">
+
+                                        <!-- Start Product Variation  -->
+                                        <div class="product-variation">
+                                            <h6 class="title">Colors:</h6>
+                                            <div class="color-variant-wrapper">
+                                                <ul class="color-variant mt--0">
+                                                    <li class="color-extra-01 active"><span><span
+                                                                class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-02"><span><span class="color"></span></span>
+                                                    </li>
+                                                    <li class="color-extra-03"><span><span class="color"></span></span>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        <!-- End Product Variation  -->
+
+                                        <!-- Start Product Variation  -->
+                                        <div class="product-variation product-size-variation">
+                                            <h6 class="title">Size:</h6>
+                                            <ul class="range-variant">
+                                                <li>xs</li>
+                                                <li>s</li>
+                                                <li>m</li>
+                                                <li>l</li>
+                                                <li>xl</li>
+                                            </ul>
+                                        </div>
+                                        <!-- End Product Variation  -->
+
+                                        <h4 class="primary-color mb--40 desc-heading">Description</h4>
+                                        <div class="single-desc mb--30">
+                                            <h5 class="title">Specifications:</h5>
+                                            <p>{{$products->discreption}}</p>
+                                        </div>
+                                    </div>
+                                    <hr class="sidebar-divider">
 
                                     <!-- Start Product Action Wrapper  -->
                                     <div class="product-action-wrapper d-flex-center">
@@ -217,43 +265,31 @@
                                         <!-- End Product Action  -->
 
                                     </div>
+                                    <ul class="pro-des-features pro-desc-style-two pt-10">
+                                        <li class="single-features">
+                                            <div class="icon">
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/icon-3.png')}}"
+                                                    alt="icon">
+                                            </div>
+                                            Easy Returns
+                                        </li>
+                                        <li class="single-features">
+                                            <div class="icon">
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/icon-2.png')}}"
+                                                    alt="icon">
+                                            </div>
+                                            Quality Service
+                                        </li>
+                                        <li class="single-features">
+                                            <div class="icon">
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/icon-1.png')}}"
+                                                    alt="icon">
+                                            </div>
+                                            Original Product
+                                        </li>
+                                    </ul>
                                     <!-- End Product Action Wrapper  -->
 
-                                    <div class="product-desc-wrapper pt--80 pt_sm--60">
-                                        <h4 class="primary-color mb--40 desc-heading">Description</h4>
-                                        <div class="single-desc mb--30">
-                                            <h5 class="title">Specifications:</h5>
-                                            <p>We’ve created a full-stack structure for our working workflow processes,
-                                                were from the funny the century initial all the made, have spare to
-                                                negatives. But the structure was from the funny the century rather,
-                                                initial all the made, have spare to negatives.</p>
-                                        </div>
-
-                                        <ul class="pro-des-features pro-desc-style-two pt-10">
-                                            <li class="single-features">
-                                                <div class="icon">
-                                                    <img src="{{asset('fas/assets/images/product/product-thumb/icon-3.png')}}"
-                                                        alt="icon">
-                                                </div>
-                                                Easy Returns
-                                            </li>
-                                            <li class="single-features">
-                                                <div class="icon">
-                                                    <img src="{{asset('fas/assets/images/product/product-thumb/icon-2.png')}}"
-                                                        alt="icon">
-                                                </div>
-                                                Quality Service
-                                            </li>
-                                            <li class="single-features">
-                                                <div class="icon">
-                                                    <img src="{{asset('fas/assets/images/product/product-thumb/icon-1.png')}}"
-                                                        alt="icon">
-                                                </div>
-                                                Original Product
-                                            </li>
-                                        </ul>
-                                        <!-- End .pro-des-features -->
-                                    </div>
                                     <!-- End .product-desc-wrapper -->
                                 </div>
                             </div>
