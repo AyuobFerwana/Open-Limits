@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+    // The first Show For User
     public function index(Request $request)
     {
         $categories = Category::all();
@@ -27,22 +28,26 @@ class FrontController extends Controller
 
     public function sidebar(Request $request)
     {
-        $sort = $request->input('sort', 'latest');
-        if ($sort === 'latest') {
-            $sort = 'created_at';
-          }
-        $products = Product::orderBy($sort, $sort === 'productName' ? 'asc' : 'desc')->get();
-
+        // product & Sort
         $categories = Category::paginate(10);
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
-        })->with('category')->get();
+        })->with('category')->when($request->sort && in_array($request->sort, ['latest', 'price-low', 'price-high']), function ($q) use ($request) {
+            if ($request->sort == 'latest') {
+                return $q->orderBy('id', 'desc');
+            } elseif ($request->sort == 'price-low') {
+                return $q->orderBy('price', 'asc');
+            } else {
+
+                return $q->orderByDesc('price');
+            }
+        })->get();
         return response()->view('ase.userInterface.shop-sidebar', [
             'products' => $products,
             'categories' => $categories
         ]);
     }
-
+    // Search
     public function productSearch(Request $request)
     {
         $products = Product::when($request->q, function ($q) use ($request) {
@@ -50,7 +55,7 @@ class FrontController extends Controller
         })->limit(10)->get();
         return response()->view('ase.components.product-search', compact('products'));
     }
-
+    //  Product Show
     public function productItem(Product $products)
     {
         $categories = Category::all();

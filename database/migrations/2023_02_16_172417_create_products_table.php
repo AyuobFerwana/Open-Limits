@@ -19,7 +19,7 @@ return new class extends Migration
             $table->json('size');
             $table->integer('quantity');
             $table->foreignId('category_id')->constrained()->cascadeOnDelete();
-            $table->string('price');
+            $table->float('price');
             $table->string('discount')->default(0);
             $table->boolean('flag')->default(0);
             $table->string('image')->nullable();

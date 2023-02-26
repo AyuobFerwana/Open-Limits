@@ -15,7 +15,7 @@
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.rtl.min.css')}}">
+    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/font-awesome.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/flaticon/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick.css')}}">
@@ -248,11 +248,10 @@
                                         class="category-select align-items-center justify-content-lg-end justify-content-between">
                                         <!-- Start Single Select  -->
                                         <span class="filter-results">Showing {{$products->count()}} results</span>
-                                        <select class="single-select" id="sort-select" onchange="selectSort()">
+                                        <select class="single-select" onchange="sortData(this)" id="sort">
                                             <option value="latest">Sort by Latest</option>
-                                            <option value="oldest">Sort by Oldest</option>
-                                            <option value="productName">Sort by Name</option>
-                                            <option value="price">Sort by Price</option>
+                                            <option value="price-low">Sort by Price : Low</option>
+                                            <option value="price-high">Sort by Price : High</option>
                                         </select>
                                         <!-- End Single Select  -->
                                     </div>
@@ -843,31 +842,12 @@
         }
 
     </script>
-
     <script>
-        function selectSort() {
-            document.getElementById('sort-select').addEventListener('change', selectSort);
-            const sortType = document.getElementById('sort-select').value;
-            axios.get(`/products?sort=${sortType}`).then(response => {
-                const productList = document.getElementById('product-list');
-
-                // clear the existing product list
-                while (productList.firstChild) {
-                  productList.removeChild(productList.firstChild);
-                }
-            
-                // insert the sorted products into the list
-                response.data.forEach(product => {
-                  const productItem = document.createElement('li');
-                  productItem.textContent = `${product.name} - ${product.price}`;
-                  productList.appendChild(productItem);
-                });
-            }).catch(error => {
-              console.log(error);
-            });
-          }
-          document.getElementById('sort-select').addEventListener('change', selectSort);
+        function sortData(ref){
+            window.location.href="/products?sort="+ref.value;
+        }
     </script>
+
 </body>
 
 </html>

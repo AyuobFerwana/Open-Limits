@@ -15,7 +15,7 @@
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.rtl.min.css')}}">
+    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.min.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/font-awesome.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/flaticon/flaticon.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick.css')}}">
