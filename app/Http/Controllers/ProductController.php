@@ -141,7 +141,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validator = Validator($request->all(), [
-            'categoryName' => 'required|string',
+            'categoryName' => 'required|string|min:3',
             'color' => ['required', new Hex],
             'colors' => 'required|integer',
             'size' => 'required|string',

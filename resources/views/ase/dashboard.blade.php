@@ -79,25 +79,25 @@
                                         <g id="Icon" transform="translate(27.000000, 15.000000)">
                                             <g id="Mask" transform="translate(0.000000, 8.000000)">
                                                 <mask id="mask-2" fill="white">
-                                                    <use xlink:href="#path-1"></use>
+                                                    {{--  <use xlink:href="#path-1"></use>  --}}
                                                 </mask>
-                                                <use fill="#696cff" xlink:href="#path-1"></use>
+                                                {{--  <use fill="#696cff" xlink:href="#path-1"></use>  --}}
                                                 <g id="Path-3" mask="url(#mask-2)">
-                                                    <use fill="#696cff" xlink:href="#path-3"></use>
-                                                    <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3">
-                                                    </use>
+                                                    {{--  <use fill="#696cff" xlink:href="#path-3"></use>  --}}
+                                                    {{--  <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-3">
+                                                    </use>  --}}
                                                 </g>
                                                 <g id="Path-4" mask="url(#mask-2)">
-                                                    <use fill="#696cff" xlink:href="#path-4"></use>
+                                                    {{--  <use fill="#696cff" xlink:href="#path-4"></use>
                                                     <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-4">
-                                                    </use>
+                                                    </use>  --}}
                                                 </g>
                                             </g>
                                             <g id="Triangle"
                                                 transform="translate(19.000000, 11.000000) rotate(-300.000000) translate(-19.000000, -11.000000) ">
-                                                <use fill="#696cff" xlink:href="#path-5"></use>
+                                                {{--  <use fill="#696cff" xlink:href="#path-5"></use>
                                                 <use fill-opacity="0.2" fill="#FFFFFF" xlink:href="#path-5">
-                                                </use>
+                                                </use>  --}}
                                             </g>
                                         </g>
                                     </g>
@@ -123,7 +123,41 @@
                             <div data-i18n="Analytics">Dashboard</div>
                         </a>
                     </li>
+                    {{-- Users --}}
+                    @if (auth()->user()->role == 'admin' )
 
+                    <li class="menu-header small text-uppercase">
+                        <span class="menu-header-text">Users</span>
+                    </li>
+                    <li class="menu-item">
+                        <a href="javascript:void(0);" class="menu-link menu-toggle">
+                            <i class='menu-icon tf-icons bx bxs-user-account'></i>
+                            <div data-i18n="Account Settings">Users</div>
+                        </a>
+                        <ul class="menu-sub">
+                            <li class="menu-item">
+                                <a href="{{ route('users.create') }}" class="menu-link">
+                                    <div data-i18n="Account">Create</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('users.index') }}" class="menu-link">
+                                    <div data-i18n="Notifications">Index</div>
+                                </a>
+                            </li>
+                            <li class="menu-item">
+                                <a href="{{ route('users.restoreUsers') }}" class="menu-link">
+                                    <div data-i18n="Connections">Deleted</div>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    @endif
+
+
+                    {{-- Categorys --}}
+                    @if (auth()->user()->role == 'admin' )
+                    
                     <li class="menu-header small text-uppercase">
                         <span class="menu-header-text">Category</span>
                     </li>
@@ -150,8 +184,13 @@
                             </li>
                         </ul>
                     </li>
+                        
+                    @endif
+
 
                     <!-- Products -->
+                    @if (auth()->user()->role == 'admin' )
+
                     <li class="menu-header small text-uppercase"><span class="menu-header-text">Product</span></li>
                     <li class="menu-item">
                         <a href="javascript:void(0)" class="menu-link menu-toggle">
@@ -176,6 +215,9 @@
                             </li>
                         </ul>
                     </li>
+                    @endif
+
+                    {{-- puschases --}}
 
                     <li class="menu-header small text-uppercase"><span class="menu-header-text"> All Customer
                             Purchases</span></li>
@@ -186,15 +228,24 @@
                             <div data-i18n="Tables">Purchase</div>
                         </a>
                     </li>
-                    <!-- Misc -->
+
+
+
+
+                    <!-- UserInterFace -->
+
                     <li class="menu-item">
                         <a href="{{route('front.index')}}" class="menu-link">
                             <i class='menu-icon tf-icons bx bx-face'></i>
                             <div data-i18n="UserInterface">User Interface</div>
                         </a>
                     </li>
+
+                    {{-- Logout --}}
+
+                        
                     <li class="menu-item">
-                        <a href="#" target="_blank" class="menu-link">
+                        <a href="{{route('logout')}}" class="menu-link">
                             <i class='menu-icon tf-icons bx bx-log-out-circle'></i>
                             <div data-i18n="Logout">Logout</div>
                         </a>

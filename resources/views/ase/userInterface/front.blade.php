@@ -9,22 +9,22 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('fas/assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('fas/assets/images/favicon.png') }}">
 
     <!-- CSS
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/flaticon/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick-theme.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/jquery-ui.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/sal.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/base.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/flaticon/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/sal.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
 
 
@@ -79,8 +79,7 @@
                         <div class="header-top-link">
                             <ul class="quick-link">
                                 <li><a href="#">Help</a></li>
-                                <li><a href="sign-up.html">Join Us</a></li>
-                                <li><a href="sign-in.html">Sign In</a></li>
+                                <li><a href="{{ route('login') }}">Sign In</a></li>
                             </ul>
                         </div>
                     </div>
@@ -93,11 +92,11 @@
             <div class="container">
                 <div class="header-navbar">
                     <div class="header-brand">
-                        <a href="{{route('front.index')}}" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
+                        <a href="{{ route('front.index') }}" class="logo logo-dark">
+                            <img src="{{ asset('fas/assets/images/logo/logo1.png') }}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
-                            <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo-light.png') }}" alt="Site Logo">
                         </a>
                     </div>
                     <div class="header-main-nav">
@@ -106,15 +105,15 @@
                             <button class="mobile-close-btn mobile-nav-toggler"><i class="fas fa-times"></i></button>
                             <div class="mobile-nav-brand">
                                 <a href="index.html" class="logo">
-                                    <img src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Site Logo">
+                                    <img src="{{ asset('fas/assets/images/logo/logo.png') }}" alt="Site Logo">
                                 </a>
                             </div>
                             <ul class="mainmenu">
-                                <li><a href="{{route('front.index')}}">Home</a></li>
+                                <li><a href="{{ route('front.index') }}">Home</a></li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Shop</a>
                                     <ul class="axil-submenu">
-                                        <li><a href="{{route('front.sidebar')}}">Shop With Sidebar</a></li>
+                                        <li><a href="{{ route('front.sidebar') }}">Shop With Sidebar</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -149,21 +148,14 @@
                                         <li>
                                             <a href="my-account.html">My Account</a>
                                         </li>
-                                        <li>
-                                            <a href="#">Initiate return</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Support</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Language</a>
-                                        </li>
+
+
                                     </ul>
                                     <div class="login-btn">
-                                        <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
+                                        <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
                                     </div>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html"
-                                            class="btn-link">REGISTER HERE.</a></div>
+                                    <div class="reg-footer text-center">No account yet? <a
+                                            href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a></div>
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -198,13 +190,13 @@
                                         <div class="item-rating">
                                             <div class="thumb">
                                                 <ul>
-                                                    <li><img src="{{asset('fas/assets/images/others/author2.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author2.png') }}"
                                                             alt="Author"></li>
-                                                    <li><img src="{{asset('fas/assets/images/others/author3.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author3.png') }}"
                                                             alt="Author"></li>
-                                                    <li><img src="{{asset('fas/assets/images/others/author1.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author1.png') }}"
                                                             alt="Author"></li>
-                                                    <li><img src="{{asset('fas/assets/images/others/author4.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author4.png') }}"
                                                             alt="Author"></li>
                                                 </ul>
                                             </div>
@@ -234,13 +226,13 @@
                                         <div class="item-rating">
                                             <div class="thumb">
                                                 <ul>
-                                                    <li><img src="{{asset('fas/assets/images/others/author1.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author1.png') }}"
                                                             alt="Author"></li>
-                                                    <li><img src="{{asset('fas/assets/images/others/author2.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author2.png') }}"
                                                             alt="Author"></li>
-                                                    <li><img src="{{asset('fas/assets/images/others/author3.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author3.png') }}"
                                                             alt="Author"></li>
-                                                    <li><img src="{{asset('fas/assets/images/others/author4.png')}}"
+                                                    <li><img src="{{ asset('fas/assets/images/others/author4.png') }}"
                                                             alt="Author"></li>
                                                 </ul>
                                             </div>
@@ -266,15 +258,15 @@
                     <div class="col-lg-7 col-sm-6">
                         <div class="main-slider-large-thumb">
                             <div class="slider-thumb-activation-one axil-slick-dots">
-                                @foreach ($products as $product )
-                                <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
-                                    data-sal-duration="1500">
-                                    <img src="{{ Storage::url($product->image)}}" alt="Product">
-                                    <div class="product-price">
-                                        <span class="text">From</span>
-                                        <span class="price-amount">{{$product->price}}</span>
+                                @foreach ($products as $product)
+                                    <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
+                                        data-sal-duration="1500">
+                                        <img src="{{ Storage::url($product->image) }}" alt="Product">
+                                        <div class="product-price">
+                                            <span class="text">From</span>
+                                            <span class="price-amount">{{ $product->price }}</span>
+                                        </div>
                                     </div>
-                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -282,8 +274,10 @@
                 </div>
             </div>
             <ul class="shape-group">
-                <li class="shape-1"><img src="{{asset('fas/assets/images/others/shape-1.png')}}" alt="Shape"></li>
-                <li class="shape-2"><img src="{{asset('fas/assets/images/others/shape-2.png')}}" alt="Shape"></li>
+                <li class="shape-1"><img src="{{ asset('fas/assets/images/others/shape-1.png') }}" alt="Shape">
+                </li>
+                <li class="shape-2"><img src="{{ asset('fas/assets/images/others/shape-2.png') }}" alt="Shape">
+                </li>
             </ul>
         </div>
 
@@ -291,22 +285,23 @@
         <div class="axil-categorie-area bg-color-white axil-section-gapcommon">
             <div class="container">
                 <div class="section-title-wrapper">
-                    <span class="title-highlighter highlighter-secondary"> <i class="far fa-tags"></i> Categories</span>
+                    <span class="title-highlighter highlighter-secondary"> <i class="far fa-tags"></i>
+                        Categories</span>
                     <h2 class="title">Browse by Category</h2>
                 </div>
                 <div class="categrie-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
                     @foreach ($categories as $categorie)
-                    <div class="slick-single-layout">
-                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
-                            <a href="{{route('front.sidebar', ['category' =>$categorie->id])}}">
-                                <img class="img-fluid" src="{{Storage::url($categorie->image)}}"
-                                    alt="product categorie">
-                                <h6 class="cat-title">{{$categorie->categoryName}}</h6>
-                            </a>
+                        <div class="slick-single-layout">
+                            <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200"
+                                data-sal-duration="500">
+                                <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
+                                    <img class="img-fluid" src="{{ Storage::url($categorie->image) }}"
+                                        alt="product categorie">
+                                    <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
+                                </a>
+                            </div>
+                            <!-- End .categrie-product -->
                         </div>
-                        <!-- End .categrie-product -->
-                    </div>
-
                     @endforeach
 
                 </div>
@@ -326,48 +321,51 @@
                     <div class="slick-single-layout">
                         <div class="row row--15">
                             @foreach ($products as $product)
-
-                            <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
-                                <div class="axil-product product-style-one">
-                                    <div class="thumbnail">
-                                        <a href="single-product.html">
-                                            <img data-sal="zoom-out" style="height: 200px ; width: 300px;"
-                                                data-sal-delay="300" data-sal-duration="800" loading="lazy"
-                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                            <img class="hover-img" style="height: 200px ; width: 300px;"
-                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                        </a>
-                                        <div class="product-hover-action">
-                                            <ul class="cart-action">
-                                                <li class="quickview"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view-modal"><i
-                                                            class="far fa-eye"></i></a></li>
-                                                <li class="select-option"><a href="single-product.html">Add to Cart</a>
-                                                </li>
-                                                <li class="wishlist"><a href="wishlist.html"><i
-                                                            class="far fa-heart"></i></a></li>
-                                            </ul>
+                                <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
+                                    <div class="axil-product product-style-one">
+                                        <div class="thumbnail">
+                                            <a href="single-product.html">
+                                                <img data-sal="zoom-out" style="height: 200px ; width: 300px;"
+                                                    data-sal-delay="300" data-sal-duration="800" loading="lazy"
+                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                                <img class="hover-img" style="height: 200px ; width: 300px;"
+                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                            </a>
+                                            <div class="product-hover-action">
+                                                <ul class="cart-action">
+                                                    <li class="quickview"><a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#quick-view-modal"><i
+                                                                class="far fa-eye"></i></a></li>
+                                                    <li class="select-option"><a href="single-product.html">Add to
+                                                            Cart</a>
+                                                    </li>
+                                                    <li class="wishlist"><a href="wishlist.html"><i
+                                                                class="far fa-heart"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="inner">
-                                            <h5 class="title">{{$product->category->categoryName}}</h5>
-                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{
-                                                    $product->productName }}</a></h5>
-                                            @if ($product->flag)
-                                            <div class="product-price-variant">
-                                                <span class="price current-price">${{ $product->discount }}</span>
-                                                <span class="price old-price">${{$product->price }}</span>
+                                        <div class="product-content">
+                                            <div class="inner">
+                                                <h5 class="title">{{ $product->category->categoryName }}</h5>
+                                                <h5><a
+                                                        href="{{ route('front.productItem', $product->id) }}">{{ $product->productName }}</a>
+                                                </h5>
+                                                @if ($product->flag)
+                                                    <div class="product-price-variant">
+                                                        <span
+                                                            class="price current-price">${{ $product->discount }}</span>
+                                                        <span class="price old-price">${{ $product->price }}</span>
+                                                    </div>
+                                                @else
+                                                    <div class="product-price-variant">
+                                                        <span
+                                                            class="price current-price">${{ $product->price }}</span>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            @else
-                                            <div class="product-price-variant">
-                                                <span class="price current-price">${{ $product->price }}</span>
-                                            </div>
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                            </div>
                             @endforeach
 
                         </div>
@@ -382,7 +380,7 @@
                     <div class="col-lg-6 mb--30">
                         <div class="single-poster">
                             <a href="shop.html">
-                                <img src="{{asset('fas/assets/images/product/poster/poster-01.png')}}"
+                                <img src="{{ asset('fas/assets/images/product/poster/poster-01.png') }}"
                                     alt="eTrade promotion poster">
                                 <div class="poster-content">
                                     <div class="inner">
@@ -399,7 +397,7 @@
                     <div class="col-lg-6 mb--30">
                         <div class="single-poster">
                             <a href="shop-sidebar.html">
-                                <img src="{{asset('fas/assets/images/product/poster/poster-02.png')}}"
+                                <img src="{{ asset('fas/assets/images/product/poster/poster-02.png') }}"
                                     alt="eTrade promotion poster">
                                 <div class="poster-content content-left">
                                     <div class="inner">
@@ -447,7 +445,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service1.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service1.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Fast &amp; Secure Delivery</h6>
@@ -458,7 +456,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service2.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service2.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Money Back Guarantee</h6>
@@ -469,7 +467,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service3.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service3.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">24 Hour Return Policy</h6>
@@ -480,7 +478,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service4.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service4.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Pro Quality Support</h6>
@@ -502,8 +500,8 @@
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
-                            <a href="{{route('home')}}">
-                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Logo Images">
+                            <a href="{{ route('home') }}">
+                                <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo1.png') }}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">
@@ -562,15 +560,15 @@
                                 <span>Save $3 With App & New User only</span>
                                 <div class="download-btn-group">
                                     <div class="qr-code">
-                                        <img src="{{asset('fas/assets/images/others/qr.png')}}" alt="Axilthemes">
+                                        <img src="{{ asset('fas/assets/images/others/qr.png') }}" alt="Axilthemes">
                                     </div>
                                     <div class="app-link">
                                         <a href="#">
-                                            <img src="{{asset('fas/assets/images/others/app-store.png')}}"
+                                            <img src="{{ asset('fas/assets/images/others/app-store.png') }}"
                                                 alt="App Store">
                                         </a>
                                         <a href="#">
-                                            <img src="{{asset('fas/assets/images/others/play-store.png')}}"
+                                            <img src="{{ asset('fas/assets/images/others/play-store.png') }}"
                                                 alt="Play Store">
                                         </a>
                                     </div>
@@ -609,11 +607,14 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-1.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
+                                        alt="paypal cart">
                                 </li>
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-2.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
+                                        alt="paypal cart">
                                 </li>
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-5.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
+                                        alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -642,20 +643,20 @@
                                         <div
                                             class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-01.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                    <a href="{{ asset('fas/assets/images/product/product-big-01.png') }}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-02.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-02.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
@@ -668,7 +669,7 @@
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-03.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-03.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
@@ -685,15 +686,15 @@
                                     <div class="col-lg-2 order-lg-1">
                                         <div class="product-small-thumb small-thumb-wrapper">
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-08.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-08.png') }}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-07.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-07.png') }}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-09.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-09.png') }}"
                                                     alt="thumb image">
                                             </div>
                                         </div>
@@ -705,7 +706,7 @@
                                     <div class="inner">
                                         <div class="product-rating">
                                             <div class="star-rating">
-                                                <img src="{{asset('fas/assets/images/icons/rate.png')}}"
+                                                <img src="{{ asset('fas/assets/images/icons/rate.png') }}"
                                                     alt="Rate Images">
                                             </div>
                                             <div class="review-link">
@@ -803,7 +804,7 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title"> Result Found {{$products->count()}}</h6>
+                    <h6 class="title"> Result Found {{ $products->count() }}</h6>
                     <a href="shop.html" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
@@ -825,7 +826,7 @@
                     <li class="cart-item">
                         <div class="item-img">
                             <a href="single-product.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-01.png')}}"
+                                    src="{{ asset('fas/assets/images/product/electric/product-01.png') }}"
                                     alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
@@ -885,26 +886,26 @@
     <!-- JS
 ============================================ -->
     <!-- Modernizer JS -->
-    <script src="{{asset('fas/assets/js/vendor/modernizr.min.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/modernizr.min.js') }}"></script>
     <!-- jQuery JS -->
-    <script src="{{asset('fas/assets/js/vendor/jquery.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="{{asset('fas/assets/js/vendor/popper.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/bootstrap.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/slick.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/js.cookie.js')}}"></script>
-    <!-- <script src="{{asset('fas/assets/js/vendor/jquery.style.switcher.js')}}"></script> -->
-    <script src="{{asset('fas/assets/js/vendor/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery.countdown.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/sal.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/isotope.pkgd.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/counterup.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/waypoints.min.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/popper.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/slick.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/js.cookie.js') }}"></script>
+    <!-- <script src="{{ asset('fas/assets/js/vendor/jquery.style.switcher.js') }}"></script> -->
+    <script src="{{ asset('fas/assets/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/sal.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/counterup.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/waypoints.min.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{asset('fas/assets/js/rtl-main.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
     {{-- <script src="{{asset('fas/js/popper.min.js')}}"></script> --}}
 
     <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
@@ -913,17 +914,16 @@
     <script src="{{ asset('js/sweet.js') }}"></script>
 
     <script>
-        function productSearch(e){
+        function productSearch(e) {
             axios.get(`/product/search?q=${e.value}`)
-            .then(function(response) {
-                console.log(response);
-                document.getElementById('searchContainer').innerHTML=response.data;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+                .then(function(response) {
+                    console.log(response);
+                    document.getElementById('searchContainer').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
-
     </script>
 
 </body>

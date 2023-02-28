@@ -64,4 +64,6 @@ class FrontController extends Controller
             'categories' => $categories
         ]);
     }
+
+    
 }
