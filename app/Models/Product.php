@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,4 +30,11 @@ class Product extends Model
         'colors' => 'array',
         'size' => 'array',
     ];
+
+
+
+    public function carts()
+    {
+        return $this->belongsToMany(Cart::class)->wihtTrashed();
+    }
 }

@@ -127,11 +127,7 @@
                                     <i class="flaticon-magnifying-glass"></i>
                                 </a>
                             </li>
-                            <li class="wishlist">
-                                <a href="wishlist.html">
-                                    <i class="flaticon-heart"></i>
-                                </a>
-                            </li>
+
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
                                     <span class="cart-count">3</span>
@@ -259,14 +255,14 @@
                         <div class="main-slider-large-thumb">
                             <div class="slider-thumb-activation-one axil-slick-dots">
                                 @foreach ($products as $product)
-                                    <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
-                                        data-sal-duration="1500">
-                                        <img src="{{ Storage::url($product->image) }}" alt="Product">
-                                        <div class="product-price">
-                                            <span class="text">From</span>
-                                            <span class="price-amount">{{ $product->price }}</span>
-                                        </div>
+                                <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
+                                    data-sal-duration="1500">
+                                    <img src="{{ Storage::url($product->image) }}" alt="Product">
+                                    <div class="product-price">
+                                        <span class="text">From</span>
+                                        <span class="price-amount">{{ $product->price }}</span>
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -291,17 +287,16 @@
                 </div>
                 <div class="categrie-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
                     @foreach ($categories as $categorie)
-                        <div class="slick-single-layout">
-                            <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200"
-                                data-sal-duration="500">
-                                <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
-                                    <img class="img-fluid" src="{{ Storage::url($categorie->image) }}"
-                                        alt="product categorie">
-                                    <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
-                                </a>
-                            </div>
-                            <!-- End .categrie-product -->
+                    <div class="slick-single-layout">
+                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
+                            <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
+                                <img class="img-fluid" src="{{ Storage::url($categorie->image) }}"
+                                    alt="product categorie">
+                                <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
+                            </a>
                         </div>
+                        <!-- End .categrie-product -->
+                    </div>
                     @endforeach
 
                 </div>
@@ -321,51 +316,48 @@
                     <div class="slick-single-layout">
                         <div class="row row--15">
                             @foreach ($products as $product)
-                                <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
-                                    <div class="axil-product product-style-one">
-                                        <div class="thumbnail">
-                                            <a href="single-product.html">
-                                                <img data-sal="zoom-out" style="height: 200px ; width: 300px;"
-                                                    data-sal-delay="300" data-sal-duration="800" loading="lazy"
-                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                                <img class="hover-img" style="height: 200px ; width: 300px;"
-                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                            </a>
-                                            <div class="product-hover-action">
-                                                <ul class="cart-action">
-                                                    <li class="quickview"><a href="#" data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view-modal"><i
-                                                                class="far fa-eye"></i></a></li>
-                                                    <li class="select-option"><a href="single-product.html">Add to
-                                                            Cart</a>
-                                                    </li>
-                                                    <li class="wishlist"><a href="wishlist.html"><i
-                                                                class="far fa-heart"></i></a></li>
-                                                </ul>
-                                            </div>
+                            <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
+                                <div class="axil-product product-style-one">
+                                    <div class="thumbnail">
+                                        <a href="{{route('front.sidebar' ,$product->id)}}">
+                                            <img data-sal="zoom-out" style="height: 200px ; width: 300px;"
+                                                data-sal-delay="300" data-sal-duration="800" loading="lazy"
+                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                            <img class="hover-img" style="height: 200px ; width: 300px;"
+                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                        </a>
+                                        <div class="product-hover-action">
+                                            <ul class="cart-action">
+                                                <li class="quickview"><a href="#" data-bs-toggle="modal"
+                                                        data-bs-target="#quick-view-modal"><i
+                                                            class="far fa-eye"></i></a></li>
+                                                <li class="select-option">
+                                                    <a href="{{route('cart.add' ,$product->id)}}">Add to Cart</a>
+                                                </li>
+                                                <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
+                                            </ul>
                                         </div>
-                                        <div class="product-content">
-                                            <div class="inner">
-                                                <h5 class="title">{{ $product->category->categoryName }}</h5>
-                                                <h5><a
-                                                        href="{{ route('front.productItem', $product->id) }}">{{ $product->productName }}</a>
-                                                </h5>
-                                                @if ($product->flag)
-                                                    <div class="product-price-variant">
-                                                        <span
-                                                            class="price current-price">${{ $product->discount }}</span>
-                                                        <span class="price old-price">${{ $product->price }}</span>
-                                                    </div>
-                                                @else
-                                                    <div class="product-price-variant">
-                                                        <span
-                                                            class="price current-price">${{ $product->price }}</span>
-                                                    </div>
-                                                @endif
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="inner">
+                                            <h5 class="title">{{ $product->category->categoryName }}</h5>
+                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{
+                                                    $product->productName }}</a>
+                                            </h5>
+                                            @if ($product->flag)
+                                            <div class="product-price-variant">
+                                                <span class="price current-price">${{ $product->discount }}</span>
+                                                <span class="price old-price">${{ $product->price }}</span>
                                             </div>
+                                            @else
+                                            <div class="product-price-variant">
+                                                <span class="price current-price">${{ $product->price }}</span>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
 
                         </div>
@@ -607,14 +599,11 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}" alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -831,16 +820,6 @@
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(64)</span>
-                            </div>
                             <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
                             <div class="item-price"><span class="currency-symbol">$</span>155.00</div>
                             <div class="pro-qty item-quantity">

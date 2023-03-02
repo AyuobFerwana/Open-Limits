@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\UserController;
+use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductController;
@@ -20,21 +21,33 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// User Inter FAce
-Route::middleware('auth')->group(function(){
-    
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
+// logout
+Route::middleware('auth')->group(function () {
+
+    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
+
+
+// User Inter FAce
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
 Route::get('/product/search', [FrontController::class, 'productSearch']);
 Route::get('/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
 
+
+
+// Cart
+Route::view('/cart', 'ase.cart.cartShop')->name('cart');
+Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
+Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+
+
+
 // Dashboard
 Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(function () {
     Route::view('/', 'ase.dashboard')->name('home');
-
 });
 
 Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
@@ -62,18 +75,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     // Purchase
     Route::get('purchase', [PurchaseController::class, 'index'])->name('purchase.index');
     Route::delete('purchase', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
-
-
-    // logout
-
 });
-    // login & Register
-Route::middleware('guest')->group(function() {
+// login & Register
+Route::middleware('guest')->group(function () {
     Route::view('/login', 'ase.auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
     Route::view('/register', 'ase.auth.register')->name('register');
-    Route::post('/register', [AuthController::class,'store'])->name('register.store');
+    Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 });
 
 
