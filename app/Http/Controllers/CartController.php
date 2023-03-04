@@ -6,58 +6,96 @@ use App\Models\Cart as Cart;
 use App\Models\Product;
 // use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
-
-    public function store($id)
+    public function show(Request $request)
     {
-
-        $cart = Cart::where('user_id', auth()->user()->id)->with('product')->get();
-        return view('ase.cart.cartShop', compact('cart'));
+        if (Auth::check()) {
+            $carts = $request->user()->carts;
+        } else {
+            $carts = Session::get('cart') ?? [];
+        }
+        return response()->view('ase.cart.cartShop', compact('carts'));
     }
 
-    public function add(Request $request, $id)
+    public function add(Product $product, Request $request)
     {
-        // Find the product by ID
-        $product = Product::findOrFail($id);
-
-        // Check if the product is already in the cart
-        $cartItem = Cart::where('user_id', auth()->user()->id)
-            ->where('product_id', $id)->first();
-            
-        if (!$cartItem) {
-            $cartItem = new Cart([
-                'user_id' => auth()->user()->id,
-                'product_id' => $id,
-            ]);
-            $isSaved = $cartItem->save();
-            return response()->json(
-                [
-                    'message' => $isSaved ? ' Add to Cart ' : ' Faild to Add'
-                ],
-                $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
-            );
+        if (Auth::check()) {
+            $carts = $request->user()->carts;
+            $cart = new Cart();
+            $isProductInCart = false;
+            foreach ($carts as $c) {
+                if ($c->product_id == $product->id) {
+                    $isProductInCart = true;
+                    $cart = $c;
+                    break;
+                }
+            }
+            if ($isProductInCart) {
+                $cart->quantity += $request->input('quantity');
+            } else {
+                $cart->user_id = $request->user()->id;
+                $cart->product_id = $product->id;
+                $cart->quantity = $request->input('quantity');
+            }
+            $isSaved = $cart->save();
+            return response()->json([
+                'message' => $isSaved ? 'Product added to cart successfully!' : 'Failed to add the product, Please try again.'
+            ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
+        } else {
+            $carts = Session::get('cart') ?? [];
+            $cart = new Cart();
+            $isProductInCart = false;
+            foreach ($carts as $c) {
+                if ($c->product_id == $product->id) {
+                    $isProductInCart = true;
+                    $cart = $c;
+                    break;
+                }
+            }
+            if ($isProductInCart) {
+                $cart->quantity += (int) $request->input('quantity');
+            } else {
+                $cart->product_id = $product->id;
+                $cart->quantity = (int) $request->input('quantity');
+                array_push($carts, $cart);
+            }
+            Session::put('cart', $carts);
+            return response()->json([
+                'message' => 'Product added to cart successfully!'
+            ], Response::HTTP_CREATED);
         }
     }
 
+    public function remove(Product $product, Request $request) {
+        if (Auth::check()) {
+            $deleted = Cart::where('user_id', $request->user()->id)->where('product_id', $product->id)->delete();
+            return response()->json([
+                'message' => $deleted ? 'Product Removed from cart successfully!' : 'Failed to remove product from cart, please try again later.',
+            ], $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        } else {
+            $carts = Session::get('cart') ?? [];
+            $cartIndex = -1;
+            $isProductInCart = false;
+            foreach ($carts as $key => $value) {
+                if ($value->product_id == $product->id) {
+                    $isProductInCart = true;
+                    $cartIndex = $key;
+                    break;
+                }
+            }
+            if ($isProductInCart) {
+                unset($carts[$cartIndex]);
+                Session::put('cart', $carts);
+            }
+            return response()->json([
+                'message' => 'Product Removed from cart successfully!',
+            ], Response::HTTP_OK);
 
-
-    public function remove($cartItemId)
-    {
-        $cartItem = Cart::findOrFail($cartItemId);
-        $cartItem->delete();
-
-        return redirect()->route('cart');
-    }
-
-    public function update(Request $request, $cartItemId)
-    {
-        $cartItem = Cart::findOrFail($cartItemId);
-        $cartItem->quantity = $request->quantity;
-        $cartItem->save();
-
-        return redirect()->route('cart.index');
+        }
     }
 }

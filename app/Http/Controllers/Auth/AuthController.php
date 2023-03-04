@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\Cart;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 use Symfony\Component\HttpFoundation\Response;
 
 class AuthController extends Controller
@@ -21,7 +23,7 @@ class AuthController extends Controller
         $validator =  Validator($request->all(),[
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:users,email',
-            'phone' => 'required|string|min:10',
+            'phone' => 'required|string|min:10|unique:users,phone',
             'password' => 'required|min:6|confirmed',
             
         ]);
@@ -35,6 +37,27 @@ class AuthController extends Controller
             $isSaved = $users->save();
             if($isSaved){
                 Auth::login($users);
+                $carts = Session::get('cart') ?? [];
+                $databaseCarts = $users->carts;
+                foreach($carts as $cart) {
+                    $isProductExists = false;
+                    foreach($databaseCarts as $dbCart) {
+                        if($dbCart->product_id == $cart->product_id) {
+                            $isProductExists = true;
+                            $dbCart->quantity+=$cart->quantity;
+                            $dbCart->save();
+                            break;
+                        }
+                    }
+                    if(!$isProductExists) {
+                        $dbCart = new Cart();
+                        $dbCart->user_id = $users->id;
+                        $dbCart->quantity = $cart->quantity;
+                        $dbCart->product_id = $cart->product_id;
+                        $dbCart->save();
+                    }
+                }
+                Session::remove('cart');
             }
             return response()->json([
                 'message' => $isSaved ? 'Create User Successfully' : 'Create User Failed'
@@ -63,6 +86,27 @@ class AuthController extends Controller
             }
             if (Hash::check($request->input('password'), $users->password)) {
                 Auth::login($users, $request->input('remember'));
+                $carts = Session::get('cart') ?? [];
+                $databaseCarts = $users->carts;
+                foreach($carts as $cart) {
+                    $isProductExists = false;
+                    foreach($databaseCarts as $dbCart) {
+                        if($dbCart->product_id == $cart->product_id) {
+                            $isProductExists = true;
+                            $dbCart->quantity+=$cart->quantity;
+                            $dbCart->save();
+                            break;
+                        }
+                    }
+                    if(!$isProductExists) {
+                        $dbCart = new Cart();
+                        $dbCart->user_id = $users->id;
+                        $dbCart->quantity = $cart->quantity;
+                        $dbCart->product_id = $cart->product_id;
+                        $dbCart->save();
+                    }
+                }
+                Session::remove('cart');
                 return response()->json([
                     'message' => 'Logged in successfully!',
                 ], Response::HTTP_OK);

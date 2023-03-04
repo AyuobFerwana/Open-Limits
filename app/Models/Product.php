@@ -30,11 +30,4 @@ class Product extends Model
         'colors' => 'array',
         'size' => 'array',
     ];
-
-
-
-    public function carts()
-    {
-        return $this->belongsToMany(Cart::class)->wihtTrashed();
-    }
 }

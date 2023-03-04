@@ -37,10 +37,14 @@ Route::get('/product-item/{products}', [FrontController::class, 'productItem'])-
 
 
 
-// Cart
-Route::view('/cart', 'ase.cart.cartShop')->name('cart');
-Route::post('/cart', [CartController::class, 'store'])->name('cart.store');
-Route::post('/cart/add/{id}', [CartController::class, 'add'])->name('cart.add');
+// Route::view('/cart', 'ase.cart.cartShop')->name('cart');
+Route::get('/cart', [CartController::class, 'show'])->name('cart');
+Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/cart/{product}', [CartController::class, 'remove']);
+
+
+
+
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 

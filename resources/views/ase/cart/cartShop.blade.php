@@ -25,6 +25,7 @@
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/base.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
 
 </head>
 
@@ -207,25 +208,27 @@
                         <table class="table axil-product-table axil-cart-table mb--40">
                             <thead>
                                 <tr>
-                                    <th scope="col"></th>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Product Name</th>
-                                    <th scope="col" style=" text-align: center;">Price</th>
+                                    <th scope="col" style=" text-align: center;"></th>
+                                    <th scope="col" style=" text-align: center;">Image</th>
+                                    <th scope="col" style=" text-align: center;">Product Name</th>
+                                    <th scope="col" style=" text-align: center;">Price per unit</th>
+                                    <th scope="col" style=" text-align: center;">Quantity</th>
+                                    <th scope="col">Total Price</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                @foreach ($carts as $cart)
                                 <tr>
-                                    <td class="product-remove"><a href="#" class="remove-wishlist"><i class="fal fa-times"></i></a></td>
-                                    <td class="product-thumbnail"><a href="single-product.html"><img src="{{asset('fas/assets/images/product/electric/product-01.png')}}" alt="Digital Product"></a></td>
-                                    <td class="product-title"><a href="single-product.html">Wireless PS Handler</a></td>
-                                    <td class="product-price" style=" text-align: center;" data-title="Price"><span class="currency-symbol">$</span>124.00</td>
-                                    {{--  <td class="product-quantity" data-title="Qty">
-                                        <div class="pro-qty">
-                                            <input type="number" class="quantity-input" value="1">
-                                        </div>
-                                    </td>  --}}
-                                    {{--  <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>275.00</td>  --}}
+                                    <td class="product-remove"><button type="button" onclick="removeProduct({{$cart->product_id}}, this)" class="remove-wishlist"><i class="fal fa-times"></i></button></td>
+                                    <td class="product-thumbnail"><a href="single-product.html"><img src="{{ Storage::url($cart->product->image) }}" alt="Digital Product"></a></td>
+                                    <td class="product-title" style="text-align: center"><a href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a></td>
+                                    <td class="product-price" style=" text-align: center;" data-title="Price"><span class="currency-symbol">$</span>{{$cart->product->flag == 'price' ? $cart->product->price : $cart->product->discount}}</td>
+                                     <td class="product-quantity" data-title="Qty" style=" text-align: center;">
+                                            {{$cart->quantity}}
+                                    </td> 
+                                     <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{$cart->quantity * ($cart->product->flag == 'price' ? $cart->product->price : $cart->product->discount)}}</td> 
                                 </tr>
+                                @endforeach
                                
                             </tbody>
                         </table>
@@ -807,6 +810,22 @@
     <!-- Main JS -->
     <script src="{{asset('fas/assets/js/main.js')}}"></script>
 
+    <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
+    <script src="{{ asset('js/axios.js') }}"></script>
+    <script src="{{ asset('js/Crud.js') }}"></script>
+    <script src="{{ asset('js/sweet.js') }}"></script>
+
+    <script>
+        function removeProduct(id, ref) {
+            let url = `/cart/${id}`;
+            axios.delete(url).then((response) => {
+                toastr.success(response.data.message);
+                ref.closest('tr').remove();
+            }).catch(() => {
+                toastr.error(error.response.data.message);
+            })
+        }
+    </script>
 </body>
 
 </html>

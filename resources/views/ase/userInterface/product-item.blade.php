@@ -9,22 +9,29 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('fas/assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('fas/assets/images/favicon.png') }}">
 
     <!-- CSS
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/flaticon/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick-theme.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/jquery-ui.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/sal.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/base.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/flaticon/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/sal.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/style.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
+
+    <style>
+        .toast-message {
+            font-size: 14px !important;
+        }
+    </style>
 
 </head>
 
@@ -44,10 +51,10 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="index.html" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo1.png') }}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
-                            <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo-light.png') }}" alt="Site Logo">
                         </a>
                     </div>
                     <div class="header-main-nav">
@@ -56,17 +63,17 @@
                             <button class="mobile-close-btn mobile-nav-toggler"><i class="fas fa-times"></i></button>
                             <div class="mobile-nav-brand">
                                 <a href="index.html" class="logo">
-                                    <img src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Site Logo">
+                                    <img src="{{ asset('fas/assets/images/logo/logo.png') }}" alt="Site Logo">
                                 </a>
                             </div>
                             <ul class="mainmenu">
                                 <li>
-                                    <a href="{{route('front.index')}}">Home</a>
+                                    <a href="{{ route('front.index') }}">Home</a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Shop</a>
                                     <ul class="axil-submenu">
-                                        <li><a href="{{route('front.sidebar')}}">Shop With Sidebar</a></li>
+                                        <li><a href="{{ route('front.sidebar') }}">Shop With Sidebar</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -77,8 +84,8 @@
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
                                 <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128" placeholder="What are you looking for?"
-                                    autocomplete="off">
+                                    id="search2" value="" maxlength="128"
+                                    placeholder="What are you looking for?" autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -170,7 +177,7 @@
                                     <div
                                         class="product-large-thumbnail-2 single-product-thumbnail axil-product slick-layout-wrapper--15 axil-slick-arrow arrow-both-side-3">
                                         <div class="thumbnail">
-                                            <img src="{{Storage::url($products->image)}}" alt="Product Images">
+                                            <img src="{{ Storage::url($products->image) }}" alt="Product Images">
                                         </div>
                                     </div>
                                 </div>
@@ -180,18 +187,17 @@
 
                             <div class="single-product-content">
                                 <div class="inner">
-                                    <h5 class="title">{{$products->category->categoryName}}</h5>
-                                    <h2 class="product-title">{{$products->productName}}</h2>
+                                    <h5 class="title">{{ $products->category->categoryName }}</h5>
+                                    <h2 class="product-title">{{ $products->productName }}</h2>
                                     @if ($products->flag)
-
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">${{$products->discount}}</span>
-                                        <del><span class="price old-price">${{$products->price}}</span></del>
-                                    </div>
+                                        <div class="product-price-variant">
+                                            <span class="price current-price">${{ $products->discount }}</span>
+                                            <del><span class="price old-price">${{ $products->price }}</span></del>
+                                        </div>
                                     @else
-                                    <div class="product-price-variant">
-                                        <span class="price current-price">${{$products->price}}</span>
-                                    </div>
+                                        <div class="product-price-variant">
+                                            <span class="price current-price">${{ $products->price }}</span>
+                                        </div>
                                     @endif
 
                                     <div class="product-rating">
@@ -205,7 +211,7 @@
                                     </div>
 
                                     <ul class="product-meta">
-                                        <li><i class="fal fa-check"></i>In stock ({{ $products->quantity}})</li>
+                                        <li><i class="fal fa-check"></i>In stock ({{ $products->quantity }})</li>
                                         <li><i class="fal fa-check"></i>Free Delivery Available</li>
                                     </ul>
 
@@ -219,9 +225,11 @@
                                                     <li class="color-extra-01 active"><span><span
                                                                 class="color"></span></span>
                                                     </li>
-                                                    <li class="color-extra-02"><span><span class="color"></span></span>
+                                                    <li class="color-extra-02"><span><span
+                                                                class="color"></span></span>
                                                     </li>
-                                                    <li class="color-extra-03"><span><span class="color"></span></span>
+                                                    <li class="color-extra-03"><span><span
+                                                                class="color"></span></span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -244,7 +252,7 @@
                                         <h4 class="primary-color mb--40 desc-heading">Description</h4>
                                         <div class="single-desc mb--30">
                                             <h5 class="title">Specifications:</h5>
-                                            <p>{{$products->discreption}}</p>
+                                            <p>{{ $products->discreption }}</p>
                                         </div>
                                     </div>
                                     <hr class="sidebar-divider">
@@ -252,15 +260,17 @@
                                     <!-- Start Product Action Wrapper  -->
                                     <div class="product-action-wrapper d-flex-center">
                                         <!-- Start Quentity Action  -->
-                                        <div class="pro-qty mr--20"><input type="text" value="1"></div>
+                                        <div class="pro-qty mr--20"><input type="text" id="quantity"
+                                                value="1"></div>
                                         <!-- End Quentity Action  -->
 
                                         <!-- Start Product Action  -->
                                         <ul class="product-action d-flex-center mb--0">
-                                            <li class="add-to-cart"><a href="cart.html"
-                                                    class="axil-btn btn-bg-primary">Add to Cart</a></li>
+                                            <li class="add-to-cart"><button type="button" onclick="addProductToCart()"
+                                                    class="axil-btn btn-bg-primary">Add to Cart</button></li>
                                             <li class="wishlist"><a href="wishlist.html"
-                                                    class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                                    class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a>
+                                            </li>
                                         </ul>
                                         <!-- End Product Action  -->
 
@@ -268,21 +278,21 @@
                                     <ul class="pro-des-features pro-desc-style-two pt-10">
                                         <li class="single-features">
                                             <div class="icon">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/icon-3.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/icon-3.png') }}"
                                                     alt="icon">
                                             </div>
                                             Easy Returns
                                         </li>
                                         <li class="single-features">
                                             <div class="icon">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/icon-2.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/icon-2.png') }}"
                                                     alt="icon">
                                             </div>
                                             Quality Service
                                         </li>
                                         <li class="single-features">
                                             <div class="icon">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/icon-1.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/icon-1.png') }}"
                                                     alt="icon">
                                             </div>
                                             Original Product
@@ -328,7 +338,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service1.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service1.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Fast &amp; Secure Delivery</h6>
@@ -339,7 +349,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service2.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service2.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Money Back Guarantee</h6>
@@ -350,7 +360,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service3.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service3.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">24 Hour Return Policy</h6>
@@ -361,7 +371,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service4.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service4.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Pro Quality Support</h6>
@@ -384,7 +394,7 @@
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
                             <a href="index.html">
-                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
+                                <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo.png') }}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">
@@ -443,15 +453,15 @@
                                 <span>Save $3 With App & New User only</span>
                                 <div class="download-btn-group">
                                     <div class="qr-code">
-                                        <img src="{{asset('fas/assets/images/others/qr.png')}}" alt="Axilthemes">
+                                        <img src="{{ asset('fas/assets/images/others/qr.png') }}" alt="Axilthemes">
                                     </div>
                                     <div class="app-link">
                                         <a href="#">
-                                            <img src="{{asset('fas/assets/images/others/app-store.png')}}"
+                                            <img src="{{ asset('fas/assets/images/others/app-store.png') }}"
                                                 alt="App Store">
                                         </a>
                                         <a href="#">
-                                            <img src="{{asset('fas/assets/images/others/play-store.png')}}"
+                                            <img src="{{ asset('fas/assets/images/others/play-store.png') }}"
                                                 alt="Play Store">
                                         </a>
                                     </div>
@@ -490,11 +500,14 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-1.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
+                                        alt="paypal cart">
                                 </li>
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-2.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
+                                        alt="paypal cart">
                                 </li>
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-5.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
+                                        alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -523,39 +536,39 @@
                                         <div
                                             class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-01.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                    <a href="{{ asset('fas/assets/images/product/product-big-01.png') }}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-02.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-02.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="{{asset('fas/assets/images/product/product-big-02.png')}}"
+                                                    <a href="{{ asset('fas/assets/images/product/product-big-02.png') }}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-03.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-03.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="{{asset('fas/assets/images/product/product-big-03.png')}}"
+                                                    <a href="{{ asset('fas/assets/images/product/product-big-03.png') }}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
@@ -566,15 +579,15 @@
                                     <div class="col-lg-2 order-lg-1">
                                         <div class="product-small-thumb small-thumb-wrapper">
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-08.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-08.png') }}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-07.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-07.png') }}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-09.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-09.png') }}"
                                                     alt="thumb image">
                                             </div>
                                         </div>
@@ -586,7 +599,7 @@
                                     <div class="inner">
                                         <div class="product-rating">
                                             <div class="star-rating">
-                                                <img src="{{asset('fas/assets/images/icons/rate.png')}}"
+                                                <img src="{{ asset('fas/assets/images/icons/rate.png') }}"
                                                     alt="Rate Images">
                                             </div>
                                             <div class="review-link">
@@ -683,7 +696,7 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title"> Result Found {{$products->count()}}</h6>
+                    <h6 class="title"> Result Found {{ $products->count() }}</h6>
                     <a href="shop.html" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
@@ -706,7 +719,7 @@
                     <li class="cart-item">
                         <div class="item-img">
                             <a href="single-product.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-01.png')}}"
+                                    src="{{ asset('fas/assets/images/product/electric/product-01.png') }}"
                                     alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
@@ -731,7 +744,7 @@
                     <li class="cart-item">
                         <div class="item-img">
                             <a href="single-product-2.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-02.png')}}"
+                                    src="{{ asset('fas/assets/images/product/electric/product-02.png') }}"
                                     alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
@@ -756,7 +769,7 @@
                     <li class="cart-item">
                         <div class="item-img">
                             <a href="single-product-3.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-03.png')}}"
+                                    src="{{ asset('fas/assets/images/product/electric/product-03.png') }}"
                                     alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
@@ -796,37 +809,53 @@
     <!-- JS
 ============================================ -->
     <!-- Modernizer JS -->
-    <script src="{{asset('fas/assets/js/vendor/modernizr.min.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/modernizr.min.js') }}"></script>
     <!-- jQuery JS -->
-    <script src="{{asset('fas/assets/js/vendor/jquery.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="{{asset('fas/assets/js/vendor/popper.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/bootstrap.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/slick.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/js.cookie.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery.countdown.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/sal.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/isotope.pkgd.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/counterup.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/waypoints.min.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/popper.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/slick.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/js.cookie.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/sal.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/counterup.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/waypoints.min.js') }}"></script>
+    <script src="{{ asset('js/axios.js') }}"></script>
+    <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
+    
 
     <!-- Main JS -->
-    <script src="{{asset('fas/assets/js/rtl-main.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
 
     <script>
-        function productSearch(e){
+        function productSearch(e) {
             axios.get(`/product/search?q=${e.value}`)
-            .then(function(response) {
-                document.getElementById('searchContainer').innerHTML=response.data;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+                .then(function(response) {
+                    document.getElementById('searchContainer').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
 
+        function addProductToCart() {
+            let url = '{{ route('cart.add', $products->id) }}';
+            let data = {
+                quantity: document.getElementById('quantity').value
+            }
+            axios.post(url, data).then((response) => {
+                console.log(response)
+                toastr.success(response.data.message);
+            }).catch((error) => {
+                console.log(error.response)
+                toastr.success(error.response.data.message);
+            })
+        }
     </script>
 </body>
 

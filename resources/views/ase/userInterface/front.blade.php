@@ -26,6 +26,7 @@
     <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/base.css') }}">
     <link rel="stylesheet" href="{{ asset('fas/assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
+    
 
 
 </head>
