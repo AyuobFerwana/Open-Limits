@@ -138,7 +138,7 @@
 
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">{{count($carts)}}</span>
+                                    <span class="cart-count" id="carts-count">{{count($carts)}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -823,7 +823,7 @@
             </div>
 
             <div class="cart-body">
-                <ul class="cart-item-list">
+                <ul class="cart-item-list" id="cart-list-container">
                     @foreach ($carts as $cart)
                     <li class="cart-item">
                         <div class="item-img">
@@ -836,8 +836,7 @@
                             <h3 class="item-title"><a
                                     href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
                             </h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
-                                'price' ? $cart->product->price : $cart->product->discount}}</div>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ? $cart->product->price : $cart->product->discount}}</div>
                             <div class="pro-qty item-quantity">
                                 <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
                             </div>
@@ -932,6 +931,8 @@
             axios.post(url, data).then((response) => {
                 console.log(response)
                 toastr.success(response.data.message);
+                document.getElementById('cart-list-container').innerHTML = response.data.cartList;
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
             }).catch((error) => {
                 console.log(error.response)
                 toastr.success(error.response.data.message);
@@ -946,6 +947,7 @@
             axios.delete(url).then((response) => {
                 toastr.success(response.data.message);
                 ref.closest('li').remove();
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })

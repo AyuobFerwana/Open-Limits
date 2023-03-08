@@ -21,5 +21,12 @@ class UserSeeder extends Seeder
             'role'=>'admin',
             'password'=>Hash::make('1213'),
         ]);
+        User::create([
+            'UsersName'=>'SuperAdmin',
+            'email'=>'admin@app.com',
+            'phone'=>'05925496883',
+            'role'=>'admin',
+            'password'=>Hash::make('123'),
+        ]);
     }
 }

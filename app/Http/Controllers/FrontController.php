@@ -7,6 +7,8 @@ use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 
 class FrontController extends Controller
 {
@@ -15,7 +17,12 @@ class FrontController extends Controller
     // The first Show For User
     public function index(Request $request, Cart $carts)
     {
-        $carts = Cart::all();
+        if(Auth::check()) {
+            $user = $request->user();
+            $carts = $user->carts;
+        } else {
+            $carts = Session::get('cart');
+        }
         $categories = Category::all();
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
@@ -34,7 +41,8 @@ class FrontController extends Controller
     // product & Sort SideBAR
     public function sidebar(Request $request, Cart $carts)
     {
-        $carts = Cart::all();
+        $user = $request->user();
+        $carts = $user->carts;
         $categories = Category::paginate(10);
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
