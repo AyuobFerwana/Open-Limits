@@ -7,6 +7,7 @@ use App\Models\User;
 use Dotenv\Validator;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,6 +87,66 @@ class UserController extends Controller
         return response()->view('ase.users.edit', compact('users'));
     }
 
+
+
+
+
+
+
+
+
+
+    //  Update User Account
+    public function account(User $users)
+    {
+
+        return response()->view('ase.users.account-user', compact('users'));
+    }
+
+    //  Update User Account
+
+    public function accountUpdate(Request $request)
+    {
+        $validator = Validator($request->all(), [
+            'UsersName' => 'required|string|min:3',
+            'email' => 'required|string|unique:users,email,' . $request->user()->id,
+            'phone' => 'required|string|min:10',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
+        ]);
+
+        if (!$validator->fails()) {
+            $users = $request->user();
+            $users->UsersName = $request->input('UsersName');
+            $users->email = $request->input('email');
+            $users->phone = $request->input('phone');
+            if ($request->hasFile('image')) {
+                Storage::disk('public')->delete('' . $users->image);
+                $file = $request->file('image');
+                $imageName = time() . '_' . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
+                $image = $file->storePubliclyAs('users', $imageName, ['disk' => 'public']);
+                $users->image = $image;
+            }
+
+            $isSaved = $users->save();
+            return response()->json([
+                'message' => $isSaved ? 'Update User Successfully' : 'Update User Failed'
+            ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        } else {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first()
+            ], Response::HTTP_BAD_REQUEST);
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     /**
      * Update the specified resource in storage.
      */
@@ -101,7 +162,7 @@ class UserController extends Controller
         ]);
 
         if (!$validator->fails()) {
-            $users->UserName = $request->input('UserName');
+            $users->UsersName = $request->input('UsersName');
             $users->email = $request->input('email');
             $users->phone = $request->input('phone');
             $users->password = Hash::make($request->input('password'));
@@ -167,5 +228,16 @@ class UserController extends Controller
             ],
             $users ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST
         );
+    }
+
+
+
+
+
+
+    //  ReSet -  Password
+    public function resetPass(Request $request)
+    {
+        return response()->view('ase.settings.reset-password');
     }
 }

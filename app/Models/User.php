@@ -3,15 +3,18 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable , SoftDeletes;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     /**
      * The attributes that are mass assignable.
@@ -23,6 +26,8 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
+        'image',
+
     ];
 
     /**
@@ -44,7 +49,23 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function carts() {
+        // Cart
+    public function carts()
+    {
         return $this->hasMany(Cart::class)->with('product');
+    }
+
+        // fULL name
+    public function getFullNameAttribute()
+    {
+        return $this->UsersName;
+    }
+        
+        // Image 
+    public function imageUrl(): Attribute
+    {
+        return Attribute::make(
+            get: fn () => $this->image == null ? asset('ase/assets/img/avatars/blank-profile.png') : Storage::url($this->image)
+        );
     }
 }

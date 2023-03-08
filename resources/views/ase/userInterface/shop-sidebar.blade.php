@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Open Limit | Shop Sidebar</title>
+    <title>Open-Limits | Shop Sidebar</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -25,7 +25,13 @@
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/magnific-popup.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/base.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
 
+    <style>
+        .toast-message {
+            font-size: 14px !important;
+        }
+    </style>
 </head>
 
 
@@ -66,11 +72,14 @@
                         </div>
                     </div>
                     <div class="col-lg-6 col-sm-6 col-12">
+                        @if (auth()->guest())
+
                         <div class="header-top-link">
                             <ul class="quick-link">
-                                <li><a href="sign-in.html">Sign In</a></li>
+                                <li><a href="{{route('login')}}">Sign In</a></li>
                             </ul>
                         </div>
+                        @endif
                     </div>
                 </div>
             </div>
@@ -82,7 +91,7 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="{{route('front.index')}}" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
+                            <img src="{{asset('fas/assets/images/logo/logo2.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
                             <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
@@ -131,7 +140,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">3</span>
+                                    <span class="cart-count">{{$carts->count()}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -143,12 +152,15 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="my-account.html">My Account</a>
+                                            <a href="{{route('home')}}">My Account</a>
                                         </li>
                                     </ul>
-                                    <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html"
+                                    @if (auth()->guest())
+
+                                    <a href="{{route('login')}}" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a href="{{route('register')}}"
                                             class="btn-link">REGISTER HERE.</a></div>
+                                    @endif
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -263,14 +275,15 @@
                                 <div class="axil-product product-style-one mb--30">
                                     <div class="thumbnail">
                                         <a href="single-product.html">
-                                            <img style="height: 200px ; width: 300px;"
+                                            <img style="height: 300px ; width: 300px;"
                                                 src="{{Storage::url($product->image)}}" alt="Product Images">
                                         </a>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
                                                 <li class="wishlist"><a href="wishlist.html"><i
                                                             class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a href="cart.html">Add to Cart</a></li>
+                                                <li class="select-option"><a onclick="addProductToCart()">Add to
+                                                        Cart</a></li>
                                                 <li class="quickview"><a href="#" data-bs-toggle="modal"
                                                         data-bs-target="#quick-view-modal"><i
                                                             class="far fa-eye"></i></a></li>
@@ -711,93 +724,38 @@
                 <h2 class="header-title">Cart review</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
+            
             <div class="cart-body">
+                @foreach ($carts as $cart )
                 <ul class="cart-item-list">
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-01.png')}}"
+                            <a href="single-product.html"><img src="{{Storage::url($cart->product->image)}}"
                                     alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
+                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"></i></button>
                         </div>
                         <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(64)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>155.00</div>
+                            <h3 class="item-title"><a href="single-product-3.html">{{$cart->product->productName}}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
+                                'price' ? $cart->product->price : $cart->product->discount}}</div>
                             <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="15">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-2.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-02.png')}}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(4)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-2.html">Gradient Light Keyboard</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>255.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="5">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-3.html"><img
-                                    src="{{asset('fas/assets/images/product/electric/product-03.png')}}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(6)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product.html">HD CC Camera</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>200.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="100">
+                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
                             </div>
                         </div>
                     </li>
                 </ul>
+                @endforeach
             </div>
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">$610.00</span>
+                    {{-- <span class="subtotal-amount">${{$cart->quantity * ($cart->product->flag == 'price' ?
+                        $cart->product->price : $cart->product->discount)}}</span> --}}
                 </h3>
                 <div class="group-btn">
-                    <a href="cart.html" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="checkout.html" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
+                    <a href="#" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
         </div>
@@ -823,7 +781,11 @@
     <script src="{{asset('fas/assets/js/vendor/isotope.pkgd.min.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/counterup.js')}}"></script>
     <script src="{{asset('fas/assets/js/vendor/waypoints.min.js')}}"></script>
+
+    <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/axios.js') }}"></script>
+    <script src="{{ asset('js/Crud.js') }}"></script>
+    <script src="{{ asset('js/sweet.js') }}"></script>
 
     <!-- Main JS -->
     <script src="{{asset('fas/assets/js/rtl-main.js')}}"></script>
@@ -839,10 +801,36 @@
             });
         }
 
+        
+        function addProductToCart() {
+            let url = '{{ route('cart.add', $product->id) }}';
+            let data = {
+                quantity: 1
+            }
+            axios.post(url, data).then((response) => {
+                console.log(response)
+                toastr.success(response.data.message);
+            }).catch((error) => {
+                console.log(error.response)
+                toastr.success(error.response.data.message);
+            })
+        }
     </script>
     <script>
         function sortData(ref){
             window.location.href="/products?sort="+ref.value;
+        }
+    </script>
+
+    <script>
+        function removeProduct(id, ref) {
+            let url = `/cart/${id}`;
+            axios.delete(url).then((response) => {
+                toastr.success(response.data.message);
+                ref.closest('tr').remove();
+            }).catch(() => {
+                toastr.error(error.response.data.message);
+            })
         }
     </script>
 

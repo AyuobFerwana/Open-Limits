@@ -103,7 +103,7 @@
 
 @section('script')
 
-    <script>
+<script>
     let colors = 0;
         let sizes =1;
 

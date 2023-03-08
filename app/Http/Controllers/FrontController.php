@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
@@ -9,9 +10,12 @@ use Illuminate\Http\Request;
 
 class FrontController extends Controller
 {
+
+    
     // The first Show For User
-    public function index(Request $request)
+    public function index(Request $request, Cart $carts)
     {
+        $carts = Cart::all();
         $categories = Category::all();
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
@@ -22,13 +26,15 @@ class FrontController extends Controller
         return response()->view('ase.userInterface.front', [
             'products' => $products,
             'categories' => $categories,
+            'carts' => $carts,
         ]);
     }
 
 
-    public function sidebar(Request $request)
+    // product & Sort SideBAR
+    public function sidebar(Request $request, Cart $carts)
     {
-        // product & Sort
+        $carts = Cart::all();
         $categories = Category::paginate(10);
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
@@ -44,9 +50,13 @@ class FrontController extends Controller
         })->get();
         return response()->view('ase.userInterface.shop-sidebar', [
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'carts' => $carts,
+
         ]);
     }
+
+
     // Search
     public function productSearch(Request $request)
     {
@@ -55,13 +65,19 @@ class FrontController extends Controller
         })->limit(10)->get();
         return response()->view('ase.components.product-search', compact('products'));
     }
+
+
+
     //  Product Show
-    public function productItem(Product $products)
+    public function productItem(Product $products, Cart $carts)
     {
+        $carts = Cart::all();
         $categories = Category::all();
         return response()->view('ase.userInterface.product-item', [
             'products' => $products,
-            'categories' => $categories
+            'categories' => $categories,
+            'carts' => $carts,
+
         ]);
     }
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Open Limit</title>
+    <title>Open-Limits</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -26,7 +26,11 @@
     <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/base.css') }}">
     <link rel="stylesheet" href="{{ asset('fas/assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
-    
+    <style>
+        .toast-message {
+            font-size: 12px !important;
+        }
+    </style>
 
 
 </head>
@@ -76,6 +80,8 @@
                             </div>
                         </div>
                     </div>
+                    @if (auth()->guest())
+
                     <div class="col-sm-6">
                         <div class="header-top-link">
                             <ul class="quick-link">
@@ -84,6 +90,7 @@
                             </ul>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -94,7 +101,7 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="{{ route('front.index') }}" class="logo logo-dark">
-                            <img src="{{ asset('fas/assets/images/logo/logo1.png') }}" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo2.png') }}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
                             <img src="{{ asset('fas/assets/images/logo/logo-light.png') }}" alt="Site Logo">
@@ -131,7 +138,7 @@
 
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">3</span>
+                                    <span class="cart-count">{{count($carts)}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -143,16 +150,19 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="my-account.html">My Account</a>
+                                            <a href="{{route('home')}}">My Account</a>
                                         </li>
 
 
                                     </ul>
+                                    @if (auth()->guest())
+
                                     <div class="login-btn">
                                         <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
                                     </div>
                                     <div class="reg-footer text-center">No account yet? <a
                                             href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a></div>
+                                    @endif
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -261,7 +271,7 @@
                                     <img src="{{ Storage::url($product->image) }}" alt="Product">
                                     <div class="product-price">
                                         <span class="text">From</span>
-                                        <span class="price-amount">{{ $product->price }}</span>
+                                        <span class="price-amount">${{ $product->price }}</span>
                                     </div>
                                 </div>
                                 @endforeach
@@ -321,10 +331,10 @@
                                 <div class="axil-product product-style-one">
                                     <div class="thumbnail">
                                         <a href="{{route('front.sidebar' ,$product->id)}}">
-                                            <img data-sal="zoom-out" style="height: 200px ; width: 300px;"
+                                            <img data-sal="zoom-out" style="height: 300px ; width: 300px;"
                                                 data-sal-delay="300" data-sal-duration="800" loading="lazy"
                                                 src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                            <img class="hover-img" style="height: 200px ; width: 300px;"
+                                            <img class="hover-img" style="height: 300px ; width: 300px;"
                                                 src="{{ Storage::url($product->image) }}" alt="Product Images">
                                         </a>
                                         <div class="product-hover-action">
@@ -333,7 +343,7 @@
                                                         data-bs-target="#quick-view-modal"><i
                                                             class="far fa-eye"></i></a></li>
                                                 <li class="select-option">
-                                                    <a href="{{route('cart.add' ,$product->id)}}">Add to Cart</a>
+                                                    <a onclick="addProductToCart({{$product->id}})">Add to Cart</a>
                                                 </li>
                                                 <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
                                             </ul>
@@ -811,33 +821,41 @@
                 <h2 class="header-title">Cart review</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
+
             <div class="cart-body">
                 <ul class="cart-item-list">
+                    @foreach ($carts as $cart)
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img
-                                    src="{{ asset('fas/assets/images/product/electric/product-01.png') }}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
+                            <a href="{{route('front.productItem', $cart->product_id)}}"><img
+                                    src="{{Storage::url($cart->product->image)}}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
+                                    class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
-                            <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>155.00</div>
+                            <h3 class="item-title"><a
+                                    href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
+                                'price' ? $cart->product->price : $cart->product->discount}}</div>
                             <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="15">
+                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
                             </div>
                         </div>
                     </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">$610.00</span>
+                    {{--  <span class="subtotal-amount">${{$cart->quantity * ($cart->product->flag == 'price' ?
+                        $carts->product->price : $carts->product->discount)}}</span>  --}}
+
                 </h3>
                 <div class="group-btn">
-                    <a href="cart.html" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="checkout.html" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
+                    <a href="#" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
         </div>
@@ -904,8 +922,35 @@
                     console.log(error);
                 });
         }
+
+
+        function addProductToCart(id) {
+            let url = `/cart/add/${id}`;
+            let data = {
+                quantity: 1
+            }
+            axios.post(url, data).then((response) => {
+                console.log(response)
+                toastr.success(response.data.message);
+            }).catch((error) => {
+                console.log(error.response)
+                toastr.success(error.response.data.message);
+            })
+        }
     </script>
 
+
+    <script>
+        function removeProduct(id, ref) {
+            let url = `/cart/${id}`;
+            axios.delete(url).then((response) => {
+                toastr.success(response.data.message);
+                ref.closest('li').remove();
+            }).catch(() => {
+                toastr.error(error.response.data.message);
+            })
+        }
+    </script>
 </body>
 
 </html>

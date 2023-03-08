@@ -40,9 +40,10 @@
                         <td>{{ $categorie->categoryName }}</td>
                         <td>{{ $categorie->deleted_at }}</td>
                         <td>
-                            <a href="{{ route('category.restore', $categorie->id) }}" style="color:aliceblue" 
+                            <a href="{{ route('category.restore', $categorie->id) }}" style="color:aliceblue"
                                 class="btn btn-primary">Restore</a>
-                            <a onclick="performDestroy('{{ $categorie->id }}',this)" style="color:aliceblue"  class="btn btn-danger">Delete</a>
+                            <a onclick="performDestroy('{{ $categorie->id }}',this)" style="color:aliceblue"
+                                class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach
@@ -58,13 +59,13 @@
 
 
 @section('script')
-    <script>
+<script>
     function performDestroy(id, reference) {
             confirmDestroy('/dashboard/RestoreCategoryDestroy', id, reference)
         }
 </script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $('.show_confirm').click(function(e) {
             if (!confirm('Are you sure you want to delete this?')) {
                 e.preventDefault();

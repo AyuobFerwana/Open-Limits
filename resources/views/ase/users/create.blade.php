@@ -42,8 +42,7 @@
                                 class="form-control @error('password') is-invalid @enderror"
                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                 aria-describedby="password" />
-                            <span class="input-group-text cursor-pointer"><i
-                                    class="bx bx-hide"></i><strong></span>
+                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i><strong></span>
                         </div>
 
                         <div class="mb-3">

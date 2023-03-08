@@ -36,25 +36,31 @@ Route::get('/product/search', [FrontController::class, 'productSearch']);
 Route::get('/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
 
 
-
-// Route::view('/cart', 'ase.cart.cartShop')->name('cart');
+// Cart
 Route::get('/cart', [CartController::class, 'show'])->name('cart');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/{product}', [CartController::class, 'remove']);
 
-
-
-
+// CheckOut
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
 
 
-
-// Dashboard
+// Authentication
 Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(function () {
+    // Dashboard
     Route::view('/', 'ase.dashboard')->name('home');
+
+    // User Account
+    Route::get('/account', [UserController::class, 'account'])->name('users.account');
+    Route::put('/account-update', [UserController::class, 'accountUpdate'])->name('users.accountUpdate');
+
+    // ReSet Password
+    Route::get('/Reset-Password', [UserController::class, 'resetPass'])->name('user.resetPass');
 });
 
+// Admin Role
 Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function () {
+
     // User
     Route::get('users/restore', [UserController::class, 'restoreUsers'])->name('users.restoreUsers');
     Route::resource('/users', UserController::class);
@@ -81,7 +87,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::delete('purchase', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
 });
 // login & Register
-Route::middleware('guest')->group(function () {
+Route::middleware(['guest', 'throttle:authentication'])->group(function () {
     Route::view('/login', 'ase.auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 

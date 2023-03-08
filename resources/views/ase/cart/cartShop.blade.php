@@ -26,7 +26,11 @@
     <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/base.css')}}">
     <link rel="stylesheet" href="{{asset('fas/assets/css/style.min.css')}}">
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
-
+    <style>
+        .toast-message {
+            font-size: 14px !important;
+        }
+    </style>
 </head>
 
 
@@ -43,7 +47,8 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-dropdown">
                             <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     English
                                 </button>
                                 <ul class="dropdown-menu">
@@ -53,7 +58,8 @@
                                 </ul>
                             </div>
                             <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     USD
                                 </button>
                                 <ul class="dropdown-menu">
@@ -67,9 +73,10 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-link">
                             <ul class="quick-link">
-                                <li><a href="#">Help</a></li>
-                                <li><a href="sign-up.html">Join Us</a></li>
-                                <li><a href="sign-in.html">Sign In</a></li>
+                                @if (auth()->guest())
+
+                                <li><a href="{{route('login')}}">Sign In</a></li>
+                                @endif
                             </ul>
                         </div>
                     </div>
@@ -86,7 +93,7 @@
                             <img src="{{asset('fas/assets/images/logo/logo1.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
-                            <img src="assets/images/logo/logo-light.png" alt="Site Logo">
+                            <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
                         </a>
                     </div>
                     <div class="header-main-nav">
@@ -115,7 +122,9 @@
                     <div class="header-action">
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
-                                <input type="search" class="placeholder product-search-input" name="search2" id="search2" value="" maxlength="128" placeholder="What are you looking for?" autocomplete="off">
+                                <input type="search" class="placeholder product-search-input" name="search2"
+                                    id="search2" value="" maxlength="128" placeholder="What are you looking for?"
+                                    autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -132,7 +141,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">3</span>
+                                    <span class="cart-count">{{count($carts)}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -144,20 +153,15 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="my-account.html">My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Initiate return</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Support</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Language</a>
+                                            <a href="{{route('home')}}">My Account</a>
                                         </li>
                                     </ul>
-                                    <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html" class="btn-link">REGISTER HERE.</a></div>
+                                    @if (auth()->guest())
+
+                                    <a href="{{route('login')}}" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a href="{{route('register')}}"
+                                            class="btn-link">REGISTER HERE.</a></div>
+                                    @endif
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -219,17 +223,28 @@
                             <tbody>
                                 @foreach ($carts as $cart)
                                 <tr>
-                                    <td class="product-remove"><button type="button" onclick="removeProduct({{$cart->product_id}}, this)" class="remove-wishlist"><i class="fal fa-times"></i></button></td>
-                                    <td class="product-thumbnail"><a href="single-product.html"><img src="{{ Storage::url($cart->product->image) }}" alt="Digital Product"></a></td>
-                                    <td class="product-title" style="text-align: center"><a href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a></td>
-                                    <td class="product-price" style=" text-align: center;" data-title="Price"><span class="currency-symbol">$</span>{{$cart->product->flag == 'price' ? $cart->product->price : $cart->product->discount}}</td>
-                                     <td class="product-quantity" data-title="Qty" style=" text-align: center;">
-                                            {{$cart->quantity}}
-                                    </td> 
-                                     <td class="product-subtotal" data-title="Subtotal"><span class="currency-symbol">$</span>{{$cart->quantity * ($cart->product->flag == 'price' ? $cart->product->price : $cart->product->discount)}}</td> 
+                                    <td class="product-remove"><button type="button"
+                                            onclick="removeProduct({{$cart->product_id}}, this)"
+                                            class="remove-wishlist"><i class="fal fa-times"></i></button></td>
+                                    <td class="product-thumbnail"><a
+                                            href="{{route('front.productItem', $cart->product_id)}}"><img
+                                                src="{{ Storage::url($cart->product->image) }}"
+                                                alt="Digital Product"></a></td>
+                                    <td class="product-title" style="text-align: center"><a
+                                            href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                                    </td>
+                                    <td class="product-price" style=" text-align: center;" data-title="Price"><span
+                                            class="currency-symbol">$</span>{{$cart->product->flag == 'price' ?
+                                        $cart->product->price : $cart->product->discount}}</td>
+                                    <td class="product-quantity" data-title="Qty" style=" text-align: center;">
+                                        {{$cart->quantity}}
+                                    </td>
+                                    <td class="product-subtotal" data-title="Subtotal"><span
+                                            class="currency-symbol">$</span>{{$cart->quantity * ($cart->product->flag ==
+                                        'price' ? $cart->product->price : $cart->product->discount)}}</td>
                                 </tr>
                                 @endforeach
-                               
+
                             </tbody>
                         </table>
                     </div>
@@ -283,7 +298,8 @@
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="checkout.html" class="axil-btn btn-bg-primary checkout-btn">Process to Checkout</a>
+                                <a href="checkout.html" class="axil-btn btn-bg-primary checkout-btn">Process to
+                                    Checkout</a>
                             </div>
                         </div>
                     </div>
@@ -301,7 +317,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service1.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service1.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Fast &amp; Secure Delivery</h6>
@@ -312,7 +328,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service2.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service2.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Money Back Guarantee</h6>
@@ -323,7 +339,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service3.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service3.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">24 Hour Return Policy</h6>
@@ -334,7 +350,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service4.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service4.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Pro Quality Support</h6>
@@ -357,17 +373,19 @@
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
                             <a href="index.html">
-                                <img class="light-logo" src="assets/images/logo/logo.png" alt="Logo Images">
+                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">
                                 <p>685 Market Street, <br>
-                                Las Vegas, LA 95820, <br>
-                                United States.
+                                    Las Vegas, LA 95820, <br>
+                                    United States.
                                 </p>
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i> example@domain.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01) 850-315-5862</a></li>
+                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i>
+                                            example@domain.com</a></li>
+                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01)
+                                            850-315-5862</a></li>
                                     <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
                                 </ul>
                             </div>
@@ -414,14 +432,16 @@
                                 <span>Save $3 With App & New User only</span>
                                 <div class="download-btn-group">
                                     <div class="qr-code">
-                                        <img src="assets/images/others/qr.png" alt="Axilthemes">
+                                        <img src="{{asset('fas/assets/images/others/qr.png')}}" alt="Axilthemes">
                                     </div>
                                     <div class="app-link">
                                         <a href="#">
-                                            <img src="assets/images/others/app-store.png" alt="App Store">
+                                            <img src="{{asset('fas/assets/images/others/app-store.png')}}"
+                                                alt="App Store">
                                         </a>
                                         <a href="#">
-                                            <img src="assets/images/others/play-store.png" alt="Play Store">
+                                            <img src="{{asset('fas/assets/images/others/play-store.png')}}"
+                                                alt="Play Store">
                                         </a>
                                     </div>
                                 </div>
@@ -449,17 +469,22 @@
                     <div class="col-xl-4 col-lg-12">
                         <div class="copyright-left d-flex flex-wrap justify-content-center">
                             <ul class="quick-link">
-                                <li>© 2022. All rights reserved by <a target="_blank" href="https://axilthemes.com/">Axilthemes</a>.</li>
+                                <li>© 2022. All rights reserved by <a target="_blank"
+                                        href="https://axilthemes.com/">Axilthemes</a>.</li>
                             </ul>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
-                        <div class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
+                        <div
+                            class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="assets/images/icons/cart/cart-1.png" alt="paypal cart"></li>
-                                <li><img src="assets/images/icons/cart/cart-2.png" alt="paypal cart"></li>
-                                <li><img src="assets/images/icons/cart/cart-5.png" alt="paypal cart"></li>
+                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-1.png')}}" alt="paypal cart">
+                                </li>
+                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-2.png')}}" alt="paypal cart">
+                                </li>
+                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-5.png')}}" alt="paypal cart">
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -475,7 +500,8 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i class="far fa-times"></i></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
+                            class="far fa-times"></i></button>
                 </div>
                 <div class="modal-body">
                     <div class="single-product-thumb">
@@ -483,36 +509,43 @@
                             <div class="col-lg-7 mb--40">
                                 <div class="row">
                                     <div class="col-lg-10 order-lg-2">
-                                        <div class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
+                                        <div
+                                            class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-01.png" alt="Product Images">
+                                                <img src="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                    alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-01.png" class="popup-zoom">
+                                                    <a href="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                        class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-02.png" alt="Product Images">
+                                                <img src="{{asset('fas/assets/images/product/product-big-02.png')}}"
+                                                    alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-02.png" class="popup-zoom">
+                                                    <a href="{{asset('fas/assets/images/product/product-big-02.png')}}"
+                                                        class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-03.png" alt="Product Images">
+                                                <img src="{{asset('fas/assets/images/product/product-big-03.png')}}"
+                                                    alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-03.png" class="popup-zoom">
+                                                    <a href="{{asset('fas/assets/images/product/product-big-03.png')}}"
+                                                        class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
@@ -522,13 +555,16 @@
                                     <div class="col-lg-2 order-lg-1">
                                         <div class="product-small-thumb small-thumb-wrapper">
                                             <div class="small-thumb-img">
-                                                <img src="assets/images/product/product-thumb/thumb-08.png" alt="thumb image">
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-08.png')}}"
+                                                    alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="assets/images/product/product-thumb/thumb-07.png" alt="thumb image">
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-07.png')}}"
+                                                    alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="assets/images/product/product-thumb/thumb-09.png" alt="thumb image">
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-09.png')}}"
+                                                    alt="thumb image">
                                             </div>
                                         </div>
                                     </div>
@@ -539,7 +575,8 @@
                                     <div class="inner">
                                         <div class="product-rating">
                                             <div class="star-rating">
-                                                <img src="assets/images/icons/rate.png" alt="Rate Images">
+                                                <img src="{{asset('fas/assets/images/icons/rate.png')}}"
+                                                    alt="Rate Images">
                                             </div>
                                             <div class="review-link">
                                                 <a href="#">(<span>1</span> customer reviews)</a>
@@ -552,7 +589,9 @@
                                             <li><i class="fal fa-check"></i>Free delivery available</li>
                                             <li><i class="fal fa-check"></i>Sales 30% Off Us Code: MOTIVE30</li>
                                         </ul>
-                                        <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi pretium. Integer ante est, elementum eget magna. Pellentesque sagittis dictum libero, eu dignissim tellus.</p>
+                                        <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi
+                                            pretium. Integer ante est, elementum eget magna. Pellentesque sagittis
+                                            dictum libero, eu dignissim tellus.</p>
 
                                         <div class="product-variations-wrapper">
 
@@ -561,11 +600,14 @@
                                                 <h6 class="title">Colors:</h6>
                                                 <div class="color-variant-wrapper">
                                                     <ul class="color-variant mt--0">
-                                                        <li class="color-extra-01 active"><span><span class="color"></span></span>
+                                                        <li class="color-extra-01 active"><span><span
+                                                                    class="color"></span></span>
                                                         </li>
-                                                        <li class="color-extra-02"><span><span class="color"></span></span>
+                                                        <li class="color-extra-02"><span><span
+                                                                    class="color"></span></span>
                                                         </li>
-                                                        <li class="color-extra-03"><span><span class="color"></span></span>
+                                                        <li class="color-extra-03"><span><span
+                                                                    class="color"></span></span>
                                                         </li>
                                                     </ul>
                                                 </div>
@@ -595,8 +637,11 @@
 
                                             <!-- Start Product Action  -->
                                             <ul class="product-action d-flex-center mb--0">
-                                                <li class="add-to-cart"><a href="cart.html" class="axil-btn btn-bg-primary">Add to Cart</a></li>
-                                                <li class="wishlist"><a href="wishlist.html" class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a></li>
+                                                <li class="add-to-cart"><a href="cart.html"
+                                                        class="axil-btn btn-bg-primary">Add to Cart</a></li>
+                                                <li class="wishlist"><a href="wishlist.html"
+                                                        class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a>
+                                                </li>
                                             </ul>
                                             <!-- End Product Action  -->
 
@@ -620,7 +665,8 @@
             <div class="card-header">
                 <form action="#">
                     <div class="input-group">
-                        <input type="search" class="form-control" name="prod-search" id="prod-search" placeholder="Write Something....">
+                        <input type="search" class="form-control" name="prod-search" id="prod-search"
+                            placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
@@ -634,18 +680,19 @@
                     <div class="axil-product-list">
                         <div class="thumbnail">
                             <a href="single-product.html">
-                                <img src="./assets/images/product/electric/product-09.png" alt="Yantiti Leather Bags">
+                                <img src="{{asset('fas/assets/images/product/electric/product-09.png')}}"
+                                    alt="Yantiti Leather Bags">
                             </a>
                         </div>
                         <div class="product-content">
                             <div class="product-rating">
                                 <span class="rating-icon">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fal fa-star"></i>
-                            </span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </span>
                                 <span class="rating-number"><span>100+</span> Reviews</span>
                             </div>
                             <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
@@ -662,18 +709,19 @@
                     <div class="axil-product-list">
                         <div class="thumbnail">
                             <a href="single-product.html">
-                                <img src="./assets/images/product/electric/product-09.png" alt="Yantiti Leather Bags">
+                                <img src="{{asset('fas/assets/images/product/electric/product-09.png')}}"
+                                    alt="Yantiti Leather Bags">
                             </a>
                         </div>
                         <div class="product-content">
                             <div class="product-rating">
                                 <span class="rating-icon">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fal fa-star"></i>
-                            </span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fal fa-star"></i>
+                                </span>
                                 <span class="rating-number"><span>100+</span> Reviews</span>
                             </div>
                             <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
@@ -705,18 +753,20 @@
                 <ul class="cart-item-list">
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img src="assets/images/product/electric/product-01.png" alt="Commodo Blown Lamp"></a>
+                            <a href="single-product.html"><img
+                                    src="{{asset('fas/assets/images/product/electric/product-01.png')}}"
+                                    alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
                             <div class="product-rating">
                                 <span class="icon">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
                                 <span class="rating-number">(64)</span>
                             </div>
                             <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
@@ -728,18 +778,20 @@
                     </li>
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product-2.html"><img src="assets/images/product/electric/product-02.png" alt="Commodo Blown Lamp"></a>
+                            <a href="single-product-2.html"><img
+                                    src="{{asset('fas/assets/images/product/electric/product-02.png')}}"
+                                    alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
                             <div class="product-rating">
                                 <span class="icon">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
                                 <span class="rating-number">(4)</span>
                             </div>
                             <h3 class="item-title"><a href="single-product-2.html">Gradient Light Keyboard</a></h3>
@@ -751,18 +803,20 @@
                     </li>
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product-3.html"><img src="assets/images/product/electric/product-03.png" alt="Commodo Blown Lamp"></a>
+                            <a href="single-product-3.html"><img
+                                    src="{{asset('fas/assets/images/product/electric/product-03.png')}}"
+                                    alt="Commodo Blown Lamp"></a>
                             <button class="close-btn"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
                             <div class="product-rating">
                                 <span class="icon">
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-								<i class="fas fa-star"></i>
-							</span>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </span>
                                 <span class="rating-number">(6)</span>
                             </div>
                             <h3 class="item-title"><a href="single-product.html">HD CC Camera</a></h3>
@@ -808,7 +862,6 @@
     <script src="{{asset('fas/assets/js/vendor/waypoints.min.js')}}"></script>
 
     <!-- Main JS -->
-    <script src="{{asset('fas/assets/js/main.js')}}"></script>
 
     <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/axios.js') }}"></script>

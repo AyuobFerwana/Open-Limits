@@ -21,12 +21,13 @@
                         @csrf
                         <div class="mb-3">
                             <label class="form-label" for="Name Category">Name Category</label>
-                            <input type="text" class="form-control" id="categoryName" value="{{$category->categoryName}}"
-                            placeholder="Name Category" />
+                            <input type="text" class="form-control" id="categoryName"
+                                value="{{$category->categoryName}}" placeholder="Name Category" />
                         </div>
                         <div class="mb-3">
                             <label class="form-label" for="Image">Image</label>
-                            <input class="form-control" name="img[]" type="file" id="image" value="{{$category->image}}">
+                            <input class="form-control" name="img[]" type="file" id="image"
+                                value="{{$category->image}}">
 
                         </div>
                         <button type="submit" class="btn btn-primary">Save</button>

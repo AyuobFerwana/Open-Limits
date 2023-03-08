@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('UsersName', 50);
             $table->string('email')->unique();
-            $table->string('phone');
+            $table->string('phone')->unique();
             $table->enum('role', ['user', 'admin'])->default('user');
             $table->string('image')->nullable();
             $table->timestamp('email_verified_at')->nullable();
@@ -38,3 +38,4 @@ return new class extends Migration
         Schema::dropIfExists('users');
     }
 };
+?>

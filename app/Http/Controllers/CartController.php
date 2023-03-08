@@ -44,7 +44,7 @@ class CartController extends Controller
             }
             $isSaved = $cart->save();
             return response()->json([
-                'message' => $isSaved ? 'Product added to cart successfully!' : 'Failed to add the product, Please try again.'
+                'message' => $isSaved ? 'Product Added to Cart Successfully!' : 'Failed to Add the Product, Please try Again.'
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
         } else {
             $carts = Session::get('cart') ?? [];
@@ -71,7 +71,8 @@ class CartController extends Controller
         }
     }
 
-    public function remove(Product $product, Request $request) {
+    public function remove(Product $product, Request $request)
+    {
         if (Auth::check()) {
             $deleted = Cart::where('user_id', $request->user()->id)->where('product_id', $product->id)->delete();
             return response()->json([
@@ -95,7 +96,6 @@ class CartController extends Controller
             return response()->json([
                 'message' => 'Product Removed from cart successfully!',
             ], Response::HTTP_OK);
-
         }
     }
 }

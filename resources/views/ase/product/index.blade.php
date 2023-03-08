@@ -84,10 +84,10 @@
                                 </div>
                             </div>
                         </td>
-                     </div>
-                     </tr>
-                @endforeach
-            </tbody>
+        </div>
+        </tr>
+        @endforeach
+        </tbody>
         </table>
         <div>
             {{ $products->links() }}

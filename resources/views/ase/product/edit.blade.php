@@ -43,11 +43,12 @@
                         </div>
                         <div class="form-group">
                             <label for="color"> Color</label>
-                            
+
                             <div id="colors-container">
                                 @foreach ($product->colors as $colors)
                                 @if (!$loop->first)
-                                <input type="color" value="{{ $colors }}" class="form-control" id="color_{{ $loop->iteration - 1 }}">
+                                <input type="color" value="{{ $colors }}" class="form-control"
+                                    id="color_{{ $loop->iteration - 1 }}">
                                 @endif
 
                                 @endforeach
@@ -62,11 +63,12 @@
 
                         <div class="mb-3">
                             <label for="size">Size</label>
-                            
+
                             <div id="sizes-container">
                                 @foreach ($product->size as $size)
                                 @if (!$loop->first)
-                                <input type="text" value="{{ $size }}" class="form-control" id="size_{{ $loop->iteration - 1 }}">
+                                <input type="text" value="{{ $size }}" class="form-control"
+                                    id="size_{{ $loop->iteration - 1 }}">
                                 @endif
                                 @endforeach
                             </div>

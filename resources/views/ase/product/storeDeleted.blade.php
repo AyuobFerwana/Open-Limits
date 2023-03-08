@@ -76,19 +76,19 @@
 
 
 @section('script')
-    <script>
+<script>
     function performDestroy(id, reference) {
             confirmDestroy('/dashboard/Restoredestroy', id, reference)
         }
-    </script>
+</script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $('.show_confirm').click(function(e) {
             if (!confirm('Are you sure you want to delete this?')) {
                 e.preventDefault();
             }
         });
-    </script>
+</script>
 
 
 @endsection

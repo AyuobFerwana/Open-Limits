@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'email'=>'ayuob@gmail.com',
             'phone'=>'0592549688',
             'role'=>'admin',
-            'password'=>Hash::make('Ayuob0569099'),
+            'password'=>Hash::make('1213'),
         ]);
     }
 }

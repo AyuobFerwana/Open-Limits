@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <title>Open Limit | Product Item</title>
+    <title>Open Limits | Product Item</title>
     <meta name="robots" content="noindex, follow" />
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -51,7 +51,7 @@
                 <div class="header-navbar">
                     <div class="header-brand">
                         <a href="index.html" class="logo logo-dark">
-                            <img src="{{ asset('fas/assets/images/logo/logo1.png') }}" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo2.png') }}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
                             <img src="{{ asset('fas/assets/images/logo/logo-light.png') }}" alt="Site Logo">
@@ -84,8 +84,8 @@
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
                                 <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128"
-                                    placeholder="What are you looking for?" autocomplete="off">
+                                    id="search2" value="" maxlength="128" placeholder="What are you looking for?"
+                                    autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -102,7 +102,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">3</span>
+                                    <span class="cart-count">{{$carts->count()}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -114,21 +114,15 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="my-account.html">My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Initiate return</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Support</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Language</a>
+                                            <a href="{{route('home')}}">My Account</a>
                                         </li>
                                     </ul>
-                                    <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html"
+                                    @if (auth()->guest())
+
+                                    <a href="{{route('login')}}" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a href="{{route('register')}}"
                                             class="btn-link">REGISTER HERE.</a></div>
+                                    @endif
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -149,12 +143,12 @@
                         <div class="header-campaign-activation axil-slick-arrow arrow-both-side header-campaign-arrow">
                             <div class="slick-slide">
                                 <div class="campaign-content">
-                                    <p>STUDENT NOW GET 10% OFF : <a href="#">GET OFFER</a></p>
+                                    <p>Shop NOW GET 10% OFF</p>
                                 </div>
                             </div>
                             <div class="slick-slide">
                                 <div class="campaign-content">
-                                    <p>STUDENT NOW GET 10% OFF : <a href="#">GET OFFER</a></p>
+                                    <p>Shop NOW GET 10% OFF</p>
                                 </div>
                             </div>
                         </div>
@@ -190,14 +184,14 @@
                                     <h5 class="title">{{ $products->category->categoryName }}</h5>
                                     <h2 class="product-title">{{ $products->productName }}</h2>
                                     @if ($products->flag)
-                                        <div class="product-price-variant">
-                                            <span class="price current-price">${{ $products->discount }}</span>
-                                            <del><span class="price old-price">${{ $products->price }}</span></del>
-                                        </div>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">${{ $products->discount }}</span>
+                                        <del><span class="price old-price">${{ $products->price }}</span></del>
+                                    </div>
                                     @else
-                                        <div class="product-price-variant">
-                                            <span class="price current-price">${{ $products->price }}</span>
-                                        </div>
+                                    <div class="product-price-variant">
+                                        <span class="price current-price">${{ $products->price }}</span>
+                                    </div>
                                     @endif
 
                                     <div class="product-rating">
@@ -225,11 +219,9 @@
                                                     <li class="color-extra-01 active"><span><span
                                                                 class="color"></span></span>
                                                     </li>
-                                                    <li class="color-extra-02"><span><span
-                                                                class="color"></span></span>
+                                                    <li class="color-extra-02"><span><span class="color"></span></span>
                                                     </li>
-                                                    <li class="color-extra-03"><span><span
-                                                                class="color"></span></span>
+                                                    <li class="color-extra-03"><span><span class="color"></span></span>
                                                     </li>
                                                 </ul>
                                             </div>
@@ -260,8 +252,7 @@
                                     <!-- Start Product Action Wrapper  -->
                                     <div class="product-action-wrapper d-flex-center">
                                         <!-- Start Quentity Action  -->
-                                        <div class="pro-qty mr--20"><input type="text" id="quantity"
-                                                value="1"></div>
+                                        <div class="pro-qty mr--20"><input type="text" id="quantity" value="1"></div>
                                         <!-- End Quentity Action  -->
 
                                         <!-- Start Product Action  -->
@@ -500,14 +491,11 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}" alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -714,93 +702,40 @@
                 <h2 class="header-title">Cart review</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
+            @foreach ($carts as $cart)
             <div class="cart-body">
                 <ul class="cart-item-list">
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img
-                                    src="{{ asset('fas/assets/images/product/electric/product-01.png') }}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
+                            <a href="{{route('front.productItem', $cart->product_id)}}"><img
+                                    src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
+                                    class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(64)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>155.00</div>
+                            <h3 class="item-title"><a
+                                    href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
+                                'price' ? $cart->product->price : $cart->product->discount}}</div>
                             <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="15">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-2.html"><img
-                                    src="{{ asset('fas/assets/images/product/electric/product-02.png') }}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(4)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-2.html">Gradient Light Keyboard</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>255.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="5">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-3.html"><img
-                                    src="{{ asset('fas/assets/images/product/electric/product-03.png') }}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(6)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product.html">HD CC Camera</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>200.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="100">
+                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
                             </div>
                         </div>
                     </li>
                 </ul>
+
             </div>
+            @endforeach
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">$610.00</span>
+                    {{-- <span class="subtotal-amount">${{$cart->quantity * ($cart->product->flag == 'price' ?
+                        $cart->product->price : $cart->product->discount)}}</span> --}}
                 </h3>
                 <div class="group-btn">
-                    <a href="cart.html" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="checkout.html" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
+                    <a href="#" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
         </div>
@@ -827,7 +762,7 @@
     <script src="{{ asset('fas/assets/js/vendor/waypoints.min.js') }}"></script>
     <script src="{{ asset('js/axios.js') }}"></script>
     <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
-    
+
 
     <!-- Main JS -->
     <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
@@ -854,6 +789,18 @@
             }).catch((error) => {
                 console.log(error.response)
                 toastr.success(error.response.data.message);
+            })
+        }
+    </script>
+
+    <script>
+        function removeProduct(id, ref) {
+            let url = `/cart/${id}`;
+            axios.delete(url).then((response) => {
+                toastr.success(response.data.message);
+                ref.closest('tr').remove();
+            }).catch(() => {
+                toastr.error(error.response.data.message);
             })
         }
     </script>

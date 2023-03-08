@@ -44,9 +44,10 @@
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->deleted_at }}</td>
                         <td>
-                            <a href="{{ route('users.restore', $user->id) }}" style="color:aliceblue" 
+                            <a href="{{ route('users.restore', $user->id) }}" style="color:aliceblue"
                                 class="btn btn-primary">Restore</a>
-                            <a onclick="performDestroy('{{ $user->id }}',this)" style="color:aliceblue"  class="btn btn-danger">Delete</a>
+                            <a onclick="performDestroy('{{ $user->id }}',this)" style="color:aliceblue"
+                                class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach
@@ -62,13 +63,13 @@
 
 
 @section('script')
-    <script>
+<script>
     function performDestroy(id, reference) {
             confirmDestroy('/dashboard/RestoreUserdestroy', id, reference)
         }
 </script>
 
-    <script type="text/javascript">
+<script type="text/javascript">
     $('.show_confirm').click(function(e) {
             if (!confirm('Are you sure you want to delete this?')) {
                 e.preventDefault();
