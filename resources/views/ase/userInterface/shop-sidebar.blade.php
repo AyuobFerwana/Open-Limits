@@ -140,7 +140,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">{{$carts->count()}}</span>
+                                    <span class="cart-count" id="carts-count">{{count($carts)}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -282,8 +282,8 @@
                                             <ul class="cart-action">
                                                 <li class="wishlist"><a href="wishlist.html"><i
                                                             class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a onclick="addProductToCart()">Add to
-                                                        Cart</a></li>
+                                                <li class="select-option"><a
+                                                        onclick="addProductToCart({{$product->id}})">Add to Cart</a></li>
                                                 <li class="quickview"><a href="#" data-bs-toggle="modal"
                                                         data-bs-target="#quick-view-modal"><i
                                                             class="far fa-eye"></i></a></li>
@@ -724,18 +724,19 @@
                 <h2 class="header-title">Cart review</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
-            
+
             <div class="cart-body">
-                @foreach ($carts as $cart )
-                <ul class="cart-item-list">
+                <ul class="cart-item-list" id="cart-list-container">
+                    @foreach ($carts as $cart )
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img src="{{Storage::url($cart->product->image)}}"
+                            <a href="{{route('front.productItem', $cart->product_id)}}"><img src="{{Storage::url($cart->product->image)}}"
                                     alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"></i></button>
+                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
+                                class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
-                            <h3 class="item-title"><a href="single-product-3.html">{{$cart->product->productName}}</a>
+                            <h3 class="item-title"><a href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
                                 'price' ? $cart->product->price : $cart->product->discount}}</div>
@@ -744,8 +745,8 @@
                             </div>
                         </div>
                     </li>
+                    @endforeach
                 </ul>
-                @endforeach
             </div>
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
@@ -802,14 +803,18 @@
         }
 
         
-        function addProductToCart() {
-            let url = '{{ route('cart.add', $product->id) }}';
+        function addProductToCart(id) {
+            let url = `/cart/add/${id}`;
             let data = {
                 quantity: 1
             }
             axios.post(url, data).then((response) => {
                 console.log(response)
                 toastr.success(response.data.message);
+                document.getElementById('cart-list-container').innerHTML=response.data.cartList;
+                document.getElementById('carts-count').innerHTML=response.data.cartCount;
+
+
             }).catch((error) => {
                 console.log(error.response)
                 toastr.success(error.response.data.message);
@@ -827,7 +832,9 @@
             let url = `/cart/${id}`;
             axios.delete(url).then((response) => {
                 toastr.success(response.data.message);
-                ref.closest('tr').remove();
+                ref.closest('li').remove();
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
+
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })

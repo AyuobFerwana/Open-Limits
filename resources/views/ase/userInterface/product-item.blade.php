@@ -102,7 +102,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">{{$carts->count()}}</span>
+                                    <span class="cart-count">{{count($carts)}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>

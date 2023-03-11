@@ -44,7 +44,9 @@ class CartController extends Controller
             }
             $isSaved = $cart->save();
             return response()->json([
-                'message' => $isSaved ? 'Product Added to Cart Successfully!' : 'Failed to Add the Product, Please try Again.'
+                'message' => $isSaved ? 'Product Added to Cart Successfully!' : 'Failed to Add the Product, Please try Again.',
+                'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
+                'cartCount' => count($carts),
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
         } else {
             $carts = Session::get('cart') ?? [];
@@ -79,6 +81,8 @@ class CartController extends Controller
             $deleted = Cart::where('user_id', $request->user()->id)->where('product_id', $product->id)->delete();
             return response()->json([
                 'message' => $deleted ? 'Product Removed from cart successfully!' : 'Failed to remove product from cart, please try again later.',
+                'cartCount' => $request->user()->carts()->count(),
+
             ], $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
         } else {
             $carts = Session::get('cart') ?? [];

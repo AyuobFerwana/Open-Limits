@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
     <style>
         .toast-message {
-            font-size: 12px !important;
+            font-size: 13px !important;
         }
     </style>
 
@@ -138,7 +138,9 @@
 
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count" id="carts-count">{{count($carts)}}</span>
+                                    <span class="cart-count" id="carts-count"> 
+                                        {{ count($carts) }}
+                                    </span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -824,32 +826,32 @@
 
             <div class="cart-body">
                 <ul class="cart-item-list" id="cart-list-container">
-                    @foreach ($carts as $cart)
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="{{route('front.productItem', $cart->product_id)}}"><img
-                                    src="{{Storage::url($cart->product->image)}}" alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
-                                    class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <h3 class="item-title"><a
-                                    href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
-                            </h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ? $cart->product->price : $cart->product->discount}}</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                        @foreach ($carts as $cart)
+                        <li class="cart-item">
+                            <div class="item-img">
+                                <a href="{{route('front.productItem', $cart->product_id)}}"><img
+                                        src="{{Storage::url($cart->product->image)}}" alt="Commodo Blown Lamp"></a>
+                                <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
+                                        class="fas fa-times"></i></button>
                             </div>
-                        </div>
-                    </li>
-                    @endforeach
+                            <div class="item-content">
+                                <h3 class="item-title"><a
+                                        href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                                </h3>
+                                <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
+                                    $cart->product->price : $cart->product->discount}}</div>
+                                <div class="pro-qty item-quantity">
+                                    <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                                </div>
+                            </div>
+                        </li>
+                        @endforeach
                 </ul>
             </div>
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    {{--  <span class="subtotal-amount">${{$cart->quantity * ($cart->product->flag == 'price' ?
-                        $carts->product->price : $carts->product->discount)}}</span>  --}}
+                    {{--  <span class="subtotal-amount">${{Cart::total()}}</span>  --}}
 
                 </h3>
                 <div class="group-btn">
@@ -953,6 +955,8 @@
             })
         }
     </script>
+
+    
 </body>
 
 </html>

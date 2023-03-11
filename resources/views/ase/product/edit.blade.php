@@ -48,7 +48,7 @@
                                 @foreach ($product->colors as $colors)
                                 @if (!$loop->first)
                                 <input type="color" value="{{ $colors }}" class="form-control"
-                                    id="color_{{ $loop->iteration - 1 }}">
+                                    id="color_{{ $loop->iteration - 0 }}">
                                 @endif
 
                                 @endforeach

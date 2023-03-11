@@ -20,8 +20,9 @@ class FrontController extends Controller
         if(Auth::check()) {
             $user = $request->user();
             $carts = $user->carts;
+        
         } else {
-            $carts = Session::get('cart');
+            $carts = Session::get('cart') ?? [];
         }
         $categories = Category::all();
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
@@ -41,8 +42,12 @@ class FrontController extends Controller
     // product & Sort SideBAR
     public function sidebar(Request $request, Cart $carts)
     {
-        $user = $request->user();
-        $carts = $user->carts;
+        if(Auth::check()) {
+            $user = $request->user();
+            $carts = $user->carts;
+        } else {
+            $carts = Session::get('cart') ?? [];
+        }
         $categories = Category::paginate(10);
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
