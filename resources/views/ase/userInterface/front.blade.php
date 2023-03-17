@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
     <style>
         .toast-message {
-            font-size: 13px !important;
+            font-size: 16px !important;
         }
     </style>
 
@@ -138,7 +138,7 @@
 
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count" id="carts-count"> 
+                                    <span class="cart-count" id="carts-count">
                                         {{ count($carts) }}
                                     </span>
                                     <i class="flaticon-shopping-cart"></i>
@@ -303,8 +303,8 @@
                     <div class="slick-single-layout">
                         <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
                             <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
-                                <img class="img-fluid" src="{{ Storage::url($categorie->image) }}"
-                                    alt="product categorie">
+                                <img class="img-fluid" style="width: 300px; height: 150px; !important "
+                                    src="{{ Storage::url($categorie->image) }}" alt="product categorie">
                                 <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
                             </a>
                         </div>
@@ -332,7 +332,7 @@
                             <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
                                 <div class="axil-product product-style-one">
                                     <div class="thumbnail">
-                                        <a href="{{route('front.sidebar' ,$product->id)}}">
+                                        <a href="{{route('front.productItem' ,$product->id)}}">
                                             <img data-sal="zoom-out" style="height: 300px ; width: 300px;"
                                                 data-sal-delay="300" data-sal-duration="800" loading="lazy"
                                                 src="{{ Storage::url($product->image) }}" alt="Product Images">
@@ -341,8 +341,8 @@
                                         </a>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
-                                                <li class="quickview"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view-modal"><i
+                                                <li class="quickview"><a onclick="quickView({{$product->id}})"
+                                                        data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i
                                                             class="far fa-eye"></i></a></li>
                                                 <li class="select-option">
                                                     <a onclick="addProductToCart({{$product->id}})">Add to Cart</a>
@@ -636,159 +636,13 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"><i
                             class="far fa-times"></i></button>
                 </div>
-                <div class="modal-body">
-                    <div class="single-product-thumb">
-                        <div class="row">
-                            <div class="col-lg-7 mb--40">
-                                <div class="row">
-                                    <div class="col-lg-10 order-lg-2">
-                                        <div
-                                            class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
-                                            <div class="thumbnail">
-                                                <img src="{{ asset('fas/assets/images/product/product-big-01.png') }}"
-                                                    alt="Product Images">
-                                                <div class="label-block label-right">
-                                                    <div class="product-badget">20% OFF</div>
-                                                </div>
-                                                <div class="product-quick-view position-view">
-                                                    <a href="{{ asset('fas/assets/images/product/product-big-01.png') }}"
-                                                        class="popup-zoom">
-                                                        <i class="far fa-search-plus"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="thumbnail">
-                                                <img src="{{ asset('fas/assets/images/product/product-big-02.png') }}"
-                                                    alt="Product Images">
-                                                <div class="label-block label-right">
-                                                    <div class="product-badget">20% OFF</div>
-                                                </div>
-                                                <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-02.png"
-                                                        class="popup-zoom">
-                                                        <i class="far fa-search-plus"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                            <div class="thumbnail">
-                                                <img src="{{ asset('fas/assets/images/product/product-big-03.png') }}"
-                                                    alt="Product Images">
-                                                <div class="label-block label-right">
-                                                    <div class="product-badget">20% OFF</div>
-                                                </div>
-                                                <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-03.png"
-                                                        class="popup-zoom">
-                                                        <i class="far fa-search-plus"></i>
-                                                    </a>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 order-lg-1">
-                                        <div class="product-small-thumb small-thumb-wrapper">
-                                            <div class="small-thumb-img">
-                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-08.png') }}"
-                                                    alt="thumb image">
-                                            </div>
-                                            <div class="small-thumb-img">
-                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-07.png') }}"
-                                                    alt="thumb image">
-                                            </div>
-                                            <div class="small-thumb-img">
-                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-09.png') }}"
-                                                    alt="thumb image">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-5 mb--40">
-                                <div class="single-product-content">
-                                    <div class="inner">
-                                        <div class="product-rating">
-                                            <div class="star-rating">
-                                                <img src="{{ asset('fas/assets/images/icons/rate.png') }}"
-                                                    alt="Rate Images">
-                                            </div>
-                                            <div class="review-link">
-                                                <a href="#">(<span>1</span> customer reviews)</a>
-                                            </div>
-                                        </div>
-                                        <h3 class="product-title">Serif Coffee Table</h3>
-                                        <span class="price-amount">$155.00 - $255.00</span>
-                                        <ul class="product-meta">
-                                            <li><i class="fal fa-check"></i>In stock</li>
-                                            <li><i class="fal fa-check"></i>Free delivery available</li>
-                                            <li><i class="fal fa-check"></i>Sales 30% Off Us Code: MOTIVE30</li>
-                                        </ul>
-                                        <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi
-                                            pretium. Integer ante est, elementum eget magna. Pellentesque sagittis
-                                            dictum libero, eu dignissim tellus.</p>
+                <div class="modal-body" id="quickViewProduct">
 
-                                        <div class="product-variations-wrapper">
-
-                                            <!-- Start Product Variation  -->
-                                            <div class="product-variation">
-                                                <h6 class="title">Colors:</h6>
-                                                <div class="color-variant-wrapper">
-                                                    <ul class="color-variant mt--0">
-                                                        <li class="color-extra-01 active"><span><span
-                                                                    class="color"></span></span>
-                                                        </li>
-                                                        <li class="color-extra-02"><span><span
-                                                                    class="color"></span></span>
-                                                        </li>
-                                                        <li class="color-extra-03"><span><span
-                                                                    class="color"></span></span>
-                                                        </li>
-                                                    </ul>
-                                                </div>
-                                            </div>
-                                            <!-- End Product Variation  -->
-
-                                            <!-- Start Product Variation  -->
-                                            <div class="product-variation">
-                                                <h6 class="title">Size:</h6>
-                                                <ul class="range-variant">
-                                                    <li>xs</li>
-                                                    <li>s</li>
-                                                    <li>m</li>
-                                                    <li>l</li>
-                                                    <li>xl</li>
-                                                </ul>
-                                            </div>
-                                            <!-- End Product Variation  -->
-
-                                        </div>
-
-                                        <!-- Start Product Action Wrapper  -->
-                                        <div class="product-action-wrapper d-flex-center">
-                                            <!-- Start Quentity Action  -->
-                                            <div class="pro-qty"><input type="text" value="1"></div>
-                                            <!-- End Quentity Action  -->
-
-                                            <!-- Start Product Action  -->
-                                            <ul class="product-action d-flex-center mb--0">
-                                                <li class="add-to-cart"><a href="cart.html"
-                                                        class="axil-btn btn-bg-primary">Add to Cart</a></li>
-                                                <li class="wishlist"><a href="wishlist.html"
-                                                        class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a>
-                                                </li>
-                                            </ul>
-                                            <!-- End Product Action  -->
-
-                                        </div>
-                                        <!-- End Product Action Wrapper  -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
     </div>
+
     <!-- Product Quick View Modal End -->
 
 
@@ -826,32 +680,32 @@
 
             <div class="cart-body">
                 <ul class="cart-item-list" id="cart-list-container">
-                        @foreach ($carts as $cart)
-                        <li class="cart-item">
-                            <div class="item-img">
-                                <a href="{{route('front.productItem', $cart->product_id)}}"><img
-                                        src="{{Storage::url($cart->product->image)}}" alt="Commodo Blown Lamp"></a>
-                                <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
-                                        class="fas fa-times"></i></button>
+                    @foreach ($carts as $cart)
+                    <li class="cart-item">
+                        <div class="item-img">
+                            <a href="{{route('front.productItem', $cart->product_id)}}"><img
+                                    src="{{Storage::url($cart->product->image)}}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="item-content">
+                            <h3 class="item-title"><a
+                                    href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
+                                $cart->product->price : $cart->product->discount}}</div>
+                            <div class="pro-qty item-quantity">
+                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
                             </div>
-                            <div class="item-content">
-                                <h3 class="item-title"><a
-                                        href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
-                                </h3>
-                                <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
-                                    $cart->product->price : $cart->product->discount}}</div>
-                                <div class="pro-qty item-quantity">
-                                    <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
-                                </div>
-                            </div>
-                        </li>
-                        @endforeach
+                        </div>
+                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    {{--  <span class="subtotal-amount">${{Cart::total()}}</span>  --}}
+                    {{-- <span class="subtotal-amount">${{Cart::total()}}</span> --}}
 
                 </h3>
                 <div class="group-btn">
@@ -924,6 +778,17 @@
                 });
         }
 
+        function quickView(d){
+            axios.get(`/product/quickView?d=${d.value}`)
+            .then(function(response) {
+                console.log(response);
+                document.getElementById('quickViewProduct').innerHTML = response.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+        }
+
 
         function addProductToCart(id) {
             let url = `/cart/add/${id}`;
@@ -956,7 +821,7 @@
         }
     </script>
 
-    
+
 </body>
 
 </html>

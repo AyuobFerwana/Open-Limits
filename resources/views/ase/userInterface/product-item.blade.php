@@ -29,7 +29,7 @@
 
     <style>
         .toast-message {
-            font-size: 14px !important;
+            font-size: 16px !important;
         }
     </style>
 
@@ -702,9 +702,9 @@
                 <h2 class="header-title">Cart review</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
-            @foreach ($carts as $cart)
             <div class="cart-body">
                 <ul class="cart-item-list">
+                    @foreach ($carts as $cart)
                     <li class="cart-item">
                         <div class="item-img">
                             <a href="{{route('front.productItem', $cart->product_id)}}"><img
@@ -723,10 +723,10 @@
                             </div>
                         </div>
                     </li>
+                    @endforeach
                 </ul>
 
             </div>
-            @endforeach
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>

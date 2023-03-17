@@ -13,14 +13,13 @@ use Illuminate\Support\Facades\Session;
 class FrontController extends Controller
 {
 
-    
+
     // The first Show For User
     public function index(Request $request, Cart $carts)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = $request->user();
             $carts = $user->carts;
-        
         } else {
             $carts = Session::get('cart') ?? [];
         }
@@ -42,7 +41,7 @@ class FrontController extends Controller
     // product & Sort SideBAR
     public function sidebar(Request $request, Cart $carts)
     {
-        if(Auth::check()) {
+        if (Auth::check()) {
             $user = $request->user();
             $carts = $user->carts;
         } else {
@@ -78,6 +77,18 @@ class FrontController extends Controller
         })->limit(10)->get();
         return response()->view('ase.components.product-search', compact('products'));
     }
+
+    // quickView
+    public function quickView(Product $products)
+    {
+        $categories = Category::all();
+        return response()->view('ase.components.quick-view-product', [
+            'products' => $products,
+            'categories' => $categories,
+
+        ]);
+    }
+
 
 
 

@@ -20,12 +20,12 @@ class AuthController extends Controller
 
     public function store(Request $request, User $users)
     {
-        $validator =  Validator($request->all(),[
+        $validator =  Validator($request->all(), [
             'name' => 'required|string|min:3|max:255',
             'email' => 'required|email|unique:users,email',
             'phone' => 'required|string|min:10|unique:users,phone',
             'password' => 'required|min:6|confirmed',
-            
+
         ]);
 
         if (!$validator->fails()) {
@@ -35,21 +35,21 @@ class AuthController extends Controller
             $users->phone = $request->input('phone');
             $users->password = Hash::make($request->input('password'));
             $isSaved = $users->save();
-            if($isSaved){
+            if ($isSaved) {
                 Auth::login($users);
                 $carts = Session::get('cart') ?? [];
                 $databaseCarts = $users->carts;
-                foreach($carts as $cart) {
+                foreach ($carts as $cart) {
                     $isProductExists = false;
-                    foreach($databaseCarts as $dbCart) {
-                        if($dbCart->product_id == $cart->product_id) {
+                    foreach ($databaseCarts as $dbCart) {
+                        if ($dbCart->product_id == $cart->product_id) {
                             $isProductExists = true;
-                            $dbCart->quantity+=$cart->quantity;
+                            $dbCart->quantity += $cart->quantity;
                             $dbCart->save();
                             break;
                         }
                     }
-                    if(!$isProductExists) {
+                    if (!$isProductExists) {
                         $dbCart = new Cart();
                         $dbCart->user_id = $users->id;
                         $dbCart->quantity = $cart->quantity;
@@ -88,17 +88,17 @@ class AuthController extends Controller
                 Auth::login($users, $request->input('remember'));
                 $carts = Session::get('cart') ?? [];
                 $databaseCarts = $users->carts;
-                foreach($carts as $cart) {
+                foreach ($carts as $cart) {
                     $isProductExists = false;
-                    foreach($databaseCarts as $dbCart) {
-                        if($dbCart->product_id == $cart->product_id) {
+                    foreach ($databaseCarts as $dbCart) {
+                        if ($dbCart->product_id == $cart->product_id) {
                             $isProductExists = true;
-                            $dbCart->quantity+=$cart->quantity;
+                            $dbCart->quantity += $cart->quantity;
                             $dbCart->save();
                             break;
                         }
                     }
-                    if(!$isProductExists) {
+                    if (!$isProductExists) {
                         $dbCart = new Cart();
                         $dbCart->user_id = $users->id;
                         $dbCart->quantity = $cart->quantity;

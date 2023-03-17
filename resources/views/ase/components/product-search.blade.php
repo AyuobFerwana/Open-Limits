@@ -7,7 +7,8 @@
     </div>
     <div class="product-content">
 
-        <h6 class="product-title"><a href="{{route('front.sidebar')}}">{{$product->productName}}</a></h6>
+        <h6 class="product-title"><a href="{{route('front.productItem' , $product->id)}}">{{$product->productName}}</a>
+        </h6>
         @if ($product->flag)
 
         <div class="product-price-variant">

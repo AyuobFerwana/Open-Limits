@@ -29,8 +29,10 @@
 
     <style>
         .toast-message {
-            font-size: 14px !important;
+            font-size: 16px !important;
         }
+
+        
     </style>
 </head>
 
@@ -257,7 +259,8 @@
                                     <div
                                         class="category-select align-items-center justify-content-lg-end justify-content-between">
                                         <!-- Start Single Select  -->
-                                        <span class="filter-results">Showing {{$products->count()}} results</span>
+                                        <span class="filter-results">Showing (<span style="color: #3577F0; font-size:19px;">{{$products->count()}}</span>) results</span>
+                                        
                                         <select class="single-select" onchange="sortData(this)" id="sort">
                                             <option value="latest">Sort by Latest</option>
                                             <option value="price-low">Sort by Price : Low</option>
@@ -274,13 +277,13 @@
                             <div class="col-xl-4 col-sm-6">
                                 <div class="axil-product product-style-one mb--30">
                                     <div class="thumbnail">
-                                        <a href="single-product.html">
+                                        <a href="{{route('front.productItem', $product->id)}}">
                                             <img style="height: 300px ; width: 300px;"
                                                 src="{{Storage::url($product->image)}}" alt="Product Images">
                                         </a>
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
-                                                <li class="wishlist"><a href="wishlist.html"><i
+                                                <li class="wishlist"><a href="#"><i
                                                             class="far fa-heart"></i></a></li>
                                                 <li class="select-option"><a
                                                         onclick="addProductToCart({{$product->id}})">Add to Cart</a></li>

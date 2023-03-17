@@ -44,7 +44,7 @@ class CartController extends Controller
             }
             $isSaved = $cart->save();
             return response()->json([
-                'message' => $isSaved ? 'Product Added to Cart Successfully!' : 'Failed to Add the Product, Please try Again.',
+                'message' => $isSaved ? '!Added to Cart Successfully' : 'Failed to Add the Product, Please try Again.',
                 'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
                 'cartCount' => count($carts),
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
