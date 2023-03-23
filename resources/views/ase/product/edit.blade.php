@@ -23,8 +23,8 @@
                             <label for="Category" class="form-label">Select Category</label>
                             <select class="form-select" id="categoryName" aria-label="Default select example">
                                 @foreach ($categories as $categorie)
-                                <option value="{{ $categorie->id }}" @selected($product->category->categoryName)>{{
-                                    $categorie->categoryName }}
+                                <option value="{{ $categorie->id }}" @selected($product->category->categoryName)>
+                                    {{ $categorie->categoryName }}
                                 </option>
                                 @endforeach
                             </select>
@@ -45,16 +45,17 @@
                             <label for="color"> Color</label>
 
                             <div id="colors-container">
-                                @foreach ($product->colors as $colors)
+                                <input type="color" value="{{ $product->colors[0] }}" class="form-control" id="color">
+                                @foreach ($product->colors as $color)
                                 @if (!$loop->first)
-                                <input type="color" value="{{ $colors }}" class="form-control"
-                                    id="color_{{ $loop->iteration - 0 }}">
+                                <input type="color" value="{{ $color }}" class="form-control"
+                                    id="color_{{ $loop->iteration - 1 }}">
                                 @endif
-
                                 @endforeach
                             </div>
 
-                            <button type="button" onclick="addColor()" class="btn btn-success">Add Color &plus;</button>
+                            <button type="button" onclick="addColor()" class="btn btn-success">Add Color
+                                &plus;</button>
                             <button type="button" onclick="resetColors()" class="btn btn-danger"
                                 style="margin-left: 20px;">Clear
                                 Colors</button>
@@ -65,6 +66,8 @@
                             <label for="size">Size</label>
 
                             <div id="sizes-container">
+                                <input type="text" value="{{ $product->size[0] }}" class="form-control" id="size">
+
                                 @foreach ($product->size as $size)
                                 @if (!$loop->first)
                                 <input type="text" value="{{ $size }}" class="form-control"
@@ -104,11 +107,11 @@
                             <label class="form-label" for="discount">Flag</label>
                             <div class="form-check mt-7">
                                 <label class="form-check-label" for="Price"> Price </label>
-                                <input class="form-check-input" id="selectedValue" type="radio" value="price"
-                                    @checked(!$product->flag) /><br>
+                                <input class="form-check-input" id="selectedValue" type="radio" name="flag"
+                                    value="price" @if (!$product->flag) checked @endif /><br>
                                 <label class="form-check-label" for="Discount"> Discount </label>
-                                <input class="form-check-input" id="selectedValue" type="radio" value="discount"
-                                    @checked(!$product->flag) />
+                                <input class="form-check-input" id="selectedValue" type="radio" name="flag"
+                                    value="discount" @if ($product->flag) checked @endif />
                             </div>
                         </div>
                         <div class="mb-3">
@@ -129,85 +132,90 @@
 @section('script')
 
 <script>
-    let colors = 0;
-        let sizes =1;
-
-        
-       // {{--  Colors  --}}
-       function addColor() {
-          const colorInput = document.createElement("input");
-          colorInput.setAttribute('type', 'color');
-          colorInput.setAttribute('value', '#000000');
-          colorInput.setAttribute('class', 'form-control');
-          colorInput.setAttribute('id', `color_${++colors}`);
-          document.getElementById('colors-container').appendChild(colorInput);
-      }
-
-      function resetColors() {
-          const colorInput = document.createElement("input");
-          colorInput.setAttribute('type', 'color');
-          colorInput.setAttribute('value', '#000000');
-          colorInput.setAttribute('class', 'form-control');
-          colorInput.setAttribute('id', `color`);
-          document.getElementById('colors-container').innerHTML = '';
-          document.getElementById('colors-container').appendChild(colorInput);
-          colors = 0;
-      }
-
-
-
-            // {{--  Size  --}}
-            function addSize() {
-              const sizeInput = document.createElement("input");
-              sizeInput.setAttribute('type', 'text');
-              sizeInput.setAttribute('class', 'form-control');
-              sizeInput.setAttribute('id', `size_${++sizes}`);
-              document.getElementById('sizes-container').appendChild(sizeInput);
-          }
-  
-          function resetSizes() {
-              const sizeInput = document.createElement("input");
-              sizeInput.setAttribute('type', 'text');
-              sizeInput.setAttribute('class', 'form-control');
-              sizeInput.setAttribute('id', `size`);
-              document.getElementById('sizes-container').innerHTML = '';  
-              document.getElementById('sizes-container').appendChild(sizeInput);
-              sizes = 0;
-          }
-
-
-
+    let colors = {{ count($product -> colors) - 1 }};
+    let sizes = {{ count($product -> size) - 1 }};
+    
+    
+    // {{--  Colors  --}}
+    function addColor() {
+        const colorInput = document.createElement("input");
+        colorInput.setAttribute('type', 'color');
+        colorInput.setAttribute('value', '#000000');
+        colorInput.setAttribute('class', 'form-control');
+        colorInput.setAttribute('id', `color_${++colors}`);
+        document.getElementById('colors-container').appendChild(colorInput);
+    }
+    
+    function resetColors() {
+        const colorInput = document.createElement("input");
+        colorInput.setAttribute('type', 'color');
+        colorInput.setAttribute('value', '#000000');
+        colorInput.setAttribute('class', 'form-control');
+        colorInput.setAttribute('id', `color`);
+        document.getElementById('colors-container').innerHTML = '';
+        document.getElementById('colors-container').appendChild(colorInput);
+        colors = 0;
+    }
+    
+    
+    
+    // {{--  Size  --}}
+    function addSize() {
+        const sizeInput = document.createElement("input");
+        sizeInput.setAttribute('type', 'text');
+        sizeInput.setAttribute('class', 'form-control');
+        sizeInput.setAttribute('id', `size_${++sizes}`);
+        document.getElementById('sizes-container').appendChild(sizeInput);
+    }
+    
+    function resetSizes() {
+        const sizeInput = document.createElement("input");
+        sizeInput.setAttribute('type', 'text');
+        sizeInput.setAttribute('class', 'form-control');
+        sizeInput.setAttribute('id', `size`);
+        document.getElementById('sizes-container').innerHTML = '';
+        document.getElementById('sizes-container').appendChild(sizeInput);
+        sizes = 0;
+    }
+    
     function PerformProduct() {
-            let formData = new FormData();
-            formData.append('_method', 'PUT');
-            formData.append('categoryName', document.getElementById('categoryName').value);
-            formData.append('productName', document.getElementById('productName').value);
-            formData.append('discreption', document.getElementById('discreption').value);
-            formData.append('price', document.getElementById('price').value);
-            formData.append('discount', document.getElementById('discount').value);
-            formData.append('color', document.getElementById('color').value);
-             formData.append('quantity', document.getElementById('quantity').value);
-            const radioButtons = document.querySelectorAll('input[type="radio"]');
-
-            let selectedValue;
+        let formData = new FormData();
+        formData.append('_method', 'PUT');
+        formData.append('categoryName', document.getElementById('categoryName').value);
+        formData.append('productName', document.getElementById('productName').value);
+        formData.append('discreption', document.getElementById('discreption').value);
+        formData.append('price', document.getElementById('price').value);
+        formData.append('discount', document.getElementById('discount').value);
+        formData.append('color', document.getElementById('color').value);
+        formData.append('quantity', document.getElementById('quantity').value);
+        const radioButtons = document.querySelectorAll('input[type="radio"]');
+    
+    
+    // {{--  Flag  --}}
+    let selectedValue;
             radioButtons.forEach(radio => {
                 if (radio.checked) {
                     selectedValue = radio.value;
                 }
             });
 
-             // {{--  Colors  --}}
+            // {{--  Colors  --}}
+
             formData.append('colors', colors);
             for (let i = 1; i <= colors; i++) {
-                formData.append('color_' + i, document.getElementById('color_' + i).value);
+                const inputId = 'color_' + i;
+                const inputValue = document.getElementById(inputId).value;
+                formData.append(inputId, inputValue);
             }
 
+            // {{--  Sizes  --}}
+            formData.append('size', sizes);
+            for (let i = 1; i <= sizes; i++) {
+                const inputId = 'size_' + i;
+                const inputValue = document.getElementById(inputId).value;
+                formData.append(inputId, inputValue);
 
-               // {{--  Sizes  --}}
-               formData.append('size', sizes);
-               for (let i = 1; i <= sizes; i++) {
-                   formData.append('size_' + i, document.getElementById('size_' + i).value);
-               }
+            }
 
             formData.append('flag', selectedValue);
 
@@ -217,20 +225,17 @@
 
             // {{--  axios  --}}
 
-            axios.post('{{ route('products.update', $product) }}', formData)
+            axios.post('{{ route('products.update',$product) }}', formData)
                 .then(function(response) {
                     toastr.success(response.data.message);
                     console.log(response);
-                    document.getElementById('form').reset();
-                   // {{--  window.location.href = 'dashboard/products/create';  --}}
+                    document.getElementById('form');
                 })
                 .catch(function(error) {
                     toastr.error(error.response.data.message);
                     console.log(error);
                 });
-            }
-            
-       
+        }
 </script>
 
 @endsection

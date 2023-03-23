@@ -6,6 +6,7 @@ use App\Models\Cart;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\Store;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -15,15 +16,35 @@ class FrontController extends Controller
 
 
     // The first Show For User
-    public function index(Request $request, Cart $carts)
+    public function index(Request $request, Cart $carts, User $users)
     {
+
         if (Auth::check()) {
-            $user = $request->user();
-            $carts = $user->carts;
+            $users = $request->user();
+            $carts = $users->carts;
         } else {
             $carts = Session::get('cart') ?? [];
         }
+
+        $total = 0;
+
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $quantity = $cart->quantity;
+
+            //apply any quantity-based discounts or price breaks
+            $price = $product->flag ? $product->discount : $product->price;
+
+            if ($quantity >= 10) {
+                $price *= 0.9; // 10% discount for quantities of 10 or more
+            }
+            $total += $quantity * $price;
+        }
+        
+
+
         $categories = Category::all();
+
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
         })->when($request->categoryName, function ($q) use ($request) {
@@ -34,6 +55,8 @@ class FrontController extends Controller
             'products' => $products,
             'categories' => $categories,
             'carts' => $carts,
+            'users' => $users,
+            'total' => $total
         ]);
     }
 
@@ -78,12 +101,13 @@ class FrontController extends Controller
         return response()->view('ase.components.product-search', compact('products'));
     }
 
+
     // quickView
-    public function quickView(Product $products)
+    public function quickView(Product $product)
     {
         $categories = Category::all();
         return response()->view('ase.components.quick-view-product', [
-            'products' => $products,
+            'products' => $product,
             'categories' => $categories,
 
         ]);

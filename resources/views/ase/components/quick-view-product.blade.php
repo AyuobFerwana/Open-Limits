@@ -1,21 +1,21 @@
-{{-- @foreach ($products as $product ) --}}
 
 <div class="single-product-thumb">
     <div class="row">
+        {{--  @foreach ($products as $product )  --}}
         <div class="col-lg-7 mb--40">
             <div class="row">
                 <div class="col-lg-10 order-lg-2">
                     <div
                         class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                         <div class="thumbnail">
-                            <img src="{{Storage::url('$products->image') }}" alt="Product Images">
+                            <img src="{{Storage::url($products->image) }}" alt="Product Images">
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-2 order-lg-1">
                     <div class="product-small-thumb small-thumb-wrapper">
                         <div class="small-thumb-img">
-                            <img src="{{ Storage::url('$products->image') }}" alt="thumb image">
+                            <img src="{{ Storage::url($products->image) }}" alt="thumb image">
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,6 @@
                 </div>
             </div>
         </div>
+        {{--  @endforeach  --}}
     </div>
 </div>
-
-{{-- @endforeach --}}

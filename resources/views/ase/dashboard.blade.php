@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="{{ asset('ase/assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}" />
 
     <link rel="stylesheet" href="{{ asset('ase/assets/vendor/libs/apex-charts/apex-charts.css') }}" />
-    <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">      
+    <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
 
     @yield('style')
 
@@ -175,7 +175,7 @@
                     {{-- puschases --}}
 
                     <li class="menu-header small text-uppercase"><span class="menu-header-text"> All Customer
-                          Needs</span></li>
+                            Needs</span></li>
 
                     <li class="menu-item">
                         <a href="{{ route('purchase.index') }}" class="menu-link">
@@ -227,31 +227,25 @@
                     </div>
 
                     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
-                        <!-- Search -->
-                        <div class="navbar-nav align-items-center">
-                            <div class="nav-item d-flex align-items-center">
-                                <i class="bx bx-search fs-4 lh-0"></i>
-                                <input type="text" class="form-control border-0 shadow-none" placeholder="Search..."
-                                    aria-label="Search..." />
-                            </div>
-                        </div>
-                        <!-- /Search -->
-
-                        <div class="widget widget-lg"><a class="btn" href="https://github.com/themeselection/sneat-html-admin-template-free" 
-                            rel="noopener" target="_blank" aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">
-                            <svg viewBox="0 0 16 16" width="16" height="16" class="octicon octicon-star" aria-hidden="true">
-                                <path d="M8 .25a.75.75 0 0 1 .673.418l1.882 3.815 4.21.612a.75.75 0 0 1 .416 1.279l-3.046 2.97.719 4.192a.751.751 0 0 1-1.088.791L8 12.347l-3.766 1.98a.75.75 0 0 1-1.088-.79l.72-4.194L.818 6.374a.75.75 0 0 1 .416-1.28l4.21-.611L7.327.668A.75.75 0 0 1 8 .25Zm0 2.445L6.615 5.5a.75.75 0 0 1-.564.41l-3.097.45 2.24 2.184a.75.75 0 0 1 .216.664l-.528 3.084 2.769-1.456a.75.75 0 0 1 .698 0l2.77 1.456-.53-3.084a.75.75 0 0 1 .216-.664l2.24-2.183-3.096-.45a.75.75 0 0 1-.564-.41L8 2.694Z">
-                                    </path></svg>&nbsp;<span>Star</span></a><a class="social-count" href="https://github.com/themeselection/sneat-bootstrap-html-admin-template-free/stargazers"
-                                     rel="noopener" target="_blank" aria-label="526 stargazers on GitHub">526</a></div>
-
                         <ul class="navbar-nav flex-row align-items-center ms-auto">
                             <!-- Place this tag where you want the button to render. -->
-                            {{--  <li class="nav-item lh-1 me-3">
+                            @if (auth()->user()->role == 'admin')
+
+                            <li class="nav-item lh-1 me-3">
+                                <span>Users</span></a>
+                                <a class="social-count" style="color: #2B90FA" target="_blank"> ( {{
+                                    auth()->user()->count() }} )
+                            </li>
+                            @endif
+
+
+                            {{-- <li class="nav-item lh-1 me-3">
                                 <a class="github-button"
                                     href="https://github.com/themeselection/sneat-html-admin-template-free"
                                     data-icon="octicon-star" data-size="large" data-show-count="true"
                                     aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
-                            </li>  --}}
+                            </li> --}}
+
 
                             <!-- User -->
                             <li class="nav-item navbar-dropdown dropdown-user dropdown">

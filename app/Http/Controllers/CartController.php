@@ -68,7 +68,7 @@ class CartController extends Controller
             }
             Session::put('cart', $carts);
             return response()->json([
-                'message' => 'Product added to cart successfully!',
+                'message' => '!Added to Cart Successfully',
                 'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
                 'cartCount' => count($carts),
             ], Response::HTTP_CREATED);

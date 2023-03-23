@@ -160,7 +160,7 @@ class UserController extends Controller
 
             $isSaved = $users->save();
             return response()->json([
-                'message' => $isSaved ? 'Update User Successfully' : 'Update User Failed'
+                'message' => $isSaved ? 'Update User Account Successfully' : 'Update User Account Failed'
             ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
         } else {
             return response()->json([

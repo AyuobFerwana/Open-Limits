@@ -118,8 +118,6 @@
             formData.append('color', document.getElementById('color').value);
              formData.append('quantity', document.getElementById('quantity').value);
 
-         //   formData.append('quantity', getQuantity());
-
             // {{--  Flag  --}}
             const radioButtons = document.querySelectorAll('input[type="radio"]');
             let selectedValue;
@@ -147,37 +145,6 @@
                for (let i = 1; i <= sizes; i++) {
                    formData.append('size_' + i, document.getElementById('size_' + i).value);
                }
-
-            // {{--  Quantity  --}}
-       /*     {{--  let products = [{
-                id: 1,
-                name: 'Product 1',
-                quantity: 10
-            }, {
-                id: 2,
-                name: 'Product 2',
-                quantity: 20
-            }, {
-                id: 3,
-                name: 'Product 3',
-                quantity: 30
-            }];
-
-            function getQuantity() {
-                let input = document.getElementById('quantity');
-                let decrementProductQuantity = (productId, quantity) => {
-                    let Product = products.find(Product => Product.id === productId);
-                    Product.quantity -= quantity;
-                };
-
-                let order = {
-                    quantity: 5
-                };
-
-                decrementProductQuantity(1, order.quantity);
-                console.log(products[0].quantity);
-            }  --}}*/
-
 
             // {{--  axios  --}}
             axios.post('{{ route('products.store') }}', formData)

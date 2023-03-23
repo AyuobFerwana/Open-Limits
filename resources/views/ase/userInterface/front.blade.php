@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
     <style>
         .toast-message {
-            font-size: 16px !important;
+            font-size: 14px !important;
         }
     </style>
 
@@ -190,37 +190,11 @@
                                 <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="400"
                                     data-sal-duration="800">
                                     <span class="subtitle"><i class="fas fa-fire"></i> Hot Deal In This Week</span>
-                                    <h1 class="title">Roco Wireless Headphone</h1>
+                                    <h1 class="title">We have everything you need</h1>
                                     <div class="slide-action">
                                         <div class="shop-btn">
-                                            <a href="shop.html" class="axil-btn btn-bg-white"><i
+                                            <a href="{{ route('front.sidebar') }}" class="axil-btn btn-bg-white"><i
                                                     class="fal fa-shopping-cart"></i>Shop Now</a>
-                                        </div>
-                                        <div class="item-rating">
-                                            <div class="thumb">
-                                                <ul>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author2.png') }}"
-                                                            alt="Author"></li>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author3.png') }}"
-                                                            alt="Author"></li>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author1.png') }}"
-                                                            alt="Author"></li>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author4.png') }}"
-                                                            alt="Author"></li>
-                                                </ul>
-                                            </div>
-                                            <div class="content">
-                                                <span class="rating-icon">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                </span>
-                                                <span class="review-text">
-                                                    <span>100+</span> Reviews
-                                                </span>
-                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -232,32 +206,6 @@
                                             <a href="shop.html" class="axil-btn btn-bg-white"><i
                                                     class="fal fa-shopping-cart"></i>Shop Now</a>
                                         </div>
-                                        <div class="item-rating">
-                                            <div class="thumb">
-                                                <ul>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author1.png') }}"
-                                                            alt="Author"></li>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author2.png') }}"
-                                                            alt="Author"></li>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author3.png') }}"
-                                                            alt="Author"></li>
-                                                    <li><img src="{{ asset('fas/assets/images/others/author4.png') }}"
-                                                            alt="Author"></li>
-                                                </ul>
-                                            </div>
-                                            <div class="content">
-                                                <span class="rating-icon">
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fas fa-star"></i>
-                                                    <i class="fal fa-star"></i>
-                                                </span>
-                                                <span class="review-text">
-                                                    <span>100+</span> Reviews
-                                                </span>
-                                            </div>
-                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -267,7 +215,7 @@
                     <div class="col-lg-7 col-sm-6">
                         <div class="main-slider-large-thumb">
                             <div class="slider-thumb-activation-one axil-slick-dots">
-                                @foreach ($products as $product)
+                                @foreach ($products->take(3) as $product)
                                 <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
                                     data-sal-duration="1500">
                                     <img src="{{ Storage::url($product->image) }}" alt="Product">
@@ -661,7 +609,7 @@
             <div class="card-body">
                 <div class="search-result-header">
                     <h6 class="title"> Result Found {{ $products->count() }}</h6>
-                    <a href="shop.html" class="view-all">View All</a>
+                    <a href="{{ route('front.sidebar') }}" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
 
@@ -694,7 +642,7 @@
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
                                 $cart->product->price : $cart->product->discount}}</div>
-                            <div class="pro-qty item-quantity">
+                            <div class="pro-qty item-quantity" >
                                 <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
                             </div>
                         </div>
@@ -705,7 +653,7 @@
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    {{-- <span class="subtotal-amount">${{Cart::total()}}</span> --}}
+                    <span class="subtotal-amount">${{ $total }}</span>
 
                 </h3>
                 <div class="group-btn">
@@ -778,15 +726,15 @@
                 });
         }
 
-        function quickView(d){
-            axios.get(`/product/quickView?d=${d.value}`)
-            .then(function(response) {
-                console.log(response);
-                document.getElementById('quickViewProduct').innerHTML = response.data;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+        function quickView(d) {
+            axios.get(`/product/quickView/${d}`)
+                .then(function(response) {
+                    console.log(response);
+                    document.getElementById('quickViewProduct').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
 
 
@@ -805,6 +753,7 @@
                 toastr.success(error.response.data.message);
             })
         }
+
     </script>
 
 
@@ -820,7 +769,6 @@
             })
         }
     </script>
-
 
 </body>
 

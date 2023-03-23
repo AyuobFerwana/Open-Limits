@@ -53,7 +53,7 @@ class ProductController extends Controller
             'discount' => 'required|numeric|min:0',
             'flag' => 'required|string|in:price,discount',
             'quantity' => 'required|integer|min:0',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:50000',
             'colors' => 'required|integer',
 
         ]);
@@ -68,14 +68,6 @@ class ProductController extends Controller
 
             $products->flag = $request->input('flag') == 'discount';
 
-            // quantity
-            /*     $products = Product::find($productId);
-            $products->decrement('quantity', $quantity);
-            $products->quantity = $quantity;
-            $products->decrementProductQuantity($productId, $quantity);*/
-
-
-
             // image
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
@@ -83,6 +75,7 @@ class ProductController extends Controller
                 $image = $file->storePubliclyAs('products', $imageName, ['disk' => 'public']);
                 $products->image = $image;
             }
+            
             // color
             $colors = [$request->input('color')];
             for ($i = 1; $i <= $request->input('colors'); $i++) {
@@ -141,7 +134,7 @@ class ProductController extends Controller
     public function update(Request $request, Product $product)
     {
         $validator = Validator($request->all(), [
-            'categoryName' => 'required|string|min:3',
+            'categoryName' => 'required|string',
             'color' => ['required', new Hex],
             'colors' => 'required|integer',
             'size' => 'required|string',
@@ -151,10 +144,9 @@ class ProductController extends Controller
             'price' => 'required|numeric|min:0',
             'discount' => 'required|numeric|min:0',
             'flag' => 'required|string|in:price,discount',
-            'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
+            'image' => 'required|image|mimes:png,jpg,jpeg|max:50000',
         ]);
         if (!$validator->fails()) {
-            $product = new Product();
             $product->category_id = $request->input('categoryName');
             $product->productName = $request->input('productName');
             $product->discreption = $request->input('discreption');
@@ -185,13 +177,6 @@ class ProductController extends Controller
                 array_push($sizes, $request->input('size_' . $i));
             }
             $product->size = $sizes;
-
-            // quantity
-            // $product = Product::find($productId);
-            // $product->decrement('quantity', $quantity);
-            // $product->quantity = $quantity;
-            // $product->decrementProductQuantity($productId, $quantity);
-
             $isSaved = $product->save();
             return response()->json([
                 'message' => $isSaved ? 'Update Product Successfully' : 'Update Product Failed'

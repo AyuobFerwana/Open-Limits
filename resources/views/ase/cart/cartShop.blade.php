@@ -89,7 +89,7 @@
             <div class="container">
                 <div class="header-navbar">
                     <div class="header-brand">
-                        <a href="index.html" class="logo logo-dark">
+                        <a href="{{route('front.index')}}" class="logo logo-dark">
                             <img src="{{asset('fas/assets/images/logo/logo2.png')}}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">

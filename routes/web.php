@@ -33,7 +33,7 @@ Route::middleware('auth')->group(function () {
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
 Route::get('/product/search', [FrontController::class, 'productSearch']);
-Route::get('/product/quickView', [FrontController::class, 'quickView'])->name('front.quickView');
+Route::get('/product/quickView/{product}', [FrontController::class, 'quickView'])->name('front.quickView');
 
 Route::get('/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
 
