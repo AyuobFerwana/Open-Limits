@@ -9,30 +9,28 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('fas/assets/images/favicon.png')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{ asset('fas/assets/images/favicon.png') }}">
 
     <!-- CSS
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/bootstrap.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/font-awesome.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/flaticon/flaticon.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/slick-theme.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/jquery-ui.min.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/sal.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/magnific-popup.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/vendor/base.css')}}">
-    <link rel="stylesheet" href="{{asset('fas/assets/css/style.min.css')}}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/flaticon/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/sal.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/style.min.css') }}">
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
 
     <style>
         .toast-message {
             font-size: 16px !important;
         }
-
-        
     </style>
 </head>
 
@@ -75,12 +73,11 @@
                     </div>
                     <div class="col-lg-6 col-sm-6 col-12">
                         @if (auth()->guest())
-
-                        <div class="header-top-link">
-                            <ul class="quick-link">
-                                <li><a href="{{route('login')}}">Sign In</a></li>
-                            </ul>
-                        </div>
+                            <div class="header-top-link">
+                                <ul class="quick-link">
+                                    <li><a href="{{ route('login') }}">Sign In</a></li>
+                                </ul>
+                            </div>
                         @endif
                     </div>
                 </div>
@@ -92,11 +89,11 @@
             <div class="container">
                 <div class="header-navbar">
                     <div class="header-brand">
-                        <a href="{{route('front.index')}}" class="logo logo-dark">
-                            <img src="{{asset('fas/assets/images/logo/logo2.png')}}" alt="Site Logo">
+                        <a href="{{ route('front.index') }}" class="logo logo-dark">
+                            <img src="{{ asset('fas/assets/images/logo/logo2.png') }}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
-                            <img src="{{asset('fas/assets/images/logo/logo-light.png')}}" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo-light.png') }}" alt="Site Logo">
                         </a>
                     </div>
                     <div class="header-main-nav">
@@ -105,15 +102,15 @@
                             <button class="mobile-close-btn mobile-nav-toggler"><i class="fas fa-times"></i></button>
                             <div class="mobile-nav-brand">
                                 <a href="index.html" class="logo">
-                                    <img src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Site Logo">
+                                    <img src="{{ asset('fas/assets/images/logo/logo.png') }}" alt="Site Logo">
                                 </a>
                             </div>
                             <ul class="mainmenu">
-                                <li><a href="{{route('front.index')}}">Home</a></li>
+                                <li><a href="{{ route('front.index') }}">Home</a></li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Shop</a>
                                     <ul class="axil-submenu">
-                                        <li><a href="{{route('front.sidebar')}}">Shop With Sidebar</a></li>
+                                        <li><a href="{{ route('front.sidebar') }}">Shop With Sidebar</a></li>
                                     </ul>
                                 </li>
                             </ul>
@@ -124,8 +121,8 @@
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
                                 <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128" placeholder=" ? What are you looking for"
-                                    autocomplete="off">
+                                    id="search2" value="" maxlength="128"
+                                    placeholder=" ? What are you looking for" autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -142,7 +139,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count" id="carts-count">{{count($carts)}}</span>
+                                    <span class="cart-count" id="carts-count">{{ count($carts) }}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -154,14 +151,14 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="{{route('home')}}">My Account</a>
+                                            <a href="{{ route('home') }}">My Account</a>
                                         </li>
                                     </ul>
                                     @if (auth()->guest())
-
-                                    <a href="{{route('login')}}" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="{{route('register')}}"
-                                            class="btn-link">REGISTER HERE.</a></div>
+                                        <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
+                                        <div class="reg-footer text-center">No account yet? <a
+                                                href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
+                                        </div>
                                     @endif
                                 </div>
                             </li>
@@ -207,7 +204,7 @@
                     <div class="col-lg-6 col-md-8">
                         <div class="inner">
                             <ul class="axil-breadcrumb">
-                                <li class="axil-breadcrumb-item"><a href="{{route('front.index')}}">Home</a></li>
+                                <li class="axil-breadcrumb-item"><a href="{{ route('front.index') }}">Home</a></li>
                                 <li class="separator"></li>
                                 <li class="axil-breadcrumb-item active" aria-current="page">All Products</li>
                             </ul>
@@ -217,7 +214,7 @@
                     <div class="col-lg-6 col-md-4">
                         <div class="inner">
                             <div class="bradcrumb-thumb">
-                                <img src="{{asset('fas/assets/images/product/product-45.png')}}" alt="Image">
+                                <img src="{{ asset('fas/assets/images/product/product-45.png') }}" alt="Image">
                             </div>
                         </div>
                     </div>
@@ -237,18 +234,19 @@
                             </div>
                             <div class="toggle-list product-categories active">
                                 <h6 class="title">CATEGORIES</h6>
-                                @foreach($categories as $categorie)
-                                <div class="shop-submenu">
-                                    <ul>
-                                        <li class="{{request()->category == $categorie->id ? 'current-cat' : '' }}">
-                                            <a
-                                                href="{{route('front.sidebar', ['category' =>$categorie->id])}}">{{$categorie->categoryName}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
+                                @foreach ($categories as $categorie)
+                                    <div class="shop-submenu">
+                                        <ul>
+                                            <li
+                                                class="{{ request()->category == $categorie->id ? 'current-cat' : '' }}">
+                                                <a
+                                                    href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">{{ $categorie->categoryName }}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
                                 @endforeach
                             </div>
-                            <a href="{{route('front.sidebar')}}" class="axil-btn btn-bg-primary">All Reset</a>
+                            <a href="{{ route('front.sidebar') }}" class="axil-btn btn-bg-primary">All Reset</a>
                         </div>
                         <!-- End .axil-shop-sidebar -->
                     </div>
@@ -259,8 +257,10 @@
                                     <div
                                         class="category-select align-items-center justify-content-lg-end justify-content-between">
                                         <!-- Start Single Select  -->
-                                        <span class="filter-results">Showing (<span style="color: #3577F0; font-size:19px;">{{$products->count()}}</span>) results</span>
-                                        
+                                        <span class="filter-results">Showing (<span
+                                                style="color: #3577F0; font-size:19px;">{{ $products->count() }}</span>)
+                                            results</span>
+
                                         <select class="single-select" onchange="sortData(this)" id="sort">
                                             <option value="latest">Sort by Latest</option>
                                             <option value="price-low">Sort by Price : Low</option>
@@ -274,47 +274,48 @@
                         <!-- End .row -->
                         <div class="row row--15">
                             @foreach ($products as $product)
-                            <div class="col-xl-4 col-sm-6">
-                                <div class="axil-product product-style-one mb--30">
-                                    <div class="thumbnail">
-                                        <a href="{{route('front.productItem', $product->id)}}">
-                                            <img style="height: 300px ; width: 300px;"
-                                                src="{{Storage::url($product->image)}}" alt="Product Images">
-                                        </a>
-                                        <div class="product-hover-action">
-                                            <ul class="cart-action">
-                                                <li class="wishlist"><a href="#"><i
-                                                            class="far fa-heart"></i></a></li>
-                                                <li class="select-option"><a
-                                                        onclick="addProductToCart({{$product->id}})">Add to Cart</a></li>
-                                                <li class="quickview"><a href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view-modal"><i
-                                                            class="far fa-eye"></i></a></li>
-                                            </ul>
+                                <div class="col-xl-4 col-sm-6">
+                                    <div class="axil-product product-style-one mb--30">
+                                        <div class="thumbnail">
+                                            <a href="{{ route('front.productItem', $product->id) }}">
+                                                <img style="height: 300px ; width: 300px;"
+                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                            </a>
+                                            <div class="product-hover-action">
+                                                <ul class="cart-action">
+                                                    <li class="wishlist"><a href="#"><i
+                                                                class="far fa-heart"></i></a></li>
+                                                    <li class="select-option"><a
+                                                            onclick="addProductToCart({{ $product->id }})">Add to
+                                                            Cart</a></li>
+                                                    <li class="quickview"><a href="#" data-bs-toggle="modal"
+                                                            data-bs-target="#quick-view-modal"><i
+                                                                class="far fa-eye"></i></a></li>
+                                                </ul>
+                                            </div>
                                         </div>
-                                    </div>
-                                    <div class="product-content">
-                                        <div class="inner">
-                                            <h5 class="title">{{$product->category->categoryName}}</h5>
-                                            <h5><a
-                                                    href="{{ route('front.productItem', $product->id) }}">{{$product->productName}}</a>
-                                            </h5>
-                                            @if ($product->flag)
-
-                                            <div class="product-price-variant">
-                                                <span class="price current-price">${{$product->discount}}</span>
-                                                <span class="price old-price">${{$product->price}}</span>
+                                        <div class="product-content">
+                                            <div class="inner">
+                                                <h5 class="title">{{ $product->category->categoryName }}</h5>
+                                                <h5><a
+                                                        href="{{ route('front.productItem', $product->id) }}">{{ $product->productName }}</a>
+                                                </h5>
+                                                @if ($product->flag)
+                                                    <div class="product-price-variant">
+                                                        <span
+                                                            class="price current-price">${{ $product->discount }}</span>
+                                                        <span class="price old-price">${{ $product->price }}</span>
+                                                    </div>
+                                                @else
+                                                    <div class="product-price-variant">
+                                                        <span
+                                                            class="price current-price">${{ $product->price }}</span>
+                                                    </div>
+                                                @endif
                                             </div>
-                                            @else
-                                            <div class="product-price-variant">
-                                                <span class="price current-price">${{$product->price}}</span>
-                                            </div>
-                                            @endif
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-
                             @endforeach
 
                         </div>
@@ -354,7 +355,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service1.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service1.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Fast &amp; Secure Delivery</h6>
@@ -365,7 +366,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service2.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service2.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Money Back Guarantee</h6>
@@ -376,7 +377,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service3.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service3.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">24 Hour Return Policy</h6>
@@ -387,7 +388,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="{{asset('fas/assets/images/icons/service4.png')}}" alt="Service">
+                            <img src="{{ asset('fas/assets/images/icons/service4.png') }}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Pro Quality Support</h6>
@@ -410,7 +411,7 @@
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
                             <a href="index.html">
-                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
+                                <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo.png') }}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">
@@ -469,15 +470,15 @@
                                 <span>Save $3 With App & New User only</span>
                                 <div class="download-btn-group">
                                     <div class="qr-code">
-                                        <img src="{{asset('fas/assets/images/others/qr.png')}}" alt="Axilthemes">
+                                        <img src="{{ asset('fas/assets/images/others/qr.png') }}" alt="Axilthemes">
                                     </div>
                                     <div class="app-link">
                                         <a href="#">
-                                            <img src="{{asset('fas/assets/images/others/app-store.png')}}"
+                                            <img src="{{ asset('fas/assets/images/others/app-store.png') }}"
                                                 alt="App Store">
                                         </a>
                                         <a href="#">
-                                            <img src="{{asset('fas/assets/images/others/play-store.png')}}"
+                                            <img src="{{ asset('fas/assets/images/others/play-store.png') }}"
                                                 alt="Play Store">
                                         </a>
                                     </div>
@@ -516,11 +517,14 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-1.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
+                                        alt="paypal cart">
                                 </li>
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-2.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
+                                        alt="paypal cart">
                                 </li>
-                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-5.png')}}" alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
+                                        alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -549,20 +553,20 @@
                                         <div
                                             class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-01.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="{{asset('fas/assets/images/product/product-big-01.png')}}"
+                                                    <a href="{{ asset('fas/assets/images/product/product-big-01.png') }}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-02.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-02.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
@@ -575,7 +579,7 @@
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="{{asset('fas/assets/images/product/product-big-03.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-big-03.png') }}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
@@ -592,15 +596,15 @@
                                     <div class="col-lg-2 order-lg-1">
                                         <div class="product-small-thumb small-thumb-wrapper">
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-08.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-08.png') }}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-07.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-07.png') }}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-09.png')}}"
+                                                <img src="{{ asset('fas/assets/images/product/product-thumb/thumb-09.png') }}"
                                                     alt="thumb image">
                                             </div>
                                         </div>
@@ -612,7 +616,7 @@
                                     <div class="inner">
                                         <div class="product-rating">
                                             <div class="star-rating">
-                                                <img src="{{asset('fas/assets/images/icons/rate.png')}}"
+                                                <img src="{{ asset('fas/assets/images/icons/rate.png') }}"
                                                     alt="Rate Images">
                                             </div>
                                             <div class="review-link">
@@ -709,7 +713,7 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title"> Result Found {{$products->count()}}</h6>
+                    <h6 class="title"> Result Found {{ $products->count() }}</h6>
                     <a href="shop.html" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
@@ -730,24 +734,31 @@
 
             <div class="cart-body">
                 <ul class="cart-item-list" id="cart-list-container">
-                    @foreach ($carts as $cart )
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="{{route('front.productItem', $cart->product_id)}}"><img src="{{Storage::url($cart->product->image)}}"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
-                                class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <h3 class="item-title"><a href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
-                            </h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
-                                'price' ? $cart->product->price : $cart->product->discount}}</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                    @foreach ($carts as $cart)
+                        <li class="cart-item">
+                            <div class="item-img">
+                                <a href="{{ route('front.productItem', $cart->product_id) }}"><img
+                                        src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
+                                <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i
+                                        class="fas fa-times"></i></button>
                             </div>
-                        </div>
-                    </li>
+                            <div class="item-content">
+                                <h3 class="item-title"><a
+                                        href="{{ route('front.productItem', $cart->product_id) }}">{{ $cart->product->productName }}</a>
+                                </h3>
+                                <div class="item-price"><span
+                                        class="currency-symbol">$</span>{{ $cart->product->flag == 'price' ? $cart->product->price : $cart->product->discount }}
+                                </div>
+                                <div class="pro-qty item-quantity">
+                                    <span class="dec qtybtn"
+                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                    <input type="number" class="quantity-input"
+                                        id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}">
+                                    <span class="inc qtybtn"
+                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                                </div>
+                            </div>
+                        </li>
                     @endforeach
                 </ul>
             </div>
@@ -758,7 +769,7 @@
                         $cart->product->price : $cart->product->discount)}}</span> --}}
                 </h3>
                 <div class="group-btn">
-                    <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
+                    <a href="{{ route('cart') }}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
                     <a href="#" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
@@ -768,23 +779,23 @@
     <!-- JS
 ============================================ -->
     <!-- Modernizer JS -->
-    <script src="{{asset('fas/assets/js/vendor/modernizr.min.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/modernizr.min.js') }}"></script>
     <!-- jQuery JS -->
-    <script src="{{asset('fas/assets/js/vendor/jquery.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="{{asset('fas/assets/js/vendor/popper.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/bootstrap.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/slick.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/js.cookie.js')}}"></script>
-    <!-- <script src="{{asset('fas/assets/js/vendor/jquery.style.switcher.js')}}"></script> -->
-    <script src="{{asset('fas/assets/js/vendor/jquery-ui.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery.countdown.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/sal.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/jquery.magnific-popup.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/isotope.pkgd.min.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/counterup.js')}}"></script>
-    <script src="{{asset('fas/assets/js/vendor/waypoints.min.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/popper.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/slick.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/js.cookie.js') }}"></script>
+    <!-- <script src="{{ asset('fas/assets/js/vendor/jquery.style.switcher.js') }}"></script> -->
+    <script src="{{ asset('fas/assets/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/sal.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/counterup.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/waypoints.min.js') }}"></script>
 
     <script src="{{ asset('js/toastr/toastr.min.js') }}"></script>
     <script src="{{ asset('js/axios.js') }}"></script>
@@ -792,20 +803,20 @@
     <script src="{{ asset('js/sweet.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="{{asset('fas/assets/js/rtl-main.js')}}"></script>
+    <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
 
     <script>
-        function productSearch(e){
+        function productSearch(e) {
             axios.get(`/product/search?q=${e.value}`)
-            .then(function(response) {
-                document.getElementById('searchContainer').innerHTML=response.data;
-            })
-            .catch(function(error) {
-                console.log(error);
-            });
+                .then(function(response) {
+                    document.getElementById('searchContainer').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
         }
 
-        
+
         function addProductToCart(id) {
             let url = `/cart/add/${id}`;
             let data = {
@@ -814,8 +825,23 @@
             axios.post(url, data).then((response) => {
                 console.log(response)
                 toastr.success(response.data.message);
-                document.getElementById('cart-list-container').innerHTML=response.data.cartList;
-                document.getElementById('carts-count').innerHTML=response.data.cartCount;
+                document.getElementById('cart-list-container').innerHTML = response.data.cartList;
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                $('.qtybtn').on('click', function() {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find('input').val();
+                    if ($button.hasClass('inc')) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 0) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 0;
+                        }
+                    }
+                    $button.parent().find('input').val(newVal);
+                });
 
 
             }).catch((error) => {
@@ -823,14 +849,11 @@
                 toastr.success(error.response.data.message);
             })
         }
-    </script>
-    <script>
-        function sortData(ref){
-            window.location.href="/products?sort="+ref.value;
-        }
-    </script>
 
-    <script>
+        function sortData(ref) {
+            window.location.href = "/products?sort=" + ref.value;
+        }
+
         function removeProduct(id, ref) {
             let url = `/cart/${id}`;
             axios.delete(url).then((response) => {
@@ -841,6 +864,23 @@
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })
+        }
+
+        function changeQuantity(id, type, ref) {
+            setTimeout(() => {
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
+            }, 1);
         }
     </script>
 

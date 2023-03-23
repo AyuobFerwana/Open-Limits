@@ -43,6 +43,9 @@ class CartController extends Controller
                 $cart->quantity = $request->input('quantity');
             }
             $isSaved = $cart->save();
+
+            $carts = Cart::where('user_id', $request->user()->id)->get();
+
             return response()->json([
                 'message' => $isSaved ? '!Added to Cart Successfully' : 'Failed to Add the Product, Please try Again.',
                 'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
@@ -102,6 +105,47 @@ class CartController extends Controller
             return response()->json([
                 'message' => 'Product Removed from cart successfully!',
                 'cartCount' => count($carts),
+            ], Response::HTTP_OK);
+        }
+    }
+
+    public function changeQuantity(Product $product, Request $request)
+    {
+        $validator = Validator($request->all(), [
+            'type' => 'required|string|in:dec,inc',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        if (Auth::check()) {
+            $cart = $request->user()->carts()->where('product_id', $product->id)->first();
+            if ($request->input('type') == 'dec') {
+                $cart->quantity--;
+            } else {
+                $cart->quantity++;
+            }
+            $isSaved = $cart->save();
+            return response()->json([
+                'message' => $isSaved ? 'saved' : 'faild',
+            ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+        } else {
+            $carts = Session::get('cart') ?? [];
+            foreach ($carts as $c) {
+                if ($c->product_id == $product->id) {
+                    if ($request->input('type') == 'dec') {
+                        $c->quantity--;
+                    } else {
+                        $c->quantity++;
+                    }
+                    break;
+                }
+            }
+            Session::put('cart', $carts);
+            return response()->json([
+                'message' => 'saved',
             ], Response::HTTP_OK);
         }
     }

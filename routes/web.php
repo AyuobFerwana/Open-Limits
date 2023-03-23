@@ -42,6 +42,7 @@ Route::get('/product-item/{products}', [FrontController::class, 'productItem'])-
 Route::get('/cart', [CartController::class, 'show'])->name('cart');
 Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
 Route::delete('/cart/{product}', [CartController::class, 'remove']);
+Route::put('/cart/{product}', [CartController::class, 'changeQuantity']);
 
 // CheckOut
 Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
