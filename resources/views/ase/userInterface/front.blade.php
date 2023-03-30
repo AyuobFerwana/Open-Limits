@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
     <style>
         .toast-message {
-            font-size: 14px !important;
+            font-size: 16px !important;
         }
     </style>
 
@@ -200,10 +200,10 @@
                                 </div>
                                 <div class="single-slide slick-slide">
                                     <span class="subtitle"><i class="fas fa-fire"></i> Hot Deal In This Week</span>
-                                    <h1 class="title">Smart Digital Watch</h1>
+                                    <h2 class="title">That making cool look easy feeling</h2>
                                     <div class="slide-action">
                                         <div class="shop-btn">
-                                            <a href="shop.html" class="axil-btn btn-bg-white"><i
+                                            <a href="{{ route('front.sidebar') }}" class="axil-btn btn-bg-white"><i
                                                     class="fal fa-shopping-cart"></i>Shop Now</a>
                                         </div>
                                     </div>
@@ -458,16 +458,14 @@
                             </a>
                         </div> -->
                             <div class="inner">
-                                <p>685 Market Street, <br>
-                                    Las Vegas, LA 95820, <br>
-                                    United States.
-                                </p>
+                                <p> <i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
+
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i>
-                                            example@domain.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01)
-                                            850-315-5862</a></li>
-                                    <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
+                                    <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i
+                                                class="fal fa-envelope-open"></i> &nbsp;
+                                           {{ $support->email }}</a></li>
+                                    <li><a href="tel:{{ $support->phone }}"> <i class="fal fa-phone-alt"></i> &nbsp;
+                                            {{ $support->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -479,11 +477,11 @@
                             <h5 class="widget-title">Account</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="sign-up.html">Login / Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="{{route('home')}}">My Account</a></li>
+                                    <li><a href="{{ route('login') }}">Login / Register</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -540,18 +538,23 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4">
                         <div class="social-share">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://discord.com"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
                         <div class="copyright-left d-flex flex-wrap justify-content-center">
                             <ul class="quick-link">
-                                <li>© 2022. All rights reserved by <a target="_blank"
-                                        href="https://axilthemes.com/">Axilthemes</a>.</li>
+                                <li> ©
+                                    <script>
+                                        document.write(new Date().getFullYear());
+                                    </script>
+                                    , made with ❤️ by
+                                    <a target="_blank" class="footer-link fw-bolder">Ayuob Ferwana</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -608,7 +611,9 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title"> Result Found {{ $products->count() }}</h6>
+                    <span class="filter-results">Result (<span style="color: #3577F0; font-size:19px;">{{
+                            $products->count() }}</span>)
+                        Found</span>
                     <a href="{{ route('front.sidebar') }}" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
@@ -641,9 +646,17 @@
                                     href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
-                                $cart->product->price : $cart->product->discount}}</div>
-                            <div class="pro-qty item-quantity" >
+                                $cart->product->price : $cart->product->discount}}
+                            </div>
+
+                            <div class="pro-qty item-quantity">
+
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
                                 <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+
                             </div>
                         </div>
                     </li>
@@ -715,6 +728,7 @@
     <script src="{{ asset('js/sweet.js') }}"></script>
 
     <script>
+        //Product Search
         function productSearch(e) {
             axios.get(`/product/search?q=${e.value}`)
                 .then(function(response) {
@@ -726,6 +740,7 @@
                 });
         }
 
+        //QuickView
         function quickView(d) {
             axios.get(`/product/quickView/${d}`)
                 .then(function(response) {
@@ -737,7 +752,7 @@
                 });
         }
 
-
+        // Add Product to Cart
         function addProductToCart(id) {
             let url = `/cart/add/${id}`;
             let data = {
@@ -748,16 +763,28 @@
                 toastr.success(response.data.message);
                 document.getElementById('cart-list-container').innerHTML = response.data.cartList;
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                $('.qtybtn').on('click', function() {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find('input').val();
+                    if ($button.hasClass('inc')) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 0) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 0;
+                        }
+                    }
+                    $button.parent().find('input').val(newVal);
+                });
             }).catch((error) => {
                 console.log(error.response)
                 toastr.success(error.response.data.message);
             })
         }
 
-    </script>
-
-
-    <script>
+        // Remove Product from Slide Cart
         function removeProduct(id, ref) {
             let url = `/cart/${id}`;
             axios.delete(url).then((response) => {
@@ -767,6 +794,24 @@
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })
+        }
+
+          //Change Quantity
+          function changeQuantity(id, type, ref) {
+            setTimeout(() => {
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
+            }, 1);
         }
     </script>
 

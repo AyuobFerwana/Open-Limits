@@ -4,6 +4,7 @@ use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\UserController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
@@ -45,7 +46,7 @@ Route::delete('/cart/{product}', [CartController::class, 'remove']);
 Route::put('/cart/{product}', [CartController::class, 'changeQuantity']);
 
 // CheckOut
-Route::get('/checkout', [CartController::class, 'checkout'])->name('checkout');
+Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
 
 
 // Authentication

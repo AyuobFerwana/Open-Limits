@@ -4,22 +4,40 @@ namespace App\Http\Controllers;
 
 use App\Models\Cart as Cart;
 use App\Models\Product;
+use App\Models\Support;
 // use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
+use SebastianBergmann\CodeCoverage\Report\Xml\Totals;
 use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
-    public function show(Request $request)
+    public function show(Request $request , Product $products)
     {
         if (Auth::check()) {
             $carts = $request->user()->carts;
         } else {
             $carts = Session::get('cart') ?? [];
         }
-        return response()->view('ase.cart.cartShop', compact('carts'));
+
+        $total = 0;
+
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $quantity = $cart->quantity;
+
+            //apply any quantity-based discounts or price breaks
+            $price = $product->flag ? $product->discount : $product->price;
+
+            if ($quantity >= 10) {
+                $price *= 0.9; // 10% discount for quantities of 10 or more
+            }
+            $total += $quantity * $price;
+        }
+        $support = Support::first();
+        return response()->view('ase.cart.cartShop', compact('carts' ,'products' , 'total' , 'support'));
     }
 
     public function add(Product $product, Request $request)
@@ -74,6 +92,7 @@ class CartController extends Controller
                 'message' => '!Added to Cart Successfully',
                 'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
                 'cartCount' => count($carts),
+               
             ], Response::HTTP_CREATED);
         }
     }

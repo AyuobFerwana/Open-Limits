@@ -84,7 +84,7 @@
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
                                 <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128" placeholder="What are you looking for?"
+                                    id="search2" value="" maxlength="128" placeholder="?What are you looking for"
                                     autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
@@ -102,7 +102,7 @@
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">{{count($carts)}}</span>
+                                    <span class="cart-count" id="carts-count">{{count($carts)}}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -185,12 +185,13 @@
                                     <h2 class="product-title">{{ $products->productName }}</h2>
                                     @if ($products->flag)
                                     <div class="product-price-variant">
-                                        <span class="price current-price">${{ $products->discount }}</span>
+                                        <h4><span class="price current-price">${{ $products->discount }}</span>
                                         <del><span class="price old-price">${{ $products->price }}</span></del>
+                                        </h4>
                                     </div>
                                     @else
                                     <div class="product-price-variant">
-                                        <span class="price current-price">${{ $products->price }}</span>
+                                        <h4> <span class="price current-price">${{ $products->price }}</span></h4>
                                     </div>
                                     @endif
 
@@ -252,7 +253,14 @@
                                     <!-- Start Product Action Wrapper  -->
                                     <div class="product-action-wrapper d-flex-center">
                                         <!-- Start Quentity Action  -->
-                                        <div class="pro-qty mr--20"><input type="text" id="quantity" value="1"></div>
+
+                                        {{-- <div class="pro-qty mr--20">
+                                            <span class="dec qtybtn"
+                                                onclick="changeQuantitys({{ $carts->product_id }}, 'dec', this)">-</span>
+                                            <input type="text" value="{{$carts->quantity}}">
+                                            <span class="inc qtybtn"
+                                                onclick="changeQuantitys({{ $carts->product_id }}, 'inc', this)">+</span>
+                                        </div> --}}
                                         <!-- End Quentity Action  -->
 
                                         <!-- Start Product Action  -->
@@ -389,16 +397,13 @@
                             </a>
                         </div> -->
                             <div class="inner">
-                                <p>685 Market Street, <br>
-                                    Las Vegas, LA 95820, <br>
-                                    United States.
-                                </p>
+                                <p><i class="far fa-map-marker-alt"></i>  &nbsp; {{ $support->address }}</p>
+                                
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i>
-                                            example@domain.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01)
-                                            850-315-5862</a></li>
-                                    <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
+                                    <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i class="fal fa-envelope-open"></i> &nbsp;
+                                        {{ $support->email }}</a></li>
+                                    <li><a href="tel:{{ $support->phone }}"> <i class="fal fa-phone-alt"></i> &nbsp;
+                                        {{ $support->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -410,11 +415,11 @@
                             <h5 class="widget-title">Account</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="sign-up.html">Login / Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="{{route('home')}}">My Account</a></li>
+                                    <li><a href="{{ route('login') }}">Login / Register</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -471,18 +476,23 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4">
                         <div class="social-share">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://discord.com"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
                         <div class="copyright-left d-flex flex-wrap justify-content-center">
                             <ul class="quick-link">
-                                <li>© 2022. All rights reserved by <a target="_blank"
-                                        href="https://axilthemes.com/">Axilthemes</a>.</li>
+                                <li>  ©
+                                    <script>
+                                      document.write(new Date().getFullYear());
+                                    </script>
+                                    , made with ❤️ by
+                                    <a target="_blank" class="footer-link fw-bolder">Ayuob Ferwana</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -684,8 +694,10 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title"> Result Found {{ $products->count() }}</h6>
-                    <a href="shop.html" class="view-all">View All</a>
+                    <span class="filter-results">Result (<span
+                        style="color: #3577F0; font-size:19px;">{{ $products->count() }}</span>)
+                        Found</span>
+                    <a href="{{ route('front.sidebar') }}" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
 
@@ -703,7 +715,7 @@
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
             <div class="cart-body">
-                <ul class="cart-item-list">
+                <ul class="cart-item-list" id="cart-list-container">
                     @foreach ($carts as $cart)
                     <li class="cart-item">
                         <div class="item-img">
@@ -719,7 +731,13 @@
                             <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
                                 'price' ? $cart->product->price : $cart->product->discount}}</div>
                             <div class="pro-qty item-quantity">
+
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
                                 <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+
                             </div>
                         </div>
                     </li>
@@ -730,8 +748,7 @@
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    {{-- <span class="subtotal-amount">${{$cart->quantity * ($cart->product->flag == 'price' ?
-                        $cart->product->price : $cart->product->discount)}}</span> --}}
+                    <span class="subtotal-amount" id="price_total">${{$total}}</span>
                 </h3>
                 <div class="group-btn">
                     <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
@@ -768,9 +785,11 @@
     <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
 
     <script>
+        //Product Search
         function productSearch(e) {
             axios.get(`/product/search?q=${e.value}`)
                 .then(function(response) {
+                    console.log(response);
                     document.getElementById('searchContainer').innerHTML = response.data;
                 })
                 .catch(function(error) {
@@ -778,31 +797,90 @@
                 });
         }
 
+        // Add Product to Cart
         function addProductToCart() {
             let url = '{{ route('cart.add', $products->id) }}';
             let data = {
-                quantity: document.getElementById('quantity').value
+                quantity: 1
             }
+
             axios.post(url, data).then((response) => {
                 console.log(response)
                 toastr.success(response.data.message);
+                document.getElementById('cart-list-container').innerHTML = response.data.cartList;
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('price_total').innerHTML = response.data.priceTotal;
+
+                $('.qtybtn').on('click', function() {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find('input').val();
+                    if ($button.hasClass('inc')) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 0) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 0;
+                        }
+                    }
+                    $button.parent().find('input').val(newVal);
+               
+                });
             }).catch((error) => {
                 console.log(error.response)
                 toastr.success(error.response.data.message);
             })
         }
-    </script>
-
-    <script>
+        
+        // Remove Product From Slide Cart
         function removeProduct(id, ref) {
             let url = `/cart/${id}`;
             axios.delete(url).then((response) => {
                 toastr.success(response.data.message);
-                ref.closest('tr').remove();
+                ref.closest('li').remove();
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })
         }
+
+          //Change Quantity
+          function changeQuantity(id, type, ref) {
+            setTimeout(() => {
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
+            }, 1);
+        }
+
+        {{--  function changeQuantitys(id, type, ref) {
+            setTimeout(() => {
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
+            }, 1);
+        }  --}}
+
+    
     </script>
 </body>
 

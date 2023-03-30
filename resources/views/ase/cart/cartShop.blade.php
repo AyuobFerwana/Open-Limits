@@ -123,7 +123,7 @@
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
                                 <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128" placeholder="What are you looking for?"
+                                    id="search2" value="" maxlength="128" placeholder="?What are you looking for"
                                     autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
@@ -248,17 +248,6 @@
                             </tbody>
                         </table>
                     </div>
-                    <div class="cart-update-btn-area">
-                        <div class="input-group product-cupon">
-                            <input placeholder="Enter coupon code" type="text">
-                            <div class="product-cupon-btn">
-                                <button type="submit" class="axil-btn btn-outline">Apply</button>
-                            </div>
-                        </div>
-                        <div class="update-btn">
-                            <a href="#" class="axil-btn btn-outline">Update Cart</a>
-                        </div>
-                    </div>
                     <div class="row">
                         <div class="col-xl-5 col-lg-7 offset-xl-7 offset-lg-5">
                             <div class="axil-order-summery mt--80">
@@ -268,37 +257,13 @@
                                         <tbody>
                                             <tr class="order-subtotal">
                                                 <td>Subtotal</td>
-                                                <td>$117.00</td>
-                                            </tr>
-                                            <tr class="order-shipping">
-                                                <td>Shipping</td>
-                                                <td>
-                                                    <div class="input-group">
-                                                        <input type="radio" id="radio1" name="shipping" checked>
-                                                        <label for="radio1">Free Shippping</label>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input type="radio" id="radio2" name="shipping">
-                                                        <label for="radio2">Local: $35.00</label>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input type="radio" id="radio3" name="shipping">
-                                                        <label for="radio3">Flat rate: $12.00</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                            <tr class="order-tax">
-                                                <td>State Tax</td>
-                                                <td>$8.00</td>
-                                            </tr>
-                                            <tr class="order-total">
-                                                <td>Total</td>
-                                                <td class="order-total-amount">$125.00</td>
+                                                <td>${{ $total }}</td>
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
-                                <a href="checkout.html" class="axil-btn btn-bg-primary checkout-btn">Process to
+                                <a href="{{ route('checkout') }}" class="axil-btn btn-bg-primary checkout-btn">Process
+                                    to
                                     Checkout</a>
                             </div>
                         </div>
@@ -372,21 +337,19 @@
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
-                            <a href="index.html">
+                            <a href="{{ route('home') }}">
                                 <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">
-                                <p>685 Market Street, <br>
-                                    Las Vegas, LA 95820, <br>
-                                    United States.
-                                </p>
+                                <p><i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
+
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i>
-                                            example@domain.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01)
-                                            850-315-5862</a></li>
-                                    <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
+                                    <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i
+                                                class="fal fa-envelope-open"></i> &nbsp;
+                                            {{ $support->email }}</a></li>
+                                    <li><a href="tel:{{ $support->phone }}"> <i class="fal fa-phone-alt"></i> &nbsp;
+                                            {{ $support->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -398,11 +361,11 @@
                             <h5 class="widget-title">Account</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="sign-up.html">Login / Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="{{route('home')}}">My Account</a></li>
+                                    <li><a href="{{ route('login') }}">Login / Register</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -459,18 +422,23 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4">
                         <div class="social-share">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://discord.com"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
                         <div class="copyright-left d-flex flex-wrap justify-content-center">
                             <ul class="quick-link">
-                                <li>© 2022. All rights reserved by <a target="_blank"
-                                        href="https://axilthemes.com/">Axilthemes</a>.</li>
+                                <li> ©
+                                    <script>
+                                        document.write(new Date().getFullYear());
+                                    </script>
+                                    , made with ❤️ by
+                                    <a target="_blank" class="footer-link fw-bolder">Ayuob Ferwana</a>
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -665,76 +633,21 @@
             <div class="card-header">
                 <form action="#">
                     <div class="input-group">
-                        <input type="search" class="form-control" name="prod-search" id="prod-search"
-                            placeholder="Write Something....">
+                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
+                            id="prod-search" placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title">24 Result Found</h6>
-                    <a href="shop.html" class="view-all">View All</a>
+                    <span class="filter-results">Result (<span style="color: #3577F0; font-size:19px;">{{
+                            $products->count() }}</span>)
+                        Found</span>
+                    <a href="{{ route('front.sidebar') }}" class="view-all">View All</a>
                 </div>
-                <div class="psearch-results">
-                    <div class="axil-product-list">
-                        <div class="thumbnail">
-                            <a href="single-product.html">
-                                <img src="{{asset('fas/assets/images/product/electric/product-09.png')}}"
-                                    alt="Yantiti Leather Bags">
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-rating">
-                                <span class="rating-icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fal fa-star"></i>
-                                </span>
-                                <span class="rating-number"><span>100+</span> Reviews</span>
-                            </div>
-                            <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
-                            <div class="product-price-variant">
-                                <span class="price current-price">$29.99</span>
-                                <span class="price old-price">$49.99</span>
-                            </div>
-                            <div class="product-cart">
-                                <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
-                                <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="axil-product-list">
-                        <div class="thumbnail">
-                            <a href="single-product.html">
-                                <img src="{{asset('fas/assets/images/product/electric/product-09.png')}}"
-                                    alt="Yantiti Leather Bags">
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-rating">
-                                <span class="rating-icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fal fa-star"></i>
-                                </span>
-                                <span class="rating-number"><span>100+</span> Reviews</span>
-                            </div>
-                            <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
-                            <div class="product-price-variant">
-                                <span class="price current-price">$29.99</span>
-                                <span class="price old-price">$49.99</span>
-                            </div>
-                            <div class="product-cart">
-                                <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
-                                <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="psearch-results" id="searchContainer">
+
                 </div>
             </div>
         </div>
@@ -766,8 +679,15 @@
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
                                 $cart->product->price : $cart->product->discount}}</div>
+
                             <div class="pro-qty item-quantity">
+
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
                                 <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+
                             </div>
                         </div>
                     </li>
@@ -777,7 +697,7 @@
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    {{-- <span class="subtotal-amount">${{Cart::total()}}</span> --}}
+                    <span class="subtotal-amount">${{ $total }}</span>
 
                 </h3>
                 <div class="group-btn">
@@ -845,6 +765,9 @@
                 toastr.success(error.response.data.message);
             })
         }
+
+        // Remove Product from Slide Cart
+
         function removeProduct(id, ref , type) {
             let url = `/cart/${id}`;
             axios.delete(url).then((response) => {
@@ -867,6 +790,17 @@
             })
         }
     
+          //QuickView
+          function quickView(d) {
+            axios.get(`/product/quickView/${d}`)
+                .then(function(response) {
+                    console.log(response);
+                    document.getElementById('quickViewProduct').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
     </script>
 </body>
 

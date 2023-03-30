@@ -9,22 +9,22 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/images/favicon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('fas/assets/images/favicon.png')}}">
 
     <!-- CSS
     ============================================ -->
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="assets/css/vendor/bootstrap.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/font-awesome.css">
-    <link rel="stylesheet" href="assets/css/vendor/flaticon/flaticon.css">
-    <link rel="stylesheet" href="assets/css/vendor/slick.css">
-    <link rel="stylesheet" href="assets/css/vendor/slick-theme.css">
-    <link rel="stylesheet" href="assets/css/vendor/jquery-ui.min.css">
-    <link rel="stylesheet" href="assets/css/vendor/sal.css">
-    <link rel="stylesheet" href="assets/css/vendor/magnific-popup.css">
-    <link rel="stylesheet" href="assets/css/vendor/base.css">
-    <link rel="stylesheet" href="assets/css/style.min.css">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/bootstrap.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/font-awesome.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/flaticon/flaticon.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/slick-theme.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/jquery-ui.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/sal.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/magnific-popup.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/vendor/base.css') }}">
+    <link rel="stylesheet" href="{{ asset('fas/assets/css/style.min.css') }}">
 
 </head>
 
@@ -260,7 +260,7 @@
                                                 class="fas fa-angle-down"></i></a>
                                     </div>
                                     <div class="axil-checkout-login toggle-open">
-                                        <p>If you didn't Logged in, Please Log in first.</p>
+                                        <p>If you didnt Logged in, Please Log in first.</p>
                                         <div class="signin-box">
                                             <div class="form-group">
                                                 <label>Email</label>
@@ -594,7 +594,7 @@
                             <div class="inner">
                                 <ul>
                                     <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="terms-of-service.html">Terms Of Use</a></li>
+                                    <li><a href="terms-of-service.html">Terms Of Us</a></li>
                                     <li><a href="#">FAQ</a></li>
                                     <li><a href="contact.html">Contact</a></li>
                                     <li><a href="contact.html">Contact</a></li>
@@ -760,7 +760,7 @@
                                         <ul class="product-meta">
                                             <li><i class="fal fa-check"></i>In stock</li>
                                             <li><i class="fal fa-check"></i>Free delivery available</li>
-                                            <li><i class="fal fa-check"></i>Sales 30% Off Use Code: MOTIVE30</li>
+                                            <li><i class="fal fa-check"></i>Sales 30% Off Us Code: MOTIVE30</li>
                                         </ul>
                                         <p class="description">In ornare lorem ut est dapibus, ut tincidunt nisi
                                             pretium. Integer ante est, elementum eget magna. Pellentesque sagittis
@@ -1012,25 +1012,25 @@
     <!-- JS
 ============================================ -->
     <!-- Modernizer JS -->
-    <script src="assets/js/vendor/modernizr.min.js"></script>
+    <script src="{{ asset('fas/assets/js/vendor/modernizr.min.js') }}"></script>
     <!-- jQuery JS -->
-    <script src="assets/js/vendor/jquery.js"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.js') }}"></script>
     <!-- Bootstrap JS -->
-    <script src="assets/js/vendor/popper.min.js"></script>
-    <script src="assets/js/vendor/bootstrap.min.js"></script>
-    <script src="assets/js/vendor/slick.min.js"></script>
-    <script src="assets/js/vendor/js.cookie.js"></script>
-    <script src="assets/js/vendor/jquery-ui.min.js"></script>
-    <script src="assets/js/vendor/jquery.countdown.min.js"></script>
-    <script src="assets/js/vendor/sal.js"></script>
-    <script src="assets/js/vendor/jquery.magnific-popup.min.js"></script>
-    <script src="assets/js/vendor/imagesloaded.pkgd.min.js"></script>
-    <script src="assets/js/vendor/isotope.pkgd.min.js"></script>
-    <script src="assets/js/vendor/counterup.js"></script>
-    <script src="assets/js/vendor/waypoints.min.js"></script>
+    <script src="{{ asset('fas/assets/js/vendor/popper.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/slick.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/js.cookie.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery-ui.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.countdown.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/sal.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/jquery.magnific-popup.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/imagesloaded.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/isotope.pkgd.min.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/counterup.js') }}"></script>
+    <script src="{{ asset('fas/assets/js/vendor/waypoints.min.js') }}"></script>
 
     <!-- Main JS -->
-    <script src="assets/js/main.js"></script>
+    <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
 
 </body>
 
