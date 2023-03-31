@@ -49,23 +49,28 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-        // Cart
+    // Cart
     public function carts()
     {
         return $this->hasMany(Cart::class)->with('product');
     }
 
-        // fULL name
+    // fULL name
     public function getFullNameAttribute()
     {
         return $this->UsersName;
     }
-        
-        // Image 
+
+    // Image 
     public function imageUrl(): Attribute
     {
         return Attribute::make(
             get: fn () => $this->image == null ? asset('ase/assets/img/avatars/blank-profile.png') : Storage::url($this->image)
         );
+    }
+
+    public function checkouts()
+    {
+        return $this->hasMany(Checkout::class);
     }
 }

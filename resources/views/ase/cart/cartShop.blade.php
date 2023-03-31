@@ -702,7 +702,7 @@
                 </h3>
                 <div class="group-btn">
                     <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="#" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a href="{{route('checkout')}}" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
         </div>

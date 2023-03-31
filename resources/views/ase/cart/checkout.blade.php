@@ -30,11 +30,6 @@
 
 
 <body class="sticky-header">
-    <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-<![endif]-->
-    <a href="#top" class="back-to-top" id="backto-top"><i class="fal fa-arrow-up"></i></a>
-    <!-- Start Header -->
     <header class="header axil-header header-style-5">
         <div class="axil-header-top">
             <div class="container">
@@ -49,7 +44,6 @@
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">English</a></li>
                                     <li><a class="dropdown-item" href="#">Arabic</a></li>
-                                    <li><a class="dropdown-item" href="#">Spanish</a></li>
                                 </ul>
                             </div>
                             <div class="dropdown">
@@ -59,21 +53,21 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">USD</a></li>
-                                    <li><a class="dropdown-item" href="#">AUD</a></li>
                                     <li><a class="dropdown-item" href="#">EUR</a></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
+                    @if (auth()->guest())
+
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-link">
                             <ul class="quick-link">
-                                <li><a href="#">Help</a></li>
-                                <li><a href="sign-up.html">Join Us</a></li>
-                                <li><a href="sign-in.html">Sign In</a></li>
+                                <li><a href="{{ route('login') }}">Sign In</a></li>
                             </ul>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -83,11 +77,11 @@
             <div class="container">
                 <div class="header-navbar">
                     <div class="header-brand">
-                        <a href="index.html" class="logo logo-dark">
-                            <img src="assets/images/logo/logo.png" alt="Site Logo">
+                        <a href="{{route('front.index')}}" class="logo logo-dark">
+                            <img src="{{ asset('fas/assets/images/logo/logo2.png') }}" alt="Site Logo">
                         </a>
                         <a href="index.html" class="logo logo-light">
-                            <img src="assets/images/logo/logo-light.png" alt="Site Logo">
+                            <img src="{{ asset('fas/assets/images/logo/logo-light.png') }}" alt="Site Logo">
                         </a>
                     </div>
                     <div class="header-main-nav">
@@ -96,66 +90,19 @@
                             <button class="mobile-close-btn mobile-nav-toggler"><i class="fas fa-times"></i></button>
                             <div class="mobile-nav-brand">
                                 <a href="index.html" class="logo">
-                                    <img src="assets/images/logo/logo.png" alt="Site Logo">
+                                    <img src="{{ asset('fas/assets/images/logo/logo.png') }}" alt="Site Logo">
                                 </a>
                             </div>
                             <ul class="mainmenu">
-                                <li class="menu-item-has-children">
-                                    <a href="#">Home</a>
-                                    <ul class="axil-submenu">
-                                        <li><a href="index-1.html">Home - Electronics</a></li>
-                                        <li><a href="index-2.html">Home - NFT</a></li>
-                                        <li><a href="index-3.html">Home - Fashion</a></li>
-                                        <li><a href="index-4.html">Home - Jewellery</a></li>
-                                        <li><a href="index-5.html">Home - Furniture</a></li>
-                                        <li><a href="index-6.html">Home - Multipurpose</a></li>
-                                    </ul>
+                                <li>
+                                    <a href="{{ route('front.index') }}">Home</a>
                                 </li>
                                 <li class="menu-item-has-children">
                                     <a href="#">Shop</a>
                                     <ul class="axil-submenu">
-                                        <li><a href="shop-sidebar.html">Shop With Sidebar</a></li>
-                                        <li><a href="shop.html">Shop no Sidebar</a></li>
-                                        <li><a href="single-product.html">Product Variation 1</a></li>
-                                        <li><a href="single-product-2.html">Product Variation 2</a></li>
-                                        <li><a href="single-product-3.html">Product Variation 3</a></li>
-                                        <li><a href="single-product-4.html">Product Variation 4</a></li>
-                                        <li><a href="single-product-5.html">Product Variation 5</a></li>
-                                        <li><a href="single-product-6.html">Product Variation 6</a></li>
-                                        <li><a href="single-product-7.html">Product Variation 7</a></li>
+                                        <li><a href="{{route('front.sidebar')}}">Shop With Sidebar</a></li>
                                     </ul>
                                 </li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Pages</a>
-                                    <ul class="axil-submenu">
-                                        <li><a href="wishlist.html">Wishlist</a></li>
-                                        <li><a href="cart.html">Cart</a></li>
-                                        <li><a href="checkout.html">Checkout</a></li>
-                                        <li><a href="my-account.html">Account</a></li>
-                                        <li><a href="sign-up.html">Sign Up</a></li>
-                                        <li><a href="sign-in.html">Sign In</a></li>
-                                        <li><a href="forgot-password.html">Forgot Password</a></li>
-                                        <li><a href="reset-password.html">Reset Password</a></li>
-                                        <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                        <li><a href="coming-soon.html">Coming Soon</a></li>
-                                        <li><a href="404.html">404 Error</a></li>
-                                        <li><a href="typography.html">Typography</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="about-us.html">About</a></li>
-                                <li class="menu-item-has-children">
-                                    <a href="#">Blog</a>
-                                    <ul class="axil-submenu">
-                                        <li><a href="blog.html">Blog List</a></li>
-                                        <li><a href="blog-grid.html">Blog Grid</a></li>
-                                        <li><a href="blog-details.html">Standard Post</a></li>
-                                        <li><a href="blog-gallery.html">Gallery Post</a></li>
-                                        <li><a href="blog-video.html">Video Post</a></li>
-                                        <li><a href="blog-audio.html">Audio Post</a></li>
-                                        <li><a href="blog-quote.html">Quote Post</a></li>
-                                    </ul>
-                                </li>
-                                <li><a href="contact.html">Contact</a></li>
                             </ul>
                         </nav>
                         <!-- End Mainmanu Nav -->
@@ -176,13 +123,13 @@
                                 </a>
                             </li>
                             <li class="wishlist">
-                                <a href="wishlist.html">
+                                <a href="#">
                                     <i class="flaticon-heart"></i>
                                 </a>
                             </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count">3</span>
+                                    <span class="cart-count" id="carts-count">{{ count($carts) }}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -194,21 +141,15 @@
                                     <span class="title">QUICKLINKS</span>
                                     <ul>
                                         <li>
-                                            <a href="my-account.html">My Account</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Initiate return</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Support</a>
-                                        </li>
-                                        <li>
-                                            <a href="#">Language</a>
+                                            <a href="{{route('home')}}">My Account</a>
                                         </li>
                                     </ul>
-                                    <a href="sign-in.html" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="sign-up.html"
+                                    @if (auth()->guest())
+
+                                    <a href="{{route('login')}}" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a href="{{route('register')}}"
                                             class="btn-link">REGISTER HERE.</a></div>
+                                    @endif
                                 </div>
                             </li>
                             <li class="axil-mobile-toggle">
@@ -229,12 +170,12 @@
                         <div class="header-campaign-activation axil-slick-arrow arrow-both-side header-campaign-arrow">
                             <div class="slick-slide">
                                 <div class="campaign-content">
-                                    <p>STUDENT NOW GET 10% OFF : <a href="#">GET OFFER</a></p>
+                                    <p>Shop NOW GET 10% OFF : <a href="#">GET OFFER</a></p>
                                 </div>
                             </div>
                             <div class="slick-slide">
                                 <div class="campaign-content">
-                                    <p>STUDENT NOW GET 10% OFF : <a href="#">GET OFFER</a></p>
+                                    <p>Shop NOW GET 10% OFF : <a href="#">GET OFFER</a></p>
                                 </div>
                             </div>
                         </div>
@@ -250,74 +191,34 @@
         <!-- Start Checkout Area  -->
         <div class="axil-checkout-area axil-section-gap">
             <div class="container">
-                <form action="#">
+                <form id="form" onsubmit="event.preventDefault(); preformLogin();">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="axil-checkout-notice">
                                 <div class="axil-toggle-box">
-                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer? <a
-                                            href="javascript:void(0)" class="toggle-btn">Click here to login <i
-                                                class="fas fa-angle-down"></i></a>
-                                    </div>
-                                    <div class="axil-checkout-login toggle-open">
-                                        <p>If you didnt Logged in, Please Log in first.</p>
-                                        <div class="signin-box">
-                                            <div class="form-group">
-                                                <label>Email</label>
-                                                <input type="email" class="form-control" name="email">
-                                            </div>
-                                            <div class="form-group">
-                                                <label>Password</label>
-                                                <input type="password" class="form-control" name="password">
-                                            </div>
-                                            <div class="form-group mb--0">
-                                                <button type="submit" class="axil-btn btn-bg-primary submit-btn">Sign
-                                                    In</button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="axil-toggle-box">
-                                    <div class="toggle-bar"><i class="fas fa-pencil"></i> Have a coupon? <a
-                                            href="javascript:void(0)" class="toggle-btn">Click here to enter your code
-                                            <i class="fas fa-angle-down"></i></a>
-                                    </div>
+                                    @if (auth()->guest())
 
-                                    <div class="axil-checkout-coupon toggle-open">
-                                        <p>If you have a coupon code, please apply it below.</p>
-                                        <div class="input-group">
-                                            <input placeholder="Enter coupon code" type="text">
-                                            <div class="apply-btn">
-                                                <button type="submit" class="axil-btn btn-bg-primary">Apply</button>
-                                            </div>
-                                        </div>
+                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a
+                                            href="{{route('login')}}" class="toggle-btn">Click here to login</a>
                                     </div>
+                                    @endif
                                 </div>
                             </div>
                             <div class="axil-checkout-billing">
                                 <h4 class="title mb--40">Billing details</h4>
                                 <div class="row">
-                                    <div class="col-lg-6">
+
+                                    <div class="col-lg-12">
                                         <div class="form-group">
-                                            <label>First Name <span>*</span></label>
-                                            <input type="text" id="first-name" placeholder="Adam">
+                                            <label>Full Name <span>*</span></label>
+                                            <input type="text" id="fullName" placeholder="">
                                         </div>
                                     </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            <label>Last Name <span>*</span></label>
-                                            <input type="text" id="last-name" placeholder="John">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Company Name</label>
-                                    <input type="text" id="company-name">
                                 </div>
                                 <div class="form-group">
                                     <label>Country/ Region <span>*</span></label>
                                     <select id="Region">
-                                        <option value="3">Australia</option>
+                                        <option value="3">Palestine</option>
                                         <option value="4">England</option>
                                         <option value="6">New Zealand</option>
                                         <option value="5">Switzerland</option>
@@ -327,18 +228,12 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Street Address <span>*</span></label>
-                                    <input type="text" id="address1" class="mb--15"
+                                    <input type="text" id="address" class="mb--15"
                                         placeholder="House number and street name">
-                                    <input type="text" id="address2"
-                                        placeholder="Apartment, suite, unit, etc. (optonal)">
                                 </div>
                                 <div class="form-group">
                                     <label>Town/ City <span>*</span></label>
                                     <input type="text" id="town">
-                                </div>
-                                <div class="form-group">
-                                    <label>Country</label>
-                                    <input type="text" id="country">
                                 </div>
                                 <div class="form-group">
                                     <label>Phone <span>*</span></label>
@@ -351,51 +246,6 @@
                                 <div class="form-group input-group">
                                     <input type="checkbox" id="checkbox1" name="account-create">
                                     <label for="checkbox1">Create an account</label>
-                                </div>
-                                <div class="form-group different-shippng">
-                                    <div class="toggle-bar">
-                                        <a href="javascript:void(0)" class="toggle-btn">
-                                            <input type="checkbox" id="checkbox2" name="diffrent-ship">
-                                            <label for="checkbox2">Ship to a different address?</label>
-                                        </a>
-                                    </div>
-                                    <div class="toggle-open">
-                                        <div class="form-group">
-                                            <label>Country/ Region <span>*</span></label>
-                                            <select id="Region">
-                                                <option value="3">Australia</option>
-                                                <option value="4">England</option>
-                                                <option value="6">New Zealand</option>
-                                                <option value="5">Switzerland</option>
-                                                <option value="1">United Kindom (UK)</option>
-                                                <option value="2">United States (USA)</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Street Address <span>*</span></label>
-                                            <input type="text" id="address1" class="mb--15"
-                                                placeholder="House number and street name">
-                                            <input type="text" id="address2"
-                                                placeholder="Apartment, suite, unit, etc. (optonal)">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Town/ City <span>*</span></label>
-                                            <input type="text" id="town">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Country</label>
-                                            <input type="text" id="country">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Phone <span>*</span></label>
-                                            <input type="tel" id="phone">
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="form-group">
-                                    <label>Other Notes (optional)</label>
-                                    <textarea id="notes" rows="2"
-                                        placeholder="Notes about your order, e.g. speacial notes for delivery."></textarea>
                                 </div>
                             </div>
                         </div>
@@ -411,41 +261,17 @@
                                             </tr>
                                         </thead>
                                         <tbody>
+                                            @foreach($carts as $product)
                                             <tr class="order-product">
-                                                <td>Commodo Blown Lamp <span class="quantity">x1</span></td>
-                                                <td>$117.00</td>
+                                                <td>{{ $product->name }}<span class="quantity">x{{ $product->quantity }}</span></td>
+                                                <td>${{$product->quantity * ($product->product->flag ==
+                                                    'price' ? $product->product->price : $product->product->discount)}}</td>
                                             </tr>
-                                            <tr class="order-product">
-                                                <td>Commodo Blown Lamp <span class="quantity">x1</span></td>
-                                                <td>$198.00</td>
-                                            </tr>
-                                            <tr class="order-subtotal">
-                                                <td>Subtotal</td>
-                                                <td>$117.00</td>
-                                            </tr>
-                                            <tr class="order-shipping">
-                                                <td colspan="2">
-                                                    <div class="shipping-amount">
-                                                        <span class="title">Shipping Method</span>
-                                                        <span class="amount">$35.00</span>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input type="radio" id="radio1" name="shipping" checked>
-                                                        <label for="radio1">Free Shippping</label>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input type="radio" id="radio2" name="shipping">
-                                                        <label for="radio2">Local</label>
-                                                    </div>
-                                                    <div class="input-group">
-                                                        <input type="radio" id="radio3" name="shipping">
-                                                        <label for="radio3">Flat rate</label>
-                                                    </div>
-                                                </td>
-                                            </tr>
+                                            @endforeach
+                                           
                                             <tr class="order-total">
                                                 <td>Total</td>
-                                                <td class="order-total-amount">$323.00</td>
+                                                <td class="order-total-amount">${{$total}}</td>
                                             </tr>
                                         </tbody>
                                     </table>
@@ -456,22 +282,17 @@
                                             <input type="radio" id="radio4" name="payment">
                                             <label for="radio4">Direct bank transfer</label>
                                         </div>
-                                        <p>Make your payment directly into our bank account. Please use your Order ID as
+                                        <p>Make your payment directly into our bank account. Please us your Order ID as
                                             the payment reference. Your order will not be shipped until the funds have
                                             cleared in our account.</p>
                                     </div>
-                                    <div class="single-payment">
-                                        <div class="input-group">
-                                            <input type="radio" id="radio5" name="payment">
-                                            <label for="radio5">Cash on delivery</label>
-                                        </div>
-                                        <p>Pay with cash upon delivery.</p>
-                                    </div>
+
                                     <div class="single-payment">
                                         <div class="input-group justify-content-between align-items-center">
                                             <input type="radio" id="radio6" name="payment" checked>
                                             <label for="radio6">Paypal</label>
-                                            <img src="./assets/images/others/payment.png" alt="Paypal payment">
+                                            <img src="{{asset('fas/assets/images/others/payment.png')}}"
+                                                alt="Paypal payment">
                                         </div>
                                         <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
                                             account.</p>
@@ -496,7 +317,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service1.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service1.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Fast &amp; Secure Delivery</h6>
@@ -507,7 +328,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service2.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service2.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Money Back Guarantee</h6>
@@ -518,7 +339,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service3.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service3.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">24 Hour Return Policy</h6>
@@ -529,7 +350,7 @@
                 <div class="col">
                     <div class="service-box service-style-2">
                         <div class="icon">
-                            <img src="./assets/images/icons/service4.png" alt="Service">
+                            <img src="{{asset('fas/assets/images/icons/service4.png')}}" alt="Service">
                         </div>
                         <div class="content">
                             <h6 class="title">Pro Quality Support</h6>
@@ -552,7 +373,7 @@
                             <h5 class="widget-title">Support</h5>
                             <!-- <div class="logo mb--30">
                             <a href="index.html">
-                                <img class="light-logo" src="assets/images/logo/logo.png" alt="Logo Images">
+                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
                             </a>
                         </div> -->
                             <div class="inner">
@@ -611,14 +432,16 @@
                                 <span>Save $3 With App & New User only</span>
                                 <div class="download-btn-group">
                                     <div class="qr-code">
-                                        <img src="assets/images/others/qr.png" alt="Axilthemes">
+                                        <img src="{{asset('fas/assets/images/others/qr.png')}}" alt="Axilthemes">
                                     </div>
                                     <div class="app-link">
                                         <a href="#">
-                                            <img src="assets/images/others/app-store.png" alt="App Store">
+                                            <img src="{{asset('fas/assets/images/others/app-store.png')}}"
+                                                alt="App Store">
                                         </a>
                                         <a href="#">
-                                            <img src="assets/images/others/play-store.png" alt="Play Store">
+                                            <img src="{{asset('fas/assets/images/others/play-store.png')}}"
+                                                alt="Play Store">
                                         </a>
                                     </div>
                                 </div>
@@ -656,9 +479,12 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="assets/images/icons/cart/cart-1.png" alt="paypal cart"></li>
-                                <li><img src="assets/images/icons/cart/cart-2.png" alt="paypal cart"></li>
-                                <li><img src="assets/images/icons/cart/cart-5.png" alt="paypal cart"></li>
+                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-1.png')}}" alt="paypal cart">
+                                </li>
+                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-2.png')}}" alt="paypal cart">
+                                </li>
+                                <li><img src="{{asset('fas/assets/images/icons/cart/cart-5.png')}}" alt="paypal cart">
+                                </li>
                             </ul>
                         </div>
                     </div>
@@ -686,39 +512,39 @@
                                         <div
                                             class="single-product-thumbnail product-large-thumbnail axil-product thumbnail-badge zoom-gallery">
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-01.png"
+                                                <img src="{{asset('fas/assets/images/product/product-big-01.png')}}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-01.png"
+                                                    <a href="{{asset('fas/assets/images/product/product-big-01.png')}}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-02.png"
+                                                <img src="{{asset('fas/assets/images/product/product-big-02.png')}}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-02.png"
+                                                    <a href="{{asset('fas/assets/images/product/product-big-02.png')}}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
                                                 </div>
                                             </div>
                                             <div class="thumbnail">
-                                                <img src="assets/images/product/product-big-03.png"
+                                                <img src="{{asset('fas/assets/images/product/product-big-03.png')}}"
                                                     alt="Product Images">
                                                 <div class="label-block label-right">
                                                     <div class="product-badget">20% OFF</div>
                                                 </div>
                                                 <div class="product-quick-view position-view">
-                                                    <a href="assets/images/product/product-big-03.png"
+                                                    <a href="{{asset('fas/assets/images/product/product-big-03.png')}}"
                                                         class="popup-zoom">
                                                         <i class="far fa-search-plus"></i>
                                                     </a>
@@ -729,15 +555,15 @@
                                     <div class="col-lg-2 order-lg-1">
                                         <div class="product-small-thumb small-thumb-wrapper">
                                             <div class="small-thumb-img">
-                                                <img src="assets/images/product/product-thumb/thumb-08.png"
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-08.png')}}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="assets/images/product/product-thumb/thumb-07.png"
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-07.png')}}"
                                                     alt="thumb image">
                                             </div>
                                             <div class="small-thumb-img">
-                                                <img src="assets/images/product/product-thumb/thumb-09.png"
+                                                <img src="{{asset('fas/assets/images/product/product-thumb/thumb-09.png')}}"
                                                     alt="thumb image">
                                             </div>
                                         </div>
@@ -749,7 +575,8 @@
                                     <div class="inner">
                                         <div class="product-rating">
                                             <div class="star-rating">
-                                                <img src="assets/images/icons/rate.png" alt="Rate Images">
+                                                <img src="{{asset('fas/assets/images/icons/rate.png')}}"
+                                                    alt="Rate Images">
                                             </div>
                                             <div class="review-link">
                                                 <a href="#">(<span>1</span> customer reviews)</a>
@@ -838,74 +665,21 @@
             <div class="card-header">
                 <form action="#">
                     <div class="input-group">
-                        <input type="search" class="form-control" name="prod-search" id="prod-search"
-                            placeholder="Write Something....">
+                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
+                            id="prod-search" placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <h6 class="title">24 Result Found</h6>
-                    <a href="shop.html" class="view-all">View All</a>
+                    <span class="filter-results">Result (<span style="color: #3577F0; font-size:19px;">{{
+                            $products->count() }}</span>)
+                        Found</span>
+                    <a href="{{route('front.sidebar')}}" class="view-all">View All</a>
                 </div>
-                <div class="psearch-results">
-                    <div class="axil-product-list">
-                        <div class="thumbnail">
-                            <a href="single-product.html">
-                                <img src="./assets/images/product/electric/product-09.png" alt="Yantiti Leather Bags">
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-rating">
-                                <span class="rating-icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fal fa-star"></i>
-                                </span>
-                                <span class="rating-number"><span>100+</span> Reviews</span>
-                            </div>
-                            <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
-                            <div class="product-price-variant">
-                                <span class="price current-price">$29.99</span>
-                                <span class="price old-price">$49.99</span>
-                            </div>
-                            <div class="product-cart">
-                                <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
-                                <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="axil-product-list">
-                        <div class="thumbnail">
-                            <a href="single-product.html">
-                                <img src="./assets/images/product/electric/product-09.png" alt="Yantiti Leather Bags">
-                            </a>
-                        </div>
-                        <div class="product-content">
-                            <div class="product-rating">
-                                <span class="rating-icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fal fa-star"></i>
-                                </span>
-                                <span class="rating-number"><span>100+</span> Reviews</span>
-                            </div>
-                            <h6 class="product-title"><a href="single-product.html">Media Remote</a></h6>
-                            <div class="product-price-variant">
-                                <span class="price current-price">$29.99</span>
-                                <span class="price old-price">$49.99</span>
-                            </div>
-                            <div class="product-cart">
-                                <a href="cart.html" class="cart-btn"><i class="fal fa-shopping-cart"></i></a>
-                                <a href="wishlist.html" class="cart-btn"><i class="fal fa-heart"></i></a>
-                            </div>
-                        </div>
-                    </div>
+                <div class="psearch-results" id="searchContainer">
+
                 </div>
             </div>
         </div>
@@ -920,90 +694,48 @@
                 <h2 class="header-title">Cart review</h2>
                 <button class="cart-close sidebar-close"><i class="fas fa-times"></i></button>
             </div>
+
             <div class="cart-body">
-                <ul class="cart-item-list">
+                <ul class="cart-item-list" id="cart-list-container">
+                    @foreach ($carts as $cart)
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="single-product.html"><img src="assets/images/product/electric/product-01.png"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
+                            <a href="{{route('front.productItem', $cart->product_id)}}"><img
+                                    src="{{Storage::url($cart->product->image)}}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{$cart->product_id}}, this)"><i
+                                    class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(64)</span>
+                            <h3 class="item-title"><a
+                                    href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
+                                $cart->product->price : $cart->product->discount}}
                             </div>
-                            <h3 class="item-title"><a href="single-product-3.html">Wireless PS Handler</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>155.00</div>
+
                             <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="15">
+
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+
                             </div>
                         </div>
                     </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-2.html"><img src="assets/images/product/electric/product-02.png"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(4)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product-2.html">Gradient Light Keyboard</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>255.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="5">
-                            </div>
-                        </div>
-                    </li>
-                    <li class="cart-item">
-                        <div class="item-img">
-                            <a href="single-product-3.html"><img src="assets/images/product/electric/product-03.png"
-                                    alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn"><i class="fas fa-times"></i></button>
-                        </div>
-                        <div class="item-content">
-                            <div class="product-rating">
-                                <span class="icon">
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                    <i class="fas fa-star"></i>
-                                </span>
-                                <span class="rating-number">(6)</span>
-                            </div>
-                            <h3 class="item-title"><a href="single-product.html">HD CC Camera</a></h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>200.00</div>
-                            <div class="pro-qty item-quantity">
-                                <input type="number" class="quantity-input" value="100">
-                            </div>
-                        </div>
-                    </li>
+                    @endforeach
                 </ul>
             </div>
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">$610.00</span>
+                    <span class="subtotal-amount">${{ $total }}</span>
+
                 </h3>
                 <div class="group-btn">
-                    <a href="cart.html" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="checkout.html" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
+                    <a href="{{route('checkout')}}" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
         </div>
@@ -1031,7 +763,82 @@
 
     <!-- Main JS -->
     <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
+    <script>
+        //Product Search
+        function productSearch(e) {
+            axios.get(`/product/search?q=${e.value}`)
+                .then(function(response) {
+                    console.log(response);
+                    document.getElementById('searchContainer').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
 
+          // Add Product to Cart
+          function addProductToCart(id) {
+            let url = `/cart/add/${id}`;
+            let data = {
+                quantity: 1
+            }
+            axios.post(url, data).then((response) => {
+                console.log(response)
+                toastr.success(response.data.message);
+                document.getElementById('cart-list-container').innerHTML = response.data.cartList;
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                $('.qtybtn').on('click', function() {
+                    var $button = $(this);
+                    var oldValue = $button.parent().find('input').val();
+                    if ($button.hasClass('inc')) {
+                        var newVal = parseFloat(oldValue) + 1;
+                    } else {
+                        // Don't allow decrementing below zero
+                        if (oldValue > 0) {
+                            var newVal = parseFloat(oldValue) - 1;
+                        } else {
+                            newVal = 0;
+                        }
+                    }
+                    $button.parent().find('input').val(newVal);
+                });
+            }).catch((error) => {
+                console.log(error.response)
+                toastr.success(error.response.data.message);
+            })
+        }
+
+        // Remove Product from Slide Cart
+        function removeProduct(id, ref) {
+            let url = `/cart/${id}`;
+            axios.delete(url).then((response) => {
+                toastr.success(response.data.message);
+                ref.closest('li').remove();
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
+            }).catch(() => {
+                toastr.error(error.response.data.message);
+            })
+        }
+
+          //Change Quantity
+          function changeQuantity(id, type, ref) {
+            setTimeout(() => {
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
+            }, 1);
+        }
+
+    </script>
 </body>
 
 </html>

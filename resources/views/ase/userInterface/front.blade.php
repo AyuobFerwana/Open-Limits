@@ -38,10 +38,6 @@
 
 <body class="sticky-header newsletter-popup-modal">
 
-    <!--[if lte IE 9]>
-    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-<![endif]-->
-    <a href="#top" class="back-to-top" id="backto-top"><i class="fal fa-arrow-up"></i></a>
     <header class="header axil-header header-style-1">
         <div class="header-top-campaign">
             <div class="container position-relative">
@@ -671,7 +667,7 @@
                 </h3>
                 <div class="group-btn">
                     <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
-                    <a href="#" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
+                    <a href="{{route('checkout')}}" class="axil-btn btn-bg-secondary checkout-btn">Checkout</a>
                 </div>
             </div>
         </div>
