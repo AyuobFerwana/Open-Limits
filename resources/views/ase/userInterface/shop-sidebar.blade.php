@@ -598,8 +598,8 @@
                             <h3 class="item-title"><a href="{{ route('front.productItem', $cart->product_id) }}">{{
                                     $cart->product->productName }}</a>
                             </h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>{{ $cart->product->flag ==
-                                'price' ? $cart->product->price : $cart->product->discount }}
+                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
+                                $cart->product->price : $cart->product->discount}}
                             </div>
                             <div class="pro-qty item-quantity">
                                 <span class="dec qtybtn"

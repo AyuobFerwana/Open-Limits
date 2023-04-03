@@ -10,7 +10,7 @@ class Purchase extends Model
 {
     use HasFactory,SoftDeletes;
     
-    public function product(){
-        return $this->belongsTo(Product::class)->withTrashed();
+    public function products(){
+        return $this->belongsToMany(Product::class)->withTrashed();
     }
 }

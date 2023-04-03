@@ -6,11 +6,11 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\FrontController;
+use App\Http\Controllers\Payment\PayPalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -47,6 +47,14 @@ Route::put('/cart/{product}', [CartController::class, 'changeQuantity']);
 
 // CheckOut
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+
+// Payment
+Route::get('Payment' , [PayPalController::class , 'payment'])->name('payment');
+Route::get('cancel' , [PayPalController::class , 'cancel'])->name('payment.cancel');
+Route::get('success' , [PayPalController::class , 'success'])->name('payment.success');
+
+
+
 
 
 // Authentication

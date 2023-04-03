@@ -459,7 +459,7 @@
                                 <ul class="support-list-item">
                                     <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i
                                                 class="fal fa-envelope-open"></i> &nbsp;
-                                           {{ $support->email }}</a></li>
+                                            {{ $support->email }}</a></li>
                                     <li><a href="tel:{{ $support->phone }}"> <i class="fal fa-phone-alt"></i> &nbsp;
                                             {{ $support->phone }}</a></li>
                                 </ul>
@@ -646,13 +646,12 @@
                             </div>
 
                             <div class="pro-qty item-quantity">
-
                                 <span class="dec qtybtn"
                                     onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                <input type="number" class="quantity-input" id="quantity" value="{{$cart->quantity}}">
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}">
                                 <span class="inc qtybtn"
                                     onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-
                             </div>
                         </div>
                     </li>
