@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutController extends Controller
 {
-    public function checkout(Request $request)
+    public function checkout(Request $request , User $user)
     {
         if (Auth::check()) {
             $carts = $request->user()->carts;
@@ -39,7 +39,7 @@ class CheckoutController extends Controller
             $total += $quantity * $price;
         }
 
-        return response()->view('ase.cart.checkout', compact('carts', 'total'));
+        return response()->view('ase.cart.checkout', compact('carts', 'total' , 'user'));
     }
 
 
@@ -91,16 +91,5 @@ class CheckoutController extends Controller
                 'message' => $validator->getMessageBag()->first()
             ], Response::HTTP_BAD_REQUEST);
         }
-
-
-        // return response()->view('ase.cart.checkout', [
-        //     'products' => $products,
-        //     'carts' => $carts,
-        //     'checkout' => $checkout,
-        //     'total' => $total,
-        //     'support' => $support,
-        //     'users' => $users
-
-        // ]);
     }
 }

@@ -31,6 +31,7 @@
         .toast-message {
             font-size: 16px !important;
         }
+
         .single-product-thumbnail .thumbnail img {
             width: 100%;
             border-radius: 6px;
@@ -175,7 +176,8 @@
                                     <div
                                         class="product-large-thumbnail-2 single-product-thumbnail axil-product slick-layout-wrapper--15 axil-slick-arrow arrow-both-side-3">
                                         <div class="thumbnail">
-                                            <img src="{{ Storage::url($products->image) }}" alt="Product Images" style="width: 1000px; height: 500px;">
+                                            <img src="{{ Storage::url($products->image) }}" alt="Product Images"
+                                                style="width: 1000px; height: 500px;">
                                         </div>
                                     </div>
                                 </div>
@@ -190,7 +192,7 @@
                                     @if ($products->flag)
                                     <div class="product-price-variant">
                                         <h4><span class="price current-price">${{ $products->discount }}</span>
-                                        <del><span class="price old-price">${{ $products->price }}</span></del>
+                                            <del><span class="price old-price">${{ $products->price }}</span></del>
                                         </h4>
                                     </div>
                                     @else
@@ -401,13 +403,14 @@
                             </a>
                         </div> -->
                             <div class="inner">
-                                <p><i class="far fa-map-marker-alt"></i>  &nbsp; {{ $support->address }}</p>
-                                
+                                <p><i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
+
                                 <ul class="support-list-item">
-                                    <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i class="fal fa-envelope-open"></i> &nbsp;
-                                        {{ $support->email }}</a></li>
+                                    <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i
+                                                class="fal fa-envelope-open"></i> &nbsp;
+                                            {{ $support->email }}</a></li>
                                     <li><a href="tel:{{ $support->phone }}"> <i class="fal fa-phone-alt"></i> &nbsp;
-                                        {{ $support->phone }}</a></li>
+                                            {{ $support->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -490,9 +493,9 @@
                     <div class="col-xl-4 col-lg-12">
                         <div class="copyright-left d-flex flex-wrap justify-content-center">
                             <ul class="quick-link">
-                                <li>  ©
+                                <li> ©
                                     <script>
-                                      document.write(new Date().getFullYear());
+                                        document.write(new Date().getFullYear());
                                     </script>
                                     , made with ❤️ by
                                     <a target="_blank" class="footer-link fw-bolder">Ayuob Ferwana</a>
@@ -698,8 +701,8 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <span class="filter-results">Result (<span
-                        style="color: #3577F0; font-size:19px;">{{ $products->count() }}</span>)
+                    <span class="filter-results">Result (<span style="color: #3577F0; font-size:19px;">{{
+                            $products->count() }}</span>)
                         Found</span>
                     <a href="{{ route('front.sidebar') }}" class="view-all">View All</a>
                 </div>
@@ -734,14 +737,14 @@
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
                                 'price' ? $cart->product->price : $cart->product->discount}}</div>
-                                <div class="pro-qty item-quantity">
-                                    <span class="dec qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
-                                        value="{{ $cart->quantity }}">
-                                    <span class="inc qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                                </div>
+                            <div class="pro-qty item-quantity">
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                            </div>
                         </div>
                     </li>
                     @endforeach

@@ -66,13 +66,13 @@
                         </div>
                     </div>
                     @if (auth()->guest())
-                        <div class="col-lg-6 col-sm-6 col-12">
-                            <div class="header-top-link">
-                                <ul class="quick-link">
-                                    <li><a href="{{ route('login') }}">Sign In</a></li>
-                                </ul>
-                            </div>
+                    <div class="col-lg-6 col-sm-6 col-12">
+                        <div class="header-top-link">
+                            <ul class="quick-link">
+                                <li><a href="{{ route('login') }}">Sign In</a></li>
+                            </ul>
                         </div>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -117,8 +117,8 @@
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
                                 <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128"
-                                    placeholder="What are you looking for?" autocomplete="off">
+                                    id="search2" value="" maxlength="128" placeholder="?What are you looking for"
+                                    autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -151,10 +151,10 @@
                                         </li>
                                     </ul>
                                     @if (auth()->guest())
-                                        <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
-                                        <div class="reg-footer text-center">No account yet? <a
-                                                href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
-                                        </div>
+                                    <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
+                                    <div class="reg-footer text-center">No account yet? <a
+                                            href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
+                                    </div>
                                     @endif
                                 </div>
                             </li>
@@ -203,10 +203,10 @@
                             <div class="axil-checkout-notice">
                                 <div class="axil-toggle-box">
                                     @if (auth()->guest())
-                                        <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a
-                                                href="{{ route('login') }}" class="toggle-btn">Click here to
-                                                login</a>
-                                        </div>
+                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a
+                                            href="{{ route('login') }}" class="toggle-btn">Click here to
+                                            login</a>
+                                    </div>
                                     @endif
                                 </div>
                             </div>
@@ -216,8 +216,8 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Full Name <span>*</span></label>
-                                            <input type="text" value="{{ auth()->user()->UsersName }}"
-                                                id="UsersName" placeholder="" disabled>
+                                            <input type="text" value="{{ auth()->guest() || auth()->user()->id !== $user->id ? auth()->user()->UsersName : '' }}"
+                                                id="UsersName" placeholder=""  {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
                                         </div>
                                     </div>
                                 </div>
@@ -243,11 +243,15 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Phone <span>*</span></label>
-                                    <input type="number" id="phone" max="15" value="{{auth()->user()->phone}}" disabled>
+                                    <input type="number" id="phone" max="15"
+                                        value="{{ auth()->guest() || auth()->user()->id !== $user->id ? auth()->user()->phone : '' }}"  {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
+
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address <span>*</span></label>
-                                    <input type="email" id="email" placeholder="example@gmail.com" value="{{auth()->user()->email}}" disabled>
+
+                                    <input type="email" id="email" placeholder="example@gmail.com"
+                                        value="{{ auth()->guest() || auth()->user()->id !== $user->id ? auth()->user()->email : '' }}"  {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
                                 </div>
                             </div>
                         </div>
@@ -264,12 +268,13 @@
                                         </thead>
                                         <tbody>
                                             @foreach ($carts as $cart)
-                                                <tr class="order-product">
-                                                    <td>{{ $cart->product->productName }}<span class="quantity">
-                                                            x{{ $cart->quantity }}</span></td>
-                                                    <td>${{ $cart->quantity * (!$cart->product->flag ? $cart->product->price : $cart->product->discount) }}
-                                                    </td>
-                                                </tr>
+                                            <tr class="order-product">
+                                                <td>{{ $cart->product->productName }}<span class="quantity">
+                                                        x{{ $cart->quantity }}</span></td>
+                                                <td>${{ $cart->quantity * (!$cart->product->flag ? $cart->product->price
+                                                    : $cart->product->discount) }}
+                                                </td>
+                                            </tr>
                                             @endforeach
 
                                             <tr class="order-total">
@@ -487,14 +492,11 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}" alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -545,31 +547,31 @@
             <div class="cart-body">
                 <ul class="cart-item-list" id="cart-list-container">
                     @foreach ($carts as $cart)
-                        <li class="cart-item">
-                            <div class="item-img">
-                                <a href="{{ route('front.productItem', $cart->product_id) }}"><img
-                                        src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
-                                <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i
-                                        class="fas fa-times"></i></button>
+                    <li class="cart-item">
+                        <div class="item-img">
+                            <a href="{{ route('front.productItem', $cart->product_id) }}"><img
+                                    src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="item-content">
+                            <h3 class="item-title"><a href="{{ route('front.productItem', $cart->product_id) }}">{{
+                                    $cart->product->productName }}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{ !$cart->product->flag ?
+                                $cart->product->price : $cart->product->discount }}
                             </div>
-                            <div class="item-content">
-                                <h3 class="item-title"><a
-                                        href="{{ route('front.productItem', $cart->product_id) }}">{{ $cart->product->productName }}</a>
-                                </h3>
-                                <div class="item-price"><span
-                                        class="currency-symbol">$</span>{{ !$cart->product->flag ? $cart->product->price : $cart->product->discount }}
-                                </div>
 
-                                <div class="pro-qty item-quantity">
-                                    <span class="dec qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                    <input type="number" class="quantity-input"
-                                        id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}">
-                                    <span class="inc qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                                </div>
+                            <div class="pro-qty item-quantity">
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
                             </div>
-                        </li>
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
             </div>

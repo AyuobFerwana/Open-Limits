@@ -10,7 +10,11 @@ use App\Http\Controllers\Payment\PayPalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\StripeController;
 use Illuminate\Support\Facades\Route;
+
+use Illuminate\Http\Request;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -122,7 +126,7 @@ Route::middleware(['guest', 'throttle:authentication'])->group(function () {
 // Route::delete('RestoreStoreDestroy/{id}',  [StoreController::class, 'RestoreStoreDestroy'])->name('store.RestoreStoreDestroy');
 
 
-Route::get('test', function() {
+Route::get('test', function () {
     $provider = \PayPal::setProvider();
     $provider->getAccessToken();
     $data = json_decode('{
@@ -136,16 +140,24 @@ Route::get('test', function() {
           }
         ]
     }', true);
-    
+
     $order = $provider->createOrder($data);
     return $order;
     $provider->authorizePaymentOrder($order['id']);
     $test = $provider->capturePaymentOrder($order['id']);
     return $test;
 });
-Route::get('test2/{order_id}', function($order_id) {
+Route::get('test2/{order_id}', function ($order_id) {
     $provider = \PayPal::setProvider();
     $provider->getAccessToken();
     $order = $provider->capturePaymentOrder($order_id);
     return $order;
+});
+
+
+//  Stripe
+Route::get('/stripe', [StripeController::class, 'showUpdatePaymentMethodForm'])->name('stripeMetod');
+
+Route::get('/billing-portal', function (Request $request) {
+    return $request->user()->redirectToBillingPortal(route('home'));
 });

@@ -9,10 +9,12 @@
         "guzzlehttp/guzzle": "^7.2",
         "hardevine/shoppingcart": "^3.1",
         "laravel-validation-rules/colour": "^1.7",
+        "laravel/cashier": "^14.10",
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.8",
-        "srmklive/paypal": "^3.0"
+        "srmklive/paypal": "^3.0",
+        "stripe/stripe-php": "^10.12"
     },
     "require-dev": {
         "barryvdh/laravel-debugbar": "^3.8",

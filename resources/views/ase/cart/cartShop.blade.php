@@ -680,14 +680,14 @@
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
                                 $cart->product->price : $cart->product->discount}}</div>
 
-                                <div class="pro-qty item-quantity">
-                                    <span class="dec qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
-                                        value="{{ $cart->quantity }}">
-                                    <span class="inc qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                                </div>
+                            <div class="pro-qty item-quantity">
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                            </div>
                         </div>
                     </li>
                     @endforeach

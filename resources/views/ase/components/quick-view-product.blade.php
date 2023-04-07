@@ -1,7 +1,5 @@
-
 <div class="single-product-thumb">
     <div class="row">
-        {{--  @foreach ($products as $product )  --}}
         <div class="col-lg-7 mb--40">
             <div class="row">
                 <div class="col-lg-10 order-lg-2">
@@ -76,6 +74,5 @@
                 </div>
             </div>
         </div>
-        {{--  @endforeach  --}}
     </div>
 </div>

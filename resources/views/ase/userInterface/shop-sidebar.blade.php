@@ -657,6 +657,17 @@
     <script src="{{ asset('fas/assets/js/rtl-main.js') }}"></script>
 
     <script>
+        // Get the select element by its ID
+        var select = document.getElementById("sort");
+        select.addEventListener("change", function() {
+        localStorage.setItem("selectedOption", select.value);
+        });
+        
+        if(localStorage.getItem("selectedOption")) {
+        select.value = localStorage.getItem("selectedOption");
+        }
+        
+
         //Product Search
         function productSearch(e) {
             axios.get(`/product/search?q=${e.value}`)
