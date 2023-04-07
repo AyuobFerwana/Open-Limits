@@ -216,8 +216,13 @@
                                     <div class="col-lg-12">
                                         <div class="form-group">
                                             <label>Full Name <span>*</span></label>
-                                            <input type="text" value="{{ auth()->guest() || auth()->user()->id !== $user->id ? auth()->user()->UsersName : '' }}"
-                                                id="UsersName" placeholder=""  {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
+                                            @if (auth()->check() && auth()->user()->id !== $user->id)
+                                            <input type="text" value="{{ auth()->user()->UsersName }}" {{ auth()->check() && auth()->user()->id
+                                                === $user->id ? '' : 'disabled' }}>
+                                            @else
+                                            <input type="text" value="" {{ auth()->check() && auth()->user()->id
+                                                === $user->id ? '' : 'disabled' }}>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
@@ -243,15 +248,24 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Phone <span>*</span></label>
-                                    <input type="number" id="phone" max="15"
-                                        value="{{ auth()->guest() || auth()->user()->id !== $user->id ? auth()->user()->phone : '' }}"  {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
-
+                                    @if (auth()->check() && auth()->user()->id !== $user->id)
+                                    <input type="number" value="{{ auth()->user()->phone }}" {{ auth()->check() && auth()->user()->id
+                                        === $user->id ? '' : 'disabled' }}>
+                                    @else
+                                    <input type="number" value="" {{ auth()->check() && auth()->user()->id
+                                        === $user->id ? '' : 'disabled' }}>
+                                    @endif
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address <span>*</span></label>
 
-                                    <input type="email" id="email" placeholder="example@gmail.com"
-                                        value="{{ auth()->guest() || auth()->user()->id !== $user->id ? auth()->user()->email : '' }}"  {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
+                                        @if (auth()->check() && auth()->user()->id !== $user->id)
+                                        <input type="email" value="{{ auth()->user()->email }}" {{ auth()->check() && auth()->user()->id
+                                            === $user->id ? '' : 'disabled' }}>
+                                        @else
+                                        <input type="email" value="" {{ auth()->check() && auth()->user()->id
+                                            === $user->id ? '' : 'disabled' }}>
+                                        @endif
                                 </div>
                             </div>
                         </div>
