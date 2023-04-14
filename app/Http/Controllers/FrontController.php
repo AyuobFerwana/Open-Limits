@@ -87,7 +87,7 @@ class FrontController extends Controller
         }
 
         $support = Support::first();
-        $categories = Category::paginate(10);
+        $categories = Category::all();
         $products = Product::when($request->category && $request->category != -1, function ($q) use ($request) {
             return $q->where('category_id', $request->category);
         })->with('category')->when($request->sort && in_array($request->sort, ['latest', 'price-low', 'price-high']), function ($q) use ($request) {
@@ -99,16 +99,13 @@ class FrontController extends Controller
 
                 return $q->orderByDesc('price');
             }
-        })->get();
+        })->paginate(12);
         return response()->view('ase.userInterface.shop-sidebar', [
             'products' => $products,
             'categories' => $categories,
             'carts' => $carts,
             'total' => $total,
             'support' => $support
-
-
-
         ]);
     }
 

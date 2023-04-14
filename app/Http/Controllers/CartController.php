@@ -14,7 +14,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
-    public function show(Request $request , Product $products)
+    public function show(Request $request, Product $products)
     {
         if (Auth::check()) {
             $carts = $request->user()->carts;
@@ -31,13 +31,13 @@ class CartController extends Controller
             //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
 
-            // if ($quantity >= 10) {
-            //     $price *= 0.9; // 10% discount for quantities of 10 or more
-            // }
+            if ($quantity >= 10) {
+                $price *= 0.9; // 10% discount for quantities of 10 or more
+            }
             $total += $quantity * $price;
         }
         $support = Support::first();
-        return response()->view('ase.cart.cartShop', compact('carts' ,'products' , 'total' , 'support'));
+        return response()->view('ase.cart.cartShop', compact('carts', 'products', 'total', 'support'));
     }
 
     public function add(Product $product, Request $request)
@@ -63,11 +63,25 @@ class CartController extends Controller
             $isSaved = $cart->save();
 
             $carts = Cart::where('user_id', $request->user()->id)->get();
+            $total = 0;
 
+            foreach ($carts as $cart) {
+                $product = $cart->product;
+                $quantity = $cart->quantity;
+
+                //apply any quantity-based discounts or price breaks
+                $price = $product->flag ? $product->discount : $product->price;
+
+                if ($quantity >= 10) {
+                    $price *= 0.9; // 10% discount for quantities of 10 or more
+                }
+                $total += $quantity * $price;
+            }
             return response()->json([
                 'message' => $isSaved ? '!Added to Cart Successfully' : 'Failed to Add the Product, Please try Again.',
                 'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
                 'cartCount' => count($carts),
+                'cartTotal' => $total,
             ], $isSaved ? Response::HTTP_CREATED : Response::HTTP_BAD_REQUEST);
         } else {
             $carts = Session::get('cart') ?? [];
@@ -88,11 +102,27 @@ class CartController extends Controller
                 array_push($carts, $cart);
             }
             Session::put('cart', $carts);
+
+            $total = 0;
+
+            foreach ($carts as $cart) {
+                $product = $cart->product;
+                $quantity = $cart->quantity;
+
+                //apply any quantity-based discounts or price breaks
+                $price = $product->flag ? $product->discount : $product->price;
+
+                if ($quantity >= 10) {
+                    $price *= 0.9; // 10% discount for quantities of 10 or more
+                }
+                $total += $quantity * $price;
+            }
             return response()->json([
                 'message' => '!Added to Cart Successfully',
                 'cartList' => view('ase.userInterface.components.cart-list', compact('carts'))->render(),
                 'cartCount' => count($carts),
-               
+                'cartTotal' => $total,
+
             ], Response::HTTP_CREATED);
         }
     }
@@ -128,7 +158,7 @@ class CartController extends Controller
         }
     }
 
-    public function changeQuantity(Product $product, Request $request)
+    public function changeQuantity(Product $product,Cart $cart, Request $request)
     {
         $validator = Validator($request->all(), [
             'type' => 'required|string|in:dec,inc',
@@ -149,6 +179,7 @@ class CartController extends Controller
             $isSaved = $cart->save();
             return response()->json([
                 'message' => $isSaved ? 'saved' : 'faild',
+                
             ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
         } else {
             $carts = Session::get('cart') ?? [];

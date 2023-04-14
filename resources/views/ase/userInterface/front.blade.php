@@ -272,7 +272,7 @@
                     class="explore-product-activation slick-layout-wrapper slick-layout-wrapper--15 axil-slick-arrow arrow-top-slide">
                     <div class="slick-single-layout">
                         <div class="row row--15">
-                            @foreach ($products as $product)
+                            @foreach ($products->take(8) as $product)
                             <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
                                 <div class="axil-product product-style-one">
                                     <div class="thumbnail">
@@ -638,13 +638,12 @@
                                     class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
-                            <h3 class="item-title"><a
-                                    href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
+                            <h3 class="item-title"><a href="{{ route('front.productItem', $cart->product_id) }}">{{
+                                    $cart->product->productName }}</a>
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
                                 $cart->product->price : $cart->product->discount}}
                             </div>
-
                             <div class="pro-qty item-quantity">
                                 <span class="dec qtybtn"
                                     onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
@@ -661,7 +660,7 @@
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">${{ $total }}</span>
+                    <span class="subtotal-amount" id="carts-total">${{ $total }}</span>
 
                 </h3>
                 <div class="group-btn">
@@ -735,6 +734,24 @@
                 });
         }
 
+          //Change Quantity
+          function changeQuantity(id, type, ref) {
+            setTimeout(() => {
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
+            }, 1);
+        }
+
         //QuickView
         function quickView(d) {
             axios.get(`/product/quickView/${d}`)
@@ -758,6 +775,8 @@
                 toastr.success(response.data.message);
                 document.getElementById('cart-list-container').innerHTML = response.data.cartList;
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;                        
+
                 $('.qtybtn').on('click', function() {
                     var $button = $(this);
                     var oldValue = $button.parent().find('input').val();
@@ -786,28 +805,14 @@
                 toastr.success(response.data.message);
                 ref.closest('li').remove();
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;                        
+
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })
         }
 
-          //Change Quantity
-          function changeQuantity(id, type, ref) {
-            setTimeout(() => {
-                console.log(document.getElementById('quantity_' + id).value)
-                if (document.getElementById('quantity_' + id).value < 1) {
-                    removeProduct(id, ref)
-                } else {
-                    axios.put(`/cart/${id}`, {
-                        type: type
-                    }).then((response) => {
-                        console.log(response.data);
-                    }).catch((error) => {
-                        console.log(error.response.data);
-                    })
-                }
-            }, 1);
-        }
+        
     </script>
 
 </body>

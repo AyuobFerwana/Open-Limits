@@ -259,22 +259,30 @@
                                     <!-- Start Product Action Wrapper  -->
                                     <div class="product-action-wrapper d-flex-center">
                                         <!-- Start Quentity Action  -->
+                                        
+                                        {{--  @foreach ($carts->take($products->id) as $cart )
 
-                                        {{-- <div class="pro-qty mr--20">
+                                        <div class="pro-qty item-quantity">
                                             <span class="dec qtybtn"
-                                                onclick="changeQuantitys({{ $carts->product_id }}, 'dec', this)">-</span>
-                                            <input type="text" value="{{$carts->quantity}}">
+                                                onclick="changeQuantity({{ $carts->product_id }}, 'dec', this)">-</span>
+                                                @if ($carts->quantity)
+                                                    
+                                                <input type="number" class="quantity-input"
+                                                    id="quantity_{{ $carts->product_id }}" value="{{  $carts->quantity }}">
+                                                @else
+                                                <input type="number" class="quantity-input"
+                                                id="quantity_{{ $carts->product_id }}" value="0">
+                                                @endif
                                             <span class="inc qtybtn"
-                                                onclick="changeQuantitys({{ $carts->product_id }}, 'inc', this)">+</span>
-                                        </div> --}}
-                                        <!-- End Quentity Action  -->
-
+                                                onclick="changeQuantity({{  $carts->product_id }}, 'inc', this)">+</span>
+                                        </div>
+                                        @endforeach  --}}
                                         <!-- Start Product Action  -->
                                         <ul class="product-action d-flex-center mb--0">
                                             <li class="add-to-cart"><button type="button" onclick="addProductToCart()"
                                                     class="axil-btn btn-bg-primary">Add to Cart</button></li>
-                                            <li class="wishlist"><a href="wishlist.html"
-                                                    class="axil-btn wishlist-btn"><i class="far fa-heart"></i></a>
+                                            <li class="wishlist"><a href="#" class="axil-btn wishlist-btn"><i
+                                                        class="far fa-heart"></i></a>
                                             </li>
                                         </ul>
                                         <!-- End Product Action  -->
@@ -661,7 +669,7 @@
                                         <!-- Start Product Action Wrapper  -->
                                         <div class="product-action-wrapper d-flex-center">
                                             <!-- Start Quentity Action  -->
-                                            <div class="pro-qty"><input type="text" value="1"></div>
+
                                             <!-- End Quentity Action  -->
 
                                             <!-- Start Product Action  -->

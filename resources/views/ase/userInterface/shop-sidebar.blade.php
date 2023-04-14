@@ -238,8 +238,8 @@
                                 <div class="shop-submenu">
                                     <ul>
                                         <li class="{{ request()->category == $categorie->id ? 'current-cat' : '' }}">
-                                            <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">{{$categorie->categoryName
-                                                }}</a>
+                                            <a
+                                                href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">{{$categorie->categoryName}}</a>
                                         </li>
                                     </ul>
                                 </div>
@@ -315,7 +315,7 @@
                                 </div>
                             </div>
                             @endforeach
-
+                            {{ $products->links() }}
                         </div>
                     </div>
                 </div>

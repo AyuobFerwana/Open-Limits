@@ -260,11 +260,9 @@
                                     <label>Email Address <span>*</span></label>
 
                                         @if (auth()->check() && auth()->user()->id !== $user->id)
-                                        <input type="email" value="{{ auth()->user()->email }}" {{ auth()->check() && auth()->user()->id
-                                            === $user->id ? '' : 'disabled' }}>
+                                        <input type="email" value="{{ auth()->user()->email }}" {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
                                         @else
-                                        <input type="email" value="" {{ auth()->check() && auth()->user()->id
-                                            === $user->id ? '' : 'disabled' }}>
+                                        <input type="email" value="" {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
                                         @endif
                                 </div>
                             </div>
