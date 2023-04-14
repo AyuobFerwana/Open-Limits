@@ -3,51 +3,106 @@
 namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
+use App\Models\Checkout;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Srmklive\PayPal\Services\PayPal as PayPalClient;
-
+use Srmklive\PayPal\Services\ExpressCheckout;
+use Symfony\Component\HttpFoundation\Response;
 
 class PayPalController extends Controller
 {
 
     public function payment(Request $request)
     {
-        // Retrieve the products from the database
-        $products = Product::all();
-
-        // Initialize the PayPal client
-        $paypal = new PayPalClient();
-
-        // Set the checkout parameters
-        $data = [
-            'items' => [],
-            'invoice_id' => uniqid(),
-            'invoice_description' => "Order description",
-            'tax' => 5, // Set the tax amount
-            'subtotal' => 0, // Initialize the subtotal to 0
-            'shipping' => 10, // Set the shipping amount
-            'return_url' => url('/paypal/success'),
-            'cancel_url' => url('/paypal/cancel')
-        ];
-
-        // Loop through the products and add them to the checkout parameters
-        foreach ($products as $product) {
-            $item = [
-                'name' => $product->name,
-                'price' => $product->price,
-                'qty' => 1
-            ];
-
-            // Add the item to the items array and update the subtotal
-            $data['items'][] = $item;
-            $data['subtotal'] += $item['price'];
+        if (!Auth::check()) {
+            return response()->json([
+                'message' => 'Please login to place an order.',
+            ], Response::HTTP_BAD_REQUEST);
         }
 
-        // Create the payment
-        $response = $paypal->createPayment($data);
 
-        // Redirect the user to PayPal to complete the payment
-        return redirect($response['paypal_link']);
+        $validator = Validator($request->all(), [
+            'region' => 'required',
+            'address' => 'required|string|min:3|max:500',
+            'town' => 'required|string|min:3|max:200',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'message' => $validator->getMessageBag()->first(),
+            ], Response::HTTP_BAD_REQUEST);
+        }
+
+        $data = [];
+        $data['items'] = [];
+
+        $user = $request->user();
+        $carts = $user->carts;
+
+        $total = 0;
+
+        $productsIds = [];
+
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $quantity = $cart->quantity;
+
+            //apply any quantity-based discounts or price breaks
+            $price = $product->flag ? $product->discount : $product->price;
+            $item = [];
+            $item['name'] = $product->name;
+            $item['price'] = $price;
+            $item['desc'] = "Product With ID " . $product->id;
+            $item['qty'] = $quantity;
+            array_push($data['items'], $item);
+            $productsIds[$product->id] = ['quantity' => $quantity];
+            $total += $quantity * $price;
+        }
+
+        $checkout = new Checkout();
+        $checkout->user_id = auth()->user()->id;
+        $checkout->address = $request->input('address');
+        $checkout->town = $request->input('town');
+        $checkout->region = $request->input('region');
+        $isSaved = $checkout->save();
+        if ($isSaved) {
+            $checkout->products()->attach($productsIds);
+            $data['invoice_id'] = $checkout->id;
+            $data['invoice_description'] = "Invoice for " . auth()->user()->id;
+            $data['return_url'] = route('payment.success');
+            $data['cancel_url'] = route('payment.cancel');
+            $data['total'] = $total;
+
+            $provider = new ExpressCheckout;
+            $response = $provider->setExpressCheckout($data, true);
+            return response()->json([
+                'message' => 'Order has been placed successfully, you will be redirected shortly',
+                'link' => $response['paypal_link'],
+            ], Response::HTTP_CREATED);
+        }
+        return response()->json([
+            'message' => 'Something went wrong, Please try again.',
+        ], Response::HTTP_INTERNAL_SERVER_ERROR);
+    }
+
+    public function cancel()
+    {
+        return 'ابلع';
+    }
+
+    public function success(Request $request)
+    {
+        $provider = new ExpressCheckout;
+        $response = $provider->getExpressCheckoutDetails($request->token);
+        if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
+            $checkout = Checkout::findOrFail($response['PAYMENTREQUEST_0_INVNUM']);
+            $checkout->status = 'paid';
+            $checkout->save();
+            return 'يييي نصبت عليك ابلع برضو';
+        }
+        return 'بتتهبل؟ ';
     }
 }

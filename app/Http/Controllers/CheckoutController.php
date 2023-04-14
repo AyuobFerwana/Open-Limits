@@ -61,9 +61,6 @@ class CheckoutController extends Controller
             //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
 
-            if ($quantity >= 10) {
-                $price *= 0.9; // 10% discount for quantities of 10 or more
-            }
             $total += $quantity * $price;
         }
 

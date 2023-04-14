@@ -681,9 +681,12 @@
                 town: document.getElementById('town').value,
                 address: document.getElementById('address').value,
             }
-            axios.post('{{ route('checkout.pay') }}', data)
+            axios.post('{{ route('payment') }}', data)
                 .then((response) => {
                     toastr.success(response.data.message);
+                    setTimeout(() => {
+                        window.location.href = response.data.link;
+                    }, 1000);
                 })
                 .catch((error) => {
                     toastr.error(error.response.data.message);

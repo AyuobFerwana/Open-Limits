@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StripeController;
+use App\Models\Checkout;
 use Illuminate\Support\Facades\Route;
 
 use Illuminate\Http\Request;
@@ -51,12 +52,12 @@ Route::put('/cart/{product}', [CartController::class, 'changeQuantity']);
 
 // CheckOut
 Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-Route::middleware('auth')->post('/checkout/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::post('/checkout/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
 
 // Payment
-Route::get('Payment', [PayPalController::class, 'payment'])->name('payment');
+Route::post('payment', [PayPalController::class, 'payment'])->name('payment');
 Route::get('cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
-Route::get('success', [PayPalController::class, 'success'])->name('payment.success');
+Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
 
 
 
@@ -126,34 +127,10 @@ Route::middleware(['guest', 'throttle:authentication'])->group(function () {
 // Route::delete('RestoreStoreDestroy/{id}',  [StoreController::class, 'RestoreStoreDestroy'])->name('store.RestoreStoreDestroy');
 
 
-Route::get('test', function () {
-    $provider = \PayPal::setProvider();
-    $provider->getAccessToken();
-    $data = json_decode('{
-        "intent": "CAPTURE",
-        "purchase_units": [
-          {
-            "amount": {
-              "currency_code": "USD",
-              "value": "69.00"
-            }
-          }
-        ]
-    }', true);
-
-    $order = $provider->createOrder($data);
-    return $order;
-    $provider->authorizePaymentOrder($order['id']);
-    $test = $provider->capturePaymentOrder($order['id']);
-    return $test;
+Route::get('/test', function() {
+    $checkouts = Checkout::with('products')->get();
+    dd($checkouts);
 });
-Route::get('test2/{order_id}', function ($order_id) {
-    $provider = \PayPal::setProvider();
-    $provider->getAccessToken();
-    $order = $provider->capturePaymentOrder($order_id);
-    return $order;
-});
-
 
 //  Stripe
 Route::get('/stripe', [StripeController::class, 'showUpdatePaymentMethodForm'])->name('stripeMetod');

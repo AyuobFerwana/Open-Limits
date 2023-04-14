@@ -234,14 +234,13 @@
                                             href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
                                     </td>
                                     <td class="product-price" style=" text-align: center;" data-title="Price"><span
-                                            class="currency-symbol">$</span>{{$cart->product->flag == 'price' ?
+                                            class="currency-symbol">$</span>{{!$cart->product->flag ?
                                         $cart->product->price : $cart->product->discount}}</td>
                                     <td class="product-quantity" data-title="Qty" style=" text-align: center;">
                                         {{$cart->quantity}}
                                     </td>
                                     <td class="product-subtotal" data-title="Subtotal"><span
-                                            class="currency-symbol">$</span>{{$cart->quantity * ($cart->product->flag ==
-                                        'price' ? $cart->product->price : $cart->product->discount)}}</td>
+                                            class="currency-symbol">$</span>{{$cart->quantity * (!$cart->product->flag ? $cart->product->price : $cart->product->discount)}}</td>
                                 </tr>
                                 @endforeach
 
