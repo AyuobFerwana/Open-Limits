@@ -31,6 +31,7 @@
         .toast-message {
             font-size: 14px !important;
         }
+
     </style>
 
 </head>
@@ -44,8 +45,7 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-dropdown">
                             <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     English
                                 </button>
                                 <ul class="dropdown-menu">
@@ -54,8 +54,7 @@
                                 </ul>
                             </div>
                             <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                                    aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     USD
                                 </button>
                                 <ul class="dropdown-menu">
@@ -116,9 +115,7 @@
                     <div class="header-action">
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
-                                <input type="search" class="placeholder product-search-input" name="search2"
-                                    id="search2" value="" maxlength="128" placeholder="?What are you looking for"
-                                    autocomplete="off">
+                                <input type="search" class="placeholder product-search-input" name="search2" id="search2" value="" maxlength="128" placeholder="?What are you looking for" autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -152,8 +149,7 @@
                                     </ul>
                                     @if (auth()->guest())
                                     <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a
-                                            href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
+                                    <div class="reg-footer text-center">No account yet? <a href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
                                     </div>
                                     @endif
                                 </div>
@@ -203,8 +199,7 @@
                             <div class="axil-checkout-notice">
                                 <div class="axil-toggle-box">
                                     @if (auth()->guest())
-                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a
-                                            href="{{ route('login') }}" class="toggle-btn">Click here to
+                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a href="{{ route('login') }}" class="toggle-btn">Click here to
                                             login</a>
                                     </div>
                                     @endif
@@ -217,11 +212,12 @@
                                         <div class="form-group">
                                             <label>Full Name <span>*</span></label>
                                             @if (auth()->check() && auth()->user()->id !== $user->id)
-                                            <input type="text" value="{{ auth()->user()->UsersName }}" {{ auth()->check() && auth()->user()->id
-                                                === $user->id ? '' : 'disabled' }}>
+                                            <input type="text" value="{{ auth()->user()->UsersName }}" {{
+                                                auth()->check() && auth()->user()->id
+                                            === $user->id ? '' : 'disabled' }}>
                                             @else
                                             <input type="text" value="" {{ auth()->check() && auth()->user()->id
-                                                === $user->id ? '' : 'disabled' }}>
+                                            === $user->id ? '' : 'disabled' }}>
                                             @endif
                                         </div>
                                     </div>
@@ -239,8 +235,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Street Address <span>*</span></label>
-                                    <input type="text" id="address" class="mb--15"
-                                        placeholder="House number and street name">
+                                    <input type="text" id="address" class="mb--15" placeholder="House number and street name">
                                 </div>
                                 <div class="form-group">
                                     <label>Town/ City <span>*</span></label>
@@ -249,21 +244,24 @@
                                 <div class="form-group">
                                     <label>Phone <span>*</span></label>
                                     @if (auth()->check() && auth()->user()->id !== $user->id)
-                                    <input type="number" value="{{ auth()->user()->phone }}" {{ auth()->check() && auth()->user()->id
-                                        === $user->id ? '' : 'disabled' }}>
+                                    <input type="number" value="{{ auth()->user()->phone }}" {{ auth()->check() &&
+                                    auth()->user()->id
+                                    === $user->id ? '' : 'disabled' }}>
                                     @else
                                     <input type="number" value="" {{ auth()->check() && auth()->user()->id
-                                        === $user->id ? '' : 'disabled' }}>
+                                    === $user->id ? '' : 'disabled' }}>
                                     @endif
                                 </div>
                                 <div class="form-group">
                                     <label>Email Address <span>*</span></label>
 
-                                        @if (auth()->check() && auth()->user()->id !== $user->id)
-                                        <input type="email" value="{{ auth()->user()->email }}" {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
-                                        @else
-                                        <input type="email" value="" {{ auth()->check() && auth()->user()->id === $user->id ? '' : 'disabled' }}>
-                                        @endif
+                                    @if (auth()->check() && auth()->user()->id !== $user->id)
+                                    <input type="email" value="{{ auth()->user()->email }}" {{ auth()->check() &&
+                                    auth()->user()->id === $user->id ? '' : 'disabled' }}>
+                                    @else
+                                    <input type="email" value="" {{ auth()->check() && auth()->user()->id === $user->id
+                                    ? '' : 'disabled' }}>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -311,8 +309,7 @@
                                         <div class="input-group justify-content-between align-items-center">
                                             <input type="radio" id="radio6" name="payment" checked>
                                             <label for="radio6">Paypal</label>
-                                            <img src="{{ asset('fas/assets/images/others/payment.png') }}"
-                                                alt="Paypal payment">
+                                            <img src="{{ asset('fas/assets/images/others/payment.png') }}" alt="Paypal payment">
                                         </div>
                                         <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
                                             account.</p>
@@ -397,16 +394,14 @@
                             </a>
                         </div> -->
                             <div class="inner">
-                                <p>685 Market Street, <br>
-                                    Las Vegas, LA 95820, <br>
-                                    United States.
-                                </p>
+                                <p><i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
+
                                 <ul class="support-list-item">
-                                    <li><a href="mailto:example@domain.com"><i class="fal fa-envelope-open"></i>
-                                            example@domain.com</a></li>
-                                    <li><a href="tel:(+01)850-315-5862"><i class="fal fa-phone-alt"></i> (+01)
-                                            850-315-5862</a></li>
-                                    <!-- <li><i class="fal fa-map-marker-alt"></i> 685 Market Street,  <br> Las Vegas, LA 95820, <br> United States.</li> -->
+                                    <li><a href="https://mail.google.com/mail/u/0/#inbox"> <i
+                                                class="fal fa-envelope-open"></i> &nbsp;
+                                            {{ $support->email }}</a></li>
+                                    <li><a href="tel:{{ $support->phone }}"> <i class="fal fa-phone-alt"></i> &nbsp;
+                                            {{ $support->phone }}</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -418,11 +413,11 @@
                             <h5 class="widget-title">Account</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="my-account.html">My Account</a></li>
-                                    <li><a href="sign-up.html">Login / Register</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="wishlist.html">Wishlist</a></li>
-                                    <li><a href="shop.html">Shop</a></li>
+                                    <li><a href="{{route('home')}}">My Account</a></li>
+                                    <li><a href="{{ route('login') }}">Login / Register</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -479,11 +474,11 @@
                 <div class="row align-items-center">
                     <div class="col-xl-4">
                         <div class="social-share">
-                            <a href="#"><i class="fab fa-facebook-f"></i></a>
-                            <a href="#"><i class="fab fa-instagram"></i></a>
-                            <a href="#"><i class="fab fa-twitter"></i></a>
-                            <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="#"><i class="fab fa-discord"></i></a>
+                            <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                            <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                            <a href="https://twitter.com"><i class="fab fa-twitter"></i></a>
+                            <a href="https://www.linkedin.com/feed/"><i class="fab fa-linkedin-in"></i></a>
+                            <a href="https://discord.com"><i class="fab fa-discord"></i></a>
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
@@ -492,6 +487,7 @@
                                 <li> ©
                                     <script>
                                         document.write(new Date().getFullYear());
+
                                     </script>
                                     , made with ❤️ by
                                     <a target="_blank" class="footer-link fw-bolder">Ayuob Ferwana</a>
@@ -500,8 +496,7 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
-                        <div
-                            class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
+                        <div class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
                                 <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}" alt="paypal cart">
@@ -527,8 +522,7 @@
             <div class="card-header">
                 <form action="#">
                     <div class="input-group">
-                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
-                            id="prod-search" placeholder="Write Something....">
+                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search" id="prod-search" placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
@@ -561,10 +555,8 @@
                     @foreach ($carts as $cart)
                     <li class="cart-item">
                         <div class="item-img">
-                            <a href="{{ route('front.productItem', $cart->product_id) }}"><img
-                                    src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
-                            <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i
-                                    class="fas fa-times"></i></button>
+                            <a href="{{ route('front.productItem', $cart->product_id) }}"><img src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i class="fas fa-times"></i></button>
                         </div>
                         <div class="item-content">
                             <h3 class="item-title"><a href="{{ route('front.productItem', $cart->product_id) }}">{{
@@ -574,14 +566,16 @@
                                 $cart->product->price : $cart->product->discount }}
                             </div>
 
-                            <div class="pro-qty item-quantity">
-                                <span class="dec qtybtn"
-                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
-                                    value="{{ $cart->quantity }}">
-                                <span class="inc qtybtn"
-                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                            </div>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
+                                'price' ? $cart->product->price : $cart->product->discount}}</div>
+                                <div class="pro-qty item-quantity">
+                                    <span class="dec qtybtn"
+                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                        value="{{ $cart->quantity }}">
+                                    <span class="inc qtybtn"
+                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                                </div>
                         </div>
                     </li>
                     @endforeach
@@ -673,25 +667,26 @@
             }, 1);
         }
 
-     
+
 
         function payNow() {
             let data = {
-                region: document.getElementById('region').value,
-                town: document.getElementById('town').value,
-                address: document.getElementById('address').value,
-            }
+                region: document.getElementById('region').value
+                , town: document.getElementById('town').value
+                , address: document.getElementById('address').value
+            , }
             axios.post('{{ route('payment') }}', data)
                 .then((response) => {
                     toastr.success(response.data.message);
                     setTimeout(() => {
-                        window.location.href = response.data.link;
+                        //window.location.href = response.data.link;
                     }, 1000);
                 })
                 .catch((error) => {
                     toastr.error(error.response.data.message);
                 })
         }
+
     </script>
 </body>
 

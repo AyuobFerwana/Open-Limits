@@ -19,13 +19,10 @@
                     <tr>
                         <th>id</th>
                         <th>Logo</th>
-                        <th>Store</th>
-                        <th>Product Name</th>
-                        <th>Discreption</th>
-                        <th>Purchase</th>
-                        <th>Flag</th>
-                        <th>Created_at</th>
-                        <th>Setting</th>
+                        <th>Product</th>
+                        <th>Quntity</th>
+                        <th>Price</th>
+                        <th>Total</th>
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">

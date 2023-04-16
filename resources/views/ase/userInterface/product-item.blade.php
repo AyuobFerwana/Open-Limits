@@ -311,9 +311,6 @@
                                             Original Product
                                         </li>
                                     </ul>
-                                    <!-- End Product Action Wrapper  -->
-
-                                    <!-- End .product-desc-wrapper -->
                                 </div>
                             </div>
                         </div>
@@ -745,14 +742,14 @@
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
                                 'price' ? $cart->product->price : $cart->product->discount}}</div>
-                            <div class="pro-qty item-quantity">
-                                <span class="dec qtybtn"
-                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
-                                    value="{{ $cart->quantity }}">
-                                <span class="inc qtybtn"
-                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                            </div>
+                                <div class="pro-qty item-quantity">
+                                    <span class="dec qtybtn"
+                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                        value="{{ $cart->quantity }}">
+                                    <span class="inc qtybtn"
+                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                                </div>
                         </div>
                     </li>
                     @endforeach
@@ -762,7 +759,8 @@
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount" id="price_total">${{$total}}</span>
+                    <span class="subtotal-amount">$<span id="carts-total">{{ $total }}</span></span>
+
                 </h3>
                 <div class="group-btn">
                     <a href="{{route('cart')}}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
@@ -823,7 +821,8 @@
                 toastr.success(response.data.message);
                 document.getElementById('cart-list-container').innerHTML = response.data.cartList;
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
-                document.getElementById('price_total').innerHTML = response.data.priceTotal;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+
 
                 $('.qtybtn').on('click', function() {
                     var $button = $(this);
@@ -854,6 +853,8 @@
                 toastr.success(response.data.message);
                 ref.closest('li').remove();
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+
             }).catch(() => {
                 toastr.error(error.response.data.message);
             })

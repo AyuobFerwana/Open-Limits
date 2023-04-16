@@ -81,6 +81,7 @@ class PayPalController extends Controller
             return response()->json([
                 'message' => 'Order has been placed successfully, you will be redirected shortly',
                 'link' => $response['paypal_link'],
+                'hhhh'=> $response, 
             ], Response::HTTP_CREATED);
         }
         return response()->json([
@@ -90,7 +91,7 @@ class PayPalController extends Controller
 
     public function cancel()
     {
-        return 'ابلع';
+        return response()->json(['message'=>'Payment Cancelled'], Response::HTTP_PAYMENT_REQUIRED);
     }
 
     public function success(Request $request)
@@ -101,8 +102,8 @@ class PayPalController extends Controller
             $checkout = Checkout::findOrFail($response['PAYMENTREQUEST_0_INVNUM']);
             $checkout->status = 'paid';
             $checkout->save();
-            return 'يييي نصبت عليك ابلع برضو';
+            return response()->json(['message'=>'Paid Success'] , Response::HTTP_OK);
         }
-        return 'بتتهبل؟ ';
+        return response()->json(['message'=>'Fail Payment'] , Response::HTTP_PAYMENT_REQUIRED);
     }
 }

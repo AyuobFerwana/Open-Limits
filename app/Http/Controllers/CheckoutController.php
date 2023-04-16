@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CheckoutController extends Controller
 {
-    public function checkout(Request $request , User $user)
+    public function checkout(Request $request , User $user ,Support $support)
     {
         if (Auth::check()) {
             $carts = $request->user()->carts;
@@ -38,8 +38,9 @@ class CheckoutController extends Controller
             }
             $total += $quantity * $price;
         }
+        $support = Support::first();
 
-        return response()->view('ase.cart.checkout', compact('carts', 'total' , 'user'));
+        return response()->view('ase.cart.checkout', compact('carts', 'total' , 'user' , 'support'));
     }
 
 

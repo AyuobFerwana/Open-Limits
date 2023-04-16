@@ -57,6 +57,12 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class)->with('product');
     }
 
+    
+    public function checkouts()
+    {
+        return $this->hasMany(Checkout::class);
+    }
+    
     // fULL name
     public function getFullNameAttribute()
     {
@@ -71,8 +77,4 @@ class User extends Authenticatable
         );
     }
 
-    public function checkouts()
-    {
-        return $this->hasMany(Checkout::class);
-    }
 }

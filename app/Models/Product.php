@@ -14,25 +14,18 @@ class Product extends Model
 
     protected $products = 'products';
 
-
-    public function purchases()
-    {
-        return $this->hasMany(Purchase::class)->withTrashed();
-    }
-
-
     public function category()
     {
         return $this->belongsTo(Category::class)->withTrashed();
     }
 
+    public function checkouts()
+    {
+        return $this->belongsToMany(Checkout::class)->withPivot('quantity');
+    }
     protected $casts = [
         'colors' => 'array',
         'size' => 'array',
     ];
 
-    public function checkouts()
-    {
-        return $this->belongsToMany(Checkout::class)->withPivot('quantity');
-    }
 }

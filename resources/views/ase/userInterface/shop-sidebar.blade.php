@@ -617,7 +617,7 @@
             <div class="cart-footer">
                 <h3 class="cart-subtotal">
                     <span class="subtotal-title">Subtotal:</span>
-                    <span class="subtotal-amount">${{$total}}</span>
+                    <span class="subtotal-amount">$<span id="carts-total">{{$total}}</span></span>
                 </h3>
                 <div class="group-btn">
                     <a href="{{ route('cart') }}" class="axil-btn btn-bg-primary viewcart-btn">View Cart</a>
@@ -690,6 +690,8 @@
                 toastr.success(response.data.message);
                 document.getElementById('cart-list-container').innerHTML = response.data.cartList;
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+
                 $('.qtybtn').on('click', function() {
                     var $button = $(this);
                     var oldValue = $button.parent().find('input').val();
@@ -725,6 +727,8 @@
                 toastr.success(response.data.message);
                 ref.closest('li').remove();
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+
 
             }).catch(() => {
                 toastr.error(error.response.data.message);
