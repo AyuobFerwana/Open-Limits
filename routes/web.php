@@ -75,6 +75,10 @@ Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(funct
     // ReSet Password
     Route::get('/Reset-Password', [UserController::class, 'resetPass'])->name('user.resetPass');
     Route::put('/update-Password', [UserController::class, 'updatePasswod'])->name('user.updatePasswod');
+    
+    // Purchase
+    Route::get('purchase', [CheckoutController::class, 'purchase'])->name('purchase');
+    Route::delete('purchase', [CheckoutController::class, 'destroy'])->name('purchase.destroy');
 });
 
 // Admin Role
@@ -101,9 +105,6 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::get('restoreCategory', [CategoryController::class, 'RestoreAll'])->name('category.Restore.all');
     Route::delete('RestoreCategoryDestroy/{id}',  [CategoryController::class, 'Restoredestroy'])->name('category.Restoredestroy');
 
-    // Purchase
-    Route::get('purchase', [PurchaseController::class, 'index'])->name('purchase.index');
-    Route::delete('purchase', [PurchaseController::class, 'destroy'])->name('purchase.destroy');
 });
 // login & Register
 Route::middleware(['guest', 'throttle:authentication'])->group(function () {
@@ -126,15 +127,3 @@ Route::middleware(['guest', 'throttle:authentication'])->group(function () {
 // Route::get('restoreAll', [StoreController::class, 'restoreAll'])->name('store.restore.all');
 // Route::delete('RestoreStoreDestroy/{id}',  [StoreController::class, 'RestoreStoreDestroy'])->name('store.RestoreStoreDestroy');
 
-
-Route::get('/test', function() {
-    $checkouts = Checkout::with('products')->get();
-    dd($checkouts);
-});
-
-//  Stripe
-Route::get('/stripe', [StripeController::class, 'showUpdatePaymentMethodForm'])->name('stripeMetod');
-
-Route::get('/billing-portal', function (Request $request) {
-    return $request->user()->redirectToBillingPortal(route('home'));
-});

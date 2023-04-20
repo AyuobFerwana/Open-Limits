@@ -42,8 +42,8 @@ class UserController extends Controller
     {
         $validator = Validator($request->all(), [
             'UsersName' => 'required|string|min:3',
-            'email' => 'required|string|unique',
-            'phone' => 'required|string|min:10',
+            'email' => 'required|string|unique:users,email',
+            'phone' => 'required|string|unique:users,phone|min:10',
             'password' => 'required|confirmed|min:8|max:50',
             'password_confirmation' => 'required|string|min:8|max:50',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
@@ -51,10 +51,11 @@ class UserController extends Controller
 
         if (!$validator->fails()) {
             $users = new User();
-            $users->UserName = $request->input('UserName');
+            $users->UsersName = $request->input('UsersName');
             $users->email = $request->input('email');
             $users->phone = $request->input('phone');
             $users->password = Hash::make($request->input('password'));
+            $users->role ='user';
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '_' . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
@@ -96,8 +97,8 @@ class UserController extends Controller
     {
         $validator = Validator($request->all(), [
             'UsersName' => 'required|string|min:3',
-            'email' => 'required|string|unique',
-            'phone' => 'required|string|min:10',
+            'email' => 'required|string|unique:users,email',
+            'phone' => 'required|string|unique:users,phone|min:10',
             'password' => 'required|confirmed|min:8|max:50',
             'password_confirmation' => 'required|string|min:8|max:50',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
@@ -108,6 +109,7 @@ class UserController extends Controller
             $users->email = $request->input('email');
             $users->phone = $request->input('phone');
             $users->password = Hash::make($request->input('password'));
+            $users->role ='user';
             if ($request->hasFile('image')) {
                 Storage::disk('public')->delete('' . $users->image);
                 $file = $request->file('image');

@@ -33,28 +33,9 @@
 
                         <div class="mb-3">
                             <label class="form-label" for="Name Users">PHONE NUMBER</label>
-                            <input type="number" class="form-control" value="{{$users->phone}}" id="phone"
+                            <input type="number" class="form-control" value="{{ $users->phone }}" id="phone"
                                 placeholder="220 155 198" />
                         </div>
-
-
-                        <div class="input-group input-group-merge">
-                            <input type="password" id="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
-                            <span class="input-group-text cursor-pointer"><i
-                                    class="bx bx-hide"></i><strong>{{$message}}</span>
-                        </div>
-
-                        <div class="input-group input-group-merge">
-                            <input type="password_confirmation" id="password_confirmation"
-                                class="form-control  @error('password') is-invalid @enderror"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
-                            @error('password')
-                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                            @enderror
 
                         </div>
 
@@ -78,17 +59,18 @@
 <script>
     function updateUser() {
             let formData = new FormData();
-            formData.append('_method','PUT');
             formData.append('UsersName', document.getElementById('UsersName').value);
             formData.append('email', document.getElementById('email').value);
             formData.append('phone', document.getElementById('phone').value);
             formData.append('password', document.getElementById('password').value);
             formData.append('password_confirmation', document.getElementById('password_confirmation').value);
+            formData.append('_method','PUT');
 
             if (document.getElementById('image').files.length > 0) {
                 formData.append('image', document.getElementById('image').files[0]);
             }
-            axios.post('{{ route('users.update',$users) }}', formData)
+            axios.post('{{ route('users.update', $users->id )}}', formData )
+
                 .then(function(response) {
                     toastr.success(response.data.message);
                     console.log(response);

@@ -28,7 +28,7 @@
     <link rel="stylesheet" href="{{ asset('js/toastr/toastr.min.css') }}">
     <style>
         .toast-message {
-            font-size: 14px !important;
+            font-size: 16px !important;
         }
     </style>
 </head>
@@ -240,7 +240,8 @@
                                         {{$cart->quantity}}
                                     </td>
                                     <td class="product-subtotal" data-title="Subtotal"><span
-                                            class="currency-symbol">$</span>{{$cart->quantity * (!$cart->product->flag ? $cart->product->price : $cart->product->discount)}}</td>
+                                            class="currency-symbol">$</span>{{$cart->quantity * (!$cart->product->flag ?
+                                        $cart->product->price : $cart->product->discount)}}</td>
                                 </tr>
                                 @endforeach
 
@@ -679,16 +680,16 @@
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
                                 $cart->product->price : $cart->product->discount}}</div>
 
-                                <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
-                                    'price' ? $cart->product->price : $cart->product->discount}}</div>
-                                    <div class="pro-qty item-quantity">
-                                        <span class="dec qtybtn"
-                                            onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                        <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
-                                            value="{{ $cart->quantity }}">
-                                        <span class="inc qtybtn"
-                                            onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                                    </div>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
+                                'price' ? $cart->product->price : $cart->product->discount}}</div>
+                            <div class="pro-qty item-quantity">
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}">
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                            </div>
                         </div>
                     </li>
                     @endforeach

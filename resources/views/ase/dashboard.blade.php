@@ -178,7 +178,7 @@
                             Needs</span></li>
 
                     <li class="menu-item">
-                        <a href="{{ route('purchase.index') }}" class="menu-link">
+                        <a href="{{route('purchase')}}" class="menu-link">
                             <i class='menu-icon tf-icons bx bx-shopping-bag'></i>
                             <div data-i18n="Tables">Purchase</div>
                         </a>

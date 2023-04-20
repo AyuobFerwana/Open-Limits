@@ -19,7 +19,7 @@ class PayPalController extends Controller
     {
         if (!Auth::check()) {
             return response()->json([
-                'message' => 'Please login to place an order.',
+                'message' => '.Please login to place an order',
             ], Response::HTTP_BAD_REQUEST);
         }
 
@@ -81,7 +81,7 @@ class PayPalController extends Controller
             return response()->json([
                 'message' => 'Order has been placed successfully, you will be redirected shortly',
                 'link' => $response['paypal_link'],
-                'hhhh'=> $response, 
+                'hhhh' => $response,
             ], Response::HTTP_CREATED);
         }
         return response()->json([
@@ -91,7 +91,7 @@ class PayPalController extends Controller
 
     public function cancel()
     {
-        return response()->json(['message'=>'Payment Cancelled'], Response::HTTP_PAYMENT_REQUIRED);
+        return response()->json(['message' => 'Payment Cancelled'], Response::HTTP_PAYMENT_REQUIRED);
     }
 
     public function success(Request $request)
@@ -102,8 +102,15 @@ class PayPalController extends Controller
             $checkout = Checkout::findOrFail($response['PAYMENTREQUEST_0_INVNUM']);
             $checkout->status = 'paid';
             $checkout->save();
-            return response()->json(['message'=>'Paid Success'] , Response::HTTP_OK);
+
+            $message = '!Payment successful';
+            $type = 'success';
+        } else {
+            $message = '!Payment failed';
+            $type = 'error';
         }
-        return response()->json(['message'=>'Fail Payment'] , Response::HTTP_PAYMENT_REQUIRED);
+
+        return redirect()->route('checkout')
+            ->with('toastr', ['type' => $type, 'message' => $message]);
     }
 }

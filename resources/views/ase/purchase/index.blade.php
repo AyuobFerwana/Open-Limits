@@ -26,42 +26,35 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($purchases as $purchase)
+                    @foreach ($checkouts as $checkout)
+                    @foreach ($checkout->products as $product)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
+
                         <td class="align-middle white-space-nowrap py-0">
                             <img src="{{ Storage::url($product->product->image) }}" alt="Product-image" width="53"
                                 style="border-radius: 10px;">
                         </td>
-                        {{-- <td>{{ $purchase->product->store->name }}</td> --}}
-                        <td>{{ $purchase->product->productName }}</td>
-                        {{-- <td>{{ $purchase->product->discreption }}</td>
-                        <td>{{ $purchase->product->price }}</td> --}}
-                        <td>{{ $purchase->product->flag == 'price' ? $purchase->product->price :
-                            $purchase->product->discount }}
 
-                        <td>{{ $purchase->product->discount }}</td>
-                        <td>
-                            @if ($purchase->flag)
-                            <h6 style="color:#ff0000"> Discount</h6>
-                            @else
-                            <h6 style="color:rgb(43, 255, 0)"> Price</h6>
-                            @endif
+                        <td>{{ $product->product->productName }}</td>
+
+                        <td>{{ $product->product->quntity }}</td>
+
+                        <td> {{ !$product->product->flag ? $product->product->price : $product->product->discount }}
                         </td>
-                        <td>{{ $purchase->created_at }}</td>
-
 
                         <td>
                             <div class="btn-group">
-                                <button type="button" onclick="performDestroy('{{ $purchase->product->id }}',this)"
+                                <button type="button" onclick="performDestroy('{{ $checkout->product->id }}',this)"
                                     class="btn btn-square btn-outline-danger m-0.1 border-rad">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </div>
                         </td>
-        </div>
-        </tr>
-        @endforeach
+                    </div>
+                </tr>
+                @endforeach
+                <td>{{ $total }}</td>
         </tbody>
         </table>
     </div>

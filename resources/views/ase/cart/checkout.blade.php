@@ -29,7 +29,7 @@
 
     <style>
         .toast-message {
-            font-size: 14px !important;
+            font-size: 16px !important;
         }
 
     </style>
@@ -295,15 +295,6 @@
                                     </table>
                                 </div>
                                 <div class="order-payment-method">
-                                    <div class="single-payment">
-                                        <div class="input-group">
-                                            <input type="radio" id="radio4" name="payment">
-                                            <label for="radio4">Direct bank transfer</label>
-                                        </div>
-                                        <p>Make your payment directly into our bank account. Please us your Order ID as
-                                            the payment reference. Your order will not be shipped until the funds have
-                                            cleared in our account.</p>
-                                    </div>
 
                                     <div class="single-payment">
                                         <div class="input-group justify-content-between align-items-center">
@@ -679,7 +670,7 @@
                 .then((response) => {
                     toastr.success(response.data.message);
                     setTimeout(() => {
-                        //window.location.href = response.data.link;
+                        window.location.href = response.data.link;
                     }, 1000);
                 })
                 .catch((error) => {
@@ -688,6 +679,15 @@
         }
 
     </script>
+
+
+    @if (session('toastr'))
+    <script>
+        var toastrData = {!! json_encode(session('toastr')) !!};
+        toastr[toastrData.type](toastrData.message);
+    </script>
+@endif
+
 </body>
 
 </html>

@@ -56,7 +56,7 @@
           <div class="card-body">
             <!-- Logo -->
             <div class="app-brand justify-content-center">
-              <a href="{{route('login.post')}}" class="logo logo-dark">
+              <a href="{{route('front.index')}}" class="logo logo-dark">
                 <img src="{{asset('fas/assets/images/logo/logo2.png')}}" alt="Site Logo">
               </a>
             </div>

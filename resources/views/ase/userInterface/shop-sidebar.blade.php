@@ -214,7 +214,7 @@
                     <div class="col-lg-6 col-md-4">
                         <div class="inner">
                             <div class="bradcrumb-thumb">
-                                <img src="{{ asset('fas/assets/images/product/product-45.png') }}" alt="Image">
+                                <img src="{{ asset('fas/assets/images/logo/logo-large.png') }}" style="width: 90px ; height: 100px;" alt="Image">
                             </div>
                         </div>
                     </div>

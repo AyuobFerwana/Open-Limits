@@ -51,7 +51,7 @@ class RouteServiceProvider extends ServiceProvider
 
 
         RateLimiter::for('authentication' ,function(Request $request){
-            return Limit::perMinute(6);
+            return Limit::perMinute(10);
         });
         
     }

@@ -247,7 +247,7 @@
                             <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200"
                                 data-sal-duration="500">
                                 <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
-                                    <img class="img-fluid" style="width: 300px; height: 150px; !important "
+                                    <img class="img-fluid" style="width:300px; height: 150px; !important "
                                         src="{{ Storage::url($categorie->image) }}" alt="product categorie">
                                     <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
                                 </a>
