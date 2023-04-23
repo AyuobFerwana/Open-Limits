@@ -283,14 +283,15 @@
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
                                                 <li class="quickview"><a onclick="quickView({{ $product->id }})"
-                                                        data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i
+                                                        data-bs-toggle="modal"
+                                                        data-bs-target="#quick-view-modal"><i
                                                             class="far fa-eye"></i></a></li>
-
                                                 <li class="select-option">
-                                                    <a onclick="addProductToCart({{$product->id}})">Add to Cart</a>
+                                                    <a onclick="addProductToCart({{ $product->id }})">Add to
+                                                        Cart</a>
                                                 </li>
-                                                <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
-
+                                                <li class="wishlist"><a href="#"><i
+                                                            class="far fa-heart"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -566,7 +567,7 @@
                     <span class="filter-results">Result (<span style="color: #3577F0; font-size:19px;">{{
                             $products->count() }}</span>)
                         Found</span>
-                    <a href="shop.html" class="view-all">View All</a>
+                    <a href="{{route('front.sidebar')}}" class="view-all">View All</a>
                 </div>
                 <div class="psearch-results" id="searchContainer">
 

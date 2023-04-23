@@ -13,6 +13,8 @@ class Product extends Model
 
 
     protected $products = 'products';
+    protected $guarded = [];
+
 
     public function category()
     {

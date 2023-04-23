@@ -101,6 +101,8 @@ class PayPalController extends Controller
         if (in_array(strtoupper($response['ACK']), ['SUCCESS', 'SUCCESSWITHWARNING'])) {
             $checkout = Checkout::findOrFail($response['PAYMENTREQUEST_0_INVNUM']);
             $checkout->status = 'paid';
+            $checkout->amount = $response['AMT'];
+            
             $checkout->save();
 
             $message = '!Payment successful';

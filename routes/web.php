@@ -77,7 +77,7 @@ Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(funct
     Route::put('/update-Password', [UserController::class, 'updatePasswod'])->name('user.updatePasswod');
     
     // Purchase
-    Route::get('purchase', [CheckoutController::class, 'purchase'])->name('purchase');
+    Route::get('purchase', [PurchaseController::class, 'index'])->name('purchase.index');
     Route::delete('purchase', [CheckoutController::class, 'destroy'])->name('purchase.destroy');
 });
 

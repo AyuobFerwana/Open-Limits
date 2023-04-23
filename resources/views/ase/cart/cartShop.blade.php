@@ -679,9 +679,6 @@
                             </h3>
                             <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
                                 $cart->product->price : $cart->product->discount}}</div>
-
-                            <div class="item-price"><span class="currency-symbol">$</span>{{$cart->product->flag ==
-                                'price' ? $cart->product->price : $cart->product->discount}}</div>
                             <div class="pro-qty item-quantity">
                                 <span class="dec qtybtn"
                                     onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>

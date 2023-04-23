@@ -60,7 +60,7 @@ class User extends Authenticatable
     
     public function checkouts()
     {
-        return $this->hasMany(Checkout::class);
+        return $this->hasMany(Checkout::class)->with('products');
     }
     
     // fULL name

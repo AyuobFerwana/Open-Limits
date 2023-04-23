@@ -63,8 +63,8 @@ class CartController extends Controller
             $isSaved = $cart->save();
 
             $carts = Cart::where('user_id', $request->user()->id)->get();
+            
             $total = 0;
-
             foreach ($carts as $cart) {
                 $product = $cart->product;
                 $quantity = $cart->quantity;

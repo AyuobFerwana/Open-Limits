@@ -11,9 +11,11 @@
 <div class="container-xxl flex-grow-1 container-p-y">
     <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> Purchase /</span> Transactions </h4>
 
-    <div class="card">
+    @foreach ($checkouts as $checkout)
+    <div class="card mb-5">
         <h5 class="card-header"> Purchase Transactions </h5>
         <div class="table-responsive text-nowrap">
+
             <table class="table">
                 <thead>
                     <tr>
@@ -22,42 +24,46 @@
                         <th>Product</th>
                         <th>Quntity</th>
                         <th>Price</th>
-                        <th>Total</th>
+                        <th>Setting</th>
+
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($checkouts as $checkout)
-                    @foreach ($checkout->products as $product)
+                    @foreach ($checkout->products as $checkoutDatas)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
 
                         <td class="align-middle white-space-nowrap py-0">
-                            <img src="{{ Storage::url($product->product->image) }}" alt="Product-image" width="53"
-                                style="border-radius: 10px;">
+                            <img src="{{ Storage::url($checkoutDatas->image) }}" alt="Product-image" width="100"
+                                height="90" style="border-radius: 10px;">
                         </td>
 
-                        <td>{{ $product->product->productName }}</td>
+                        <td>{{ $checkoutDatas->productName }}</td>
 
-                        <td>{{ $product->product->quntity }}</td>
+                        <td>{{ $checkoutDatas->pivot->quantity }}</td>
 
-                        <td> {{ !$product->product->flag ? $product->product->price : $product->product->discount }}
+                        <td> {{ !$checkoutDatas->flag ? $checkoutDatas->price : $checkoutDatas->discount }}
                         </td>
 
                         <td>
                             <div class="btn-group">
-                                <button type="button" onclick="performDestroy('{{ $checkout->product->id }}',this)"
-                                    class="btn btn-square btn-outline-danger m-0.1 border-rad">
-                                    <i class="fas fa-trash"></i>
-                                </button>
+                                <a onclick="performDestroy('{{ $checkoutDatas->id }}',this)" style="color:aliceblue"
+                                    class="btn btn-danger">Delete</a>
                             </div>
                         </td>
-                    </div>
-                </tr>
-                @endforeach
-                <td>{{ $total }}</td>
-        </tbody>
-        </table>
+                    </tr>
+                    @endforeach
+                    @if ($checkout->amount == null)
+                    @else
+                    <td class="text-center" style="color: black">Total : <span style="color:#8321B9 ">${{$checkout->amount }}</span></td>
+                        
+                    @endif
+                </tbody>
+            </table>
+
+        </div>
     </div>
+    @endforeach
 </div>
 @endsection
 
