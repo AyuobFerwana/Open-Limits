@@ -30,6 +30,12 @@
         .toast-message {
             font-size: 16px !important;
         }
+
+        
+        .bg_image--5 {
+            background-image: url({{asset('fas/assets/images/logo/sub.jpg')}});
+        }
+
     </style>
 
 
@@ -374,12 +380,11 @@
             <div class="container">
                 <div class="etrade-newsletter-wrapper bg_image bg_image--5">
                     <div class="newsletter-content">
-                        <span class="title-highlighter highlighter-primary2"><i
-                                class="fas fa-envelope-open"></i>Newsletter</span>
+                        <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
                         <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
                         <div class="input-group newsletter-form">
                             <div class="position-relative newsletter-inner mb--15">
-                                <input placeholder="example@gmail.com" type="text">
+                                <input placeholder="example@gmail.com" type="text" id="email">
                             </div>
                             <button type="submit" class="axil-btn mb--15">Subscribe</button>
                         </div>
@@ -819,6 +824,18 @@
                 toastr.error(error.response.data.message);
             })
         }
+
+     //Subscribe
+     function Subscribe(d) {
+        axios.get(`/subscribe/${d}`)
+            .then(function(response) {
+                console.log(response);
+                document.getElementById('subscribe').innerHTML = response.data;
+            })
+            .catch(function(error) {
+                console.log(error);
+            });
+    }
     </script>
 
 </body>

@@ -11,6 +11,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
 use App\Http\Controllers\StoreController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\SubscribeController;
 use App\Models\Checkout;
 use Illuminate\Support\Facades\Route;
 
@@ -28,19 +29,22 @@ use Illuminate\Http\Request;
 */
 
 
+
+
 // logout
 Route::middleware('auth')->group(function () {
 
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 });
 
+// Subscribe
+Route::get('/subscribe/{newsLatter}',[SubscribeController::class , 'subscribe'])->name('subscribe');
 
 // User Inter FAce
 Route::get('/', [FrontController::class, 'index'])->name('front.index');
 Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
 Route::get('/product/search', [FrontController::class, 'productSearch']);
 Route::get('/product/quickView/{product}', [FrontController::class, 'quickView'])->name('front.quickView');
-
 Route::get('/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
 
 
@@ -59,12 +63,9 @@ Route::post('payment', [PayPalController::class, 'payment'])->name('payment');
 Route::get('cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
 Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
 
-
-
-
-
 // Authentication
 Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(function () {
+
     // Dashboard
     Route::view('/', 'ase.dashboard')->name('home');
 
@@ -106,6 +107,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::delete('RestoreCategoryDestroy/{id}',  [CategoryController::class, 'Restoredestroy'])->name('category.Restoredestroy');
 
 });
+
 // login & Register
 Route::middleware(['guest', 'throttle:authentication'])->group(function () {
     Route::view('/login', 'ase.auth.login')->name('login');
