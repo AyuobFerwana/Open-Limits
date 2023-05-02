@@ -1,7 +1,7 @@
 @foreach ($products as $product)
 <div class="axil-product-list">
     <div class="thumbnail">
-        <a href="single-product.html">
+        <a href="{{ route('front.productItem', $product->id) }}">
             <img src="{{Storage::url($product->image)}}" width="100px" alt="Yantiti Leather Bags">
         </a>
     </div>
