@@ -20,6 +20,7 @@
             <span class="price current-price">${{$product->price}}</span>
         </div>
         @endif
+        
     </div>
 </div>
 @endforeach
