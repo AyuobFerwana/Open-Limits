@@ -194,6 +194,7 @@
         <div class="axil-checkout-area axil-section-gap">
             <div class="container">
                 <form id="form" onsubmit="event.preventDefault(); payNow();">
+                    @csrf
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="axil-checkout-notice">
@@ -512,6 +513,7 @@
         <div class="header-search-wrap">
             <div class="card-header">
                 <form action="#">
+                    @csrf
                     <div class="input-group">
                         <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search" id="prod-search" placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
@@ -616,7 +618,7 @@
     <script>
         //Product Search
         function productSearch(e) {
-            axios.get(`/product/search?q=${e.value}`)
+            axios.get(`/openLimits/search?q=${e.value}`)
                 .then(function(response) {
                     console.log(response);
                     document.getElementById('searchContainer').innerHTML = response.data;
@@ -628,16 +630,22 @@
 
         // Remove Product from Slide Cart
         function removeProduct(id, ref) {
-            let url = `/cart/${id}`;
+            console.log('Removing product with ID ' + id);
+            let url = `/openLimits/cart/${id}`;
             axios.delete(url).then((response) => {
-                toastr.success(response.data.message);
-                ref.closest('li').remove();
-                document.getElementById('carts-count').innerHTML = response.data.cartCount;
-            }).catch(() => {
-                toastr.error(error.response.data.message);
+              console.log('Product removed successfully:', response);
+              toastr.success(response.data.message);
+              ref.closest('li').remove();
+              document.getElementById('carts-count').innerHTML = response.data.cartCount;
+              document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+            }).catch((error) => {
+              console.log('Error removing product:', error);
+              toastr.error(error.response.data.message);
             })
-        }
+          }
+          
 
+        
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
@@ -645,16 +653,18 @@
                 if (document.getElementById('quantity_' + id).value < 1) {
                     removeProduct(id, ref)
                 } else {
-                    axios.put(`/cart/${id}`, {
+                    axios.put(`/openLimits/cart/${id}`, {
                         type: type
                     }).then((response) => {
                         console.log(response.data);
+                        document.getElementById('carts-total').innerHTML = response.data.total;
                     }).catch((error) => {
                         console.log(error.response.data);
                     })
                 }
             }, 1);
         }
+        
 
 
 
@@ -669,7 +679,7 @@
                     toastr.success(response.data.message);
                     setTimeout(() => {
                         window.location.href = response.data.link;
-                    }, 1000);
+                    }, 100);
                 })
                 .catch((error) => {
                     toastr.error(error.response.data.message);

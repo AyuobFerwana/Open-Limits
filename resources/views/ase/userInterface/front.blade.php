@@ -33,7 +33,7 @@
 
         
         .bg_image--5 {
-            background-image: url({{asset('fas/assets/images/logo/sub.jpg')}});
+            background-image: url({{asset('fas/assets/images/logo/newsL3.png')}});
         }
 
     </style>
@@ -381,7 +381,7 @@
                 <div class="etrade-newsletter-wrapper bg_image bg_image--5">
                     <div class="newsletter-content">
                         <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
-                        <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
+                        <h2 class="title mb--40 mb_sm--30">Get weekly <br> update</h2>
                         <div class="input-group newsletter-form">
                             <div class="position-relative newsletter-inner mb--15">
                                 <input placeholder="example@gmail.com" type="text" id="email">
@@ -611,6 +611,7 @@
         <div class="header-search-wrap">
             <div class="card-header">
                 <form action="#">
+                    @csrf
                     <div class="input-group">
                         <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
                             id="prod-search" placeholder="Write Something....">
@@ -658,12 +659,9 @@
                                         class="currency-symbol">$</span>{{ !$cart->product->flag ? $cart->product->price : $cart->product->discount }}
                                 </div>
                                 <div class="pro-qty item-quantity">
-                                    <span class="dec qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                    <input type="number" class="quantity-input"
-                                        id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}">
-                                    <span class="inc qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                                    <span class="dec qtybtn" onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}">
+                                    <span class="inc qtybtn" onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
                                 </div>
                             </div>
                         </li>
@@ -737,7 +735,7 @@
     <script>
         //Product Search
         function productSearch(e) {
-            axios.get(`/product/search?q=${e.value}`)
+            axios.get(`/openLimits/search?q=${e.value}`)
                 .then(function(response) {
                     console.log(response);
                     document.getElementById('searchContainer').innerHTML = response.data;
@@ -749,25 +747,26 @@
 
         //Change Quantity
         function changeQuantity(id, type, ref) {
-            setTimeout(() => {
-                console.log(document.getElementById('quantity_' + id).value)
-                if (document.getElementById('quantity_' + id).value < 1) {
-                    removeProduct(id, ref)
-                } else {
-                    axios.put(`/cart/${id}`, {
-                        type: type
-                    }).then((response) => {
-                        console.log(response.data);
-                    }).catch((error) => {
-                        console.log(error.response.data);
-                    })
-                }
-            }, 1);
+            console.log(document.getElementById('quantity_' + id).value)
+            if (document.getElementById('quantity_' + id).value < 1) {
+                removeProduct(id, ref)
+            } else {
+                axios.put(`/openLimits/cart/${id}`, {
+                    type: type
+                }).then((response) => {
+                    console.log(response.data);
+                    document.getElementById('carts-total').innerHTML = response.data.total;
+                    document.getElementById('quantity_' + id).value = response.data.quantity;
+                }).catch((error) => {
+                    console.log(error.response.data);
+                })
+            }
         }
+        
 
         //QuickView
         function quickView(d) {
-            axios.get(`/product/quickView/${d}`)
+            axios.get(`/openLimits/quickView/${d}`)
                 .then(function(response) {
                     console.log(response);
                     document.getElementById('quickViewProduct').innerHTML = response.data;
@@ -779,7 +778,7 @@
 
         // Add Product to Cart
         function addProductToCart(id) {
-            let url = `/cart/add/${id}`;
+            let url = `/openLimits/cart/add/${id}`;
             let data = {
                 quantity: 1
             }
@@ -797,7 +796,7 @@
                         var newVal = parseFloat(oldValue) + 1;
                     } else {
                         // Don't allow decrementing below zero
-                        if (oldValue > 0) {
+                        if (oldValue > 0) { 
                             var newVal = parseFloat(oldValue) - 1;
                         } else {
                             newVal = 0;
@@ -812,18 +811,21 @@
         }
 
         // Remove Product from Slide Cart
-        function removeProduct(id, ref) {
-            let url = `/cart/${id}`;
-            axios.delete(url).then((response) => {
-                toastr.success(response.data.message);
-                ref.closest('li').remove();
-                document.getElementById('carts-count').innerHTML = response.data.cartCount;
-                document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+       function removeProduct(id, ref) {
+  console.log('Removing product with ID ' + id);
+  let url = `/openLimits/cart/${id}`;
+  axios.delete(url).then((response) => {
+    console.log('Product removed successfully:', response);
+    toastr.success(response.data.message);
+    ref.closest('li').remove();
+    document.getElementById('carts-count').innerHTML = response.data.cartCount;
+    document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+  }).catch((error) => {
+    console.log('Error removing product:', error);
+    toastr.error(error.response.data.message);
+  })
+}
 
-            }).catch(() => {
-                toastr.error(error.response.data.message);
-            })
-        }
 
      //Subscribe
      function Subscribe(d) {

@@ -23,17 +23,10 @@ class CartController extends Controller
         }
 
         $total = 0;
-
         foreach ($carts as $cart) {
             $product = $cart->product;
             $quantity = $cart->quantity;
-
-            //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
-
-            if ($quantity >= 10) {
-                $price *= 0.9; // 10% discount for quantities of 10 or more
-            }
             $total += $quantity * $price;
         }
         $support = Support::first();
@@ -68,13 +61,7 @@ class CartController extends Controller
             foreach ($carts as $cart) {
                 $product = $cart->product;
                 $quantity = $cart->quantity;
-
-                //apply any quantity-based discounts or price breaks
                 $price = $product->flag ? $product->discount : $product->price;
-
-                if ($quantity >= 10) {
-                    $price *= 0.9; // 10% discount for quantities of 10 or more
-                }
                 $total += $quantity * $price;
             }
             return response()->json([
@@ -108,13 +95,7 @@ class CartController extends Controller
             foreach ($carts as $cart) {
                 $product = $cart->product;
                 $quantity = $cart->quantity;
-
-                //apply any quantity-based discounts or price breaks
                 $price = $product->flag ? $product->discount : $product->price;
-
-                if ($quantity >= 10) {
-                    $price *= 0.9; // 10% discount for quantities of 10 or more
-                }
                 $total += $quantity * $price;
             }
             return response()->json([
@@ -129,74 +110,115 @@ class CartController extends Controller
 
     public function remove(Product $product, Request $request)
     {
-        if (Auth::check()) {
-            $deleted = Cart::where('user_id', $request->user()->id)->where('product_id', $product->id)->delete();
-            return response()->json([
-                'message' => $deleted ? 'Product Removed from cart successfully!' : 'Failed to remove product from cart, please try again later.',
-                'cartCount' => $request->user()->carts()->count(),
-
-            ], $deleted ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        } else {
-            $carts = Session::get('cart') ?? [];
-            $cartIndex = -1;
-            $isProductInCart = false;
-            foreach ($carts as $key => $value) {
-                if ($value->product_id == $product->id) {
-                    $isProductInCart = true;
-                    $cartIndex = $key;
-                    break;
-                }
-            }
-            if ($isProductInCart) {
-                unset($carts[$cartIndex]);
-                Session::put('cart', $carts);
-            }
-            return response()->json([
-                'message' => 'Product Removed from cart successfully!',
-                'cartCount' => count($carts),
-            ], Response::HTTP_OK);
+      if (Auth::check()) {
+        $cart = Cart::where('user_id', $request->user()->id)->where('product_id', $product->id)->first();
+        if ($cart) {
+          $cart->delete();
         }
+        $carts = Cart::where('user_id', $request->user()->id)->get();
+        $total = 0;
+        foreach ($carts as $cart) {
+          $product = $cart->product;
+          $quantity = $cart->quantity;
+          $price = $product->flag ? $product->discount : $product->price;
+          $total += $quantity * $price;
+        }
+        return response()->json([
+          'message' => $cart ? 'Product removed from cart successfully!' : 'Failed to remove product from cart, please try again later.',
+          'cartCount' => $request->user()->carts()->count(),
+          'cartTotal' => $total,
+        ], $cart ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+      } else {
+        $carts = Session::get('cart') ?? [];
+        $cartIndex = -1;
+        $isProductInCart = false;
+        foreach ($carts as $key => $value) {
+          if ($value->product_id == $product->id) {
+            $isProductInCart = true;
+            $cartIndex = $key;
+            break;
+          }
+        }
+        if ($isProductInCart) {
+          unset($carts[$cartIndex]);
+          Session::put('cart', $carts);
+        }
+        return response()->json([
+          'message' => 'Product removed from cart successfully!',
+          'cartCount' => count($carts),
+          'cartTotal' => 0,
+        ], Response::HTTP_OK);
+      }
+    }
+    
+    public function changeQuantity(Product $product, Cart $cart, Request $request)
+{
+    $validator = Validator($request->all(), [
+        'type' => 'required|string|in:dec,inc',
+    ]);
+
+    if ($validator->fails()) {
+        return response()->json([
+            'message' => $validator->getMessageBag()->first(),
+        ], Response::HTTP_BAD_REQUEST);
     }
 
-    public function changeQuantity(Product $product,Cart $cart, Request $request)
-    {
-        $validator = Validator($request->all(), [
-            'type' => 'required|string|in:dec,inc',
-        ]);
-        if ($validator->fails()) {
-            return response()->json([
-                'message' => $validator->getMessageBag()->first(),
-            ], Response::HTTP_BAD_REQUEST);
+    if (Auth::check()) {
+        $cart = $request->user()->carts()->where('product_id', $product->id)->first();
+        if ($request->input('type') == 'dec') {
+            $cart->quantity--;
+        } else {
+            $cart->quantity++;
+        }
+        $isSaved = $cart->save();
+
+        // Calculate total price and quantity
+        $carts = $request->user()->carts;
+        $total = 0;
+        $quantity = 0;
+        foreach ($carts as $c) {
+            $product = $c->product;
+            $quantity += $c->quantity;
+            $price = $product->flag ? $product->discount : $product->price;
+            $total += $c->quantity * $price;
         }
 
-        if (Auth::check()) {
-            $cart = $request->user()->carts()->where('product_id', $product->id)->first();
-            if ($request->input('type') == 'dec') {
-                $cart->quantity--;
-            } else {
-                $cart->quantity++;
-            }
-            $isSaved = $cart->save();
-            return response()->json([
-                'message' => $isSaved ? 'saved' : 'faild',
-                
-            ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
-        } else {
-            $carts = Session::get('cart') ?? [];
-            foreach ($carts as $c) {
-                if ($c->product_id == $product->id) {
-                    if ($request->input('type') == 'dec') {
-                        $c->quantity--;
-                    } else {
-                        $c->quantity++;
-                    }
-                    break;
+        return response()->json([
+            'message' => $isSaved ? 'saved' : 'failed',
+            'total' => $total,
+            'quantity' => $quantity
+        ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
+    } else {
+        $carts = Session::get('cart') ?? [];
+        foreach ($carts as $c) {
+            if ($c->product_id == $product->id) {
+                if ($request->input('type') == 'dec') {
+                    $c->quantity--;
+                } else {
+                    $c->quantity++;
                 }
+                break;
             }
-            Session::put('cart', $carts);
-            return response()->json([
-                'message' => 'saved',
-            ], Response::HTTP_OK);
         }
+        Session::put('cart', $carts);
+
+        // Calculate total price and quantity
+        $carts = Session::get('cart');
+        $total = 0;
+        $quantity = 0;
+        foreach ($carts as $c) {
+            $product = Product::find($c->product_id);
+            $quantity += $c->quantity;
+            $price = $product->flag ? $product->discount : $product->price;
+            $total += $c->quantity * $price;
+        }
+
+        return response()->json([
+            'message' => 'saved',
+            'total' => $total,
+            'quantity' => $quantity
+        ], Response::HTTP_OK);
     }
+}
+
 }

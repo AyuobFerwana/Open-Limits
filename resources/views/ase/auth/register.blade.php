@@ -62,6 +62,7 @@
             </div>
             <!-- /Logo -->
             <form class="mb-3" onsubmit="event.preventDefault(); PerformUser();">
+              @csrf
               <div class="mb-3">
                 <label for="username" class="form-label">Full Name</label>
                 <input type="text" class="form-control" id="name" placeholder="Enter your username" autofocus />

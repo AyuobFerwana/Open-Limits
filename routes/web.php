@@ -38,30 +38,31 @@ Route::middleware('auth')->group(function () {
 });
 
 // Subscribe
-Route::get('/subscribe/{newsLatter}',[SubscribeController::class , 'subscribe'])->name('subscribe');
+Route::get('/subscribe/{newsLatter}', [SubscribeController::class, 'subscribe'])->name('subscribe');
 
 // User Inter FAce
-Route::get('/', [FrontController::class, 'index'])->name('front.index');
-Route::get('/products', [FrontController::class, 'sidebar'])->name('front.sidebar');
-Route::get('/product/search', [FrontController::class, 'productSearch']);
-Route::get('/product/quickView/{product}', [FrontController::class, 'quickView'])->name('front.quickView');
-Route::get('/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
+Route::redirect('/', '/openLimits');
+Route::get('/openLimits', [FrontController::class, 'index'])->name('front.index');
+Route::get('/openLimits/sidebar', [FrontController::class, 'sidebar'])->name('front.sidebar');
+Route::get('/openLimits/search', [FrontController::class, 'productSearch']);
+Route::get('/openLimits/quickView/{product}', [FrontController::class, 'quickView'])->name('front.quickView');
+Route::get('/openLimits/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
 
 
 // Cart
-Route::get('/cart', [CartController::class, 'show'])->name('cart');
-Route::post('/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-Route::delete('/cart/{product}', [CartController::class, 'remove']);
-Route::put('/cart/{product}', [CartController::class, 'changeQuantity']);
+Route::get('/openLimits/cart', [CartController::class, 'show'])->name('cart');
+Route::post('/openLimits/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
+Route::delete('/openLimits/cart/{product}', [CartController::class, 'remove']);
+Route::put('/openLimits/cart/{product}', [CartController::class, 'changeQuantity']);
 
 // CheckOut
-Route::get('/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
-Route::post('/checkout/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
+Route::get('/openLimits/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
+Route::post('/openLimits/checkout/pay', [CheckoutController::class, 'pay'])->name('checkout.pay');
 
 // Payment
-Route::post('payment', [PayPalController::class, 'payment'])->name('payment');
-Route::get('cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
-Route::get('payment/success', [PayPalController::class, 'success'])->name('payment.success');
+Route::post('/openLimits/payment', [PayPalController::class, 'payment'])->name('payment');
+Route::get('/openLimits/cancel', [PayPalController::class, 'cancel'])->name('payment.cancel');
+Route::get('/openLimits/payment/success', [PayPalController::class, 'success'])->name('payment.success');
 
 // Authentication
 Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(function () {
@@ -76,7 +77,7 @@ Route::middleware(['auth', 'role:admin,user'])->prefix('dashboard')->group(funct
     // ReSet Password
     Route::get('/Reset-Password', [UserController::class, 'resetPass'])->name('user.resetPass');
     Route::put('/update-Password', [UserController::class, 'updatePasswod'])->name('user.updatePasswod');
-    
+
     // Purchase
     Route::get('purchase', [PurchaseController::class, 'index'])->name('purchase.index');
     Route::delete('purchase', [CheckoutController::class, 'destroy'])->name('purchase.destroy');
@@ -105,15 +106,14 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::get('category/restore/one/{id}', [CategoryController::class, 'restore'])->name('category.restore');
     Route::get('restoreCategory', [CategoryController::class, 'RestoreAll'])->name('category.Restore.all');
     Route::delete('RestoreCategoryDestroy/{id}',  [CategoryController::class, 'Restoredestroy'])->name('category.Restoredestroy');
-
 });
 
 // login & Register
 Route::middleware(['guest', 'throttle:authentication'])->group(function () {
-    Route::view('/login', 'ase.auth.login')->name('login');
+    Route::view('/openLimits/login', 'ase.auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 
-    Route::view('/register', 'ase.auth.register')->name('register');
+    Route::view('/openLimits/register', 'ase.auth.register')->name('register');
     Route::post('/register', [AuthController::class, 'store'])->name('register.store');
 });
 
@@ -128,4 +128,3 @@ Route::middleware(['guest', 'throttle:authentication'])->group(function () {
 // Route::get('store/resto/one/{id}', [StoreController::class, 'resto'])->name('store.resto');
 // Route::get('restoreAll', [StoreController::class, 'restoreAll'])->name('store.restore.all');
 // Route::delete('RestoreStoreDestroy/{id}',  [StoreController::class, 'RestoreStoreDestroy'])->name('store.RestoreStoreDestroy');
-

@@ -631,6 +631,7 @@
         <div class="header-search-wrap">
             <div class="card-header">
                 <form action="#">
+                    @csrf
                     <div class="input-group">
                         <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
                             id="prod-search" placeholder="Write Something....">
@@ -736,7 +737,7 @@
     <script src="{{ asset('js/sweet.js') }}"></script>
     <script>
         function productSearch(e) {
-            axios.get(`/product/search?q=${e.value}`)
+            axios.get(`/openLimits/search?q=${e.value}`)
                 .then(function(response) {
                     console.log(response);
                     document.getElementById('searchContainer').innerHTML = response.data;
@@ -748,7 +749,7 @@
 
 
         function addProductToCart(id) {
-            let url = `/cart/add/${id}`;
+            let url = `/openLimits/cart/add/${id}`;
             let data = {
                 quantity: 1
             }
@@ -766,7 +767,7 @@
         // Remove Product from Slide Cart
 
         function removeProduct(id, ref , type) {
-            let url = `/cart/${id}`;
+            let url = `/openLimits/cart/${id}`;
             axios.delete(url).then((response) => {
                 toastr.success(response.data.message);
                 if(type=='table' ){
@@ -787,18 +788,8 @@
             })
         }
     
-          //QuickView
-          function quickView(d) {
-            axios.get(`/product/quickView/${d}`)
-                .then(function(response) {
-                    console.log(response);
-                    document.getElementById('quickViewProduct').innerHTML = response.data;
-                })
-                .catch(function(error) {
-                    console.log(error);
-                });
-        }
-        
+     
+       
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
@@ -806,16 +797,18 @@
                 if (document.getElementById('quantity_' + id).value < 1) {
                     removeProduct(id, ref)
                 } else {
-                    axios.put(`/cart/${id}`, {
+                    axios.put(`/openLimits/cart/${id}`, {
                         type: type
                     }).then((response) => {
                         console.log(response.data);
+                        document.getElementById('carts-total').innerHTML = response.data.total;
                     }).catch((error) => {
                         console.log(error.response.data);
                     })
                 }
             }, 1);
         }
+        
     </script>
 </body>
 

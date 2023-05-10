@@ -32,13 +32,7 @@ class FrontController extends Controller
         foreach ($carts as $cart) {
             $product = $cart->product;
             $quantity = $cart->quantity;
-
-            //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
-
-            if ($quantity >= 10) {
-                $price *= 0.9; // 10% discount for quantities of 10 or more
-            }
             $total += $quantity * $price;
         }
         $support = Support::first();
@@ -76,13 +70,7 @@ class FrontController extends Controller
         foreach ($carts as $cart) {
             $product = $cart->product;
             $quantity = $cart->quantity;
-
-            //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
-
-            if ($quantity >= 10) {
-                $price *= 0.9; // 10% discount for quantities of 10 or more
-            }
             $total += $quantity * $price;
         }
 
@@ -148,13 +136,7 @@ class FrontController extends Controller
         foreach ($carts as $cart) {
             $product = $cart->product;
             $quantity = $cart->quantity;
-
-            //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
-
-            if ($quantity >= 10) {
-                $price *= 0.9; // 10% discount for quantities of 10 or more
-            }
             $total += $quantity * $price;
         }
         $support = Support::first();

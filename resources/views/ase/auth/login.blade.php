@@ -64,6 +64,7 @@
 
 
             <form id="formAuthentication" onsubmit="event.preventDefault(); preformLogin();" class="mb-3">
+              @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Email or Phone</label>
                 <input type="text" class="form-control" id="login" placeholder="Enter your email or Phone" autofocus />
