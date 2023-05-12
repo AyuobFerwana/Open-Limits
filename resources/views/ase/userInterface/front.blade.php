@@ -747,7 +747,6 @@
 
         //Change Quantity
         function changeQuantity(id, type, ref) {
-            console.log(document.getElementById('quantity_' + id).value)
             if (document.getElementById('quantity_' + id).value < 1) {
                 removeProduct(id, ref)
             } else {
