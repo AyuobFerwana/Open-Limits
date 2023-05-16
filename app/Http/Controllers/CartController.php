@@ -56,7 +56,7 @@ class CartController extends Controller
             $isSaved = $cart->save();
 
             $carts = Cart::where('user_id', $request->user()->id)->get();
-            
+
             $total = 0;
             foreach ($carts as $cart) {
                 $product = $cart->product;
@@ -143,14 +143,22 @@ class CartController extends Controller
           unset($carts[$cartIndex]);
           Session::put('cart', $carts);
         }
+
+        $total = 0;
+        foreach ($carts as $cart) {
+          $product = $cart->product;
+          $quantity = $cart->quantity;
+          $price = $product->flag ? $product->discount : $product->price;
+          $total += $quantity * $price;
+        }
         return response()->json([
-          'message' => 'Product removed from cart successfully!',
+          'message' => '!Product removed from cart successfully',
           'cartCount' => count($carts),
           'cartTotal' => 0,
         ], Response::HTTP_OK);
       }
     }
-    
+
     public function changeQuantity(Product $product, Cart $cart, Request $request)
 {
     $validator = Validator($request->all(), [

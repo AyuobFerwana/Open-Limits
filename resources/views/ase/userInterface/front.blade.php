@@ -30,12 +30,9 @@
         .toast-message {
             font-size: 16px !important;
         }
-
-        
         .bg_image--5 {
             background-image: url({{asset('fas/assets/images/logo/newsL3.png')}});
         }
-
     </style>
 
 
@@ -83,14 +80,14 @@
                         </div>
                     </div>
                     @if (auth()->guest())
-                        <div class="col-sm-6">
-                            <div class="header-top-link">
-                                <ul class="quick-link">
-                                    <li><a href="#">Help</a></li>
-                                    <li><a href="{{ route('login') }}">Sign In</a></li>
-                                </ul>
-                            </div>
+                    <div class="col-sm-6">
+                        <div class="header-top-link">
+                            <ul class="quick-link">
+                                <li><a href="#">Help</a></li>
+                                <li><a href="{{ route('login') }}">Sign In</a></li>
+                            </ul>
                         </div>
+                    </div>
                     @endif
                 </div>
             </div>
@@ -159,12 +156,12 @@
 
                                     </ul>
                                     @if (auth()->guest())
-                                        <div class="login-btn">
-                                            <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
-                                        </div>
-                                        <div class="reg-footer text-center">No account yet? <a
-                                                href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
-                                        </div>
+                                    <div class="login-btn">
+                                        <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
+                                    </div>
+                                    <div class="reg-footer text-center">No account yet? <a
+                                            href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
+                                    </div>
                                     @endif
                                 </div>
                             </li>
@@ -217,14 +214,14 @@
                         <div class="main-slider-large-thumb">
                             <div class="slider-thumb-activation-one axil-slick-dots">
                                 @foreach ($products->take(3) as $product)
-                                    <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
-                                        data-sal-duration="1500">
-                                        <img src="{{ Storage::url($product->image) }}" alt="Product">
-                                        <div class="product-price">
-                                            <span class="text">From</span>
-                                            <span class="price-amount">${{ $product->price }}</span>
-                                        </div>
+                                <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
+                                    data-sal-duration="1500">
+                                    <img src="{{ Storage::url($product->image) }}" alt="Product">
+                                    <div class="product-price">
+                                        <span class="text">From</span>
+                                        <span class="price-amount">${{ $product->price }}</span>
                                     </div>
+                                </div>
                                 @endforeach
                             </div>
                         </div>
@@ -249,17 +246,16 @@
                 </div>
                 <div class="categrie-product-activation slick-layout-wrapper--15 axil-slick-arrow  arrow-top-slide">
                     @foreach ($categories as $categorie)
-                        <div class="slick-single-layout">
-                            <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200"
-                                data-sal-duration="500">
-                                <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
-                                    <img class="img-fluid" style="width:300px; height: 150px; !important "
-                                        src="{{ Storage::url($categorie->image) }}" alt="product categorie">
-                                    <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
-                                </a>
-                            </div>
-                            <!-- End .categrie-product -->
+                    <div class="slick-single-layout">
+                        <div class="categrie-product" data-sal="zoom-out" data-sal-delay="200" data-sal-duration="500">
+                            <a href="{{ route('front.sidebar', ['category' => $categorie->id]) }}">
+                                <img class="img-fluid" style="width:300px; height: 150px; !important "
+                                    src="{{ Storage::url($categorie->image) }}" alt="product categorie">
+                                <h6 class="cat-title">{{ $categorie->categoryName }}</h6>
+                            </a>
                         </div>
+                        <!-- End .categrie-product -->
+                    </div>
                     @endforeach
 
                 </div>
@@ -279,53 +275,49 @@
                     <div class="slick-single-layout">
                         <div class="row row--15">
                             @foreach ($products->take(8) as $product)
-                                <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
-                                    <div class="axil-product product-style-one">
-                                        <div class="thumbnail">
-                                            <a href="{{ route('front.productItem', $product->id) }}">
-                                                <img data-sal="zoom-out" style="height: 300px ; width: 300px;"
-                                                    data-sal-delay="300" data-sal-duration="800" loading="lazy"
-                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                                <img class="hover-img" style="height: 300px ; width: 300px;"
-                                                    src="{{ Storage::url($product->image) }}" alt="Product Images">
-                                            </a>
-                                            <div class="product-hover-action">
-                                                <ul class="cart-action">
-                                                    <li class="quickview"><a onclick="quickView({{ $product->id }})"
-                                                            data-bs-toggle="modal"
-                                                            data-bs-target="#quick-view-modal"><i
-                                                                class="far fa-eye"></i></a></li>
-                                                    <li class="select-option">
-                                                        <a onclick="addProductToCart({{ $product->id }})">Add to
-                                                            Cart</a>
-                                                    </li>
-                                                    <li class="wishlist"><a href="#"><i
-                                                                class="far fa-heart"></i></a></li>
-                                                </ul>
-                                            </div>
+                            <div class="col-xl-3 col-lg-4 col-sm-6 col-12 mb--30">
+                                <div class="axil-product product-style-one">
+                                    <div class="thumbnail">
+                                        <a href="{{ route('front.productItem', $product->id) }}">
+                                            <img data-sal="zoom-out" style="height: 300px ; width: 300px;"
+                                                data-sal-delay="300" data-sal-duration="800" loading="lazy"
+                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                            <img class="hover-img" style="height: 300px ; width: 300px;"
+                                                src="{{ Storage::url($product->image) }}" alt="Product Images">
+                                        </a>
+                                        <div class="product-hover-action">
+                                            <ul class="cart-action">
+                                                <li class="quickview"><a onclick="quickView({{ $product->id }})"
+                                                        data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i
+                                                            class="far fa-eye"></i></a></li>
+                                                <li class="select-option">
+                                                    <a onclick="addProductToCart({{ $product->id }})">Add to
+                                                        Cart</a>
+                                                </li>
+                                                <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
+                                            </ul>
                                         </div>
-                                        <div class="product-content">
-                                            <div class="inner">
-                                                <h5 class="title">{{ $product->category->categoryName }}</h5>
-                                                <h5><a
-                                                        href="{{ route('front.productItem', $product->id) }}">{{ $product->productName }}</a>
-                                                </h5>
-                                                @if ($product->flag)
-                                                    <div class="product-price-variant">
-                                                        <span
-                                                            class="price current-price">${{ $product->discount }}</span>
-                                                        <span class="price old-price">${{ $product->price }}</span>
-                                                    </div>
-                                                @else
-                                                    <div class="product-price-variant">
-                                                        <span
-                                                            class="price current-price">${{ $product->price }}</span>
-                                                    </div>
-                                                @endif
+                                    </div>
+                                    <div class="product-content">
+                                        <div class="inner">
+                                            <h5 class="title">{{ $product->category->categoryName }}</h5>
+                                            <h5><a href="{{ route('front.productItem', $product->id) }}">{{
+                                                    $product->productName }}</a>
+                                            </h5>
+                                            @if ($product->flag)
+                                            <div class="product-price-variant">
+                                                <span class="price current-price">${{ $product->discount }}</span>
+                                                <span class="price old-price">${{ $product->price }}</span>
                                             </div>
+                                            @else
+                                            <div class="product-price-variant">
+                                                <span class="price current-price">${{ $product->price }}</span>
+                                            </div>
+                                            @endif
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                             @endforeach
 
                         </div>
@@ -340,8 +332,8 @@
                     <div class="col-lg-6 mb--30">
                         <div class="single-poster">
                             <a href="{{route('front.sidebar')}}">
-                                <img src="{{ asset('fas/assets/images/product/poster/clothes.jpg') }}" style="height: 300px "
-                                    alt="eTrade promotion poster">
+                                <img src="{{ asset('fas/assets/images/product/poster/clothes.jpg') }}"
+                                    style="height: 300px " alt="eTrade promotion poster">
                                 <div class="poster-content">
                                     <div class="inner">
                                         <h3 class="title">Rich Clothes, <br> for less.</h3>
@@ -357,12 +349,12 @@
                     <div class="col-lg-6 mb--30">
                         <div class="single-poster">
                             <a href="{{route('front.sidebar')}}">
-                                <img src="{{ asset('fas/assets/images/product/poster/jaket.jpg') }}" style="height: 300px ;"
-                                    alt="eTrade promotion poster">
+                                <img src="{{ asset('fas/assets/images/product/poster/jaket.jpg') }}"
+                                    style="height: 300px ;" alt="eTrade promotion poster">
                                 <div class="poster-content content-left">
                                     <div class="inner">
                                         <span class="sub-title">50% Offer In Winter</span>
-                                        <h3 class="title">Get Jaket <br>  Every Size</h3>
+                                        <h3 class="title">Get Jaket <br> Every Size</h3>
                                     </div>
                                 </div>
                                 <!-- End .poster-content -->
@@ -380,7 +372,8 @@
             <div class="container">
                 <div class="etrade-newsletter-wrapper bg_image bg_image--5">
                     <div class="newsletter-content">
-                        <span class="title-highlighter highlighter-primary2"><i class="fas fa-envelope-open"></i>Newsletter</span>
+                        <span class="title-highlighter highlighter-primary2"><i
+                                class="fas fa-envelope-open"></i>Newsletter</span>
                         <h2 class="title mb--40 mb_sm--30">Get weekly <br> update</h2>
                         <div class="input-group newsletter-form">
                             <div class="position-relative newsletter-inner mb--15">
@@ -557,6 +550,7 @@
                                 <li> ©
                                     <script>
                                         document.write(new Date().getFullYear());
+
                                     </script>
                                     , made with ❤️ by
                                     <a target="_blank" class="footer-link fw-bolder">Ayuob Ferwana</a>
@@ -569,14 +563,11 @@
                             class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-2.png') }}" alt="paypal cart">
                                 </li>
-                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}"
-                                        alt="paypal cart">
+                                <li><img src="{{ asset('fas/assets/images/icons/cart/cart-5.png') }}" alt="paypal cart">
                                 </li>
                             </ul>
                         </div>
@@ -621,8 +612,8 @@
             </div>
             <div class="card-body">
                 <div class="search-result-header">
-                    <span class="filter-results">Result (<span
-                            style="color: #3577F0; font-size:19px;">{{ $products->count() }}</span>)
+                    <span class="filter-results">Result (<span style="color: #3577F0; font-size:19px;">{{
+                            $products->count() }}</span>)
                         Found</span>
                     <a href="{{ route('front.sidebar') }}" class="view-all">View All</a>
                 </div>
@@ -644,27 +635,31 @@
             <div class="cart-body">
                 <ul class="cart-item-list" id="cart-list-container">
                     @foreach ($carts as $cart)
-                        <li class="cart-item">
-                            <div class="item-img">
-                                <a href="{{ route('front.productItem', $cart->product_id) }}"><img
-                                        src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
-                                <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i
-                                        class="fas fa-times"></i></button>
+                    <li class="cart-item">
+                        <div class="item-img">
+                            <a href="{{ route('front.productItem', $cart->product_id) }}"><img
+                                    src="{{ Storage::url($cart->product->image) }}" alt="Commodo Blown Lamp"></a>
+                            <button class="close-btn" onclick="removeProduct({{ $cart->product_id }}, this)"><i
+                                    class="fas fa-times"></i></button>
+                        </div>
+                        <div class="item-content">
+                            <h3 class="item-title"><a href="{{ route('front.productItem', $cart->product_id) }}">{{
+                                    $cart->product->productName }}</a>
+                            </h3>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{ !$cart->product->flag ?
+                                $cart->product->price : $cart->product->discount }}
                             </div>
-                            <div class="item-content">
-                                <h3 class="item-title"><a
-                                        href="{{ route('front.productItem', $cart->product_id) }}">{{ $cart->product->productName }}</a>
-                                </h3>
-                                <div class="item-price"><span
-                                        class="currency-symbol">$</span>{{ !$cart->product->flag ? $cart->product->price : $cart->product->discount }}
-                                </div>
-                                <div class="pro-qty item-quantity">
-                                    <span class="dec qtybtn" onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}">
-                                    <span class="inc qtybtn" onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                                </div>
+                            <div class="pro-qty item-quantity">
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}" disabled>
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
                             </div>
-                        </li>
+
+                        </div>
+                    </li>
                     @endforeach
                 </ul>
             </div>
@@ -747,21 +742,27 @@
 
         //Change Quantity
         function changeQuantity(id, type, ref) {
-            if (document.getElementById('quantity_' + id).value < 1) {
-                removeProduct(id, ref)
-            } else {
+            setTimeout(() => {
+              if (document.getElementById('quantity_' + id).value < 1) {
+                removeProduct(id, ref);
+              } else {
                 axios.put(`/openLimits/cart/${id}`, {
-                    type: type
-                }).then((response) => {
+                  type: type
+                })
+                  .then((response) => {
                     console.log(response.data);
                     document.getElementById('carts-total').innerHTML = response.data.total;
                     document.getElementById('quantity_' + id).value = response.data.quantity;
-                }).catch((error) => {
+                  })
+                  .catch((error) => {
                     console.log(error.response.data);
-                })
-            }
-        }
-        
+                  });
+              }
+            }, 1);
+          }
+          
+
+
 
         //QuickView
         function quickView(d) {
@@ -795,7 +796,7 @@
                         var newVal = parseFloat(oldValue) + 1;
                     } else {
                         // Don't allow decrementing below zero
-                        if (oldValue > 0) { 
+                        if (oldValue > 0) {
                             var newVal = parseFloat(oldValue) - 1;
                         } else {
                             newVal = 0;
@@ -810,33 +811,34 @@
         }
 
         // Remove Product from Slide Cart
-       function removeProduct(id, ref) {
-  console.log('Removing product with ID ' + id);
-  let url = `/openLimits/cart/${id}`;
-  axios.delete(url).then((response) => {
-    console.log('Product removed successfully:', response);
-    toastr.success(response.data.message);
-    ref.closest('li').remove();
-    document.getElementById('carts-count').innerHTML = response.data.cartCount;
-    document.getElementById('carts-total').innerHTML = response.data.cartTotal;
-  }).catch((error) => {
-    console.log('Error removing product:', error);
-    toastr.error(error.response.data.message);
-  })
-}
-
-
-     //Subscribe
-     function Subscribe(d) {
-        axios.get(`/subscribe/${d}`)
-            .then(function(response) {
-                console.log(response);
-                document.getElementById('subscribe').innerHTML = response.data;
+        function removeProduct(id, ref) {
+            console.log('Removing product with ID ' + id);
+            let url = `/openLimits/cart/${id}`;
+            axios.delete(url).then((response) => {
+                console.log('Product removed successfully:', response);
+                toastr.success(response.data.message);
+                ref.closest('li').remove();
+                document.getElementById('carts-count').innerHTML = response.data.cartCount;
+                document.getElementById('carts-total').innerHTML = response.data.cartTotal;
+            }).catch((error) => {
+                console.log('Error removing product:', error);
+                toastr.error(error.response.data.message);
             })
-            .catch(function(error) {
-                console.log(error);
-            });
-    }
+        }
+
+
+        //Subscribe
+        function Subscribe(d) {
+            axios.get(`/subscribe/${d}`)
+                .then(function(response) {
+                    console.log(response);
+                    document.getElementById('subscribe').innerHTML = response.data;
+                })
+                .catch(function(error) {
+                    console.log(error);
+                });
+        }
+
     </script>
 
 </body>

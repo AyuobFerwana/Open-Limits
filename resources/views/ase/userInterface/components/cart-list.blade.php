@@ -15,7 +15,7 @@
         </div>
         <div class="pro-qty item-quantity">
             <span class="dec qtybtn" onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-            <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}">
+            <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}" value="{{ $cart->quantity }}" disabled>
             <span class="inc qtybtn" onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
         </div>
     </div>
