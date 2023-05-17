@@ -4,8 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use App\Models\Product;
-use App\Models\Store;
-use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -75,7 +73,7 @@ class ProductController extends Controller
                 $image = $file->storePubliclyAs('products', $imageName, ['disk' => 'public']);
                 $products->image = $image;
             }
-            
+
             // color
             $colors = [$request->input('color')];
             for ($i = 1; $i <= $request->input('colors'); $i++) {

@@ -2,12 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\Checkout;
-use App\Models\Product;
-use App\Models\User;
 use Illuminate\Http\Request as HttpRequest;
-use Illuminate\Support\Facades\Auth;
 
 class PurchaseController extends Controller
 {

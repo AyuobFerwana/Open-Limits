@@ -2,13 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Cart;
-use App\Models\Category;
 use App\Models\Checkout;
-use App\Models\Product;
 use App\Models\Support;
 use App\Models\User;
-use Dotenv\Validator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
@@ -87,5 +83,5 @@ class CheckoutController extends Controller
         }
     }
 
-   
+
 }

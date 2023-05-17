@@ -743,24 +743,23 @@
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
-              if (document.getElementById('quantity_' + id).value < 1) {
-                removeProduct(id, ref);
-              } else {
-                axios.put(`/openLimits/cart/${id}`, {
-                  type: type
-                })
-                  .then((response) => {
-                    console.log(response.data);
-                    document.getElementById('carts-total').innerHTML = response.data.total;
-                    document.getElementById('quantity_' + id).value = response.data.quantity;
-                  })
-                  .catch((error) => {
-                    console.log(error.response.data);
-                  });
-              }
+                console.log(document.getElementById('quantity_' + id).value)
+                if (document.getElementById('quantity_' + id).value < 1) {
+                    removeProduct(id, ref)
+                } else {
+                    axios.put(`/openLimits/cart/${id}`, {
+                        type: type
+                    }).then((response) => {
+                        console.log(response.data);
+                        document.getElementById('carts-total').innerHTML = response.data.total;
+                    }).catch((error) => {
+                        console.log(error.response.data);
+                    })
+                }
             }, 1);
-          }
-          
+        }
+
+
 
 
 

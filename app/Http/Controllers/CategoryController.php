@@ -3,8 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
-use Dotenv\Validator;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -141,7 +139,7 @@ class CategoryController extends Controller
         Category::withTrashed()->findOrFail($id)->restore();
         return back();
 
-      
+
     }
 
     public function RestoreAll()
@@ -162,4 +160,3 @@ class CategoryController extends Controller
         );
     }
 }
-    

@@ -4,12 +4,8 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-// use Dotenv\Validator;
 use Illuminate\Support\Facades\Validator;
-
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Storage;
 use Symfony\Component\HttpFoundation\Response;
@@ -234,7 +230,7 @@ class UserController extends Controller
         $validator = Validator::make($request->all(), [
             'old_password' => 'required|string|current_password',
             'new_password' => 'required|string|confirmed|min:8|max:50',
-            
+
         ]);
 
         if (!$validator->fails()) {

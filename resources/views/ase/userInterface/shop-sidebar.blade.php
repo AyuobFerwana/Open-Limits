@@ -664,11 +664,11 @@
         select.addEventListener("change", function() {
         localStorage.setItem("selectedOption", select.value);
         });
-        
+
         if(localStorage.getItem("selectedOption")) {
         select.value = localStorage.getItem("selectedOption");
         }
-        
+
 
         //Product Search
         function productSearch(e) {
@@ -737,8 +737,8 @@
               toastr.error(error.response.data.message);
             })
           }
-          
-      
+
+
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
@@ -757,7 +757,7 @@
                 }
             }, 1);
         }
-        
+
         //Quick View
         function quickView(d){
             axios.get(`/openLimits/quickView/${d}`)

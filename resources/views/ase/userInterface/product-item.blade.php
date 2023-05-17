@@ -259,14 +259,14 @@
                                     <!-- Start Product Action Wrapper  -->
                                     <div class="product-action-wrapper d-flex-center">
                                         <!-- Start Quentity Action  -->
-                                        
+
                                         {{--  @foreach ($carts->take($products->id) as $cart )
 
                                         <div class="pro-qty item-quantity">
                                             <span class="dec qtybtn"
                                                 onclick="changeQuantity({{ $carts->product_id }}, 'dec', this)">-</span>
                                                 @if ($carts->quantity)
-                                                    
+
                                                 <input type="number" class="quantity-input"
                                                     id="quantity_{{ $carts->product_id }}" value="{{  $carts->quantity }}">
                                                 @else
@@ -838,14 +838,14 @@
                         }
                     }
                     $button.parent().find('input').val(newVal);
-               
+
                 });
             }).catch((error) => {
                 console.log(error.response)
                 toastr.success(error.response.data.message);
             })
         }
-        
+
         // Remove Product From Slide Cart
         function removeProduct(id, ref) {
             console.log('Removing product with ID ' + id);
@@ -861,8 +861,8 @@
               toastr.error(error.response.data.message);
             })
           }
-          
-        
+
+
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
@@ -879,9 +879,9 @@
                         console.log(error.response.data);
                     })
                 }
-            }, 0.001);
+            }, 1);
         }
-        
+
     </script>
 </body>
 

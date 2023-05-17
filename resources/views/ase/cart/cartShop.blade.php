@@ -780,16 +780,16 @@
                 }
                 document.getElementById('carts-count').innerHTML = response.data.cartCount;
 
-                
+
             }).catch((error) => {
                 console.log(error);
                 toastr.error(error.response.data.message);
 
             })
         }
-    
-     
-       
+
+
+
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
@@ -808,7 +808,7 @@
                 }
             }, 1);
         }
-        
+
     </script>
 </body>
 

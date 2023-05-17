@@ -31,7 +31,6 @@
         .toast-message {
             font-size: 16px !important;
         }
-
     </style>
 
 </head>
@@ -45,7 +44,8 @@
                     <div class="col-lg-6 col-sm-6 col-12">
                         <div class="header-top-dropdown">
                             <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     English
                                 </button>
                                 <ul class="dropdown-menu">
@@ -54,7 +54,8 @@
                                 </ul>
                             </div>
                             <div class="dropdown">
-                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button class="dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                                    aria-expanded="false">
                                     USD
                                 </button>
                                 <ul class="dropdown-menu">
@@ -115,7 +116,9 @@
                     <div class="header-action">
                         <ul class="action-list">
                             <li class="axil-search d-xl-block d-none">
-                                <input type="search" class="placeholder product-search-input" name="search2" id="search2" value="" maxlength="128" placeholder="?What are you looking for" autocomplete="off">
+                                <input type="search" class="placeholder product-search-input" name="search2"
+                                    id="search2" value="" maxlength="128" placeholder="?What are you looking for"
+                                    autocomplete="off">
                                 <button type="submit" class="icon wooc-btn-search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </button>
@@ -149,7 +152,8 @@
                                     </ul>
                                     @if (auth()->guest())
                                     <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
-                                    <div class="reg-footer text-center">No account yet? <a href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
+                                    <div class="reg-footer text-center">No account yet? <a
+                                            href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
                                     </div>
                                     @endif
                                 </div>
@@ -200,7 +204,8 @@
                             <div class="axil-checkout-notice">
                                 <div class="axil-toggle-box">
                                     @if (auth()->guest())
-                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a href="{{ route('login') }}" class="toggle-btn">Click here to
+                                    <div class="toggle-bar"><i class="fas fa-user"></i> Returning customer ? <a
+                                            href="{{ route('login') }}" class="toggle-btn">Click here to
                                             login</a>
                                     </div>
                                     @endif
@@ -236,7 +241,8 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Street Address <span>*</span></label>
-                                    <input type="text" id="address" class="mb--15" placeholder="House number and street name">
+                                    <input type="text" id="address" class="mb--15"
+                                        placeholder="House number and street name">
                                 </div>
                                 <div class="form-group">
                                     <label>Town/ City <span>*</span></label>
@@ -301,7 +307,8 @@
                                         <div class="input-group justify-content-between align-items-center">
                                             <input type="radio" id="radio6" name="payment" checked>
                                             <label for="radio6">Paypal</label>
-                                            <img src="{{ asset('fas/assets/images/others/payment.png') }}" alt="Paypal payment">
+                                            <img src="{{ asset('fas/assets/images/others/payment.png') }}"
+                                                alt="Paypal payment">
                                         </div>
                                         <p>Pay via PayPal; you can pay with your credit card if you don’t have a PayPal
                                             account.</p>
@@ -488,7 +495,8 @@
                         </div>
                     </div>
                     <div class="col-xl-4 col-lg-12">
-                        <div class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
+                        <div
+                            class="copyright-right d-flex flex-wrap justify-content-xl-end justify-content-center align-items-center">
                             <span class="card-text">Accept For</span>
                             <ul class="payment-icons-bottom quick-link">
                                 <li><img src="{{ asset('fas/assets/images/icons/cart/cart-1.png') }}" alt="paypal cart">
@@ -515,7 +523,8 @@
                 <form action="#">
                     @csrf
                     <div class="input-group">
-                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search" id="prod-search" placeholder="Write Something....">
+                        <input type="search" class="form-control" onkeyup="productSearch(this)" name="prod-search"
+                            id="prod-search" placeholder="Write Something....">
                         <button type="submit" class="axil-btn btn-bg-primary"><i class="far fa-search"></i></button>
                     </div>
                 </form>
@@ -643,9 +652,9 @@
               toastr.error(error.response.data.message);
             })
           }
-          
 
-        
+
+
         //Change Quantity
         function changeQuantity(id, type, ref) {
             setTimeout(() => {
@@ -664,7 +673,7 @@
                 }
             }, 1);
         }
-        
+
 
 
 
@@ -694,7 +703,7 @@
         var toastrData = {!! json_encode(session('toastr')) !!};
         toastr[toastrData.type](toastrData.message);
     </script>
-@endif
+    @endif
 
 </body>
 

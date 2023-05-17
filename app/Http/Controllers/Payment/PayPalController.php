@@ -4,11 +4,8 @@ namespace App\Http\Controllers\Payment;
 
 use App\Http\Controllers\Controller;
 use App\Models\Checkout;
-use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
-use Srmklive\PayPal\Services\PayPal as PayPalClient;
 use Srmklive\PayPal\Services\ExpressCheckout;
 use Symfony\Component\HttpFoundation\Response;
 
@@ -49,8 +46,6 @@ class PayPalController extends Controller
         foreach ($carts as $cart) {
             $product = $cart->product;
             $quantity = $cart->quantity;
-
-            //apply any quantity-based discounts or price breaks
             $price = $product->flag ? $product->discount : $product->price;
             $item = [];
             $item['name'] = $product->name;
@@ -102,8 +97,14 @@ class PayPalController extends Controller
             $checkout = Checkout::findOrFail($response['PAYMENTREQUEST_0_INVNUM']);
             $checkout->status = 'paid';
             $checkout->amount = $response['AMT'];
-            
             $checkout->save();
+
+            // Remove products from the cart
+            $user = auth()->user();
+            $carts = $user->carts;
+            foreach($carts as $cart){
+                $cart->delete();
+            }
 
             $message = '!Payment successful';
             $type = 'success';
@@ -111,7 +112,6 @@ class PayPalController extends Controller
             $message = '!Payment failed';
             $type = 'error';
         }
-
         return redirect()->route('checkout')
             ->with('toastr', ['type' => $type, 'message' => $message]);
     }
