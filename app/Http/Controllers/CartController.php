@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class CartController extends Controller
 {
+    // InterFace View
     public function show(Request $request, Product $products)
     {
         if (Auth::check()) {
@@ -31,6 +32,7 @@ class CartController extends Controller
         return response()->view('ase.cart.cartShop', compact('carts', 'products', 'total', 'support'));
     }
 
+    // Add product to Cart
     public function add(Product $product, Request $request)
     {
         if (Auth::check()) {
@@ -106,6 +108,7 @@ class CartController extends Controller
         }
     }
 
+    // Remove Product
     public function remove(Product $product, Request $request)
     {
         if (Auth::check()) {
@@ -157,6 +160,7 @@ class CartController extends Controller
         }
     }
 
+    // Change Quantity
     public function changeQuantity(Product $product, Cart $cart, Request $request)
     {
         $validator = Validator($request->all(), [

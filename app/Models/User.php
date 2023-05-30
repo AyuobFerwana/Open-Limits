@@ -57,19 +57,25 @@ class User extends Authenticatable
         return $this->hasMany(Cart::class)->with('product');
     }
 
-    
+    // revenues
+    public function revenues()
+{
+    return $this->hasMany(Revenue::class);
+}
+
+
     public function checkouts()
     {
         return $this->hasMany(Checkout::class)->with('products');
     }
-    
+
     // fULL name
     public function getFullNameAttribute()
     {
         return $this->UsersName;
     }
 
-    // Image 
+    // Image
     public function imageUrl(): Attribute
     {
         return Attribute::make(

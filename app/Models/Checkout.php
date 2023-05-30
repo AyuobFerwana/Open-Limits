@@ -23,4 +23,11 @@ class Checkout extends Model
     {
         return $this->belongsToMany(Product::class)->withPivot('quantity');
     }
+
+    // revenues
+    public function revenues()
+{
+    return $this->hasMany(Revenue::class);
+}
+
 }

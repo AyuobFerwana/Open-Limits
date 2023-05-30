@@ -47,8 +47,8 @@
 
                         <td>{{ $checkoutDatas->pivot->quantity }}</td>
 
-                        <td>${{ $checkoutDatas->quantity*(!$checkoutDatas->flag ? $checkoutDatas->price :
-                            $checkoutDatas->discount) }}
+                        <td>${{!$checkoutDatas->flag ? $checkoutDatas->price :
+                            $checkoutDatas->discount }}
                         </td>
 
                         <td>

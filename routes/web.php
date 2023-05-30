@@ -9,12 +9,10 @@ use App\Http\Controllers\FrontController;
 use App\Http\Controllers\Payment\PayPalController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\PurchaseController;
+use App\Http\Controllers\RevenueController;
 use App\Http\Controllers\StoreController;
-use App\Http\Controllers\StripeController;
 use App\Http\Controllers\SubscribeController;
-use App\Models\Checkout;
 use Illuminate\Support\Facades\Route;
-
 use Illuminate\Http\Request;
 
 /*
@@ -50,10 +48,12 @@ Route::get('/openLimits/product-item/{products}', [FrontController::class, 'prod
 
 
 // Cart
-Route::get('/openLimits/cart', [CartController::class, 'show'])->name('cart');
-Route::post('/openLimits/cart/add/{product}', [CartController::class, 'add'])->name('cart.add');
-Route::delete('/openLimits/cart/{product}', [CartController::class, 'remove']);
-Route::put('/openLimits/cart/{product}', [CartController::class, 'changeQuantity']);
+Route::controller(CartController::class)->group(function(){
+    Route::get('/openLimits/cart', 'show')->name('cart');
+    Route::post('/openLimits/cart/add/{product}', 'add')->name('cart.add');
+    Route::delete('/openLimits/cart/{product}', 'remove');
+    Route::put('/openLimits/cart/{product}', 'changeQuantity');
+});
 
 // CheckOut
 Route::get('/openLimits/checkout', [CheckoutController::class, 'checkout'])->name('checkout');
@@ -106,6 +106,9 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::get('category/restore/one/{id}', [CategoryController::class, 'restore'])->name('category.restore');
     Route::get('restoreCategory', [CategoryController::class, 'RestoreAll'])->name('category.Restore.all');
     Route::delete('RestoreCategoryDestroy/{id}',  [CategoryController::class, 'Restoredestroy'])->name('category.Restoredestroy');
+
+    // Company Revenue
+    Route::get('/revenue',[RevenueController::class,'revenue'])->name('revenue');
 });
 
 // login & Register

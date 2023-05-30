@@ -210,7 +210,7 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-7 col-sm-6">
+                    <div class="col-lg-1 col-sm-6">
                         <div class="main-slider-large-thumb">
                             <div class="slider-thumb-activation-one axil-slick-dots">
                                 @foreach ($products->take(3) as $product)
