@@ -51,7 +51,7 @@ class UserController extends Controller
             $users->email = $request->input('email');
             $users->phone = $request->input('phone');
             $users->password = Hash::make($request->input('password'));
-            $users->role ='user';
+            $users->role = 'user';
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
                 $imageName = time() . '_' . rand(1, 1000000) . '.' . $file->getClientOriginalExtension();
@@ -81,9 +81,9 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(User $users): Response
+    public function edit(User $user): Response
     {
-        return response()->view('ase.users.edit', compact('users'));
+        return response()->view('ase.users.edit', ['user' => $user]);
     }
 
     /**
@@ -95,8 +95,6 @@ class UserController extends Controller
             'UsersName' => 'required|string|min:3',
             'email' => 'required|string|unique:users,email',
             'phone' => 'required|string|unique:users,phone|min:10',
-            'password' => 'required|confirmed|min:8|max:50',
-            'password_confirmation' => 'required|string|min:8|max:50',
             'image' => 'required|image|mimes:png,jpg,jpeg|max:5000',
         ]);
 
@@ -104,8 +102,6 @@ class UserController extends Controller
             $users->UsersName = $request->input('UsersName');
             $users->email = $request->input('email');
             $users->phone = $request->input('phone');
-            $users->password = Hash::make($request->input('password'));
-            $users->role ='user';
             if ($request->hasFile('image')) {
                 Storage::disk('public')->delete('' . $users->image);
                 $file = $request->file('image');
@@ -123,6 +119,17 @@ class UserController extends Controller
                 'message' => $validator->getMessageBag()->first()
             ], Response::HTTP_BAD_REQUEST);
         }
+    }
+
+    // Toggle
+    public function toggleRole(User $user)
+    {
+        $user->role = $user->role == 'admin' ? 'user' : 'admin';
+        $isSaved = $user->save();
+        return response()->json([
+            'message' => $isSaved ? 'Role Changed successfully!' : 'Failed to change role, Please try again.',
+            'role' => $user->role,
+        ], $isSaved ? Response::HTTP_OK : Response::HTTP_BAD_REQUEST);
     }
 
 

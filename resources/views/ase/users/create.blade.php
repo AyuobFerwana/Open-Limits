@@ -35,41 +35,31 @@
                         </div>
 
 
-                        <div class="mb-3">
-                            <label class="form-label" for="password">Password</label>
-
-                            <input type="password" id="password"
-                                class="form-control @error('password') is-invalid @enderror"
-                                placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
-                                aria-describedby="password" />
-                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i><strong></span>
-                        </div>
-
                         <div class="mb-3 form-password-toggle">
                             <div class="d-flex justify-content-between">
                                 <label class="form-label" for="password">New Password</label>
                             </div>
                             <div class="input-group input-group-merge">
-                                <input type="password" id="new_password" class="form-control" name="new_password"
+                                <input type="password" id="password" class="form-control" name="password"
                                     placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                     aria-describedby="password" />
                                 <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
                             </div>
                         </div>
-                        
 
-                        <div class="mb-3">
-                            <label class="form-label" for="password_confirmation">Password-Confirmation</label>
 
-                            <input type="password_confirmation" id="password_confirmation"
-                                class="form-control  @error('password') is-invalid @enderror"
+                        <div class="mb-3 form-password-toggle">
+                            <div class="d-flex justify-content-between">
+                                <label class="form-label" for="password">Password-Confirmation</label>
+                            </div>
+                            <div class="input-group input-group-merge">
+                                <input type="password" id="password_confirmation" class="form-control" name="password_confirmation"
                                 placeholder="&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;&#xb7;"
                                 aria-describedby="password" />
-                            @error('password')
-                            <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
-                            @enderror
-
+                                    <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                            </div>
                         </div>
+
 
                         <div class="mb-3">
                             <label class="form-label" for="Image">Image</label>

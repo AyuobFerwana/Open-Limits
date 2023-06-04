@@ -38,7 +38,7 @@
         }
 
         .bg_image--5 {
-            background-image: url({{asset('fas/assets/images/logo/newsL3.png')}});
+            background-image: url({{asset('fas/assets/images/logo/newsL3.png') }});
         }
     </style>
 
@@ -264,23 +264,23 @@
                                     <div class="product-action-wrapper d-flex-center">
                                         <!-- Start Quentity Action  -->
 
-                                        {{--  @foreach ($carts->take($products->id) as $cart )
+                                        {{-- @foreach ($carts->take($products->id) as $cart )
 
                                         <div class="pro-qty item-quantity">
                                             <span class="dec qtybtn"
                                                 onclick="changeQuantity({{ $carts->product_id }}, 'dec', this)">-</span>
-                                                @if ($carts->quantity)
+                                            @if ($carts->quantity)
 
-                                                <input type="number" class="quantity-input"
-                                                    id="quantity_{{ $carts->product_id }}" value="{{  $carts->quantity }}">
-                                                @else
-                                                <input type="number" class="quantity-input"
+                                            <input type="number" class="quantity-input"
+                                                id="quantity_{{ $carts->product_id }}" value="{{  $carts->quantity }}">
+                                            @else
+                                            <input type="number" class="quantity-input"
                                                 id="quantity_{{ $carts->product_id }}" value="0">
-                                                @endif
+                                            @endif
                                             <span class="inc qtybtn"
                                                 onclick="changeQuantity({{  $carts->product_id }}, 'inc', this)">+</span>
                                         </div>
-                                        @endforeach  --}}
+                                        @endforeach --}}
                                         <!-- Start Product Action  -->
                                         <ul class="product-action d-flex-center mb--0">
                                             <li class="add-to-cart"><button type="button" onclick="addProductToCart()"
@@ -449,11 +449,7 @@
                             <h5 class="widget-title">Quick Link</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="terms-of-service.html">Terms Of Us</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="contact.html">About-us</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -747,15 +743,16 @@
                             <h3 class="item-title"><a
                                     href="{{route('front.productItem', $cart->product_id)}}">{{$cart->product->productName}}</a>
                             </h3>
-                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ? $cart->product->price : $cart->product->discount}}</div>
-                                <div class="pro-qty item-quantity">
-                                    <span class="dec qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
-                                    <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
-                                        value="{{ $cart->quantity }}" disabled>
-                                    <span class="inc qtybtn"
-                                        onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
-                                </div>
+                            <div class="item-price"><span class="currency-symbol">$</span>{{!$cart->product->flag ?
+                                $cart->product->price : $cart->product->discount}}</div>
+                            <div class="pro-qty item-quantity">
+                                <span class="dec qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'dec', this)">-</span>
+                                <input type="number" class="quantity-input" id="quantity_{{ $cart->product_id }}"
+                                    value="{{ $cart->quantity }}" disabled>
+                                <span class="inc qtybtn"
+                                    onclick="changeQuantity({{ $cart->product_id }}, 'inc', this)">+</span>
+                            </div>
                         </div>
                     </li>
                     @endforeach

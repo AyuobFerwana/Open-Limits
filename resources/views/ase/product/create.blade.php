@@ -190,7 +190,7 @@
                 sizeInput.setAttribute('id', `size_${++sizes}`);
                 document.getElementById('sizes-container').appendChild(sizeInput);
             }
-    
+
             function resetSizes() {
                 const sizeInput = document.createElement("input");
                 sizeInput.setAttribute('type', 'text');

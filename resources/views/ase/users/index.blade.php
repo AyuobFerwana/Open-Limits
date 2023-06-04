@@ -21,6 +21,8 @@
                         <th>Logo</th>
                         <th>UserName</th>
                         <th>E-mail</th>
+                        <th>Type-User</th>
+
                         <th>Phone</th>
                         <th>Create_At</th>
                         <th>Updated_at</th>
@@ -37,6 +39,19 @@
                         </td>
                         <td>{{ $user->UsersName }}</td>
                         <td>{{ $user->email }}</td>
+                        <td>
+                            @if (auth()->user()->id == $user->id)
+                            <button type="button" style="cursor: not-allowed"
+                                class="btn btn-{{ $user->role == 'admin' ? 'primary' : 'success' }} mr-2" disabled>
+                                {{ $user->role }}
+                            </button>
+                            @else
+                            <button type="button" onclick="toggleRole({{ $user->id }}, this)"
+                                class="btn btn-{{ $user->role == 'admin' ? 'primary' : 'success' }} mr-2">
+                                {{ $user->role }}
+                            </button>
+                            @endif
+                        </td>
                         <td>{{ $user->phone }}</td>
                         <td>{{ $user->created_at }}</td>
                         <td>{{ $user->updated_at }}</td>
@@ -69,6 +84,25 @@
 <script>
     function performDestroy(id, reference) {
             confirmDestroy('/dashboard/users', id, reference)
+        }
+
+        // ToggleRole
+        function toggleRole(id, ref) {
+            ref.disabled = true;
+            axios.put(`/dashboard/users/${id}/toggle`)
+                .then((response) => {
+                    toastr.success(response.data.message);
+                    ref.innerHTML = response.data.role;
+                    if (response.data.role == 'admin') {
+                        ref.setAttribute('class', 'btn btn-primary mr-2');
+                    } else {
+                        ref.setAttribute('class', 'btn btn-success mr-2');
+                    }
+                }).catch((error) => {
+                    toastr.success(error.response.data.message);
+                }).finally(() => {
+                    ref.disabled = false;
+                });
         }
 </script>
 

@@ -218,7 +218,8 @@
                     <div class="col-lg-6 col-md-4">
                         <div class="inner">
                             <div class="bradcrumb-thumb">
-                                <img src="{{ asset('fas/assets/images/logo/logo-large.png') }}" style="width: 90px ; height: 100px;" alt="Image">
+                                <img src="{{ asset('fas/assets/images/logo/logo-large.png') }}"
+                                    style="width: 90px ; height: 100px;" alt="Image">
                             </div>
                         </div>
                     </div>
@@ -287,15 +288,13 @@
                                         <div class="product-hover-action">
                                             <ul class="cart-action">
                                                 <li class="quickview"><a onclick="quickView({{ $product->id }})"
-                                                        data-bs-toggle="modal"
-                                                        data-bs-target="#quick-view-modal"><i
+                                                        data-bs-toggle="modal" data-bs-target="#quick-view-modal"><i
                                                             class="far fa-eye"></i></a></li>
                                                 <li class="select-option">
                                                     <a onclick="addProductToCart({{ $product->id }})">Add to
                                                         Cart</a>
                                                 </li>
-                                                <li class="wishlist"><a href="#"><i
-                                                            class="far fa-heart"></i></a></li>
+                                                <li class="wishlist"><a href="#"><i class="far fa-heart"></i></a></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -454,11 +453,7 @@
                             <h5 class="widget-title">Quick Link</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="privacy-policy.html">Privacy Policy</a></li>
-                                    <li><a href="terms-of-service.html">Terms Of Us</a></li>
-                                    <li><a href="#">FAQ</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="contact.html">About-us</a></li>
                                 </ul>
                             </div>
                         </div>

@@ -92,6 +92,8 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::get('users/restore/one/{id}', [UserController::class, 'restore'])->name('users.restore');
     Route::get('restoreUser', [UserController::class, 'RestoreAll'])->name('users.Restore.all');
     Route::delete('RestoreUserdestroy/{id}',  [UserController::class, 'Restoredestroy'])->name('users.Restoredestroy');
+    Route::put('/users/{user}/toggle', [UserController::class, 'toggleRole'])->name('user.toggle');
+
 
     // Product
     Route::get('products/restore', [ProductController::class, 'restoreProducts'])->name('products.restoreProducts');

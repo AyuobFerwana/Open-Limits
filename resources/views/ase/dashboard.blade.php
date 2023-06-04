@@ -328,14 +328,6 @@
 
                 {{-- Company Revenue --}}
 
-                @if (auth()->user()->role == 'admin' )
-
-                <div class="container-xxl flex-grow-1 container-p-y">
-                    <div class="row" id="revenueContent">
-
-                    </div>
-                </div>
-                @endif
 
                 <!-- Content wrapper -->
             </div>
@@ -374,24 +366,6 @@
     <script src="{{ asset('js/Crud.js') }}"></script>
     <script src="{{ asset('js/sweet.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-
-    //{{-- Revenue --}}
-    <script>
-        axios.get("{{ route('revenue') }}")
-            .then(response => {
-                const revenue = response.data.revenue;
-                const revenuePercentage = response.data.revenuePercentage;
-                const revenueComparison = response.data.revenueComparison;
-
-                document.getElementById('revenueContent').innerHTML = response.data;
-                document.getElementById('monthlyRevenue').textContent = `$${revenue.toFixed(2)}`;
-                document.getElementById('revenuePercentage').textContent = `${revenuePercentage}%`;
-                document.getElementById('revenueComparison').textContent = `$${revenueComparison} less than last week`;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-    </script>
 
     @yield('script')
 </body>
