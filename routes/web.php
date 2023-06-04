@@ -112,6 +112,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
 });
 
 // login & Register
+
 Route::middleware(['guest', 'throttle:authentication'])->group(function () {
     Route::view('/openLimits/login', 'ase.auth.login')->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
