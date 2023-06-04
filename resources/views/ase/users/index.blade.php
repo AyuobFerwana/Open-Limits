@@ -28,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody class="table-border-bottom-0">
-                    @foreach ($users as $user)
+                    @foreach ($users->skip(2) as $user)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>

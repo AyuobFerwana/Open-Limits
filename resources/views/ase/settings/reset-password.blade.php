@@ -87,7 +87,7 @@
                 .then(function(response) {
                     console.log(response);
                     toastr.success(response.data.message);
-                    document.getElementById('form');
+                    document.getElementById('form').reset();
 
                 })
                 .catch(function(error) {

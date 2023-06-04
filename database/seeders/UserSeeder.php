@@ -23,8 +23,8 @@ class UserSeeder extends Seeder
         ]);
         User::create([
             'UsersName' => 'SuperAdmin',
-            'email' => 'admin@app.com',
-            'phone' => '05925496883',
+            'email' => 'rema@app.com',
+            'phone' => '0592343560',
             'role' => 'admin',
             'password' => Hash::make('123'),
         ]);

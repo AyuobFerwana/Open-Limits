@@ -36,6 +36,10 @@
             width: 100%;
             border-radius: 6px;
         }
+
+        .bg_image--5 {
+            background-image: url({{asset('fas/assets/images/logo/newsL3.png')}});
+        }
     </style>
 
 </head>
@@ -326,10 +330,12 @@
             <div class="container">
                 <div class="etrade-newsletter-wrapper bg_image bg_image--5">
                     <div class="newsletter-content">
-                        <h2 class="title mb--40 mb_sm--30">Get weekly update</h2>
+                        <span class="title-highlighter highlighter-primary2"><i
+                                class="fas fa-envelope-open"></i>Newsletter</span>
+                        <h2 class="title mb--40 mb_sm--30">Get weekly <br> update</h2>
                         <div class="input-group newsletter-form">
                             <div class="position-relative newsletter-inner mb--15">
-                                <input placeholder="example@gmail.com" type="text">
+                                <input placeholder="example@gmail.com" type="text" id="email">
                             </div>
                             <button type="submit" class="axil-btn mb--15">Subscribe</button>
                         </div>

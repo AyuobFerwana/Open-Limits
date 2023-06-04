@@ -29,7 +29,7 @@
                         <th>Product</th>
                         <th>Quntity</th>
                         <th>Price</th>
-                        <th>Setting</th>
+                        {{-- <th>Setting</th> --}}
 
                     </tr>
                 </thead>
@@ -51,12 +51,12 @@
                             $checkoutDatas->discount }}
                         </td>
 
-                        <td>
+                        {{-- <td>
                             <div class="btn-group">
                                 <a onclick="performDestroy('{{ $checkoutDatas->id }}',this)" style="color:rgb(0, 0, 0)"
                                     class="btn btn-warning">Restore</a>
                             </div>
-                        </td>
+                        </td> --}}
                     </tr>
                     @endforeach
                     @if ($checkout->amount == null)
