@@ -18,6 +18,7 @@ class AuthController extends Controller
         return view('ase.auth.register');
     }
 
+    // Register
     public function store(Request $request, User $users)
     {
         $validator =  Validator($request->all(), [
