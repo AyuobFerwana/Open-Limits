@@ -40,15 +40,19 @@ Route::get('/subscribe/{newsLatter}', [SubscribeController::class, 'subscribe'])
 
 // User Inter FAce
 Route::redirect('/', '/openLimits');
-Route::get('/openLimits', [FrontController::class, 'index'])->name('front.index');
-Route::get('/openLimits/sidebar', [FrontController::class, 'sidebar'])->name('front.sidebar');
-Route::get('/openLimits/search', [FrontController::class, 'productSearch']);
-Route::get('/openLimits/quickView/{product}', [FrontController::class, 'quickView'])->name('front.quickView');
-Route::get('/openLimits/product-item/{products}', [FrontController::class, 'productItem'])->name('front.productItem');
+
+Route::controller(FrontController::class)->group(function () {
+    Route::get('/openLimits', 'index')->name('front.index');
+    Route::get('/openLimits/sidebar', 'sidebar')->name('front.sidebar');
+    Route::get('/openLimits/search', 'productSearch');
+    Route::get('/openLimits/quickView/{product}', 'quickView')->name('front.quickView');
+    Route::get('/openLimits/product-item/{products}', 'productItem')->name('front.productItem');
+    Route::get('/openLimits/about', 'about')->name('front.about');
+});
 
 
 // Cart
-Route::controller(CartController::class)->group(function(){
+Route::controller(CartController::class)->group(function () {
     Route::get('/openLimits/cart', 'show')->name('cart');
     Route::post('/openLimits/cart/add/{product}', 'add')->name('cart.add');
     Route::delete('/openLimits/cart/{product}', 'remove');
@@ -110,7 +114,7 @@ Route::middleware(['auth', 'role:admin'])->prefix('dashboard')->group(function (
     Route::delete('RestoreCategoryDestroy/{id}',  [CategoryController::class, 'Restoredestroy'])->name('category.Restoredestroy');
 
     // Company Revenue
-    Route::get('/revenue',[RevenueController::class,'revenue'])->name('revenue');
+    Route::get('/revenue', [RevenueController::class, 'revenue'])->name('revenue');
 });
 
 // login & Register

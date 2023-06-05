@@ -63,8 +63,8 @@
                                     <i class="bx bx-dots-vertical-rounded"></i>
                                 </button>
                                 <div class="dropdown-menu">
-                                    <a class="dropdown-item" href="{{ route('users.edit', $user->id) }}"><i
-                                            class="bx bx-edit-alt me-2"></i> Edit</a>
+                                    {{-- <a class="dropdown-item" href="{{ route('users.edit', $user->id) }}"><i
+                                            class="bx bx-edit-alt me-2"></i> Edit</a> --}}
                                     <a class="dropdown-item" onclick="performDestroy('{{ $user->id }}',this)"><i
                                             class="bx bx-trash me-2"></i> Delete</a>
                                 </div>

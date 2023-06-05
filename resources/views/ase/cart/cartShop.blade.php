@@ -114,7 +114,9 @@
                                     <ul class="axil-submenu">
                                         <li><a href="{{route('front.sidebar')}}">Shop With Sidebar</a></li>
                                     </ul>
+
                                 </li>
+                                <li><a href="{{ route('front.about') }}">About</a></li>
                             </ul>
                         </nav>
                         <!-- End Mainmanu Nav -->
@@ -335,11 +337,11 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
-                            <!-- <div class="logo mb--30">
+                            <div class="logo mb--30">
                             <a href="{{ route('home') }}">
-                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo.png')}}" alt="Logo Images">
+                                <img class="light-logo" src="{{asset('fas/assets/images/logo/logo2.png')}}" alt="Logo Images">
                             </a>
-                        </div> -->
+                        </div>
                             <div class="inner">
                                 <p><i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
 
@@ -362,9 +364,6 @@
                                 <ul>
                                     <li><a href="{{route('home')}}">My Account</a></li>
                                     <li><a href="{{ route('login') }}">Login / Register</a></li>
-                                    <li><a href="{{ route('cart') }}">Cart</a></li>
-                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -376,7 +375,10 @@
                             <h5 class="widget-title">Quick Link</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="contact.html">About-us</a></li>
+                                    <li><a href="{{ route('front.about') }}">About-us</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>

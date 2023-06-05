@@ -123,23 +123,35 @@
                                         <li><a href="{{ route('front.sidebar') }}">Shop With Sidebar</a></li>
                                     </ul>
                                 </li>
+                                <li><a href="{{ route('front.about') }}">About</a></li>
+
                             </ul>
                         </nav>
                         <!-- End Mainmanu Nav -->
                     </div>
                     <div class="header-action">
                         <ul class="action-list">
-                            <li class="axil-search">
+                            <li class="axil-search d-xl-block d-none">
+                                <input type="search" class="placeholder product-search-input" name="search2"
+                                    id="search2" value="" maxlength="128" placeholder=" ? What are you looking for"
+                                    autocomplete="off">
+                                <button type="submit" class="icon wooc-btn-search">
+                                    <i class="flaticon-magnifying-glass"></i>
+                                </button>
+                            </li>
+                            <li class="axil-search d-xl-none d-block">
                                 <a href="javascript:void(0)" class="header-search-icon" title="Search">
                                     <i class="flaticon-magnifying-glass"></i>
                                 </a>
                             </li>
-
+                            <li class="wishlist">
+                                <a href="wishlist.html">
+                                    <i class="flaticon-heart"></i>
+                                </a>
+                            </li>
                             <li class="shopping-cart">
                                 <a href="#" class="cart-dropdown-btn">
-                                    <span class="cart-count" id="carts-count">
-                                        {{ count($carts) }}
-                                    </span>
+                                    <span class="cart-count" id="carts-count">{{ count($carts) }}</span>
                                     <i class="flaticon-shopping-cart"></i>
                                 </a>
                             </li>
@@ -153,13 +165,9 @@
                                         <li>
                                             <a href="{{ route('home') }}">My Account</a>
                                         </li>
-
-
                                     </ul>
                                     @if (auth()->guest())
-                                    <div class="login-btn">
-                                        <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
-                                    </div>
+                                    <a href="{{ route('login') }}" class="axil-btn btn-bg-primary">Login</a>
                                     <div class="reg-footer text-center">No account yet? <a
                                             href="{{ route('register') }}" class="btn-link">REGISTER HERE.</a>
                                     </div>
@@ -452,11 +460,11 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
-                            <!-- <div class="logo mb--30">
+                          <div class="logo mb--30">
                             <a href="{{ route('home') }}">
-                                <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo1.png') }}" alt="Logo Images">
+                                <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo2.png') }}" alt="Logo Images">
                             </a>
-                        </div> -->
+                        </div>
                             <div class="inner">
                                 <p> <i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
 

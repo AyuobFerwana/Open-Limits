@@ -149,4 +149,35 @@ class FrontController extends Controller
 
         ]);
     }
+
+    public function about(Product $products, Cart $carts, User $user,  Request $request , Category $categories)
+    {
+        if (Auth::check()) {
+            $user = $request->user();
+            $carts = $user->carts;
+        } else {
+            $carts = Session::get('cart') ?? [];
+        }
+        $total = 0;
+
+        foreach ($carts as $cart) {
+            $product = $cart->product;
+            $quantity = $cart->quantity;
+            $price = $product->flag ? $product->discount : $product->price;
+            $total += $quantity * $price;
+        }
+        $support = Support::first();
+        $user = User::all();
+        $productsCount = is_countable($products) ? count($products) : 0;
+        return response()->view('ase.userInterface.about', [
+            'products' => $products,
+            'productsCount'=>$productsCount,
+            'categories' => $categories,
+            'carts' => $carts,
+            'total' => $total,
+            'support' => $support,
+            'user'=>$user,
+
+        ]);
+    }
 }
