@@ -66,15 +66,18 @@
                             <label for="size">Size</label>
 
                             <div id="sizes-container">
-                                <input type="text" value="{{ $product->size[0] }}" class="form-control" id="size">
+                                @if (!empty($product->size))
+                                    <input type="text" value="{{ $product->size[0] }}" class="form-control" id="size">
 
-                                @foreach ($product->size as $size)
-                                @if (!$loop->first)
-                                <input type="text" value="{{ $size }}" class="form-control"
-                                    id="size_{{ $loop->iteration - 1 }}">
+                                    @foreach ($product->size as $sizes)
+                                        @if ($index > 1)
+                                            <input type="text" value="{{ $size }}" class="form-control"
+                                            id="size_{{ $index - 1 }}">
+                                        @endif
+                                    @endforeach
                                 @endif
-                                @endforeach
                             </div>
+
 
 
                             <button type="button" onclick="addSize()" class="btn btn-success">Add Sizes &plus;</button>
@@ -134,8 +137,8 @@
 <script>
     let colors = {{ count($product -> colors) - 1 }};
     let sizes = {{ count($product -> size) - 1 }};
-    
-    
+
+
     // {{--  Colors  --}}
     function addColor() {
         const colorInput = document.createElement("input");
@@ -145,7 +148,7 @@
         colorInput.setAttribute('id', `color_${++colors}`);
         document.getElementById('colors-container').appendChild(colorInput);
     }
-    
+
     function resetColors() {
         const colorInput = document.createElement("input");
         colorInput.setAttribute('type', 'color');
@@ -156,9 +159,9 @@
         document.getElementById('colors-container').appendChild(colorInput);
         colors = 0;
     }
-    
-    
-    
+
+
+
     // {{--  Size  --}}
     function addSize() {
         const sizeInput = document.createElement("input");
@@ -167,17 +170,18 @@
         sizeInput.setAttribute('id', `size_${++sizes}`);
         document.getElementById('sizes-container').appendChild(sizeInput);
     }
-    
+
     function resetSizes() {
-        const sizeInput = document.createElement("input");
-        sizeInput.setAttribute('type', 'text');
-        sizeInput.setAttribute('class', 'form-control');
-        sizeInput.setAttribute('id', `size`);
-        document.getElementById('sizes-container').innerHTML = '';
-        document.getElementById('sizes-container').appendChild(sizeInput);
-        sizes = 0;
-    }
-    
+    const sizeInput = document.createElement("input");
+    sizeInput.setAttribute('type', 'text');
+    sizeInput.setAttribute('class', 'form-control');
+    sizeInput.setAttribute('id', `size`);
+    document.getElementById('sizes-container').innerHTML = '';
+    document.getElementById('sizes-container').appendChild(sizeInput);
+    sizes = 0;
+}
+
+
     function PerformProduct() {
         let formData = new FormData();
         formData.append('_method', 'PUT');
@@ -189,8 +193,8 @@
         formData.append('color', document.getElementById('color').value);
         formData.append('quantity', document.getElementById('quantity').value);
         const radioButtons = document.querySelectorAll('input[type="radio"]');
-    
-    
+
+
     // {{--  Flag  --}}
     let selectedValue;
             radioButtons.forEach(radio => {

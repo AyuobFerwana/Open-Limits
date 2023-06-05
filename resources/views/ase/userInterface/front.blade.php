@@ -219,13 +219,14 @@
                         </div>
                     </div>
 
-                    <div class="col-lg-1 col-sm-6">
+                    <div class="col-lg-4 col-sm-6">
                         <div class="main-slider-large-thumb">
                             <div class="slider-thumb-activation-one axil-slick-dots">
                                 @foreach ($products->take(3) as $product)
                                 <div class="single-slide slick-slide" data-sal="slide-up" data-sal-delay="600"
                                     data-sal-duration="1500">
-                                    <img src="{{ Storage::url($product->image) }}" alt="Product">
+                                    <img class="img-fluid" style="width:500px; height: 500px; !important "
+                                        src="{{ Storage::url($product->image) }}" alt="products">
                                     <div class="product-price">
                                         <span class="text">From</span>
                                         <span class="price-amount">${{ $product->price }}</span>
@@ -460,11 +461,12 @@
                     <div class="col-lg-3 col-sm-6">
                         <div class="axil-footer-widget">
                             <h5 class="widget-title">Support</h5>
-                          <div class="logo mb--30">
-                            <a href="{{ route('home') }}">
-                                <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo2.png') }}" alt="Logo Images">
-                            </a>
-                        </div>
+                            <div class="logo mb--30">
+                                <a href="{{ route('home') }}">
+                                    <img class="light-logo" src="{{ asset('fas/assets/images/logo/logo2.png') }}"
+                                        alt="Logo Images">
+                                </a>
+                            </div>
                             <div class="inner">
                                 <p> <i class="far fa-map-marker-alt"></i> &nbsp; {{ $support->address }}</p>
 

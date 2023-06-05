@@ -50,8 +50,8 @@
                             @endforeach
                         </td>
                         <td>
-                            @foreach ($product->size as $size)
-                            <span class="badge bg-warning" style="color: #f00000; font-size: 16px;">{{ $size }}</span>
+                            @foreach ($product->size as $sizes)
+                            <span class="badge bg-warning">{{ $sizes }}</span>
                             @endforeach
                         </td>
                         <td>{{ $product->quantity }}</td>
@@ -68,8 +68,6 @@
                         </td>
                         <td>{{ $product->created_at }}</td>
                         <td>{{ $product->updated_at }}</td>
-                        {{-- <td>{{$product->purchases->count()}}</td> --}}
-
                         <td>
                             <div class="dropdown">
                                 <button type="button" class="btn p-0 dropdown-toggle hide-arrow"
