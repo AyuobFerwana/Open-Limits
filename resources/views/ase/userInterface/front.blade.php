@@ -489,9 +489,6 @@
                                 <ul>
                                     <li><a href="{{ route('home') }}">My Account</a></li>
                                     <li><a href="{{ route('login') }}">Login / Register</a></li>
-                                    <li><a href="{{ route('cart') }}">Cart</a></li>
-                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
-                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
@@ -503,7 +500,10 @@
                             <h5 class="widget-title">Quick Link</h5>
                             <div class="inner">
                                 <ul>
-                                    <li><a href="contact.html">About-us</a></li>
+                                    <li><a href="{{ route('front.about') }}">About-us</a></li>
+                                    <li><a href="{{ route('cart') }}">Cart</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Wishlist</a></li>
+                                    <li><a href="{{ route('front.sidebar') }}">Shop</a></li>
                                 </ul>
                             </div>
                         </div>
